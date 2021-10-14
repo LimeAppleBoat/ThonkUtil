@@ -9,8 +9,8 @@
     "Jab125"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "sources": "https://github.com/Jab125/ThonkUtil",
+    "issues": "https://github.com/Jab125/ThonkUtil/issues"
   },
 
   "license": "CC0-1.0",

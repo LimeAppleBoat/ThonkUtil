@@ -2,6 +2,7 @@ package com.jab125.thonkutil.util;
 
 import net.fabricmc.loader.api.FabricLoader;
 
+
 public class Util {
     public static boolean isModInstalled(String modid) {
         return FabricLoader.getInstance().isModLoaded(modid);
@@ -20,4 +21,9 @@ public class Util {
     public static int minutesToTick(double minutes, double seconds) {
         return secondsToTick(minutes*60 + seconds);
     }
+    public static int minutesToTick(double minutes) {
+        return secondsToTick(minutes*60);
+    }
+
+
 }
