@@ -56,7 +56,9 @@ java {
 	// If you remove this line, sources will not be generated.
 	withSourcesJar()
 }
-
+loom {
+	accessWidenerPath =  file("src/main/resources/thonkutil.accesswidener")
+}
 jar {
 	from("LICENSE") {
 		rename { "${it}_${project.archivesBaseName}"}
