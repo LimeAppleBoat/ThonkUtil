@@ -35,5 +35,10 @@
   "suggests": {
     "another-mod": "*"
   },
-  "accessWidener": "thonkutil.accesswidener"
+  "accessWidener": "thonkutil.accesswidener",
+  "custom": {
+    "modmenu": {
+      "badges": ["library"]
+    }
+  }
 }
