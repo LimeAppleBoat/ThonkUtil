@@ -1,6 +1,8 @@
 package com.jab125.thonkutil.util;
 
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 
 public class Util {
@@ -24,6 +26,14 @@ public class Util {
     public static int minutesToTick(double minutes) {
         return secondsToTick(minutes*60);
     }
-
+    public static ItemStack toItemStack(ItemStack itemStack) {
+        return itemStack;
+    }
+    public static ItemStack toItemStack(Item item) {
+        return new ItemStack(item);
+    }
+    public static ItemStack toItemStack(Item item, int count) {
+        return new ItemStack(item, count);
+    }
 
 }
