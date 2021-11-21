@@ -4,6 +4,9 @@
   "package": "com.jab125.thonkutil.mixin",
   "compatibilityLevel": "JAVA_16",
   "mixins": [
+    "PotionItemMixin",
+    "TippedArrowMixin",
+    "TippedPotionRecipeMixin"
   ],
   "client": [
   ],
