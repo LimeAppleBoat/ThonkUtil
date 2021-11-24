@@ -1,7 +1,7 @@
 package com.jab125.thonkutil.mixin;
 
-import com.jab125.thonkutil.api.SkipPotion;
-import com.jab125.thonkutil.impl.SkipPotionImpl;
+import com.jab125.thonkutil.potion.api.SkipPotion;
+import com.jab125.thonkutil.potion.impl.SkipPotionImpl;
 import net.minecraft.item.TippedArrowItem;
 import net.minecraft.potion.Potion;
 import org.spongepowered.asm.mixin.Mixin;

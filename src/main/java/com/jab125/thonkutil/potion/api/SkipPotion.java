@@ -1,6 +1,6 @@
-package com.jab125.thonkutil.api;
+package com.jab125.thonkutil.potion.api;
 
-import com.jab125.thonkutil.impl.SkipPotionImpl;
+import com.jab125.thonkutil.potion.impl.SkipPotionImpl;
 import net.minecraft.potion.Potion;
 
 @SuppressWarnings("unused")

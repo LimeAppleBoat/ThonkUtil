@@ -1,6 +1,6 @@
-package com.jab125.thonkutil.api;
+package com.jab125.thonkutil.potion.api;
 
-import com.jab125.thonkutil.impl.RemoveTippedPotionRecipeImpl;
+import com.jab125.thonkutil.potion.impl.RemoveTippedPotionRecipeImpl;
 import net.minecraft.potion.Potion;
 
 @SuppressWarnings("unused")

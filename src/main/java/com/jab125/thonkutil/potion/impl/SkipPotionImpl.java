@@ -1,4 +1,4 @@
-package com.jab125.thonkutil.impl;
+package com.jab125.thonkutil.potion.impl;
 
 import net.minecraft.potion.Potion;
 import net.minecraft.util.Pair;

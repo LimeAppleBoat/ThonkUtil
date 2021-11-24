@@ -1,4 +1,4 @@
-package com.jab125.thonkutil.util;
+package com.jab125.thonkutil.potion;
 
 import net.minecraft.item.Item;
 import net.minecraft.potion.Potion;

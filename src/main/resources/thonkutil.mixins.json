@@ -6,7 +6,8 @@
   "mixins": [
     "PotionItemMixin",
     "TippedArrowMixin",
-    "TippedPotionRecipeMixin"
+    "TippedPotionRecipeMixin",
+    "VillagerMixin"
   ],
   "client": [
   ],
