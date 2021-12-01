@@ -13,11 +13,11 @@ public class RemoveTippedPotionRecipeImpl {
     }
 
     public static Potion[] getPotions() {
-        return potions.toArray(Potion[]::new);
+        return (Potion[]) potions.toArray();
     }
     public static boolean contains(Potion potion) {
         System.out.println(Registry.POTION.getId(potion).toString());
-        for (var potion2 : potions) {
+        for (Potion potion2 : potions) {
             System.out.println(Registry.POTION.getId(potion2).toString());
             if (potion2.equals(potion)) return true;
         }

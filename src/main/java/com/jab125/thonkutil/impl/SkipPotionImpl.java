@@ -14,11 +14,11 @@ public class SkipPotionImpl {
 
     @SuppressWarnings("unchecked")
     public static Pair<Potion, Integer>[] getSkipList() {
-        return skipList.toArray(Pair[]::new);
+        return (Pair<Potion, Integer>[]) skipList.toArray();
     }
 
     public static boolean contains(Potion potion, int skip) {
-        for (var pair : skipList) {
+        for (Pair<Potion, Integer> pair : skipList) {
             if (pair.getLeft().equals(potion)) {
                 if (pair.getRight().intValue() == skip) {
                     return true;
