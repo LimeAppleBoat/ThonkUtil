@@ -1,15 +1,8 @@
 package com.jab125.thonkutil.util;
 
-import net.minecraft.item.Item;
-import net.minecraft.potion.Potion;
-import net.minecraft.recipe.BrewingRecipeRegistry;
+import org.jetbrains.annotations.ApiStatus.ScheduledForRemoval;
 
-public class PotionUtil {
-    public static void registerPotionRecipe(Potion input, Item ingredient, Potion output) {
-        BrewingRecipeRegistry.registerPotionRecipe(input, ingredient, output);
-    }
-    public static void registerItemRecipe(Item input, Item ingredient, Item output) {
-        BrewingRecipeRegistry.registerItemRecipe(input, ingredient, output);
-    }
-
+@Deprecated
+@ScheduledForRemoval(inVersion = "1.5.0")
+public class PotionUtil extends com.jab125.thonkutil.util.potion.PotionUtil {
 }

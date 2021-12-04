@@ -1,11 +1,9 @@
 package com.jab125.thonkutil.api;
 
-import com.jab125.thonkutil.impl.RemoveTippedPotionRecipeImpl;
-import net.minecraft.potion.Potion;
+import com.jab125.thonkutil.api.potion.RemovePotionRecipe;
+import org.jetbrains.annotations.ApiStatus.ScheduledForRemoval;
 
-@SuppressWarnings("unused")
-public class RemoveTippedPotionRecipe {
-    public static void remove(Potion potion) {
-        RemoveTippedPotionRecipeImpl.removeTippedPotionRecipe(potion);
-    }
+@Deprecated
+@ScheduledForRemoval(inVersion = "1.5.0")
+public class RemoveTippedPotionRecipe extends RemovePotionRecipe {
 }

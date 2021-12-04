@@ -20,6 +20,9 @@
   "entrypoints": {
     "main": [
       "com.jab125.thonkutil.ThonkUtil"
+    ],
+    "modmenu": [
+      "com.jab125.thonkutil.config.ModMenuCompat"
     ]
   },
   "mixins": [

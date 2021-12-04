@@ -1,6 +1,6 @@
 package com.jab125.thonkutil.mixin;
 
-import com.jab125.thonkutil.api.SkipPotion;
+import com.jab125.thonkutil.api.potion.SkipPotion;
 import com.jab125.thonkutil.impl.SkipPotionImpl;
 import net.minecraft.item.*;
 import net.minecraft.potion.Potion;

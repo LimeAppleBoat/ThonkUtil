@@ -2,11 +2,13 @@
   "required": true,
   "minVersion": "0.8",
   "package": "com.jab125.thonkutil.mixin",
+  "plugin": "com.jab125.thonkutil.mixin.MixinPlugin",
   "compatibilityLevel": "JAVA_16",
   "mixins": [
     "PotionItemMixin",
     "TippedArrowMixin",
-    "TippedPotionRecipeMixin"
+    "TippedPotionRecipeMixin",
+    "TradeOfferMixin"
   ],
   "client": [
   ],

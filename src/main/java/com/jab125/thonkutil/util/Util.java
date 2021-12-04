@@ -3,9 +3,23 @@ package com.jab125.thonkutil.util;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 
 
 public class Util {
+
+    public static class Item {
+
+        public static Identifier getId(ItemStack itemStack) {
+            return getId(itemStack.getItem());
+        }
+
+        public static Identifier getId(net.minecraft.item.Item item) {
+            return Registry.ITEM.getId(item);
+        }
+    }
+
     public static boolean isModInstalled(String modid) {
         return FabricLoader.getInstance().isModLoaded(modid);
     }
@@ -29,10 +43,10 @@ public class Util {
     public static ItemStack toItemStack(ItemStack itemStack) {
         return itemStack;
     }
-    public static ItemStack toItemStack(Item item) {
+    public static ItemStack toItemStack(net.minecraft.item.Item item) {
         return new ItemStack(item);
     }
-    public static ItemStack toItemStack(Item item, int count) {
+    public static ItemStack toItemStack(net.minecraft.item.Item item, int count) {
         return new ItemStack(item, count);
     }
 
