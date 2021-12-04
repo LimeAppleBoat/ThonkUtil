@@ -19,12 +19,6 @@ repositories {
 	// for more information about repositories.
 }
 
-sourceSets {
-	testmod {
-		compileClasspath += main.compileClasspath
-		runtimeClasspath += main.runtimeClasspath
-	}
-}
 dependencies {
 	// To change the versions see the gradle.properties file
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
@@ -33,11 +27,10 @@ dependencies {
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+
 	modImplementation "com.terraformersmc:modmenu:2.0.2", {
 		exclude module: "fabric-api"
 	}
-
-	testmodImplementation sourceSets.main.output
 
 	// PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
 	// You may need to force-disable transitiveness on them.
@@ -50,31 +43,6 @@ processResources {
 		expand "version": project.version
 	}
 }
-
-dependencies {
-	testmodImplementation sourceSets.main.output
-}
-loom {
-	shareRemapCaches = true
-}
-
-loom {
-	runs {
-		testmodClient {
-			client()
-			ideConfigGenerated project.rootProject == project
-			name = "Testmod Client"
-			source sourceSets.testmod
-		}
-		testmodServer {
-			server()
-			ideConfigGenerated project.rootProject == project
-			name = "Testmod Server"
-			source sourceSets.testmod
-		}
-	}
-}
-
 
 tasks.withType(JavaCompile).configureEach {
 	// ensure that the encoding is set to UTF-8, no matter what the system default is
@@ -123,12 +91,4 @@ publishing {
 		// The repositories here will be used for publishing your artifact, not for
 		// retrieving dependencies.
 	}
-}
-
-sourceSets {
-	testmod
-}
-task testJar(type: Jar) {
-	archiveClassifier = "test"
-	from sourceSets.testmod.output
 }
