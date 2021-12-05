@@ -1,6 +1,8 @@
 package com.jab125.thonkutil.config.option;
 
 import com.jab125.thonkutil.util.translation.TranslationUtil;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.screen.ScreenTexts;
 import net.minecraft.client.option.CyclingOption;
 import net.minecraft.client.option.Option;
@@ -55,6 +57,7 @@ public class EnumConfigOption<E extends Enum<E>> implements OptionConvertable {
     }
 
     @Override
+    @Environment(EnvType.CLIENT)
     public Option asOption() {
         return CyclingOption.create(translationKey, enumClass.getEnumConstants(), value -> getValueText(this, value), ignored -> ConfigOptionStorage.getEnum(key, enumClass), (ignored, option, value) -> ConfigOptionStorage.setEnum(key, value));
     }

@@ -1,6 +1,7 @@
 package com.jab125.thonkutil.mixin;
 
 import com.jab125.thonkutil.api.potion.SkipPotion;
+import com.jab125.thonkutil.config.ThonkUtilConfig;
 import com.jab125.thonkutil.impl.SkipPotionImpl;
 import net.minecraft.item.*;
 import net.minecraft.potion.Potion;
@@ -21,7 +22,7 @@ public class PotionItemMixin {
     }
     @ModifyVariable(method = "appendStacks", at = @At(value = "STORE", target = "Lnet/minecraft/item/TippedArrowItem;appendStacks(Lnet/minecraft/item/ItemGroup;Lnet/minecraft/util/collection/DefaultedList;)V"), ordinal = 0)
     private Potion modifyPotion(Potion potion) {
-
+        if (!ThonkUtilConfig.POTION_API.getValue()) return potion;
         if (SkipPotionImpl.contains(potion, getType(this.potionItem))) {
             return new Potion();
         }

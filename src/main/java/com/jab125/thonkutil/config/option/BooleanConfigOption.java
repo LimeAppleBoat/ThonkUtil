@@ -1,8 +1,11 @@
 package com.jab125.thonkutil.config.option;
 
 import com.jab125.thonkutil.util.translation.TranslationUtil;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.screen.ScreenTexts;
 import net.minecraft.client.option.CyclingOption;
+import net.minecraft.client.option.Option;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 
@@ -50,6 +53,7 @@ public class BooleanConfigOption implements OptionConvertable {
     }
 
     @Override
+    @Environment(EnvType.CLIENT)
     public CyclingOption<Boolean> asOption() {
         if (enabledText != null && disabledText != null) {
             return CyclingOption.create(translationKey, enabledText, disabledText, ignored -> ConfigOptionStorage.getBoolean(key), (ignored, option, value) -> ConfigOptionStorage.setBoolean(key, value));

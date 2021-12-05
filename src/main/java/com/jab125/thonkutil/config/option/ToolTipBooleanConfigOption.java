@@ -1,6 +1,8 @@
 package com.jab125.thonkutil.config.option;
 
 import com.jab125.thonkutil.util.translation.TranslationUtil;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.screen.ScreenTexts;
 import net.minecraft.client.gui.widget.CyclingButtonWidget;
 import net.minecraft.client.option.CyclingOption;
@@ -33,6 +35,7 @@ public class ToolTipBooleanConfigOption extends BooleanConfigOption{
     }
 
     @Override
+    @Environment(EnvType.CLIENT)
     public CyclingOption<Boolean> asOption() {
         if (enabledText != null && disabledText != null) {
             CyclingOption<Boolean> cyclingOption = CyclingOption.create(translationKey, enabledText, disabledText, ignored -> ConfigOptionStorage.getBoolean(key), (ignored, option, value) -> ConfigOptionStorage.setBoolean(key, value));

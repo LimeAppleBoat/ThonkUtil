@@ -21,6 +21,9 @@
     "main": [
       "com.jab125.thonkutil.ThonkUtil"
     ],
+    "client": [
+      "com.jab125.thonkutil.client.ThonkUtilClient"
+    ],
     "modmenu": [
       "com.jab125.thonkutil.config.ModMenuCompat"
     ]

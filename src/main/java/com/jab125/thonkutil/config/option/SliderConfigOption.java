@@ -1,6 +1,8 @@
 package com.jab125.thonkutil.config.option;
 
 import com.jab125.thonkutil.util.translation.TranslationUtil;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.screen.option.VideoOptionsScreen;
 import net.minecraft.client.option.DoubleOption;
 import net.minecraft.client.option.LogarithmicOption;
@@ -41,6 +43,7 @@ public class SliderConfigOption implements OptionConvertable {
         return key;
     }
 
+    @Environment(EnvType.CLIENT)
     @Override
     public Option asOption() {
         return new DoubleOption(translationKey, min, max, step, ignored -> ConfigOptionStorage.getDouble(key), ((ignored, value) -> ConfigOptionStorage.setDouble(key, value)), ((gameOptions, doubleOption) -> getValueText(this, ConfigOptionStorage.getDouble(key))));

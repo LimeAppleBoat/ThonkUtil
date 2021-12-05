@@ -25,6 +25,7 @@ public class ThonkUtilConfigManager {
     }
 
     public static void initializeConfig() {
+
         load();
     }
 
