@@ -1,3 +1,5 @@
+import net.fabricmc.loom.task.RemapJarTask
+
 plugins {
 	id 'fabric-loom' version '0.10-SNAPSHOT'
 	id 'maven-publish'
@@ -70,13 +72,20 @@ jar {
 	}
 }
 
+task remapMavenJar(type: RemapJarTask, dependsOn: jar) {
+	input = jar.archiveFile
+	archiveFileName = "${archivesBaseName}-${project.version}-maven.jar"
+	addNestedDependencies = false
+}
+build.dependsOn remapMavenJar
+
 // configure the maven publication
 publishing {
 	publications {
 		mavenJava(MavenPublication) {
 			// add all the jars that should be included when publishing to maven
-			artifact(remapJar) {
-				builtBy remapJar
+			artifact(remapMavenJar) {
+				builtBy remapMavenJar
 			}
 			artifact(sourcesJar) {
 				builtBy remapSourcesJar
