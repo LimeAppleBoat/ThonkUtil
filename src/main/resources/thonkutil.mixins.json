@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_16",
   "mixins": [
     "EntityMixin",
+    "GameOptions",
     "MinecraftServerMixin",
     "PlayerEntityMixin",
     "PotionItemMixin",
@@ -13,6 +14,7 @@
     "TradeOfferMixin"
   ],
   "client": [
+    "KeyboardMixin",
     "CoordOverlayMixin"
   ],
   "injectors": {

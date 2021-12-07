@@ -43,6 +43,10 @@ public class SliderConfigOption implements OptionConvertable {
         return key;
     }
 
+    public double getValue() {
+        return ConfigOptionStorage.getDouble(key);
+    }
+
     @Environment(EnvType.CLIENT)
     @Override
     public Option asOption() {

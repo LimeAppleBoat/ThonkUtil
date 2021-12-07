@@ -41,7 +41,7 @@ public abstract class CoordOverlayMixin {
     @Inject(method = "render", at = @At("TAIL"))
     private void injectCoords(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
         if (this.client.options.debugEnabled) return;
-        if (ThonkUtilConfig.UNLIMITED_TRAVEL.getValue()) return;
+        if (!ThonkUtilConfig.THONKUTIL_DEBUG.getValue()) return;
         renderCoords(matrices);
     }
 
@@ -50,7 +50,9 @@ public abstract class CoordOverlayMixin {
         List<String> list = new ArrayList<>();
 
         list.add("ThonkUtil " + FabricLoader.getInstance().getModContainer("thonkutil").get().getMetadata().getVersion().getFriendlyString());
+        list.add(this.client.fpsDebugString);
         list.add(String.format(Locale.ROOT, "XYZ: %.3f / %.5f / %.3f", this.client.getCameraEntity().getX(), this.client.getCameraEntity().getY(), this.client.getCameraEntity().getZ()));
+        list.add(String.format("Render Distance: %s", this.client.options.viewDistance));
 
         for(int i = 0; i < list.size(); ++i) {
             String string = (String)list.get(i);
