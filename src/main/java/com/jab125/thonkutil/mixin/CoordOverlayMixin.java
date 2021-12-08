@@ -52,6 +52,11 @@ public abstract class CoordOverlayMixin {
         //list.add("ThonkUtil " + FabricLoader.getInstance().getModContainer("thonkutil").get().getMetadata().getVersion().getFriendlyString());
         //list.add(this.client.fpsDebugString);
 
+        if (FabricLoader.getInstance().isModLoaded("biomeinfo")) {
+            assert MinecraftClient.getInstance().world != null;
+            if (MinecraftClient.getInstance().world.isInBuildLimit(MinecraftClient.getInstance().getCameraEntity().getBlockPos()))
+                list.add("");
+        }
         if (FabricLoader.getInstance().isModLoaded("betterf3")) {
             list.add(String.format(Locale.ROOT, "§cX§aY§bZ§c: %.3f  §a%.5f  §b%.3f", this.client.getCameraEntity().getX(), this.client.getCameraEntity().getY(), this.client.getCameraEntity().getZ()));
         } else {
