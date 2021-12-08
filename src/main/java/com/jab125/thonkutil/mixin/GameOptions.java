@@ -12,4 +12,9 @@ public class GameOptions {
     public float increaseRenderDistance(float maxRenderDist) {
         return (float) ThonkUtilConfig.MAXIMUM_RENDER_DISTANCE.getValue();
     }
+
+    @ModifyConstant(method = "<init>", constant = @Constant(floatValue = 16.0F), require = 0)
+    public float increaseRenderDistance32Bit(float maxRenderDist) {
+        return (float) ThonkUtilConfig.MAXIMUM_RENDER_DISTANCE.getValue();
+    }
 }

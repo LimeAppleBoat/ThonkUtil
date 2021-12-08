@@ -4,17 +4,13 @@
   "package": "com.jab125.thonkutil.mixin",
   "compatibilityLevel": "JAVA_16",
   "mixins": [
-    "EntityMixin",
     "GameOptions",
-    "MinecraftServerMixin",
-    "PlayerEntityMixin",
     "PotionItemMixin",
     "TippedArrowMixin",
     "TippedPotionRecipeMixin",
     "TradeOfferMixin"
   ],
   "client": [
-    "KeyboardMixin",
     "CoordOverlayMixin"
   ],
   "injectors": {

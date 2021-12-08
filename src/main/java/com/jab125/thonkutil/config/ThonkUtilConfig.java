@@ -8,6 +8,7 @@ import com.jab125.thonkutil.config.option.SliderConfigOption;
 import com.jab125.thonkutil.config.option.ToolTipBooleanConfigOption;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.Option;
 import net.minecraft.server.dedicated.ServerPropertiesLoader;
 
@@ -18,10 +19,8 @@ import java.util.Comparator;
 
 public class ThonkUtilConfig {
     public static final BooleanConfigOption TRADE_OFFER_ID = new ToolTipBooleanConfigOption("trade_offer_id", ThonkUtil.MODID, true);
-    public static final BooleanConfigOption POTION_API = new ToolTipBooleanConfigOption("potion_api", ThonkUtil.MODID, true);
-    public static final BooleanConfigOption UNLIMITED_TRAVEL = new ToolTipBooleanConfigOption("unlimited_travel", ThonkUtil.MODID, false);
-    public static final BooleanConfigOption THONKUTIL_DEBUG = new ToolTipBooleanConfigOption("show_coords", ThonkUtil.MODID, false);
-    public static final SliderConfigOption MAXIMUM_RENDER_DISTANCE = new SliderConfigOption("maximum_render_distance", ThonkUtil.MODID, 32.0, 32.0, 128.0, 1);
+    public static final BooleanConfigOption SHOW_COORDS = new ToolTipBooleanConfigOption("show_coords", ThonkUtil.MODID, false);
+    public static final SliderConfigOption MAXIMUM_RENDER_DISTANCE = new SliderConfigOption("maximum_render_distance", ThonkUtil.MODID, MinecraftClient.getInstance().is64Bit() && Runtime.getRuntime().maxMemory() >= 1000000000L ? 32.0 : 16.0, 16.0, 128.0, 1);
     //public static final BooleanConfigOption JOIN_GAME_MODLOADER = new BooleanConfigOption("join_game_modloader", false);
 
     @Environment(EnvType.CLIENT)

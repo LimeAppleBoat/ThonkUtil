@@ -29,7 +29,6 @@ public class ThonkUtil implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		ThonkUtilConfigManager.initializeConfig();
-		System.out.println("POTION API CONFIG:" + ThonkUtilConfig.POTION_API.getValue());
 		System.out.println("TRADE OFFER CONFIG:" + ThonkUtilConfig.TRADE_OFFER_ID.getValue());
 		System.out.println(FabricLoader.getInstance().getModContainer(MODID).get().getMetadata().getName() + " Initialized");
 		// This code runs as soon as Minecraft is in a mod-load-ready state.

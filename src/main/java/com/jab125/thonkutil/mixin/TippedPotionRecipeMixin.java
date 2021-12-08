@@ -13,7 +13,6 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 public class TippedPotionRecipeMixin {
     @ModifyVariable(method = "craft", at = @At(value = "STORE", ordinal = 0))
     private ItemStack modifyCrafting(ItemStack itemStack) {
-        if (!ThonkUtilConfig.POTION_API.getValue()) return itemStack;
         if (RemovePotionRecipeImpl.RemoveTippedArrowRecipeImpl.contains(PotionUtil.getPotion(itemStack))) {
             return ItemStack.EMPTY;
         }

@@ -4,9 +4,10 @@
   "option.thonkutil.trade_offer_id.tooltip": "Modifies Vanilla Trade Offer to include \"id\":\"minecraft:trade_offer\"",
   "option.thonkutil.trade_offer_id.false": "OFF",
   "option.thonkutil.trade_offer_id.true": "ON",
-  "option.thonkutil.potion_api": "Run Potion API",
-  "option.thonkutil.potion_api.tooltip": "Run the Potion API (PotionUtils excluded)",
-  "option.thonkutil.potion_api.false": "False",
-  "option.thonkutil.potion_api.true": "True",
+  "option.thonkutil.maximum_render_distance": "Maximum Render Distance: %s",
+  "option.thonkutil.show_coords": "Always Show Coords",
+  "option.thonkutil.show_coords.tooltip": "To always display the coordinates in the top-left of the screen, regardless of if the F3 screen is open",
+  "option.thonkutil.show_coords.false": "OFF",
+  "option.thonkutil.show_coords.true": "ON",
   "option.thonkutil.AAAA": "AAAA: %s"
 }

@@ -41,7 +41,7 @@ public abstract class CoordOverlayMixin {
     @Inject(method = "render", at = @At("TAIL"))
     private void injectCoords(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
         if (this.client.options.debugEnabled) return;
-        if (!ThonkUtilConfig.THONKUTIL_DEBUG.getValue()) return;
+        if (!ThonkUtilConfig.SHOW_COORDS.getValue()) return;
         renderCoords(matrices);
     }
 
@@ -49,10 +49,15 @@ public abstract class CoordOverlayMixin {
         this.client.getProfiler().push("coords");
         List<String> list = new ArrayList<>();
 
-        list.add("ThonkUtil " + FabricLoader.getInstance().getModContainer("thonkutil").get().getMetadata().getVersion().getFriendlyString());
-        list.add(this.client.fpsDebugString);
-        list.add(String.format(Locale.ROOT, "XYZ: %.3f / %.5f / %.3f", this.client.getCameraEntity().getX(), this.client.getCameraEntity().getY(), this.client.getCameraEntity().getZ()));
-        list.add(String.format("Render Distance: %s", this.client.options.viewDistance));
+        //list.add("ThonkUtil " + FabricLoader.getInstance().getModContainer("thonkutil").get().getMetadata().getVersion().getFriendlyString());
+        //list.add(this.client.fpsDebugString);
+
+        if (FabricLoader.getInstance().isModLoaded("betterf3")) {
+            list.add(String.format(Locale.ROOT, "§cX§aY§bZ§c: %.3f  §a%.5f  §b%.3f", this.client.getCameraEntity().getX(), this.client.getCameraEntity().getY(), this.client.getCameraEntity().getZ()));
+        } else {
+            list.add(String.format(Locale.ROOT, "XYZ: %.3f / %.5f / %.3f", this.client.getCameraEntity().getX(), this.client.getCameraEntity().getY(), this.client.getCameraEntity().getZ()));
+        }
+        //list.add(String.format("Render Distance: %s", this.client.options.viewDistance));
 
         for(int i = 0; i < list.size(); ++i) {
             String string = (String)list.get(i);
@@ -62,6 +67,10 @@ public abstract class CoordOverlayMixin {
                 int k = this.getTextRenderer().getWidth(string);
                 int m = 2 + j * i;
                 fill(matrices, 1, m - 1, 2 + k + 1, m + j - 1, -1873784752);
+
+                if (FabricLoader.getInstance().isModLoaded("betterf3"))
+                this.getTextRenderer().drawWithShadow(matrices, string, 2.0F, (float)m, 14737632);
+                else
                 this.getTextRenderer().draw(matrices, string, 2.0F, (float)m, 14737632);
             }
         }
