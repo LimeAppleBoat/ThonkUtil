@@ -84,8 +84,8 @@ publishing {
 	publications {
 		mavenJava(MavenPublication) {
 			// add all the jars that should be included when publishing to maven
-			artifact(remapMavenJar) {
-				builtBy remapMavenJar
+			artifact(jar) {
+				builtBy jar
 			}
 			artifact(sourcesJar) {
 				builtBy remapSourcesJar
