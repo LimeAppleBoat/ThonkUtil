@@ -6,7 +6,7 @@ import net.minecraft.potion.Potion;
 import org.jetbrains.annotations.ApiStatus.ScheduledForRemoval;
 
 @Deprecated
-@ScheduledForRemoval(inVersion = "1.5.0")
+@ScheduledForRemoval(inVersion = "1.7")
 public class RemoveTippedPotionRecipe extends RemovePotionRecipe {
     public static void remove(Potion potion) {
         RemovePotionRecipe.removeTippedArrow(potion);
