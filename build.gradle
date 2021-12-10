@@ -175,6 +175,9 @@ allprojects {
 		}
 	}
 }
+
+subprojects.each { remapJar.dependsOn("${it.path}:remapJar") }
+
 dependencies {
 	afterEvaluate {
 		subprojects.each {
