@@ -1,5 +1,5 @@
 {
-  "thonkutil-trades.options": "ThonkUtil Trades Options",
+  "thonkutil-trades-v1.options": "ThonkUtil Trades Options",
   "option.thonkutil-trades-v1.trade_offer_id": "Modify Trade Offer",
   "option.thonkutil-trades-v1.trade_offer_id.tooltip": "Modifies Vanilla Trade Offer to include \"id\":\"minecraft:trade_offer\"",
   "option.thonkutil-trades-v1.trade_offer_id.false": "OFF",

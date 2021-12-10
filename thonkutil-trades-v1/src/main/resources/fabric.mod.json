@@ -3,7 +3,7 @@
   "id": "thonkutil-trades-v1",
   "version": "${version}",
 
-  "name": "Thonkutil Trades (v1)",
+  "name": "ThonkUtil Trades (v1)",
   "description": "Allows for multiple trade types",
   "authors": [
     "Jab125"
