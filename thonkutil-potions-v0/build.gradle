@@ -1,0 +1,10 @@
+archivesBaseName = "thonkutil-potions-v0"
+group = rootProject.group
+version = getSubprojectVersion(project)
+
+moduleDependencies(project, [
+        'thonkutil-base'
+])
+loom {
+    accessWidenerPath = file("src/main/resources/thonkutil-potions-v0.accesswidener")
+}

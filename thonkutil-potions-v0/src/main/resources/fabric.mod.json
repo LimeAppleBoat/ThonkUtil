@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "id": "thonkutil-potions-v0",
+  "version": "${version}",
+
+  "name": "ThonkUtil Potions (v0)",
+  "description": "ThonkUtil Potion API",
+  "authors": [
+    "Jab125"
+  ],
+  "mixins": [
+    "thonkutil-potions-v0.mixins.json"
+  ],
+  "license": "CC0-1.0",
+  "icon": "assets/thonkutil-potions-v0/icon.png",
+  "environment": "*",
+  "accessWidener": "thonkutil-potions-v0.accesswidener",
+  "custom": {
+    "modmenu": {
+      "parent": "thonkutil",
+      "badges": ["library"]
+    }
+  }
+}

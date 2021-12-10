@@ -1,0 +1,7 @@
+archivesBaseName = "thonkutil-trades-v1"
+group = rootProject.group
+version = getSubprojectVersion(project)
+
+moduleDependencies(project, [
+        'thonkutil-base'
+])

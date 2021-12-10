@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "id": "thonkutil-base",
+  "version": "${version}",
+
+  "name": "ThonkUtil Base",
+  "description": "Base Functionality of ThonkUtil",
+  "authors": [
+    "Jab125"
+  ],
+  "license": "CC0-1.0",
+  "icon": "assets/thonkutil-base/icon.png",
+  "environment": "*",
+  "custom": {
+    "modmenu": {
+      "parent": "thonkutil",
+      "badges": ["library"]
+    }
+  }
+}

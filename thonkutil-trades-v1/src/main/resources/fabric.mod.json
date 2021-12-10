@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "thonkutil-trades-v1",
+  "version": "${version}",
+
+  "name": "Thonkutil Trades (v1)",
+  "description": "Allows for multiple trade types",
+  "authors": [
+    "Jab125"
+  ],
+  "mixins": [
+    "thonkutil-trades-v1.mixins.json"
+  ],
+  "entrypoints": {
+    "main": [
+      "com.jab125.thonkutil.ThonkUtilTrades"
+    ],
+    "modmenu": [
+      "com.jab125.thonkutil.config.ThonkUtilTradesModMenuCompat"
+    ]
+  },
+  "license": "CC0-1.0",
+  "icon": "assets/thonkutil-trades-v1/icon.png",
+  "environment": "*",
+  "custom": {
+    "modmenu": {
+      "parent": "thonkutil",
+      "badges": ["library"]
+    }
+  }
+}

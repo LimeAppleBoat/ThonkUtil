@@ -4,9 +4,11 @@
   "version": "${version}",
 
   "name": "ThonkUtil",
-  "description": "Utils for some mods",
+  "description": "Some useful features that mod devs and regular users would like.",
   "authors": [
     "Jab125"
+  ],
+  "contributors": [
   ],
   "contact": {
     "sources": "https://github.com/Jab125/ThonkUtil",
@@ -17,21 +19,6 @@
   "icon": "assets/thonkutil/icon.png",
 
   "environment": "*",
-  "entrypoints": {
-    "main": [
-      "com.jab125.thonkutil.ThonkUtil"
-    ],
-    "client": [
-      "com.jab125.thonkutil.client.ThonkUtilClient"
-    ],
-    "modmenu": [
-      "com.jab125.thonkutil.config.ModMenuCompat"
-    ]
-  },
-  "mixins": [
-    "thonkutil.mixins.json"
-  ],
-
   "depends": {
     "fabricloader": ">=0.12.8",
     "fabric": "*",
@@ -40,10 +27,9 @@
     ],
     "java": ">=16"
   },
-  "accessWidener": "thonkutil.accesswidener",
   "custom": {
     "modmenu": {
-      "badges": ["library"]
+      "badges": []
     }
   }
 }

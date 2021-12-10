@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "thonkutil-coords-v1",
+  "version": "${version}",
+
+  "name": "ThonkUtil Coords (v1)",
+  "description": "Coordinate Utilities",
+  "authors": [
+    "Jab125"
+  ],
+  "mixins": [
+    "thonkutil-coords-v1.mixins.json"
+  ],
+  "entrypoints": {
+    "client": [
+      "com.jab125.thonkutil.ThonkUtilCoord"
+    ],
+    "modmenu": [
+      "com.jab125.thonkutil.config.ThonkUtilCoordModMenuCompat"
+    ]
+  },
+  "license": "CC0-1.0",
+  "icon": "assets/thonkutil-coords-v1/icon.png",
+  "environment": "client",
+  "custom": {
+    "modmenu": {
+      "parent": "thonkutil"
+    }
+  }
+}
