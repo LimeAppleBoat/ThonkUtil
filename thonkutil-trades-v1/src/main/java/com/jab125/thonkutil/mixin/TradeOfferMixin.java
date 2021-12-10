@@ -1,6 +1,6 @@
 package com.jab125.thonkutil.mixin;
 
-import com.jab125.thonkutil.api.tradeoffer.IdentifiableTrade;
+import com.jab125.thonkutil.api.IdentifiableTrade;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.Identifier;
 import net.minecraft.village.TradeOffer;

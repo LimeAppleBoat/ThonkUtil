@@ -1,4 +1,4 @@
-package com.jab125.thonkutil.api.tradeoffer;
+package com.jab125.thonkutil.api;
 
 import net.minecraft.util.Identifier;
 import net.minecraft.village.TradeOffer;
