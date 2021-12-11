@@ -8,6 +8,7 @@ buildscript {
 plugins {
 	id 'fabric-loom' version '0.10-SNAPSHOT'
 	id 'maven-publish'
+	id "com.matthewprenger.cursegradle" version "1.4.0"
 	id "org.ajoberstar.grgit" version "3.1.0"
 }
 def ENV = System.getenv()
@@ -200,3 +201,55 @@ subprojects {
 		enabled = false
 	}
 }
+
+curseforge {
+	if (ENV.CURSEFORGE_API_KEY) {
+		apiKey = ENV.CURSEFORGE_API_KEY
+	}
+
+	project {
+		id = "536648"
+		changelog = ENV.CHANGELOG ?: "No changelog provided"
+		releaseType = project.prerelease == "true" ? "beta" : "release"
+		addGameVersion "1.18"
+		addGameVersion "Fabric"
+		addGameVersion "Java 17"
+
+		mainArtifact(remapJar) {
+			displayName = "[$project.minecraft_version] ThonkUtil $project.version"
+		}
+
+		afterEvaluate {
+			uploadTask.dependsOn("remapJar")
+		}
+	}
+
+	options {
+		forgeGradleIntegration = false
+	}
+}
+
+import org.kohsuke.github.GHReleaseBuilder
+import org.kohsuke.github.GitHub
+
+task github(dependsOn: remapMavenJar) {
+	onlyIf {
+		ENV.GITHUB_TOKEN
+	}
+
+	doLast {
+		def github = GitHub.connectUsingOAuth(ENV.GITHUB_TOKEN as String)
+		def repository = github.getRepository(ENV.GITHUB_REPOSITORY)
+
+		def releaseBuilder = new GHReleaseBuilder(repository, version as String)
+		releaseBuilder.name("[$project.minecraft_version] ThonkUtil $project.version")
+		releaseBuilder.body(ENV.CHANGELOG ?: "No changelog provided")
+		releaseBuilder.commitish(getBranch())
+		releaseBuilder.prerelease(project.prerelease == "true")
+
+		def ghRelease = releaseBuilder.create()
+		ghRelease.uploadAsset(file("${project.buildDir}/libs/${archivesBaseName}-${version}.jar"), "application/java-archive");
+	}
+}
+
+apply from: "gradle/module-versioning.gradle"

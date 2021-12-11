@@ -24,7 +24,13 @@
   "environment": "*",
   "custom": {
     "modmenu": {
-      "parent": "thonkutil",
+      "parent": {
+        "id": "thonkutil",
+        "name": "ThonkUtil",
+        "description": "Some useful features that mod devs and regular users would like.",
+        "icon": "assets/thonkutil-trades-v1/icon.png",
+        "badges": ["library"]
+      },
       "badges": ["library"]
     }
   }

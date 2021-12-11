@@ -29,7 +29,7 @@
   },
   "custom": {
     "modmenu": {
-      "badges": []
+      "badges": ["library"]
     }
   }
 }
