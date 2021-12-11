@@ -1,34 +1,24 @@
 package com.jab125.thonkutil.mixin;
 
 import com.jab125.thonkutil.impl.RemovePotionRecipeImpl;
-import net.minecraft.block.entity.BrewingStandBlockEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionUtil;
-import net.minecraft.util.collection.DefaultedList;
+import net.minecraft.recipe.BrewingRecipeRegistry;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
-@Mixin(BrewingStandBlockEntity.class)
+@Mixin(BrewingRecipeRegistry.class)
 public class PotionRecipeMixin {
-    private static DefaultedList<ItemStack> stacks;
-
-    @Inject(method = "canCraft", at = @At("HEAD"))
-    private static void getList(DefaultedList<ItemStack> slots, CallbackInfoReturnable<Boolean> cir) {
-        stacks = slots;
+    @Inject(method = "craft", at = @At("HEAD"), cancellable = true)
+    private static void injectCraft(ItemStack ingredient, ItemStack input, CallbackInfoReturnable<ItemStack> cir) {
+        if (!input.isEmpty()) {
+            if (!RemovePotionRecipeImpl.shouldCraft(input, ingredient)) cir.setReturnValue(input);
+        }
     }
-    @ModifyVariable(method = "canCraft", at = @At("STORE"))
-    private static boolean canCraftInject(boolean b) {
-        AtomicInteger atomicInteger = new AtomicInteger(stacks.size());
-        stacks.iterator().forEachRemaining((itemStack) -> {
-            if (RemovePotionRecipeImpl.RemovePotionRecipeImpl2.contains(PotionUtil.getPotion(itemStack))) {
-                atomicInteger.set(atomicInteger.get() - 1);
-            }
-        });
-        return atomicInteger.get() > 0;
+
+    @Inject(method = "hasRecipe", at = @At("HEAD"), cancellable = true)
+    private static void canCraft(ItemStack input, ItemStack ingredient, CallbackInfoReturnable<Boolean> cir) {
+        if (!RemovePotionRecipeImpl.shouldCraft(input, ingredient)) cir.setReturnValue(false);
     }
 }

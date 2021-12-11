@@ -1,6 +1,10 @@
 package com.jab125.thonkutil.impl;
 
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionUtil;
+import net.minecraft.potion.Potions;
 import org.apache.commons.lang3.NotImplementedException;
 
 import java.util.ArrayList;
@@ -35,17 +39,14 @@ public class RemovePotionRecipeImpl {
         static ArrayList<Potion> splash_potions = new ArrayList<>();
 
         public static void removeSplashPotionRecipe(Potion potion) {
-            if (true) throw new NotImplementedException("NOT IMPLEMENTED");
             splash_potions.add(potion);
         }
 
         public static Potion[] getSplashPotions() {
-            if (true) throw new NotImplementedException("NOT IMPLEMENTED");
             return splash_potions.toArray(Potion[]::new);
         }
 
         public static boolean contains(Potion potion) {
-            if (true) throw new NotImplementedException("NOT IMPLEMENTED");
             //System.out.println(Registry.POTION.getId(potion).toString());
             for (var potion2 : splash_potions) {
                 //System.out.println(Registry.POTION.getId(potion2).toString());
@@ -60,17 +61,14 @@ public class RemovePotionRecipeImpl {
         static ArrayList<Potion> lingering_potions = new ArrayList<>();
 
         public static void removeLingeringPotionRecipe(Potion potion) {
-            if (true) throw new NotImplementedException("NOT IMPLEMENTED");
             lingering_potions.add(potion);
         }
 
         public static Potion[] getLingeringPotions() {
-            if (true) throw new NotImplementedException("NOT IMPLEMENTED");
             return lingering_potions.toArray(Potion[]::new);
         }
 
         public static boolean contains(Potion potion) {
-            if (true) throw new NotImplementedException("NOT IMPLEMENTED");
             //System.out.println(Registry.POTION.getId(potion).toString());
             for (var potion2 : lingering_potions) {
                 //System.out.println(Registry.POTION.getId(potion2).toString());
@@ -80,23 +78,21 @@ public class RemovePotionRecipeImpl {
         }
     }
 
+    @Deprecated
     public static class RemovePotionRecipeImpl2 {
 
 
         static ArrayList<Potion> potions = new ArrayList<>();
 
         public static void removePotionRecipe(Potion potion) {
-            if (true) throw new NotImplementedException("NOT IMPLEMENTED");
             potions.add(potion);
         }
 
         public static Potion[] getPotions() {
-            if (true) throw new NotImplementedException("NOT IMPLEMENTED");
             return potions.toArray(Potion[]::new);
         }
 
         public static boolean contains(Potion potion) {
-            if (true) throw new NotImplementedException("NOT IMPLEMENTED");
             //System.out.println(Registry.POTION.getId(potion).toString());
             for (var potion2 : potions) {
                 //System.out.println(Registry.POTION.getId(potion2).toString());
@@ -104,5 +100,10 @@ public class RemovePotionRecipeImpl {
             }
             return false;
         }
+    }
+    public static boolean shouldCraft(ItemStack potionStack, ItemStack itemStack) {
+        if (itemStack.getItem().equals(Items.GUNPOWDER) && potionStack.getItem().equals(Items.POTION) && RemoveSplashPotionRecipeImpl.contains(PotionUtil.getPotion(potionStack))) return false;
+        if (itemStack.getItem().equals(Items.DRAGON_BREATH) && potionStack.getItem().equals(Items.SPLASH_POTION) && RemoveLingeringPotionRecipeImpl.contains(PotionUtil.getPotion(potionStack))) return false;
+        return true;
     }
 }
