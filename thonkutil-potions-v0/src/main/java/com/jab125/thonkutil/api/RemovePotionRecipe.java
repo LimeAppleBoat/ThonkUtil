@@ -8,4 +8,10 @@ public class RemovePotionRecipe {
     public static void removeTippedArrow(Potion potion) {
         RemovePotionRecipeImpl.RemoveTippedArrowRecipeImpl.removeTippedArrowRecipe(potion);
     }
+    public static void removeSplashPotion(Potion potion) {
+        RemovePotionRecipeImpl.RemoveSplashPotionRecipeImpl.removeSplashPotionRecipe(potion);
+    }
+    public static void removeLingeringPotion(Potion potion) {
+        RemovePotionRecipeImpl.RemoveLingeringPotionRecipeImpl.removeLingeringPotionRecipe(potion);
+    }
 }
