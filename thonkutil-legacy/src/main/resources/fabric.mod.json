@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "id": "thonkutil-legacy",
+  "version": "${version}",
+
+  "name": "ThonkUtil Legacy",
+  "description": "A compatibility layer for mods that use pre-2.0 ThonkUtil",
+  "authors": [
+    "Jab125"
+  ],
+  "license": "CC0-1.0",
+  "icon": "assets/thonkutil-legacy/icon.png",
+  "environment": "*",
+  "custom": {
+    "modmenu": {
+      "parent": {
+        "id": "thonkutil",
+        "name": "ThonkUtil",
+        "description": "Some useful features that mod devs and regular users would like.",
+        "icon": "assets/thonkutil-legacy/icon.png",
+        "badges": ["library"]
+      },
+      "badges": ["library", "deprecated"]
+    }
+  }
+}

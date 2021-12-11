@@ -1,0 +1,9 @@
+archivesBaseName = "thonkutil-legacy"
+group = rootProject.group
+version = getSubprojectVersion(project)
+
+dependencies {
+    api project(path: ':thonkutil-base', configuration: 'namedElements')
+    api project(path: ':thonkutil-potions-v0', configuration: 'namedElements')
+    api project(path: ':thonkutil-trades-v1', configuration: 'namedElements')
+}
