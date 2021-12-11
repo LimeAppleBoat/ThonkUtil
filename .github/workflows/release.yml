@@ -1,0 +1,28 @@
+name: Release
+on: [workflow_dispatch] # Manual trigger
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    container:
+      image: eclipse-temurin:17-jdk
+      options: --user root
+    steps:
+      - run: apt update && apt install git -y && git --version
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: LimeAppleBoat/fabric-action-scripts@v1
+        id: changelog
+        with:
+          context: changelog
+          workflow_id: release.yml
+      - uses: gradle/wrapper-validation-action@v1
+      - run: ./gradlew build curseforge github --stacktrace
+        env:
+          CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CHANGELOG: ${{ steps.changelog.outputs.changelog }}
