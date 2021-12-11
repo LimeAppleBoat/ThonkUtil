@@ -43,7 +43,7 @@ def getSubprojectVersion(project) {
 	def version = project.properties["${project.name}-version"]
 
 	if (!version) {
-		throw new NullPointerException("Could not find version for " + project.name)
+ 		throw new NullPointerException("Could not find version for " + project.name)
 	}
 
 	if (grgit == null) {
@@ -179,19 +179,6 @@ allprojects {
 
 subprojects.each { remapJar.dependsOn("${it.path}:remapJar") }
 
-dependencies {
-	afterEvaluate {
-		subprojects.each {
-			api project(path: ":${it.name}", configuration: "namedElements")
-
-			//if (!(it.name in devOnlyModules)) {
-			include project("${it.name}:")
-			//}
-
-			//testmodImplementation project("${it.name}:").sourceSets.testmod.output
-		}
-	}
-}
 
 subprojects {
 	runClient {
@@ -199,6 +186,24 @@ subprojects {
 	}
 	runServer {
 		enabled = false
+	}
+}
+
+def dontInclude = [
+
+]
+
+dependencies {
+	afterEvaluate {
+		subprojects.each {
+			api project(path: ":${it.name}", configuration: "namedElements")
+
+			if (!(it.name in dontInclude)) {
+				include project("${it.name}:")
+			}
+
+			//testmodImplementation project("${it.name}:").sourceSets.testmod.output
+		}
 	}
 }
 
