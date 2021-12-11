@@ -8,10 +8,12 @@ import net.minecraft.client.gui.screen.ScreenTexts;
 import net.minecraft.client.gui.screen.option.GameOptionsScreen;
 import net.minecraft.client.gui.widget.ButtonListWidget;
 import net.minecraft.client.gui.widget.ButtonWidget;
+import net.minecraft.client.option.Option;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.OrderedText;
 import net.minecraft.text.TranslatableText;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class ThonkUtilTradesOptionsScreen extends GameOptionsScreen {
@@ -24,8 +26,10 @@ public class ThonkUtilTradesOptionsScreen extends GameOptionsScreen {
     }
 
     protected void init() {
+        Option[] optionList = ThonkUtilTradeConfig.asOptions();
         this.list = new ButtonListWidget(this.client, this.width, this.height, 32, this.height - 32, 25);
-        this.list.addAll(ThonkUtilTradeConfig.asOptions());
+        this.list.addSingleOptionEntry(ThonkUtilTradeConfig.TRADE_OFFER_ID.asOption());
+        //this.list.addAll(optionList);
         this.addSelectableChild(this.list);
         this.addDrawableChild(new ButtonWidget(this.width / 2 - 100, this.height - 27, 200, 20, ScreenTexts.DONE, (button) -> {
             ThonkUtilTradeConfigManager.save();
@@ -41,6 +45,13 @@ public class ThonkUtilTradesOptionsScreen extends GameOptionsScreen {
         List<OrderedText> tooltip = getHoveredButtonTooltip(this.list, mouseX, mouseY);
         if (tooltip != null) {
             this.renderOrderedTooltip(matrices, tooltip, mouseX, mouseY);
+        }
+
+    }
+
+    public void addSingle(Option[] options, ButtonListWidget widget) {
+        for(int i = 0; i < options.length; i += 2) {
+            widget.addSingleOptionEntry(options[i]);
         }
 
     }
