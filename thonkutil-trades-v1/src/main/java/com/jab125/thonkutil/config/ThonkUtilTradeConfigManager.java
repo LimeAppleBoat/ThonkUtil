@@ -21,7 +21,7 @@ public class ThonkUtilTradeConfigManager {
         if (file != null) {
             return;
         }
-        file = new File(FabricLoader.getInstance().getConfigDir().toFile(), ThonkUtil.MODID.POTION_API_V0_MODID + ".json");
+        file = new File(FabricLoader.getInstance().getConfigDir().toFile(), ThonkUtil.MODID.TRADES_V1_MODID + ".json");
     }
 
     public static void initializeConfig() {
