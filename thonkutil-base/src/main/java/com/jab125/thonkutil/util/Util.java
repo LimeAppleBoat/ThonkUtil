@@ -5,7 +5,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
-
+@SuppressWarnings("unused")
 public class Util {
 
     public static class Item {
@@ -22,9 +22,18 @@ public class Util {
     public static boolean isModInstalled(String modid) {
         return FabricLoader.getInstance().isModLoaded(modid);
     }
+
+    /**
+     * @deprecated use {@link Util#isModInstalled(String)}
+     */
+    @Deprecated
     public static boolean isOverflowInstalled() {
         return isModInstalled("overflow");
     }
+    /**
+     * @deprecated use {@link Util#isModInstalled(String)}
+     */
+    @Deprecated
     public static boolean isEnchantmentDisplaysInstalled() {
         return isModInstalled("enchantment-displays");
     }
