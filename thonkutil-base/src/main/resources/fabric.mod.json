@@ -4,7 +4,7 @@
   "version": "${version}",
 
   "name": "ThonkUtil Base",
-  "description": "Base Functionality of ThonkUtil",
+  "description": "Base Functionality of ThonkUtil, almost all the modules depend on this.",
   "authors": [
     "Jab125"
   ],
