@@ -13,6 +13,7 @@ public class ThonkUtil {
         public static final String POTIONS_V0_MODID = "thonkutil-potions-v0";
         public static final String COORDS_V1_MODID = "thonkutil-coords-v1";
         public static final String TRADES_V1_MODID = "thonkutil-trades-v1";
+        public static final String CUSTOMIZATION_V1_MODID = "thonkutil-customization-v1";
         public static final String BASE_MODID = "thonkutil-base";
     }
 }

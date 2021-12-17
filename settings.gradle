@@ -11,6 +11,7 @@ pluginManagement {
 rootProject.name = "thonkutil"
 include "thonkutil-potions-v0"
 include "thonkutil-trades-v1"
+include "thonkutil-customization-v1"
 include "thonkutil-base"
 include "thonkutil-coords-v1"
 include "thonkutil-legacy"

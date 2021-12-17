@@ -1,0 +1,7 @@
+{
+  "thonkutil-coords-v1.options": "ThonkUtil Coords Options",
+  "option.thonkutil-coords-v1.always_show_coords": "Always Show Coords",
+  "option.thonkutil-coords-v1.always_show_coords.tooltip": "To always display the coordinates in the top-left of the screen, regardless of if the F3 screen is open",
+  "option.thonkutil-coords-v1.always_show_coords.false": "OFF",
+  "option.thonkutil-coords-v1.always_show_coords.true": "ON"
+}
