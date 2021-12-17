@@ -2,7 +2,9 @@
   "schemaVersion": 1,
   "id": "thonkutil-base",
   "version": "${version}",
-
+  "mixins": [
+    "thonkutil-base.mixins.json"
+  ],
   "name": "ThonkUtil Base",
   "description": "Base Functionality of ThonkUtil, almost all the modules depend on this.",
   "authors": [
