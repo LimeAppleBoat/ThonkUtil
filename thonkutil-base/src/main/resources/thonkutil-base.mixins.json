@@ -4,7 +4,6 @@
   "package": "com.jab125.thonkutil.mixin",
   "compatibilityLevel": "JAVA_16",
   "mixins": [
-    "DebugMixin"
   ],
   "injectors": {
     "defaultRequire": 1
