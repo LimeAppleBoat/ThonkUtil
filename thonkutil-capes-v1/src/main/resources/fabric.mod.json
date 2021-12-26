@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "thonkutil-capes-v1",
+  "version": "${version}",
+
+  "name": "ThonkUtil Capes (v1)",
+  "description": "Allows adding cape items",
+  "authors": [
+    "Jab125"
+  ],
+  "mixins": [
+    "thonkutil-capes-v1.mixins.json"
+  ],
+  "entrypoints": {
+    "main": [
+      "com.jab125.thonkutil.ThonkUtilCapes"
+    ]
+  },
+  "license": "CC0-1.0",
+  "icon": "assets/thonkutil-capes-v1/icon.png",
+  "environment": "*",
+  "custom": {
+    "modmenu": {
+      "parent": {
+        "id": "thonkutil",
+        "name": "ThonkUtil",
+        "description": "Some useful features that mod devs and regular users would like.",
+        "icon": "assets/thonkutil-capes-v1/icon.png",
+        "badges": ["library"]
+      },
+      "badges": ["library"]
+    }
+  }
+}

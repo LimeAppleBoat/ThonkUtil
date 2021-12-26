@@ -1,0 +1,7 @@
+archivesBaseName = "thonkutil-capes-v1"
+group = rootProject.group
+version = getSubprojectVersion(project)
+
+dependencies {
+    api project(path: ':thonkutil-base', configuration: 'namedElements')
+}

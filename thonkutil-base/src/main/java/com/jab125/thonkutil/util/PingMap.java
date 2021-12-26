@@ -1,10 +1,11 @@
 package com.jab125.thonkutil.util;
 
+import com.jab125.thonkutil.ThonkUtilBaseClass;
 import com.jab125.thonkutil.api.ThonkUtilEvents;
 
 import java.util.HashMap;
 
-public class PingMap<K extends String, V> extends HashMap<K, V> {
+public class PingMap<K extends String, V> extends HashMap<K, V> implements ThonkUtilBaseClass {
     @Override
     public V put(K key, V value) {
         fireEvents(key, value);

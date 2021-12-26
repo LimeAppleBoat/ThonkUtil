@@ -1,12 +1,13 @@
 package com.jab125.thonkutil.config.option;
 
+import com.jab125.thonkutil.ThonkUtilBaseClass;
 import com.jab125.thonkutil.util.PingMap;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public class ConfigOptionStorage {
+public class ConfigOptionStorage implements ThonkUtilBaseClass {
     private static final Map<String, Boolean> BOOLEAN_OPTIONS = new PingMap<>();
     private static final Map<String, Enum<?>> ENUM_OPTIONS = new PingMap<>();
     private static final Map<String, Double> DOUBLE_OPTIONS = new PingMap<>();

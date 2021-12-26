@@ -1,5 +1,6 @@
 package com.jab125.thonkutil.config.option;
 
+import com.jab125.thonkutil.ThonkUtilBaseClass;
 import com.jab125.thonkutil.util.translation.TranslationUtil;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -7,7 +8,7 @@ import net.minecraft.client.option.CyclingOption;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 
-public class ToolTipBooleanConfigOption extends BooleanConfigOption{
+public class ToolTipBooleanConfigOption extends BooleanConfigOption implements ThonkUtilBaseClass {
     private final Text enabledText;
     private final Text disabledText;
     private final String translationKey, key;

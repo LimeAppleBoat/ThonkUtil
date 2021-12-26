@@ -1,5 +1,6 @@
 package com.jab125.thonkutil.util;
 
+import com.jab125.thonkutil.ThonkUtilBaseClass;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
@@ -10,7 +11,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 @SuppressWarnings("unused")
-public class Util {
+public class Util implements ThonkUtilBaseClass {
 
     public static class Item {
 
@@ -84,5 +85,9 @@ public class Util {
         public net.minecraft.item.Item getItem() {
             return item;
         }
+    }
+
+    public static net.minecraft.item.Item quickRegisterItem(Identifier id, net.minecraft.item.Item item) {
+        return Registry.register(Registry.ITEM, id, item);
     }
 }

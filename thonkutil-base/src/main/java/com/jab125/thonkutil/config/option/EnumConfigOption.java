@@ -1,5 +1,6 @@
 package com.jab125.thonkutil.config.option;
 
+import com.jab125.thonkutil.ThonkUtilBaseClass;
 import com.jab125.thonkutil.util.translation.TranslationUtil;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -11,7 +12,7 @@ import net.minecraft.text.TranslatableText;
 
 import java.util.Locale;
 
-public class EnumConfigOption<E extends Enum<E>> implements OptionConvertable {
+public class EnumConfigOption<E extends Enum<E>> implements OptionConvertable, ThonkUtilBaseClass {
     private final String key, translationKey;
     private final Class<E> enumClass;
     private final E defaultValue;

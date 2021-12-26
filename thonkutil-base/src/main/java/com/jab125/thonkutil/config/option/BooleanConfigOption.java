@@ -1,5 +1,6 @@
 package com.jab125.thonkutil.config.option;
 
+import com.jab125.thonkutil.ThonkUtilBaseClass;
 import com.jab125.thonkutil.util.translation.TranslationUtil;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -8,7 +9,7 @@ import net.minecraft.client.option.CyclingOption;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 
-public class BooleanConfigOption implements OptionConvertable {
+public class BooleanConfigOption implements OptionConvertable, ThonkUtilBaseClass {
     private final String key, translationKey;
     private final boolean defaultValue;
     private final Text enabledText;

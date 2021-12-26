@@ -1,12 +1,13 @@
 package com.jab125.thonkutil.config.option;
 
+import com.jab125.thonkutil.ThonkUtilBaseClass;
 import com.jab125.thonkutil.util.translation.TranslationUtil;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 
 import java.util.Set;
 
-public class StringSetConfigOption {
+public class StringSetConfigOption implements ThonkUtilBaseClass {
     private final String key, translationKey;
     private final Set<String> defaultValue;
 

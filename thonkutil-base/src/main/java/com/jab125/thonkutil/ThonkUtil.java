@@ -6,7 +6,7 @@ import com.google.gson.GsonBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class ThonkUtil {
+public class ThonkUtil implements ThonkUtilBaseClass {
     public static final Logger LOGGER = LogManager.getLogger("goblintraders");
     public static final Gson GSON = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).setPrettyPrinting().create();
     public static class MODID {

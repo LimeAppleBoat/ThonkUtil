@@ -1,5 +1,6 @@
 package com.jab125.thonkutil.util.translation;
 
+import com.jab125.thonkutil.ThonkUtilBaseClass;
 import net.minecraft.client.resource.language.I18n;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
@@ -7,7 +8,7 @@ import net.minecraft.text.TranslatableText;
 import java.text.NumberFormat;
 import java.util.Arrays;
 
-public class TranslationUtil {
+public class TranslationUtil implements ThonkUtilBaseClass {
     public static Text translateNumeric(String key, int[]... args) {
         Object[] realArgs = new Object[args.length];
         for (int i = 0; i < args.length; i++) {
