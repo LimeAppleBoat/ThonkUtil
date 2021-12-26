@@ -36,7 +36,7 @@ public class CapeItem extends Item {
     }
 
     public boolean hasElytraTexture() {
-        return false;
+        return hasElytraTexture;
     }
 
     @Override

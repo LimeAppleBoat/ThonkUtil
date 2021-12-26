@@ -23,7 +23,7 @@ import java.util.Optional;
 import java.util.function.Consumer;
 
 public class ThonkUtilCapes implements ModInitializer, ThonkUtilCapesClass {
-    public static ItemGroup CAPES_GROUP = FabricItemGroupBuilder.create(Identifier.tryParse("thonkutil:capes")).build();
+    public static ItemGroup CAPES_GROUP = FabricItemGroupBuilder.create(Identifier.tryParse("thonkutil:capes")).icon(() -> new ItemStack(Registry.ITEM.get(new Identifier("thonkutil:minecon_2011_cape")))).build();
     static {
         List<ItemStack> a = new ArrayList<ItemStack>();
         Registry.ITEM.forEach((item -> {
