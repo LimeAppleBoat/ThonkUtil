@@ -4,11 +4,11 @@
   "package": "com.jab125.thonkutil.mixin",
   "compatibilityLevel": "JAVA_16",
   "client": [
-    "PlayerEntityMixin",
     "ElytraRendererMixin",
+    "LivingEntityRendererAccessor",
     "ModelLoaderMixin",
-    "PlayerEntityModelMixin",
-    "LivingEntityRendererAccessor"
+    "PlayerEntityMixin",
+    "PlayerEntityModelMixin"
   ],
   "injectors": {
     "defaultRequire": 1
