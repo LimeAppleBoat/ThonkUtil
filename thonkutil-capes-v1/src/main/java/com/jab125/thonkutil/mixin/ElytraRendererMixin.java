@@ -18,6 +18,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+@net.fabricmc.api.Environment(net.fabricmc.api.EnvType.CLIENT)
 @Mixin(ElytraFeatureRenderer.class)
 public class ElytraRendererMixin<T extends LivingEntity, M extends EntityModel<T>> {
     @Inject(at = @At(value = "HEAD"), method = "render(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;ILnet/minecraft/entity/LivingEntity;FFFFFF)V", require = 1, allow = 1, cancellable = true)

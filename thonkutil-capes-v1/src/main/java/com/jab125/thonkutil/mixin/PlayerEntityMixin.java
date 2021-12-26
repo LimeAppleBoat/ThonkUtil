@@ -12,6 +12,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+@net.fabricmc.api.Environment(net.fabricmc.api.EnvType.CLIENT)
 @Mixin(PlayerEntityRenderer.class)
 public abstract class PlayerEntityMixin<T extends LivingEntity, M extends EntityModel<T>> {
     @Inject(method = "<init>", at = @At("TAIL"))

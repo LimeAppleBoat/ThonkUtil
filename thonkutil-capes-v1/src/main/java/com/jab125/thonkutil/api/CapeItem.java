@@ -1,6 +1,8 @@
 package com.jab125.thonkutil.api;
 
 import com.jab125.thonkutil.ThonkUtilCapes;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -34,7 +36,7 @@ public class CapeItem extends Item {
     }
 
     public boolean hasElytraTexture() {
-        return hasElytraTexture;
+        return false;
     }
 
     @Override

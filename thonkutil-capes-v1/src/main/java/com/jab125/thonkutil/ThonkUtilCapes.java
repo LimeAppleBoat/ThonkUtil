@@ -33,9 +33,6 @@ public class ThonkUtilCapes implements ModInitializer, ThonkUtilCapesClass {
     @Override
     public void onInitialize() {
         System.out.println(this.modId() + " Init");
-        LivingEntityFeatureRenderEvents.ALLOW_CAPE_RENDER.register((abstractClientPlayerEntity) -> {
-            return !(abstractClientPlayerEntity.canRenderCapeTexture() && !abstractClientPlayerEntity.isInvisible() && !ThonkUtilCapes.getCape(abstractClientPlayerEntity).equals(ItemStack.EMPTY) && ThonkUtilCapes.getCape(abstractClientPlayerEntity).getItem() instanceof CapeItem);
-        });
         registerCapes();
     }
 

@@ -19,6 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.function.Function;
 
+@net.fabricmc.api.Environment(net.fabricmc.api.EnvType.CLIENT)
 @Mixin(PlayerEntityModel.class)
 public class PlayerEntityModelMixin<T extends LivingEntity> extends BipedEntityModel<T> implements PlayerEntityExtension {
     private static final String ITEM_CAPE = "item_cape";
