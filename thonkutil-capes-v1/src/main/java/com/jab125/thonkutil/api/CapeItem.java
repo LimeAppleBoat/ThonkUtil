@@ -4,6 +4,7 @@ import com.jab125.thonkutil.ThonkUtilCapes;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.client.resource.language.I18n;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
@@ -42,6 +43,10 @@ public class CapeItem extends Item {
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         super.appendTooltip(stack, world, tooltip, context);
+        if (I18n.hasTranslation(this.getOrCreateTranslationKey() + ".tooltip"))
+            tooltip.add(new TranslatableText(this.getOrCreateTranslationKey() + ".tooltip").formatted(Formatting.GOLD));
+        if (I18n.hasTranslation(this.getOrCreateTranslationKey() + ".tooltip.2"))
+            tooltip.add(new TranslatableText(this.getOrCreateTranslationKey() + ".tooltip.2").formatted(Formatting.GOLD));
         if (!hasElytraTexture && isModInstalled("trinkets"))
         tooltip.add(new TranslatableText("thonkutil.no_elytra").formatted(Formatting.GRAY));
     }

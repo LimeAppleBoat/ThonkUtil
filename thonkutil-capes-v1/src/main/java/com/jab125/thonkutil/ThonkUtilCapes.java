@@ -56,6 +56,14 @@ public class ThonkUtilCapes implements ModInitializer, ThonkUtilCapesClass {
         Util.quickRegisterItem(new Identifier("thonkutil:mapmaker_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)));
         Util.quickRegisterItem(new Identifier("thonkutil:turtle_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)));
         Util.quickRegisterItem(new Identifier("thonkutil:migration_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)));
+
+        Util.quickRegisterItem(new Identifier("thonkutil:founders_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)));
+        Util.quickRegisterItem(new Identifier("thonkutil:pan_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)));
+
+        Util.quickRegisterItem(new Identifier("thonkutil:hero_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE), false));
+
+        Util.quickRegisterItem(new Identifier("thonkutil:christmas_2010_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE), false));
+        Util.quickRegisterItem(new Identifier("thonkutil:new_year_2011_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE), false));
     }
 
     public static String createItemModelJson(Identifier id, String type) {
