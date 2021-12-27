@@ -3,10 +3,12 @@ package com.jab125.thonkutil;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.jab125.thonkutil.api.CapeItem;
+import com.jab125.thonkutil.impl.CapeCommand;
 import com.jab125.thonkutil.util.Util;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.client.rendering.v1.LivingEntityFeatureRenderEvents;
+import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -24,19 +26,20 @@ import java.util.function.Consumer;
 
 public class ThonkUtilCapes implements ModInitializer, ThonkUtilCapesClass {
     public static ItemGroup CAPES_GROUP = FabricItemGroupBuilder.create(Identifier.tryParse("thonkutil:capes")).icon(() -> new ItemStack(Registry.ITEM.get(new Identifier("thonkutil:minecon_2011_cape")))).build();
-    static {
-        List<ItemStack> a = new ArrayList<ItemStack>();
-        Registry.ITEM.forEach((item -> {
-            if (item instanceof CapeItem) a.add(new ItemStack(item));
-        }));
-    }
     @Override
     public void onInitialize() {
         System.out.println(this.modId() + " Init");
         registerCapes();
+        CommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> {
+            CapeCommand.register(dispatcher);
+        });
     }
 
     private static void registerCapes() {
+        Util.quickRegisterItem(new Identifier("thonkutil:mojang_classic_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)));
+        Util.quickRegisterItem(new Identifier("thonkutil:mojang_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)));
+        Util.quickRegisterItem(new Identifier("thonkutil:mojang_studios_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)));
+
         Util.quickRegisterItem(new Identifier("thonkutil:minecon_2011_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)));
         Util.quickRegisterItem(new Identifier("thonkutil:minecon_2013_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)));
         Util.quickRegisterItem(new Identifier("thonkutil:minecon_2015_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)));
@@ -53,6 +56,9 @@ public class ThonkUtilCapes implements ModInitializer, ThonkUtilCapesClass {
         Util.quickRegisterItem(new Identifier("thonkutil:translator_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)));
         Util.quickRegisterItem(new Identifier("thonkutil:chinese_translator_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)));
         Util.quickRegisterItem(new Identifier("thonkutil:japanese_translator_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)));
+        Util.quickRegisterItem(new Identifier("thonkutil:scrolls_champion_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)));
+        Util.quickRegisterItem(new Identifier("thonkutil:cobalt_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)));
+        Util.quickRegisterItem(new Identifier("thonkutil:mojira_moderator_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)));
         Util.quickRegisterItem(new Identifier("thonkutil:mapmaker_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)));
         Util.quickRegisterItem(new Identifier("thonkutil:turtle_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)));
         Util.quickRegisterItem(new Identifier("thonkutil:migration_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)));
@@ -64,6 +70,7 @@ public class ThonkUtilCapes implements ModInitializer, ThonkUtilCapesClass {
 
         Util.quickRegisterItem(new Identifier("thonkutil:christmas_2010_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE), false));
         Util.quickRegisterItem(new Identifier("thonkutil:new_year_2011_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE), false));
+        Util.quickRegisterItem(new Identifier("thonkutil:first_birthday_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE), false));
     }
 
     public static String createItemModelJson(Identifier id, String type) {

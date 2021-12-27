@@ -1,26 +1,31 @@
 package com.jab125.thonkutil.api;
 
 import com.jab125.thonkutil.ThonkUtilCapes;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.client.resource.language.I18n;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionUtil;
+import net.minecraft.potion.Potions;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
+import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Iterator;
 import java.util.List;
 
 import static com.jab125.thonkutil.util.Util.isModInstalled;
 
 public class CapeItem extends Item {
+    private static boolean generatedGroup = false;
     private final boolean hasElytraTexture;
 
     public CapeItem(Settings settings) {
@@ -28,8 +33,18 @@ public class CapeItem extends Item {
     }
 
     public CapeItem(Settings settings, boolean hasElytraTexture) {
-        super(settings.maxCount(1).group(ThonkUtilCapes.CAPES_GROUP));
+        super(settings.maxCount(1));
         this.hasElytraTexture = hasElytraTexture;
+    }
+
+    @Override
+    public void appendStacks(ItemGroup group, DefaultedList<ItemStack> stacks) {
+        super.appendStacks(group, stacks);
+        if (group.equals(ThonkUtilCapes.CAPES_GROUP) && !getRegistryId().equals("thonkutil:mojang_cape") && !getRegistryId().equals("thonkutil:mojang_classic_cape") && !getRegistryId().equals("thonkutil:mojang_studios_cape")) stacks.add(new ItemStack(this));
+    }
+
+    private String getRegistryId() {
+        return Registry.ITEM.getId(this).toString();
     }
 
     public Identifier getCapeTexture() {

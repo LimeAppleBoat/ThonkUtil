@@ -2,6 +2,10 @@
   "thonkutil.no_elytra": "No Elytra",
   "itemGroup.thonkutil.capes": "Capes",
 
+  "cape.thonkutil.mojang_classic_cape": "Mojang Cape (Classic)",
+  "cape.thonkutil.mojang_cape": "Mojang Cape",
+  "cape.thonkutil.mojang_studios_cape": "Mojang Studios Cape",
+
   "cape.thonkutil.minecon_2011_cape": "MINECON 2011 Cape",
   "cape.thonkutil.minecon_2012_cape": "MINECON 2012 Cape",
   "cape.thonkutil.minecon_2013_cape": "MINECON 2013 Cape",
@@ -19,6 +23,9 @@
   "cape.thonkutil.translator_cape": "Translator Cape",
   "cape.thonkutil.chinese_translator_cape": "Chinese Translator Cape",
   "cape.thonkutil.japanese_translator_cape": "Japanese Translator Cape",
+  "cape.thonkutil.scrolls_champion_cape": "Scrolls Champion Cape",
+  "cape.thonkutil.cobalt_cape": "Cobalt Cape",
+  "cape.thonkutil.mojira_moderator_cape": "Mojira Moderator Cape",
   "cape.thonkutil.mapmaker_cape": "Realms Mapmaker Cape",
   "cape.thonkutil.turtle_cape": "Turtle Cape",
   "cape.thonkutil.migration_cape": "Migrator Cape",
@@ -32,7 +39,6 @@
   "cape.thonkutil.hero_cape": "Hero Cape",
 
   "cape.thonkutil.christmas_2010_cape": "Christmas 2010 Cape",
-  "cape.thonkutil.christmas_2010_cape.tooltip": "If you remember this cape, you are an OG!",
-
-  "cape.thonkutil.new_year_2011_cape": "New Year 2011 Cape"
+  "cape.thonkutil.new_year_2011_cape": "New Year 2011 Cape",
+  "cape.thonkutil.first_birthday_cape": "1st Birthday Cape"
 }
