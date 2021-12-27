@@ -22,15 +22,16 @@ public class TagGroupLoaderMixin {
 
     @Inject(method = "loadTags", at = @At("RETURN"), cancellable = true)
     private void loadTagInject(ResourceManager manager, CallbackInfoReturnable<Map<Identifier, Tag.Builder>> cir) {
+        if (!this.dataType.equals("tags/items")) return;
         Tag.Builder a = Tag.Builder.create();
         Registry.ITEM.forEach((item -> {
-            if (item instanceof CapeItem) a.add(Registry.ITEM.getId(item), "thonkutil:migration_cape");
+            if (item instanceof CapeItem) a.add(Registry.ITEM.getId(item), "thonkutil");
         }));
         Map<Identifier, Tag.Builder> b = cir.getReturnValue();
         b.put(Identifier.tryParse("trinkets:chest/cape"), a);
         cir.setReturnValue(b);
         cir.getReturnValue().forEach(((identifier, builder) -> {
-            System.out.println(identifier.toString() + ", " +  builder.toJson().toString() + ", " + this.dataType);
+            //System.out.println(identifier.toString() + ", " +  builder.toJson().toString() + ", " + this.dataType);
         }));
     }
 }

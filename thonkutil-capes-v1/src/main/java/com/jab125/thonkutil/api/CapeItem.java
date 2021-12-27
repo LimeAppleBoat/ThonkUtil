@@ -62,6 +62,8 @@ public class CapeItem extends Item {
             tooltip.add(new TranslatableText(this.getOrCreateTranslationKey() + ".tooltip").formatted(Formatting.GOLD));
         if (I18n.hasTranslation(this.getOrCreateTranslationKey() + ".tooltip.2"))
             tooltip.add(new TranslatableText(this.getOrCreateTranslationKey() + ".tooltip.2").formatted(Formatting.GOLD));
+        if (I18n.hasTranslation(this.getOrCreateTranslationKey() + ".tooltip.3"))
+            tooltip.add(new TranslatableText(this.getOrCreateTranslationKey() + ".tooltip.3").formatted(Formatting.GOLD));
         if (!hasElytraTexture && isModInstalled("trinkets"))
         tooltip.add(new TranslatableText("thonkutil.no_elytra").formatted(Formatting.GRAY));
     }
