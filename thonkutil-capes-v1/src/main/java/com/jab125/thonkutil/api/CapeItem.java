@@ -25,16 +25,21 @@ import java.util.List;
 import static com.jab125.thonkutil.util.Util.isModInstalled;
 
 public class CapeItem extends Item {
-    private static boolean generatedGroup = false;
     private final boolean hasElytraTexture;
+    private final boolean has2WingedElytra;
 
     public CapeItem(Settings settings) {
         this(settings, true);
     }
 
-    public CapeItem(Settings settings, boolean hasElytraTexture) {
+    public CapeItem(Settings settings, boolean hasElytraTexture, boolean has2WingedElytra) {
         super(settings.maxCount(1));
         this.hasElytraTexture = hasElytraTexture;
+        this.has2WingedElytra = has2WingedElytra;
+    }
+
+    public CapeItem(Settings settings, boolean hasElytraTexture) {
+        this(settings, hasElytraTexture, false);
     }
 
     @Override
@@ -55,6 +60,10 @@ public class CapeItem extends Item {
         return hasElytraTexture;
     }
 
+    public Identifier getElytraTexture() {
+        return has2WingedElytra ? Identifier.tryParse(Registry.ITEM.getId(this).getNamespace() + ":textures/elytra/"+ Registry.ITEM.getId(this).getPath() + ".png") : getCapeTexture();
+    }
+
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         super.appendTooltip(stack, world, tooltip, context);
@@ -64,6 +73,8 @@ public class CapeItem extends Item {
             tooltip.add(new TranslatableText(this.getOrCreateTranslationKey() + ".tooltip.2").formatted(Formatting.GOLD));
         if (I18n.hasTranslation(this.getOrCreateTranslationKey() + ".tooltip.3"))
             tooltip.add(new TranslatableText(this.getOrCreateTranslationKey() + ".tooltip.3").formatted(Formatting.GOLD));
+        if (this instanceof AnimatedCapeItem)
+        tooltip.add(new TranslatableText("thonkutil.animated_cape").formatted(Formatting.GRAY));
         if (!hasElytraTexture && isModInstalled("trinkets"))
         tooltip.add(new TranslatableText("thonkutil.no_elytra").formatted(Formatting.GRAY));
     }
@@ -71,5 +82,9 @@ public class CapeItem extends Item {
     @Override
     public String getOrCreateTranslationKey() {
         return Util.createTranslationKey("cape", Registry.ITEM.getId(this));
+    }
+
+    public boolean has2WingedElytra() {
+        return has2WingedElytra;
     }
 }
