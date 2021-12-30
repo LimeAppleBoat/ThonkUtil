@@ -76,6 +76,8 @@ public class ThonkUtilCapes implements ModInitializer, ThonkUtilCapesClass {
         Util.quickRegisterItem(new Identifier("thonkutil:optifine_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)));
 
         Util.quickRegisterItem(new Identifier("thonkutil:better_optifine_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE), true, true));
+
+        Util.quickRegisterItem(new Identifier("thonkutil:animated_christmas_2010_cape"), new AnimatedCapeItem(new Item.Settings().rarity(Rarity.RARE), 2, 1000));
     }
 
     public static String createItemModelJson(Identifier id, String type) {
