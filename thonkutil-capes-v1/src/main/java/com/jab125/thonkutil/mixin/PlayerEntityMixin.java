@@ -2,6 +2,7 @@ package com.jab125.thonkutil.mixin;
 
 import com.jab125.thonkutil.impl.ItemCapeRenderer;
 import com.jab125.thonkutil.impl.ItemElytraRenderer;
+import com.jab125.thonkutil.impl.TwoWingedItemElytraRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.PlayerEntityRenderer;
 import net.minecraft.client.render.entity.feature.CapeFeatureRenderer;
@@ -20,5 +21,6 @@ public abstract class PlayerEntityMixin<T extends LivingEntity, M extends Entity
     public void initInject(EntityRendererFactory.Context ctx, boolean slim, CallbackInfo ci) {
         ((LivingEntityRendererAccessor) (Object)this).callAddFeature(new ItemCapeRenderer((PlayerEntityRenderer)(Object)this, ctx.getModelLoader()));
         ((LivingEntityRendererAccessor) (Object)this).callAddFeature(new ItemElytraRenderer((PlayerEntityRenderer)(Object)this, ctx.getModelLoader()));
+        ((LivingEntityRendererAccessor) (Object)this).callAddFeature(new TwoWingedItemElytraRenderer((PlayerEntityRenderer)(Object)this, ctx.getModelLoader()));
     }
 }
