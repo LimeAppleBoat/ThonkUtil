@@ -13,7 +13,6 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.OrderedText;
 import net.minecraft.text.TranslatableText;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class ThonkUtilTradesOptionsScreen extends GameOptionsScreen {

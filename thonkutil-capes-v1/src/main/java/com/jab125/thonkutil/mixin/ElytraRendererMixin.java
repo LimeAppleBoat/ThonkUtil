@@ -2,8 +2,6 @@ package com.jab125.thonkutil.mixin;
 
 import com.jab125.thonkutil.ThonkUtilCapes;
 import com.jab125.thonkutil.api.CapeItem;
-import net.fabricmc.fabric.api.client.rendering.v1.LivingEntityFeatureRenderEvents;
-import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.feature.ElytraFeatureRenderer;
 import net.minecraft.client.render.entity.model.EntityModel;

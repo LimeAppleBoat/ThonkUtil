@@ -1,14 +1,11 @@
 package com.jab125.thonkutil;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import com.jab125.thonkutil.api.AnimatedCapeItem;
 import com.jab125.thonkutil.api.CapeItem;
 import com.jab125.thonkutil.impl.CapeCommand;
 import com.jab125.thonkutil.util.Util;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
-import net.fabricmc.fabric.api.client.rendering.v1.LivingEntityFeatureRenderEvents;
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.player.PlayerEntity;
@@ -19,11 +16,8 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
 import net.minecraft.util.registry.Registry;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.function.Consumer;
 
 public class ThonkUtilCapes implements ModInitializer, ThonkUtilCapesClass {
     public static ItemGroup CAPES_GROUP = FabricItemGroupBuilder.create(Identifier.tryParse("thonkutil:capes")).icon(() -> new ItemStack(Registry.ITEM.get(new Identifier("thonkutil:minecon_2011_cape")))).build();

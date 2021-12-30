@@ -3,16 +3,12 @@ package com.jab125.thonkutil.mixin;
 import com.google.common.hash.Hashing;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.server.dedicated.command.OpCommand;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.nio.charset.StandardCharsets;
-
-import static com.jab125.thonkutil.ThonkUtil.LOGGER;
 
 @Mixin(ServerCommandSource.class)
 public class DebugMixin {

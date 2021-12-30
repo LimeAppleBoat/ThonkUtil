@@ -1,4 +1,6 @@
 import net.fabricmc.loom.task.RemapJarTask
+import org.apache.commons.codec.digest.DigestUtils
+
 buildscript {
 	dependencies {
 		classpath 'org.kohsuke:github-api:1.135'
@@ -36,7 +38,9 @@ def getBranch() {
 	def branch = grgit.branch.current().name
 	return branch.substring(branch.lastIndexOf("/") + 1)
 }
-import org.apache.commons.codec.digest.DigestUtils;
+
+
+import org.kohsuke.github.GHReleaseBuilder;
 
 def getSubprojectVersion(project) {
 	// Get the version from the gradle.properties file
@@ -248,7 +252,7 @@ curseforge {
 	}
 }
 
-import org.kohsuke.github.GHReleaseBuilder
+
 import org.kohsuke.github.GitHub
 
 task github(dependsOn: remapMavenJar) {

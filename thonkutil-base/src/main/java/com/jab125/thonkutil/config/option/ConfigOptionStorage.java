@@ -3,7 +3,6 @@ package com.jab125.thonkutil.config.option;
 import com.jab125.thonkutil.ThonkUtilBaseClass;
 import com.jab125.thonkutil.util.PingMap;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 

@@ -4,8 +4,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionUtil;
-import net.minecraft.potion.Potions;
-import org.apache.commons.lang3.NotImplementedException;
 
 import java.util.ArrayList;
 

@@ -5,7 +5,6 @@ import com.jab125.thonkutil.impl.ItemElytraRenderer;
 import com.jab125.thonkutil.impl.TwoWingedItemElytraRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.PlayerEntityRenderer;
-import net.minecraft.client.render.entity.feature.CapeFeatureRenderer;
 import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.entity.LivingEntity;
 import org.spongepowered.asm.mixin.Mixin;

@@ -1,9 +1,6 @@
 package com.jab125.thonkutil.config;
 
-import com.jab125.thonkutil.ThonkUtil;
-import com.jab125.thonkutil.config.option.BooleanConfigOption;
 import com.jab125.thonkutil.config.option.OptionConvertable;
-import com.jab125.thonkutil.config.option.ToolTipBooleanConfigOption;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.option.Option;
