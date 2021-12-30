@@ -28,7 +28,16 @@ public class TagGroupLoaderMixin {
             if (item instanceof CapeItem) a.add(Registry.ITEM.getId(item), "thonkutil");
         }));
         Map<Identifier, Tag.Builder> b = cir.getReturnValue();
-        b.put(Identifier.tryParse("trinkets:chest/cape"), a);
+        var n = b.get(Identifier.tryParse("trinkets:chest/cape"));
+        if (n != null) {
+            Registry.ITEM.forEach((item -> {
+                if (item instanceof CapeItem)
+                    n.add(TrackedEntryAccessor.createTrackedEntry((Tag.Entry) (new Tag.ObjectEntry(Registry.ITEM.getId(item))), "thonkutil"));
+            }));
+            b.put(Identifier.tryParse("trinkets:chest/cape"), n);
+        } else {
+            b.put(Identifier.tryParse("trinkets:chest/cape"), a);
+        }
         cir.setReturnValue(b);
         cir.getReturnValue().forEach(((identifier, builder) -> {
             //System.out.println(identifier.toString() + ", " +  builder.toJson().toString() + ", " + this.dataType);
