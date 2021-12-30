@@ -41,7 +41,7 @@ public class ItemElytraRenderer<T extends LivingEntity, M extends EntityModel<T>
 
     public void render(MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, T livingEntity, float f, float g, float h, float j, float k, float l) {
         ItemStack itemStack = livingEntity.getEquippedStack(EquipmentSlot.CHEST);
-        if (itemStack.isOf(Items.ELYTRA) && livingEntity instanceof PlayerEntity && ThonkUtilCapes.getCape((PlayerEntity) livingEntity).getItem() instanceof CapeItem && ((CapeItem) ThonkUtilCapes.getCape((PlayerEntity) livingEntity).getItem()).hasElytraTexture()) {
+        if (itemStack.isOf(Items.ELYTRA) && livingEntity instanceof PlayerEntity && ThonkUtilCapes.getCape((PlayerEntity) livingEntity).getItem() instanceof CapeItem && ((CapeItem) ThonkUtilCapes.getCape((PlayerEntity) livingEntity).getItem()).hasElytraTexture() && !((CapeItem) ThonkUtilCapes.getCape((PlayerEntity) livingEntity).getItem()).has2WingedElytra()) {
             Identifier identifier;
             AbstractClientPlayerEntity abstractClientPlayerEntity = (AbstractClientPlayerEntity)livingEntity;
             identifier = ((CapeItem) ThonkUtilCapes.getCape(abstractClientPlayerEntity).getItem()).getCapeTexture();
