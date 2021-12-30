@@ -60,9 +60,9 @@ public class ItemCapeRenderer extends FeatureRenderer<AbstractClientPlayerEntity
                 matrixStack.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(6.0F + r / 2.0F + q));
                 matrixStack.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(s / 2.0F));
                 matrixStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(180.0F - s / 2.0F));
-                VertexConsumer enchantmentGlint = ItemRenderer.getArmorGlintConsumer(vertexConsumerProvider, RenderLayer.getArmorCutoutNoCull(((CapeItem) ThonkUtilCapes.getCape(abstractClientPlayerEntity).getItem()).getCapeTexture()), false, ThonkUtilCapes.getCape(abstractClientPlayerEntity).hasGlint());
+                VertexConsumer enchantmentGlint = ItemRenderer.getItemGlintConsumer(vertexConsumerProvider, RenderLayer.getEntityTranslucent(((CapeItem) ThonkUtilCapes.getCape(abstractClientPlayerEntity).getItem()).getCapeTexture()), false, ThonkUtilCapes.getCape(abstractClientPlayerEntity).hasGlint());
                 VertexConsumer vertexConsumer = vertexConsumerProvider.getBuffer(RenderLayer.getEntitySolid(((CapeItem) ThonkUtilCapes.getCape(abstractClientPlayerEntity).getItem()).getCapeTexture()));
-                ((PlayerEntityExtension) this.getContextModel()).thonkutil_getItemCape().render(matrixStack, enchantmentGlint, i, OverlayTexture.DEFAULT_UV);
+                this.getContextModel().renderCape(matrixStack, enchantmentGlint, i, OverlayTexture.DEFAULT_UV);
                 matrixStack.pop();
             }
         }
