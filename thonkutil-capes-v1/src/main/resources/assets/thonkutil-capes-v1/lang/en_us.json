@@ -1,5 +1,6 @@
 {
   "thonkutil.no_elytra": "No Elytra",
+  "thonkutil.animated_cape": "Animated Cape",
   "itemGroup.thonkutil.capes": "Capes",
 
   "cape.thonkutil.mojang_classic_cape": "Mojang Cape (Classic)",
@@ -29,8 +30,6 @@
   "cape.thonkutil.mapmaker_cape": "Realms Mapmaker Cape",
   "cape.thonkutil.turtle_cape": "Turtle Cape",
   "cape.thonkutil.migration_cape": "Migrator Cape",
-  "cape.thonkutil.migration_cape.tooltip": "Given to those who migrated their",
-  "cape.thonkutil.migration_cape.tooltip.2": "accounts to Microsoft Accounts",
 
   "cape.thonkutil.founders_cape": "Founder's Cape",
   "cape.thonkutil.pan_cape": "The Pan Cape!",
@@ -41,5 +40,13 @@
   "cape.thonkutil.hero_cape.tooltip.3": "against the Arch-Illager.",
   "cape.thonkutil.christmas_2010_cape": "Christmas 2010 Cape",
   "cape.thonkutil.new_year_2011_cape": "New Year 2011 Cape",
-  "cape.thonkutil.first_birthday_cape": "1st Birthday Cape"
+  "cape.thonkutil.first_birthday_cape": "1st Birthday Cape",
+
+  "cape.thonkutil.optifine_cape": "Optifine Cape",
+  "cape.thonkutil.better_optifine_cape": "Optifine Cape",
+  "cape.thonkutil.better_optifine_cape.tooltip": "Optifine Cape, but better.",
+
+  "cape.thonkutil.animated_christmas_2010_cape": "Animated Christmas 2010 Cape",
+  "cape.thonkutil.animated_christmas_2010_cape.tooltip": "An animated version of the",
+  "cape.thonkutil.animated_christmas_2010_cape.tooltip.2": "Christmas 2010 Cape."
 }
