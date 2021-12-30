@@ -77,6 +77,9 @@ allprojects {
 			url = "https://ladysnake.jfrog.io/artifactory/mods"
 		}
 		maven { url 'https://jitpack.io' }
+		maven {
+			url "https://cursemaven.com"
+		}
 		// Add repositories to retrieve artifacts from in here.
 		// You should only use this when depending on other mods because
 		// Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
@@ -103,7 +106,6 @@ allprojects {
 		}
 
 		modImplementation "dev.emi:trinkets:3.0.4"
-
 		// PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
 		// You may need to force-disable transitiveness on them.
 	}
@@ -230,6 +232,10 @@ curseforge {
 
 		mainArtifact(remapJar) {
 			displayName = "[$project.minecraft_version] ThonkUtil $project.version"
+			relations {
+				requiredDependency 'fabric-api'
+				optionalDependency 'trinkets-fabric'
+			}
 		}
 
 		afterEvaluate {
