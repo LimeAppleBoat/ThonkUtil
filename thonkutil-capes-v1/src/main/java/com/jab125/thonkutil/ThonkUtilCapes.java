@@ -2,6 +2,7 @@ package com.jab125.thonkutil;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.jab125.thonkutil.api.AnimatedCapeItem;
 import com.jab125.thonkutil.api.CapeItem;
 import com.jab125.thonkutil.impl.CapeCommand;
 import com.jab125.thonkutil.util.Util;
@@ -71,6 +72,10 @@ public class ThonkUtilCapes implements ModInitializer, ThonkUtilCapesClass {
         Util.quickRegisterItem(new Identifier("thonkutil:christmas_2010_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE), false));
         Util.quickRegisterItem(new Identifier("thonkutil:new_year_2011_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE), false));
         Util.quickRegisterItem(new Identifier("thonkutil:first_birthday_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE), false));
+
+        Util.quickRegisterItem(new Identifier("thonkutil:optifine_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)));
+
+        Util.quickRegisterItem(new Identifier("thonkutil:better_optifine_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE), true, true));
     }
 
     public static String createItemModelJson(Identifier id, String type) {
