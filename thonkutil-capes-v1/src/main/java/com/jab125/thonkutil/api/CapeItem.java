@@ -6,6 +6,7 @@ import net.minecraft.client.resource.language.I18n;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Wearable;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
@@ -20,7 +21,7 @@ import java.util.List;
 
 import static com.jab125.thonkutil.util.Util.isModInstalled;
 
-public class CapeItem extends Item {
+public class CapeItem extends Item implements Wearable {
     private final boolean hasElytraTexture;
     private final boolean has2WingedElytra;
 
