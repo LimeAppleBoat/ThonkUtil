@@ -36,6 +36,7 @@ public class ThonkUtilCapes implements ModInitializer, ThonkUtilCapesClass {
         Util.quickRegisterItem(new Identifier("thonkutil:mojang_studios_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)));
 
         Util.quickRegisterItem(new Identifier("thonkutil:minecon_2011_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)));
+        Util.quickRegisterItem(new Identifier("thonkutil:minecon_2012_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)));
         Util.quickRegisterItem(new Identifier("thonkutil:minecon_2013_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)));
         Util.quickRegisterItem(new Identifier("thonkutil:minecon_2015_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)));
         Util.quickRegisterItem(new Identifier("thonkutil:minecon_2016_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)));
