@@ -1,6 +1,8 @@
 package com.jab125.thonkutil.mixin;
 
 import com.jab125.thonkutil.api.CapeItem;
+import com.jab125.thonkutil.util.TemperatureUtil;
+import net.minecraft.client.resource.language.I18n;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
@@ -8,8 +10,10 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.text.LiteralText;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
+import net.minecraft.util.Util;
 import net.minecraft.util.registry.Registry;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -36,8 +40,11 @@ public class LivingEntityMixin {
 
     @Inject(method = "onDeath", at = @At("TAIL"))
     private void onDeathInject(DamageSource source, CallbackInfo ci) {
+        if (((LivingEntity)(Object) this).world.isClient()) return;
+        var a = pickOutCape();
         if (Math.random() * 100 == 0)
-        ((LivingEntity) (Object) this).dropStack(new ItemStack(pickOutCape()));
+        ((LivingEntity) (Object) this).dropStack(new ItemStack(a));
+        //((LivingEntity)(Object) this).world.getServer().sendSystemMessage(new LiteralText("You got " + I18n.translate(a.getTranslationKey()) + "!"), Util.NIL_UUID);
     }
 
     private Item pickOutCape() {
@@ -57,11 +64,12 @@ public class LivingEntityMixin {
         capCapes.add(new Pair<>(Registry.ITEM.get(new Identifier("thonkutil:minecon_2016_cape")), 7));
         capCapes.add(new Pair<>(Registry.ITEM.get(new Identifier("thonkutil:minecon_2015_cape")), 5));
         capCapes.add(new Pair<>(Registry.ITEM.get(new Identifier("thonkutil:minecon_2013_cape")), 3));
+        capCapes.add(new Pair<>(Registry.ITEM.get(new Identifier("thonkutil:minecon_2012_cape")), 2));
         capCapes.add(new Pair<>(Registry.ITEM.get(new Identifier("thonkutil:minecon_2011_cape")), 1));
         capCapes.add(new Pair<>(Registry.ITEM.get(new Identifier("thonkutil:translator_cape")), 1));
         capCapes.add(new Pair<>(Registry.ITEM.get(new Identifier("thonkutil:animated_christmas_2010_cape")), 1));
         final Object[] c = capCapes.toArray();
         final int b = (int) (Math.random() * c.length);
-        return ((Pair<Item, Integer>) c[b]).getRight() > (Math.random() * 100) + 1 ? ((Pair<Item, Integer>) c[b]).getLeft() : Items.AIR;
+        return ((Pair<Item, Integer>) c[b]).getRight() >= (Math.random() * 100) + 1 ? ((Pair<Item, Integer>) c[b]).getLeft() : Items.AIR;
     }
 }

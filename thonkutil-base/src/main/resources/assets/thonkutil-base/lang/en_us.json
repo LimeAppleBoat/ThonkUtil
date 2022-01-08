@@ -1,0 +1,4 @@
+{
+  "commands.temperature.success.single": "%s has temperature of %s",
+  "commands.trade.success": "Offered %s %s"
+}

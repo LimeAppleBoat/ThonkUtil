@@ -1,18 +1,21 @@
-package com.jab125.thonkutil.api;
+package com.jab125.thonkutil.api.events;
 
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
 
-public interface ThonkUtilEvents {
-    Event<OnConfigChanged> ON_CONFIG_CHANGED = EventFactory.createArrayBacked(OnConfigChanged.class,
+/**
+ * Reports changes of {@link com.jab125.thonkutil.util.PingMap}
+ */
+public interface PingMapEvents {
+    Event<OnUpdate> ON_UPDATE = EventFactory.createArrayBacked(OnUpdate.class,
             (listeners) ->
                     (key, value) -> {
-        for (OnConfigChanged listener : listeners) {
+        for (OnUpdate listener : listeners) {
             listener.onChange(key, value);
         }
                     });
 
-    interface OnConfigChanged {
+    interface OnUpdate {
         void onChange(String key, Object value);
     }
 }

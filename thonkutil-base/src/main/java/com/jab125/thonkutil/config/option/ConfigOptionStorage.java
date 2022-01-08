@@ -7,10 +7,10 @@ import java.util.Map;
 import java.util.Set;
 
 public class ConfigOptionStorage implements ThonkUtilBaseClass {
-    private static final Map<String, Boolean> BOOLEAN_OPTIONS = new PingMap<>();
-    private static final Map<String, Enum<?>> ENUM_OPTIONS = new PingMap<>();
-    private static final Map<String, Double> DOUBLE_OPTIONS = new PingMap<>();
-    private static final Map<String, Set<String>> STRING_SET_OPTIONS = new PingMap<>();
+    private static final Map<String, Boolean> BOOLEAN_OPTIONS = new PingMap<String, Boolean>();
+    private static final Map<String, Enum<?>> ENUM_OPTIONS = new PingMap<String, Enum<?>>();
+    private static final Map<String, Double> DOUBLE_OPTIONS = new PingMap<String, Double>();
+    private static final Map<String, Set<String>> STRING_SET_OPTIONS = new PingMap<String, Set<String>>();
 
     public static void setStringSet(String key, Set<String> value) {
         STRING_SET_OPTIONS.put(key, value);
