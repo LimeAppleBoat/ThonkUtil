@@ -6,7 +6,9 @@ import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.DefaultedRegistry;
 import net.minecraft.util.registry.Registry;
+import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("unused")
 public class Util implements ThonkUtilBaseClass {
@@ -59,6 +61,24 @@ public class Util implements ThonkUtilBaseClass {
     }
     public static ItemStack toItemStack(net.minecraft.item.Item item, int count) {
         return new ItemStack(item, count);
+    }
+
+    public static net.minecraft.item.Item getItem(Identifier id) {
+        return Registry.ITEM.get(id);
+    }
+
+    @Nullable
+    public static net.minecraft.item.Item getItemNullable(Identifier id) {
+        return Registry.ITEM.getOrEmpty(id).orElse(null);
+    }
+
+    public static Block getBlock(Identifier id) {
+        return Registry.BLOCK.get(id);
+    }
+
+    @Nullable
+    public static Block getBlockNullable(Identifier id) {
+        return Registry.BLOCK.getOrEmpty(id).orElse(null);
     }
 
     public static JointBlockItem registerBlockWithItem(Identifier identifier, Block block, net.minecraft.item.Item.Settings settings) {
