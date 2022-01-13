@@ -9,18 +9,16 @@ import com.google.common.collect.ImmutableList;
 import com.jab125.thonkutil.util.TemperatureUtil;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
+import net.minecraft.command.argument.EntityArgumentType;
+import net.minecraft.entity.Entity;
+import net.minecraft.server.command.CommandManager;
+import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.text.TranslatableText;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-
-import net.minecraft.command.argument.EntityArgumentType;
-import net.minecraft.entity.Entity;
-import net.minecraft.server.command.CommandManager;
-import net.minecraft.server.command.DataCommand;
-import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.text.TranslatableText;
 
 public class TemperatureCommand {
     public TemperatureCommand() {
@@ -31,13 +29,13 @@ public class TemperatureCommand {
         dispatcher.register((LiteralArgumentBuilder) ((LiteralArgumentBuilder) CommandManager.literal("temperature").requires((source) -> {
             return source.hasPermissionLevel(2);
         })).then(CommandManager.literal("getalt").executes((context) -> {
-                    return execute((ServerCommandSource)context.getSource(), ImmutableList.of(((ServerCommandSource)context.getSource()).getEntityOrThrow()), true);
-                }).then(CommandManager.argument("targets", EntityArgumentType.entity()).executes((context) -> {
-                    return execute((ServerCommandSource)context.getSource(), EntityArgumentType.getEntities(context, "targets"), true);
-                }))).then(CommandManager.literal("get").executes((context) -> {
-            return execute((ServerCommandSource)context.getSource(), ImmutableList.of(((ServerCommandSource)context.getSource()).getEntityOrThrow()));
+            return execute(context.getSource(), ImmutableList.of(context.getSource().getEntityOrThrow()), true);
         }).then(CommandManager.argument("targets", EntityArgumentType.entity()).executes((context) -> {
-            return execute((ServerCommandSource)context.getSource(), EntityArgumentType.getEntities(context, "targets"));
+            return execute(context.getSource(), EntityArgumentType.getEntities(context, "targets"), true);
+        }))).then(CommandManager.literal("get").executes((context) -> {
+            return execute(context.getSource(), ImmutableList.of(context.getSource().getEntityOrThrow()));
+        }).then(CommandManager.argument("targets", EntityArgumentType.entity()).executes((context) -> {
+            return execute(context.getSource(), EntityArgumentType.getEntities(context, "targets"));
         }))));
     }
 
@@ -46,11 +44,11 @@ public class TemperatureCommand {
     }
 
     private static int execute(ServerCommandSource source, Collection<? extends Entity> targets, boolean alt) {
-        Iterator var2 = targets.iterator();
+        Iterator<? extends Entity> var2 = targets.iterator();
         List<Float> a = new ArrayList<>();
 
-        while(var2.hasNext()) {
-            Entity entity = (Entity)var2.next();
+        while (var2.hasNext()) {
+            Entity entity = var2.next();
             a.add(!alt ? TemperatureUtil.getTemperature(entity) : TemperatureUtil.getTemperatureAlt(entity));
         }
         var b = a.iterator();

@@ -4,6 +4,7 @@ import com.jab125.thonkutil.ThonkUtilBaseClass;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.DefaultedRegistry;
@@ -107,5 +108,9 @@ public class Util implements ThonkUtilBaseClass {
 
     public static net.minecraft.item.Item quickRegisterItem(Identifier id, net.minecraft.item.Item item) {
         return Registry.register(Registry.ITEM, id, item);
+    }
+
+    public static Block quickRegisterBlock(Identifier id, Block block) {
+        return Registry.register(Registry.BLOCK, id, block);
     }
 }
