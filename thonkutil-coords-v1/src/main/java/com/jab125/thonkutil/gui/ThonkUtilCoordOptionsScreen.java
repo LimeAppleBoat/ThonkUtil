@@ -20,8 +20,8 @@ public class ThonkUtilCoordOptionsScreen extends GameOptionsScreen {
     private final Screen previous;
 
     public ThonkUtilCoordOptionsScreen(Screen previous) {
-        super(previous == null ? PreviousScreenGetter.getPreviousScreen() : previous, MinecraftClient.getInstance().options, new TranslatableText("thonkutil-coords-v1.options"));
-        this.previous = previous == null ? PreviousScreenGetter.getPreviousScreen() : previous;
+        super(previous, MinecraftClient.getInstance().options, new TranslatableText("thonkutil-coords-v1.options"));
+        this.previous = previous;
     }
 
     protected void init() {
