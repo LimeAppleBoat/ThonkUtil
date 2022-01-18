@@ -4,7 +4,7 @@
   "version": "${version}",
 
   "name": "ThonkUtil ModChecker (v1)",
-  "description": "ditto",
+  "description": "Allows servers to disconnect players when they have blacklisted mods installed.",
   "authors": [
     "Jab125"
   ],
@@ -17,9 +17,6 @@
     ],
     "client": [
       "com.jab125.thonkutil.modchecker.v1.ClientModChecker"
-    ],
-    "_modmenu": [
-      "com.jab125.thonkutil.config.ThonkUtilTradesModMenuCompat"
     ]
   },
   "license": "CC0-1.0",

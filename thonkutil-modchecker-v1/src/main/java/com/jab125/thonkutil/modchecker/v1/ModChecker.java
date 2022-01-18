@@ -21,7 +21,6 @@ import java.util.Set;
 
 public class ModChecker implements ModInitializer {
     protected static final Identifier UNIVERSAL_PKT = new Identifier("thonkutil", "universal_packet");
-    protected static final Identifier CLIENT_PKT = new Identifier("thonkutil", "client_packet");
     @Override
     public void onInitialize() {
         ThonkUtilModCheckerConfigManager.initializeConfig();

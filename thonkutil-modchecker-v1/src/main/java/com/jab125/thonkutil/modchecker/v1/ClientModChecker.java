@@ -9,7 +9,6 @@ import net.minecraft.network.PacketByteBuf;
 
 import java.util.concurrent.CompletableFuture;
 
-import static com.jab125.thonkutil.modchecker.v1.ModChecker.CLIENT_PKT;
 import static com.jab125.thonkutil.modchecker.v1.ModChecker.UNIVERSAL_PKT;
 
 public class ClientModChecker implements ClientModInitializer {
