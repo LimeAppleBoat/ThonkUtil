@@ -18,9 +18,9 @@ public class ThonkUtil implements ThonkUtilBaseClass, ModInitializer {
      */
     @Override
     public void onInitialize() {
-        CommandRegistrationCallback.EVENT.register(((dispatcher, dedicated) -> {
-            TemperatureCommand.register(dispatcher);
-        }));
+//        CommandRegistrationCallback.EVENT.register(((dispatcher, dedicated) -> {
+//            TemperatureCommand.register(dispatcher);
+//        }));
     }
 
     public static class MODID {
