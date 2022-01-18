@@ -1,6 +1,5 @@
 package com.jab125.thonkutil.gui;
 
-import com.jab125.thonkutil.api.PreviousScreenGetter;
 import com.jab125.thonkutil.config.ThonkUtilCoordConfig;
 import com.jab125.thonkutil.config.ThonkUtilCoordConfigManager;
 import net.minecraft.client.MinecraftClient;
