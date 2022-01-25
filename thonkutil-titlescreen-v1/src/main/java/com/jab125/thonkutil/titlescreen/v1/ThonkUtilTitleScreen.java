@@ -9,6 +9,7 @@ import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.SharedConstants;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.MathHelper;
@@ -44,7 +45,7 @@ public class ThonkUtilTitleScreen implements ClientModInitializer {
             int l = MathHelper.ceil(g * 255.0F) << 24;
             if ((l & -67108864) != 0) {
                 for (int i = 0; i < 4; i++) {
-                    titleScreen.drawStringWithShadow(matrices, MinecraftClient.getInstance().textRenderer, getText(i), 2, titleScreen.height - 10 - (MinecraftClient.getInstance().textRenderer.fontHeight * i), 16777215 | l);
+                    DrawableHelper.drawStringWithShadow(matrices, MinecraftClient.getInstance().textRenderer, getText(i), 2, titleScreen.height - 10 - (MinecraftClient.getInstance().textRenderer.fontHeight * i), 16777215 | l);
                 }
             }
         }));
