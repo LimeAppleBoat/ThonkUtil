@@ -3,14 +3,19 @@ package com.jab125.thonkutil;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.jab125.thonkutil.commands.TemperatureCommand;
+import com.jab125.thonkutil.api.events.*;
+import com.jab125.thonkutil.util.AccessUtil;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
+import net.minecraft.client.gui.screen.TitleScreen;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import static com.jab125.thonkutil.api.events.EventTaxi.registerEventTaxi;
+
 public class ThonkUtil implements ThonkUtilBaseClass, ModInitializer {
-    public static final Logger LOGGER = LogManager.getLogger("goblintraders");
+    public static final Logger LOGGER = LogManager.getLogger("thonkutil");
     public static final Gson GSON = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).setPrettyPrinting().create();
 
     /**
@@ -18,9 +23,7 @@ public class ThonkUtil implements ThonkUtilBaseClass, ModInitializer {
      */
     @Override
     public void onInitialize() {
-//        CommandRegistrationCallback.EVENT.register(((dispatcher, dedicated) -> {
-//            TemperatureCommand.register(dispatcher);
-//        }));
+        EventTaxi.registerTaxis();
     }
 
     public static class MODID {

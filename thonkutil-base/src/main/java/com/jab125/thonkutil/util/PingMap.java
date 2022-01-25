@@ -1,7 +1,8 @@
 package com.jab125.thonkutil.util;
 
 import com.jab125.thonkutil.ThonkUtilBaseClass;
-import com.jab125.thonkutil.api.events.PingMapEvents;
+import com.jab125.thonkutil.api.events.EventTaxi;
+import com.jab125.thonkutil.api.events.PingMapEvent;
 
 import java.util.HashMap;
 
@@ -19,6 +20,6 @@ public class PingMap<K extends String, V> extends HashMap<K, V> implements Thonk
     }
 
     private void fireEvents(String key, V value) {
-        PingMapEvents.ON_UPDATE.invoker().onChange(key, value);
+        EventTaxi.executeEventTaxi(new PingMapEvent(key, value));
     }
 }
