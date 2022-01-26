@@ -2,7 +2,8 @@ package com.jab125.thonkutil.titlescreen.v1;
 
 import com.jab125.thonkutil.api.events.EventTaxi;
 import com.jab125.thonkutil.api.events.SubscribeEvent;
-import com.jab125.thonkutil.api.events.TitleScreenEvent;
+import com.jab125.thonkutil.api.events.client.TitleScreenEvent;
+import com.jab125.thonkutil.api.events.client.TitleScreenRenderEvent;
 import com.jab125.thonkutil.titlescreen.v1.mixin.TitleScreenAccessor;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;
@@ -36,19 +37,26 @@ public class ThonkUtilTitleScreen implements ClientModInitializer {
 //        }));
     }
 
+//    @SubscribeEvent
+//    public static void injectToTitleScreen(TitleScreenEvent event) {
+//        Screen titleScreen = event.getScreen();
+//        ScreenEvents.afterRender(titleScreen).register(((screen1, matrices, mouseX, mouseY, tickDelta) -> {
+//            float f = ((TitleScreenAccessor)titleScreen).isDoBackgroundFade() ? (float)(Util.getMeasuringTimeMs() - ((TitleScreenAccessor) titleScreen).getBackgroundFadeStart()) / 1000.0F : 1.0F;
+//            float g = ((TitleScreenAccessor)titleScreen).isDoBackgroundFade() ? MathHelper.clamp(f - 1.0F, 0.0F, 1.0F) : 1.0F;
+//            int l = MathHelper.ceil(g * 255.0F) << 24;
+//            if ((l & -67108864) != 0) {
+//                for (int i = 0; i < 4; i++) {
+//                    DrawableHelper.drawStringWithShadow(matrices, MinecraftClient.getInstance().textRenderer, getText(i), 2, titleScreen.height - 10 - (MinecraftClient.getInstance().textRenderer.fontHeight * i), 16777215 | l);
+//                }
+//            }
+//        }));
+//    }
+
     @SubscribeEvent
-    public static void injectToTitleScreen(TitleScreenEvent event) {
-        Screen titleScreen = event.getScreen();
-        ScreenEvents.afterRender(titleScreen).register(((screen1, matrices, mouseX, mouseY, tickDelta) -> {
-            float f = ((TitleScreenAccessor)titleScreen).isDoBackgroundFade() ? (float)(Util.getMeasuringTimeMs() - ((TitleScreenAccessor) titleScreen).getBackgroundFadeStart()) / 1000.0F : 1.0F;
-            float g = ((TitleScreenAccessor)titleScreen).isDoBackgroundFade() ? MathHelper.clamp(f - 1.0F, 0.0F, 1.0F) : 1.0F;
-            int l = MathHelper.ceil(g * 255.0F) << 24;
-            if ((l & -67108864) != 0) {
-                for (int i = 0; i < 4; i++) {
-                    DrawableHelper.drawStringWithShadow(matrices, MinecraftClient.getInstance().textRenderer, getText(i), 2, titleScreen.height - 10 - (MinecraftClient.getInstance().textRenderer.fontHeight * i), 16777215 | l);
-                }
-            }
-        }));
+    public static void onTitleScreenRender(TitleScreenRenderEvent event) {
+        for (int i = 0; i < 4; i++) {
+            DrawableHelper.drawStringWithShadow(event.matrices(), MinecraftClient.getInstance().textRenderer, getText(i), 2, event.screen().height - 10 - (MinecraftClient.getInstance().textRenderer.fontHeight * i), 16777215 | event.alpha());
+        }
     }
 
     private static String getText(int i) {

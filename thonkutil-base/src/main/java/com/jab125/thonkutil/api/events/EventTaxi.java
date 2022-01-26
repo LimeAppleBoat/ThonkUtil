@@ -1,13 +1,19 @@
 package com.jab125.thonkutil.api.events;
 
 import com.jab125.thonkutil.api.events.client.ScreenEvent;
+import com.jab125.thonkutil.api.events.client.TitleScreenEvent;
+import com.jab125.thonkutil.api.events.client.TitleScreenRenderEvent;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.screen.TitleScreen;
+import net.minecraft.util.Util;
+import net.minecraft.util.math.MathHelper;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -35,8 +41,19 @@ public class EventTaxi {
     public static void registerClientTaxis() {
         ScreenEvents.AFTER_INIT.register(((client, screen, scaledWidth, scaledHeight) -> {
             EventTaxi.executeEventTaxi(new ScreenEvent(screen, client, scaledWidth, scaledHeight));
-            if (screen instanceof TitleScreen)
+            if (screen instanceof TitleScreen titleScreen) {
                 EventTaxi.executeEventTaxi(new TitleScreenEvent(screen, client, scaledWidth, scaledHeight));
+                ScreenEvents.afterRender(screen).register(((screen1, matrices, mouseX, mouseY, tickDelta) -> {
+                    float f = titleScreen.doBackgroundFade ? (float)(Util.getMeasuringTimeMs() - titleScreen.backgroundFadeStart) / 1000.0F : 1.0F;
+                    float g = titleScreen.doBackgroundFade ? MathHelper.clamp(f - 1.0F, 0.0F, 1.0F) : 1.0F;
+                    int l = MathHelper.ceil(g * 255.0F) << 24;
+                    if ((l & -67108864) != 0) {
+                        for (int i = 0; i < 4; i++) {
+                            EventTaxi.executeEventTaxi(new TitleScreenRenderEvent(screen, matrices, mouseX, mouseY, tickDelta, l));
+                        }
+                    }
+                }));
+            }
         }));
     }
 
