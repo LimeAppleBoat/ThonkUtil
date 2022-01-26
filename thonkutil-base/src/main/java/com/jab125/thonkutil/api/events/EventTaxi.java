@@ -44,6 +44,11 @@ public class EventTaxi {
         registeredEventClazzes.add(clazz);
     }
 
+    @SuppressWarnings("unused")
+    public static void unregisterEventTaxiSubscriber(Class<?> clazz) {
+        registeredEventClazzes.remove(clazz);
+    }
+
 
     /**
      * keep in mind that it will only execute currently registered classes' methods.
