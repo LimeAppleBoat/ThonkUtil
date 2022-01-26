@@ -1,7 +1,7 @@
 package com.jab125.thonkutil.titlescreen.v1;
 
 import com.jab125.thonkutil.api.events.EventTaxi;
-import com.jab125.thonkutil.api.events.EventTaxiSubscriber;
+import com.jab125.thonkutil.api.events.SubscribeEvent;
 import com.jab125.thonkutil.api.events.TitleScreenEvent;
 import com.jab125.thonkutil.titlescreen.v1.mixin.TitleScreenAccessor;
 import net.fabricmc.api.ClientModInitializer;
@@ -19,7 +19,7 @@ public class ThonkUtilTitleScreen implements ClientModInitializer {
     public void onInitializeClient() {
         getModCount();
         FabricLoader.getInstance();
-        EventTaxi.registerEventTaxi(ThonkUtilTitleScreen.class);
+        EventTaxi.registerEventTaxiSubscriber(ThonkUtilTitleScreen.class);
 //        ScreenEvents.AFTER_INIT.register(((client, screen, scaledWidth, scaledHeight) -> {
 //            if (screen instanceof TitleScreen titleScreen) {
 //                ScreenEvents.afterRender(screen).register(((screen1, matrices, mouseX, mouseY, tickDelta) -> {
@@ -36,7 +36,7 @@ public class ThonkUtilTitleScreen implements ClientModInitializer {
 //        }));
     }
 
-    @EventTaxiSubscriber
+    @SubscribeEvent
     public static void injectToTitleScreen(TitleScreenEvent event) {
         Screen titleScreen = event.getScreen();
         ScreenEvents.afterRender(titleScreen).register(((screen1, matrices, mouseX, mouseY, tickDelta) -> {

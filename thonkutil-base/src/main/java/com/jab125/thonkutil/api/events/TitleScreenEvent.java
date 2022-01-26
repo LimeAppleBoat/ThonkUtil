@@ -1,5 +1,6 @@
 package com.jab125.thonkutil.api.events;
 
+import com.jab125.thonkutil.api.events.client.ScreenEvent;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 

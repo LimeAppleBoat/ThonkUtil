@@ -1,8 +1,12 @@
 package com.jab125.thonkutil.api.events;
 
+import com.jab125.thonkutil.api.events.client.ScreenEvent;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
 import net.minecraft.client.gui.screen.TitleScreen;
 
 import java.lang.annotation.Annotation;
@@ -13,22 +17,30 @@ public class EventTaxi {
     private static final ArrayList<Class<?>> registeredEventClazzes = new ArrayList<>();
 
     public static void registerTaxis() {
+        CommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> {
+            EventTaxi.executeEventTaxi(new RegisterCommandEvent(dispatcher, dedicated));
+        });
+        ServerPlayerEvents.ALLOW_DEATH.register((player, damageSource, damageAmount) -> {
+            return (boolean) EventTaxi.executeEventTaxi(new OnPlayerFatalDamageEvent(player, damageSource, damageAmount));
+        });
+        ServerWorldEvents.LOAD.register((minecraftServer, world) -> {
+            EventTaxi.executeEventTaxi(new ServerWorldLoadEvent(minecraftServer, world));
+        });
+        ServerWorldEvents.UNLOAD.register((server, world) -> {
+            EventTaxi.executeEventTaxi(new ServerWorldUnloadEvent(server, world));
+        });
+    }
+
+    @Environment(EnvType.CLIENT)
+    public static void registerClientTaxis() {
         ScreenEvents.AFTER_INIT.register(((client, screen, scaledWidth, scaledHeight) -> {
             EventTaxi.executeEventTaxi(new ScreenEvent(screen, client, scaledWidth, scaledHeight));
             if (screen instanceof TitleScreen)
                 EventTaxi.executeEventTaxi(new TitleScreenEvent(screen, client, scaledWidth, scaledHeight));
         }));
-        CommandRegistrationCallback.EVENT.register(((dispatcher, dedicated) -> {
-            EventTaxi.executeEventTaxi(new RegisterCommandEvent(dispatcher, dedicated));
-        }));
-        ServerPlayerEvents.ALLOW_DEATH.register(((player, damageSource, damageAmount) -> {
-            boolean no = (boolean) EventTaxi.executeEventTaxi(new OnPlayerFatalDamageEvent(player, damageSource, damageAmount));
-            //System.out.println("Result: " + no);
-            return no;
-        }));
     }
 
-    public static void registerEventTaxi(Class<?> clazz) {
+    public static void registerEventTaxiSubscriber(Class<?> clazz) {
         registeredEventClazzes.add(clazz);
     }
 
@@ -44,7 +56,7 @@ public class EventTaxi {
                 if (method.getParameterCount() != 1) continue;
                 if (!method.getParameters()[0].getType().equals(object.getClass())) continue;
                 for (Annotation declaredAnnotation : method.getDeclaredAnnotations()) {
-                    if (declaredAnnotation instanceof EventTaxiSubscriber) {
+                    if (declaredAnnotation instanceof SubscribeEvent) {
                         try {
                             method.invoke(null, object);
                             if (object instanceof EventTaxiBooleanReturnableEvent event) {

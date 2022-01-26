@@ -8,5 +8,6 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 @SuppressWarnings("unused")
-public @interface EventTaxiSubscriber {
+/* this is the best name for it */
+public @interface SubscribeEvent {
 }

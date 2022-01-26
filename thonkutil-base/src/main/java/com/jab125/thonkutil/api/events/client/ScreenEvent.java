@@ -1,5 +1,6 @@
-package com.jab125.thonkutil.api.events;
+package com.jab125.thonkutil.api.events.client;
 
+import com.jab125.thonkutil.api.events.EventTaxiEvent;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
