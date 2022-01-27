@@ -2,7 +2,7 @@ package com.jab125.thonkutil.util;
 
 import com.jab125.thonkutil.ThonkUtilBaseClass;
 import com.jab125.thonkutil.api.events.EventTaxi;
-import com.jab125.thonkutil.api.events.PingMapEvent;
+import com.jab125.thonkutil.api.events.misc.PingMapEvent;
 
 import java.util.HashMap;
 

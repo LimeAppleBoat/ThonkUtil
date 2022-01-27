@@ -1,16 +1,19 @@
 package com.jab125.thonkutil.api.events;
 
-import com.jab125.thonkutil.api.events.client.ScreenEvent;
-import com.jab125.thonkutil.api.events.client.TitleScreenEvent;
-import com.jab125.thonkutil.api.events.client.TitleScreenRenderEvent;
+import com.jab125.thonkutil.api.annotations.SubscribeEvent;
+import com.jab125.thonkutil.api.events.client.screen.ScreenEvent;
+import com.jab125.thonkutil.api.events.client.screen.TitleScreenEvent;
+import com.jab125.thonkutil.api.events.client.screen.TitleScreenRenderEvent;
+import com.jab125.thonkutil.api.events.entity.player.OnPlayerFatalDamageEvent;
+import com.jab125.thonkutil.api.events.server.RegisterCommandEvent;
+import com.jab125.thonkutil.api.events.server.world.ServerWorldLoadEvent;
+import com.jab125.thonkutil.api.events.server.world.ServerWorldUnloadEvent;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.screen.TitleScreen;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.MathHelper;

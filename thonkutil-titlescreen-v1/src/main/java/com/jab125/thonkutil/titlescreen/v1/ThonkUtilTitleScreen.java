@@ -1,19 +1,13 @@
 package com.jab125.thonkutil.titlescreen.v1;
 
 import com.jab125.thonkutil.api.events.EventTaxi;
-import com.jab125.thonkutil.api.events.SubscribeEvent;
-import com.jab125.thonkutil.api.events.client.TitleScreenEvent;
-import com.jab125.thonkutil.api.events.client.TitleScreenRenderEvent;
-import com.jab125.thonkutil.titlescreen.v1.mixin.TitleScreenAccessor;
+import com.jab125.thonkutil.api.annotations.SubscribeEvent;
+import com.jab125.thonkutil.api.events.client.screen.TitleScreenRenderEvent;
 import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.SharedConstants;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.util.Util;
-import net.minecraft.util.math.MathHelper;
 
 public class ThonkUtilTitleScreen implements ClientModInitializer {
     @Override

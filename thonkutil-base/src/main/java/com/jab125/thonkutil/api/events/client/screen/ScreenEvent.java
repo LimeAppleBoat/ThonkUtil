@@ -1,4 +1,4 @@
-package com.jab125.thonkutil.api.events.client;
+package com.jab125.thonkutil.api.events.client.screen;
 
 import com.jab125.thonkutil.api.events.EventTaxiEvent;
 import net.fabricmc.api.EnvType;

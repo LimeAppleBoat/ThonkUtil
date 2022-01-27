@@ -1,5 +1,6 @@
-package com.jab125.thonkutil.api.events;
+package com.jab125.thonkutil.api.events.server;
 
+import com.jab125.thonkutil.api.events.EventTaxiEvent;
 import com.mojang.brigadier.CommandDispatcher;
 import net.minecraft.server.command.ServerCommandSource;
 

@@ -1,4 +1,4 @@
-package com.jab125.thonkutil.api.events;
+package com.jab125.thonkutil.api.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

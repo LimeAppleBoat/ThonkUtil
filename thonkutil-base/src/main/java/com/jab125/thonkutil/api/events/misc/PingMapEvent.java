@@ -1,4 +1,6 @@
-package com.jab125.thonkutil.api.events;
+package com.jab125.thonkutil.api.events.misc;
+
+import com.jab125.thonkutil.api.events.EventTaxiEvent;
 
 import java.util.Objects;
 
