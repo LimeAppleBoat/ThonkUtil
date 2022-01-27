@@ -1,4 +1,4 @@
-package com.jab125.thonkutil.api.events.entity.player;
+package com.jab125.thonkutil.api.events.server.player;
 
 import com.jab125.thonkutil.api.events.EventTaxiBooleanReturnableEvent;
 import net.minecraft.entity.damage.DamageSource;

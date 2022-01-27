@@ -4,7 +4,7 @@ import com.jab125.thonkutil.api.annotations.SubscribeEvent;
 import com.jab125.thonkutil.api.events.client.screen.ScreenEvent;
 import com.jab125.thonkutil.api.events.client.screen.TitleScreenEvent;
 import com.jab125.thonkutil.api.events.client.screen.TitleScreenRenderEvent;
-import com.jab125.thonkutil.api.events.entity.player.OnPlayerFatalDamageEvent;
+import com.jab125.thonkutil.api.events.server.player.OnPlayerFatalDamageEvent;
 import com.jab125.thonkutil.api.events.server.RegisterCommandEvent;
 import com.jab125.thonkutil.api.events.server.world.ServerWorldLoadEvent;
 import com.jab125.thonkutil.api.events.server.world.ServerWorldUnloadEvent;
