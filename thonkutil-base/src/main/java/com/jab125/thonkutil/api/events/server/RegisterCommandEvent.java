@@ -12,11 +12,11 @@ public class RegisterCommandEvent extends EventTaxiEvent {
         this.dedicated = dedicated;
     }
 
-    public CommandDispatcher<ServerCommandSource> getSource() {
+    public CommandDispatcher<ServerCommandSource> source() {
         return source;
     }
 
-    public boolean isDedicated() {
+    public boolean dedicated() {
         return dedicated;
     }
 }

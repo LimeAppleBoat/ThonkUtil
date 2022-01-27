@@ -12,11 +12,11 @@ public class ServerWorldLoadEvent extends EventTaxiEvent {
         this.world = world;
     }
 
-    public MinecraftServer getServer() {
+    public MinecraftServer server() {
         return server;
     }
 
-    public ServerWorld getWorld() {
+    public ServerWorld world() {
         return world;
     }
 }
