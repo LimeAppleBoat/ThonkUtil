@@ -113,8 +113,8 @@ public class EventTaxi {
                     if (declaredAnnotation instanceof SubscribeEvent) {
                         try {
                             method.invoke(null, object);
-                            if (object instanceof EventTaxiBooleanReturnableEvent event) {
-                                System.out.println(event.getBoolean());
+                            if (object instanceof EventTaxiReturnableEvent event) {
+                                //System.out.println(event.getBoolean());
                             }
                         } catch (Exception e){
                             System.out.println("failed to execute event taxi");
@@ -123,8 +123,8 @@ public class EventTaxi {
                 }
             }
         }
-        if (object instanceof EventTaxiBooleanReturnableEvent event) {
-            return event.getBoolean();
+        if (object instanceof EventTaxiReturnableEvent event) {
+            return event.getResult();
         }
         return null;
     }
