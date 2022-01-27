@@ -116,7 +116,9 @@ public class EventTaxi {
                             if (object instanceof EventTaxiReturnableEvent event) {
                                 //System.out.println(event.getBoolean());
                             }
+                            break;
                         } catch (Exception e){
+                            e.printStackTrace();
                             System.out.println("failed to execute event taxi");
                         }
                     }

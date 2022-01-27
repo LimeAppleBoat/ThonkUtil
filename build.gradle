@@ -205,14 +205,19 @@ subprojects {
 def dontInclude = [
 
 ]
+def dontUse = [
+		"thonkutil-unittests"
+]
 
 dependencies {
 	afterEvaluate {
 		subprojects.each {
-			api project(path: ":${it.name}", configuration: "namedElements")
+			if (!(it.name in dontUse)) {
+				api project(path: ":${it.name}", configuration: "namedElements")
 
-			if (!(it.name in dontInclude)) {
-				include project("${it.name}:")
+				if (!(it.name in dontInclude)) {
+					include project("${it.name}:")
+				}
 			}
 
 			//testmodImplementation project("${it.name}:").sourceSets.testmod.output
