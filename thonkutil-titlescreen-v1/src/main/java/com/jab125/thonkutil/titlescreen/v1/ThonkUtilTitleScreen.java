@@ -60,18 +60,13 @@ public class ThonkUtilTitleScreen implements ClientModInitializer {
     }
 
     private static String getText(int i) {
-        switch (i) {
-            case 3:
-                return "Fabric " + FabricLoader.getInstance().getModContainer("fabricloader").get().getMetadata().getVersion().getFriendlyString();
-            case 2:
-                return "Minecraft " + SharedConstants.getGameVersion().getName();
-            case 1:
-                return "Fabric API " + FabricLoader.getInstance().getModContainer("fabric").get().getMetadata().getVersion().getFriendlyString().split("\\+")[0];
-            case 0:
-                return getModCount() + " mods loaded";
-            default:
-                throw new IllegalStateException("Unexpected value: " + i);
-        }
+        return switch (i) {
+            case 3 -> "Fabric " + FabricLoader.getInstance().getModContainer("fabricloader").get().getMetadata().getVersion().getFriendlyString();
+            case 2 -> "Minecraft " + SharedConstants.getGameVersion().getName();
+            case 1 -> "Fabric API " + FabricLoader.getInstance().getModContainer("fabric").get().getMetadata().getVersion().getFriendlyString().split("\\+")[0];
+            case 0 -> getModCount() + " mods loaded";
+            default -> throw new IllegalStateException("Unexpected value: " + i);
+        };
     }
 
     private static String getModCount() {
