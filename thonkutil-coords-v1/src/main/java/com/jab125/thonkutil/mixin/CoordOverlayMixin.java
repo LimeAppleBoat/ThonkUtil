@@ -33,10 +33,10 @@ public abstract class CoordOverlayMixin {
     private void injectCoords(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
         if (this.client.options.debugEnabled) return;
         if (!ThonkUtilCoordConfig.ALWAYS_SHOW_COORDS.getValue()) return;
-        renderCoords(matrices);
+        thonkutil$renderCoords(matrices);
     }
 
-    public void renderCoords(MatrixStack matrices) {
+    private void thonkutil$renderCoords(MatrixStack matrices) {
         this.client.getProfiler().push("coords");
         List<String> list = new ArrayList<>();
 
