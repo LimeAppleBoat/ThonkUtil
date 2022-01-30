@@ -9,6 +9,7 @@
   "mixins": [
     "ModMenuDataAccessor",
     "NeutronModMenu",
+    "TridentMixin",
     "VillagerMixin",
     "WanderingTraderMixin"
   ]
