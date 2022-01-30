@@ -233,9 +233,10 @@ curseforge {
 	project {
 		id = "536648"
 		changelog = ENV.CHANGELOG ?: "No changelog provided"
-		releaseType = project.prerelease == "true" ? "beta" : "release"
+		releaseType = project.prerelease == "true" ? "beta" : project.prerelease == "alpha" ? "alpha" : "release"
 		addGameVersion "1.18.1"
 		addGameVersion "1.18"
+		addGameVersion "1.18-Snapshot"
 		addGameVersion "Fabric"
 		addGameVersion "Java 17"
 
@@ -254,6 +255,7 @@ curseforge {
 
 	options {
 		forgeGradleIntegration = false
+		debug = ENV.GITHUB_RUN_NUMBER ? false : true
 	}
 }
 
@@ -273,7 +275,7 @@ task github(dependsOn: remapMavenJar) {
 		releaseBuilder.name("[$project.minecraft_version] ThonkUtil $project.version")
 		releaseBuilder.body(ENV.CHANGELOG ?: "No changelog provided")
 		releaseBuilder.commitish(getBranch())
-		releaseBuilder.prerelease(project.prerelease == "true")
+		releaseBuilder.prerelease(project.prerelease == "true" || project.prerelease == "alpha")
 
 		def ghRelease = releaseBuilder.create()
 		ghRelease.uploadAsset(file("${project.buildDir}/libs/${archivesBaseName}-${version}.jar"), "application/java-archive");
