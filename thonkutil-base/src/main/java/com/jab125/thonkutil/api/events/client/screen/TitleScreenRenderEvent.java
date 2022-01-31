@@ -2,7 +2,6 @@ package com.jab125.thonkutil.api.events.client.screen;
 
 import com.jab125.thonkutil.api.events.EventTaxiEvent;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.screen.TitleScreen;
 import net.minecraft.client.util.math.MatrixStack;
 
 import java.util.Objects;
@@ -15,7 +14,7 @@ public final class TitleScreenRenderEvent extends EventTaxiEvent {
     private final float tickDelta;
     private final int alpha;
 
-    public TitleScreenRenderEvent(TitleScreen screen, MatrixStack matrices, int mouseX, int mouseY, float tickDelta, int alpha) {
+    public TitleScreenRenderEvent(Screen screen, MatrixStack matrices, int mouseX, int mouseY, float tickDelta, int alpha) {
         this.screen = screen;
         this.matrices = matrices;
         this.mouseX = mouseX;

@@ -81,7 +81,7 @@ public class EventTaxi {
                     int l = MathHelper.ceil(g * 255.0F) << 24;
                     if ((l & -67108864) != 0) {
                         for (int i = 0; i < 4; i++) {
-                            EventTaxi.executeEventTaxi(new TitleScreenRenderEvent(titleScreen, matrices, mouseX, mouseY, tickDelta, l));
+                            EventTaxi.executeEventTaxi(new TitleScreenRenderEvent(screen, matrices, mouseX, mouseY, tickDelta, l));
                         }
                     }
                 }));
