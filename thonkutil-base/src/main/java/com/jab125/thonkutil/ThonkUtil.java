@@ -3,20 +3,32 @@ package com.jab125.thonkutil;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.jab125.thonkutil.api.annotations.SubscribeEvent;
 import com.jab125.thonkutil.api.events.*;
+import com.jab125.thonkutil.api.events.client.screen.TitleScreenRenderEvent;
 import com.jab125.thonkutil.util.AccessUtil;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
+import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.screen.TitleScreen;
+import net.minecraft.text.LiteralText;
+import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
+import net.minecraft.util.Formatting;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.Locale;
 
 import static com.jab125.thonkutil.api.events.EventTaxi.registerEventTaxiSubscriber;
 
 public class ThonkUtil implements ThonkUtilBaseClass, ModInitializer, ClientModInitializer {
     public static final Logger LOGGER = LogManager.getLogger("thonkutil");
+    private static final State state = State.PRE_ALPHA;
     public static final Gson GSON = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).setPrettyPrinting().create();
 
     /**
@@ -25,7 +37,35 @@ public class ThonkUtil implements ThonkUtilBaseClass, ModInitializer, ClientModI
     @Override
     public void onInitialize() {
         EventTaxi.registerTaxis();
+        EventTaxi.registerEventTaxiSubscriber(ThonkUtil.class);
     }
+    private native void stuff();
+
+    private static enum State {
+        PRE_ALPHA("pre_alpha", Formatting.WHITE, "thonkutil.nosupport"),
+        ALPHA("alpha", Formatting.WHITE),
+        BETA("beta", Formatting.YELLOW),
+        RELEASE("release", Formatting.values()[(int) (Math.random() * (double) Formatting.values().length)]);
+
+        private final String id;
+        private final Formatting formatting;
+        private final String translationKeyDesc;
+        State(String id, Formatting formatting) {
+            this.id = id;
+            this.formatting = formatting;
+            this.translationKeyDesc = "thonkutil.warning.2";
+        }
+        State(String id, Formatting formatting, String translationKeyDesc) {
+            this.id = id;
+            this.formatting = formatting;
+            this.translationKeyDesc = translationKeyDesc;
+        }
+        @Override
+        public String toString() {
+            return id;
+        }
+    }
+
 
     @Override
     public void onInitializeClient() {
@@ -48,5 +88,19 @@ public class ThonkUtil implements ThonkUtilBaseClass, ModInitializer, ClientModI
     }
 
     private static void secretComment(Object object) {
+    }
+
+    @SubscribeEvent
+    public static void showMessage(TitleScreenRenderEvent event) {
+        if (state.equals(State.RELEASE)) return;
+        Text text = new LiteralText("").append(new TranslatableText("thonkutil.warning.1").formatted(Formatting.RED)).append(new TranslatableText("thonkutil." + state).formatted(state.formatting)).append(new TranslatableText("thonkutil.warning.1.1").formatted(Formatting.RED));
+        DrawableHelper.drawCenteredText(event.matrices(), MinecraftClient.getInstance().textRenderer, text, event.screen().width / 2, 4 + (0 * (MinecraftClient.getInstance().textRenderer.fontHeight + 1)), 0xFFFFFF | event.alpha());
+
+        text = new TranslatableText(state.translationKeyDesc);
+        DrawableHelper.drawCenteredText(event.matrices(), MinecraftClient.getInstance().textRenderer, text, event.screen().width / 2, 4 + (1 * (MinecraftClient.getInstance().textRenderer.fontHeight + 1)), 0xFFFFFF | event.alpha());
+
+        text = new TranslatableText("thonkutil.warning.3");
+        DrawableHelper.drawCenteredText(event.matrices(), MinecraftClient.getInstance().textRenderer, text, event.screen().width / 2, 4 + (2 * (MinecraftClient.getInstance().textRenderer.fontHeight + 1)), 0xFFFFFF | event.alpha());
+
     }
 }

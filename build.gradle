@@ -14,7 +14,8 @@ plugins {
 	id "org.ajoberstar.grgit" version "3.1.0"
 }
 def ENV = System.getenv()
-version = project.version + "+" + (ENV.GITHUB_RUN_NUMBER ? "" : "local-") + getBranch()
+version = project.version + "+" + (ENV.GITHUB_RUN_NUMBER ? "" : "local-") + getBranch();
+version = version + getAddon(project);
 def moduleDependencies(project, List<String> depNames) {
 	def deps = depNames.iterator().collect { project.dependencies.project(path: ":$it", configuration: 'namedElements') }
 	project.dependencies {
@@ -47,7 +48,7 @@ def getSubprojectVersion(project) {
 	def version = project.properties["${project.name}-version"]
 
 	if (!version) {
- 		throw new NullPointerException("Could not find version for " + project.name)
+		throw new NullPointerException("Could not find version for " + project.name)
 	}
 
 	if (grgit == null) {
@@ -61,6 +62,23 @@ def getSubprojectVersion(project) {
 	}
 
 	return version + "+" + latestCommits.get(0).id.substring(0, 8) + DigestUtils.sha256Hex(project.rootProject.minecraft_version).substring(0, 2)
+}
+
+def getAddon(project) {
+	// Get the version from the gradle.properties file
+
+
+	if (grgit == null) {
+		return "+nogit"
+	}
+
+	def latestCommits = grgit.log(paths: [project.name], maxCommits: 1)
+
+	if (latestCommits.isEmpty()) {
+		return "+uncommited"
+	}
+
+	return "+" + latestCommits.get(0).id.substring(0, 8) + DigestUtils.sha256Hex(project.rootProject.minecraft_version).substring(0, 2)
 }
 
 
@@ -228,6 +246,7 @@ dependencies {
 curseforge {
 	if (ENV.CURSEFORGE_API_KEY) {
 		apiKey = ENV.CURSEFORGE_API_KEY
+		if (project.prerelease == "pre-alpha") return
 	}
 
 	project {
@@ -265,6 +284,7 @@ import org.kohsuke.github.GitHub
 task github(dependsOn: remapMavenJar) {
 	onlyIf {
 		ENV.GITHUB_TOKEN
+		project.prerelease != "pre-alpha"
 	}
 
 	doLast {
