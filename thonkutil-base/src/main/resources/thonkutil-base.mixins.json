@@ -4,6 +4,8 @@
   "package": "com.jab125.thonkutil.mixin",
   "compatibilityLevel": "JAVA_16",
   "mixins": [
+    "BlockMixin",
+    "ItemMixin"
   ],
   "client": [
   ],

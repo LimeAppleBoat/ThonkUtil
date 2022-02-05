@@ -17,7 +17,7 @@ public interface IdentifiableTrade {
 
     static Identifier getIdOf(TradeOffer tradeOffer) {
         try {
-            return ((IdentifiableTrade) tradeOffer).getId();
+            return tradeOffer.getId();
         } catch (ClassCastException e) {
             return new Identifier("minecraft", "trade_offer");
         }

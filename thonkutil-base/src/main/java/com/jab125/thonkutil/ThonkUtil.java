@@ -12,6 +12,7 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.block.Blocks;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.screen.TitleScreen;
@@ -39,7 +40,6 @@ public class ThonkUtil implements ThonkUtilBaseClass, ModInitializer, ClientModI
         EventTaxi.registerTaxis();
         EventTaxi.registerEventTaxiSubscriber(ThonkUtil.class);
     }
-    private native void stuff();
 
     private static enum State {
         PRE_ALPHA("pre_alpha", Formatting.WHITE, "thonkutil.nosupport"),
