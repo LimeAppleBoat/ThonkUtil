@@ -101,16 +101,25 @@ public class EventTaxi {
 
     /**
      * keep in mind that it will only execute currently registered classes' methods.
-     * @param object
+     * @param object the {@link EventTaxiEvent} to fire.
      */
     public static Object executeEventTaxi(Object object) {
+        return executeEventTaxi(object, null);
+    }
+    /**
+     * keep in mind that it will only execute currently registered classes' methods.
+     * @param object the {@link EventTaxiEvent} to fire.
+     * @param target will restrict events to only firing if their target is {@code target}, but if this target is null, then target checking will be deactivated.
+     */
+    public static Object executeEventTaxi(Object object, String target) {
         if (!(object instanceof EventTaxiEvent)) return null;
         for (Class<?> clazz : registeredEventClazzes) {
             for (Method method : clazz.getMethods()) {
                 if (method.getParameterCount() != 1) continue;
                 if (!method.getParameters()[0].getType().equals(object.getClass())) continue;
                 for (Annotation declaredAnnotation : method.getDeclaredAnnotations()) {
-                    if (declaredAnnotation instanceof SubscribeEvent) {
+                    if (declaredAnnotation instanceof SubscribeEvent subscribeEvent) {
+                        if (target != null && !subscribeEvent.target().equals(target)) break;
                         try {
                             method.invoke(null, object);
                             if (object instanceof EventTaxiReturnableEvent event) {

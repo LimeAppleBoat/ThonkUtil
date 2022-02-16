@@ -10,4 +10,5 @@ import java.lang.annotation.Target;
 @SuppressWarnings("unused")
 /* this is the best name for it */
 public @interface SubscribeEvent {
+    String target() default "";
 }
