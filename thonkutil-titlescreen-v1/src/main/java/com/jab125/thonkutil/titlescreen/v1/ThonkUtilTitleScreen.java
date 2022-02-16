@@ -74,15 +74,15 @@ public class ThonkUtilTitleScreen implements ClientModInitializer {
         }
     }
     private String getTextNoFAPI(int i) {
-        switch (i) {
-            case 2:
-                return "Fabric " + FabricLoader.getInstance().getModContainer("fabricloader").get().getMetadata().getVersion().getFriendlyString();
-            case 1:
-                return "Minecraft " + SharedConstants.getGameVersion().getName();
-            case 0:
-                return FabricLoader.getInstance().getAllMods().size() + " mods loaded";
-            default:
-                throw new IllegalStateException("Unexpected value: " + i);
-        }
+        return switch (i) {
+            case 2 -> "Fabric " + FabricLoader.getInstance().getModContainer("fabricloader").get().getMetadata().getVersion().getFriendlyString();
+            case 1 -> "Minecraft " + SharedConstants.getGameVersion().getName();
+            case 0 -> FabricLoader.getInstance().getAllMods().size() + " mods loaded";
+            default -> throw new IllegalStateException("Unexpected value: " + i);
+        };
+    }
+
+    public static String modId() {
+        return "thonkutil-titlescreen-v1";
     }
 }
