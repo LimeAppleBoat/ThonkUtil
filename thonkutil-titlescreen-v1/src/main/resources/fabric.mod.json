@@ -4,7 +4,7 @@
   "version": "${version}",
 
   "name": "ThonkUtil TitleScreen (v1)",
-  "description": "Figure it out yourself",
+  "description": "Adds in the MinecraftForge style title screen",
   "authors": [
     "Jab125"
   ],
@@ -12,16 +12,13 @@
     "thonkutil-titlescreen-v1.mixins.json"
   ],
   "entrypoints": {
-    "_main": [
-      "com.jab125.thonkutil.ThonkUtilCapes"
-    ],
     "client": [
       "com.jab125.thonkutil.titlescreen.v1.ThonkUtilTitleScreen"
     ]
   },
   "license": "CC0-1.0",
   "icon": "assets/thonkutil-titlescreen-v1/icon.png",
-  "environment": "*",
+  "environment": "client",
   "custom": {
     "modmenu": {
       "parent": {
