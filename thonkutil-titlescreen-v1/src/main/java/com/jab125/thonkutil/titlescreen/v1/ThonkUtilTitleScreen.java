@@ -12,8 +12,7 @@ import net.minecraft.client.gui.DrawableHelper;
 public class ThonkUtilTitleScreen implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
-        getModCount();
-        FabricLoader.getInstance();
+        //getModCount();
         EventTaxi.registerEventTaxiSubscriber(ThonkUtilTitleScreen.class);
 //        ScreenEvents.AFTER_INIT.register(((client, screen, scaledWidth, scaledHeight) -> {
 //            if (screen instanceof TitleScreen titleScreen) {
