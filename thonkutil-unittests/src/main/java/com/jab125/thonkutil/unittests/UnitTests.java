@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 public class UnitTests {
     private static int q = 0;
+    private static int r = 0;
     private static final ArrayList<Object> errs = new ArrayList<>();
     private static final PingMap<String, String> pingMap = new PingMap<>();
     public static void main(String[] args) {
@@ -29,6 +30,10 @@ public class UnitTests {
         logTestEnd();
         logTestStart("Ping Map Test");
         pingMap.put("cheese", "crackers");
+        logTestEnd();
+        logTestStart("Subscribe Event Target Test");
+        EventTaxi.executeEventTaxi(new SubscribeEventTargetTest(), "target");
+        checkResults(1, r);
         logTestEnd();
     }
 
@@ -53,6 +58,17 @@ public class UnitTests {
         checkResults(true, test.getResult());
     }
 
+    @SubscribeEvent(target = "target")
+    public static void testSubscribeEvent(SubscribeEventTargetTest test) {
+        r++;
+        //System.out.println("Target \"target\"");
+    }
+
+    @SubscribeEvent(target = "not target")
+    public static void testSubscribeEvent2(SubscribeEventTargetTest test) {
+        //System.out.println("Target \"not target\"");
+        errs.add("Target \"not target\" fired even though target was \"target\"");
+    }
 
     private static void checkResults(Object expectedResult, Object result) {
         if (expectedResult != result) {
@@ -104,4 +120,7 @@ public class UnitTests {
         }
     }
 
+    public static class SubscribeEventTargetTest extends EventTaxiEvent {
+
+    }
 }
