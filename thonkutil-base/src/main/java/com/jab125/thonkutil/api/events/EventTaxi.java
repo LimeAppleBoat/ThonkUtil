@@ -80,9 +80,9 @@ public class EventTaxi {
                     float g = titleScreen.doBackgroundFade ? MathHelper.clamp(f - 1.0F, 0.0F, 1.0F) : 1.0F;
                     int l = MathHelper.ceil(g * 255.0F) << 24;
                     if ((l & -67108864) != 0) {
-                        for (int i = 0; i < 4; i++) {
-                            EventTaxi.executeEventTaxi(new TitleScreenRenderEvent(titleScreen, matrices, mouseX, mouseY, tickDelta, l));
-                        }
+                        // for (int i = 0; i < 4; i++) {
+                        EventTaxi.executeEventTaxi(new TitleScreenRenderEvent(titleScreen, matrices, mouseX, mouseY, tickDelta, l));
+                        // }
                     }
                 }));
             }
