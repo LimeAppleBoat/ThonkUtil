@@ -65,7 +65,7 @@ public class ThonkUtilTitleScreen implements ClientModInitializer {
 
     private static String getModCount() {
         try {
-            return (String)(Class.forName("com.terraformersmc.modmenu.ModMenu").getMethod("getDisplayedModCount").invoke(new Object[]{}));
+            return (String)(Class.forName("com.terraformersmc.modmenu.ModMenu").getMethod("getDisplayedModCount").invoke(null, new Object[]{}));
 //            for (Method method : Class.forName("com.terraformersmc.modmenu.ModMenu").getMethods()) {
 //                System.out.println(method.getName() + ", Annotations" + Arrays.toString(method.getDeclaredAnnotations()) + ", Static: " + Modifier.isStatic(method.getModifiers()));
 //            }
