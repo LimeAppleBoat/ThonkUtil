@@ -242,6 +242,14 @@ dependencies {
 	}
 }
 
+tasks.withType(Jar).configureEach {
+	manifest {
+		attributes 'Implementation-Title': 'ThonkUtil',
+				'Implementation-Version': project.version,
+				'Main-Class': 'com.jab125.thonkutil.Main'
+	}
+}
+
 curseforge {
 	if (ENV.CURSEFORGE_API_KEY) {
 		apiKey = ENV.CURSEFORGE_API_KEY

@@ -29,7 +29,7 @@ import static com.jab125.thonkutil.api.events.EventTaxi.registerEventTaxiSubscri
 
 public class ThonkUtil implements ThonkUtilBaseClass, ModInitializer, ClientModInitializer {
     public static final Logger LOGGER = LogManager.getLogger("thonkutil");
-    private static final State state = State.ALPHA;
+    private static final State state = State.PRE_ALPHA;
     public static final Gson GSON = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).setPrettyPrinting().create();
 
     /**
