@@ -4,18 +4,18 @@
   "version": "${version}",
 
   "name": "ThonkUtil Customization (v1)",
-  "description": "Customize vanilla features",
+  "description": "Customize vanilla features\nCurrently disabled.",
   "authors": [
     "Jab125"
   ],
-  "mixins": [
+  "disabled:mixins": [
     "thonkutil-customization-v1.mixins.json"
   ],
   "entrypoints": {
-    "main": [
+    "_main": [
       "com.jab125.thonkutil.ThonkUtilCustomization"
     ],
-    "modmenu": [
+    "_modmenu": [
       "com.jab125.thonkutil.config.ThonkUtilCustomizationModMenuCompat"
     ]
   },
@@ -31,7 +31,7 @@
         "icon": "assets/thonkutil-customization-v1/icon.png",
         "badges": ["library"]
       },
-      "badges": ["library"]
+      "badges": ["library", "deprecated"]
     }
   }
 }

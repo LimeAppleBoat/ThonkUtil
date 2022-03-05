@@ -5,3 +5,7 @@ version = getSubprojectVersion(project)
 dependencies {
     api project(path: ':thonkutil-base', configuration: 'namedElements')
 }
+
+loom {
+    accessWidenerPath = file("src/main/resources/thonkutil-titlescreen-v1.accesswidener")
+}

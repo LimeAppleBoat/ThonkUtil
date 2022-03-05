@@ -107,26 +107,28 @@ public class EventTaxi {
      * keep in mind that it will only execute currently registered classes' methods.
      * @param object the {@link EventTaxiEvent} to fire.
      */
-    public static Object executeEventTaxi(Object object) {
+    public static Object executeEventTaxi(EventTaxiEvent object) {
         return executeEventTaxi(object, null);
     }
     /**
      * keep in mind that it will only execute currently registered classes' methods.
-     * @param object the {@link EventTaxiEvent} to fire.
+     * @param event the {@link EventTaxiEvent} to fire.
      * @param target will restrict events to only firing if their target is {@code target}, but if this target is null, then target checking will be deactivated.
      */
-    public static Object executeEventTaxi(Object object, String target) {
-        if (!(object instanceof EventTaxiEvent)) return null;
+    public static Object executeEventTaxi(EventTaxiEvent event, String target) {
+        if (event == null) return null;
+        outerLoop:
         for (Class<?> clazz : registeredEventClazzes) {
             for (Method method : clazz.getMethods()) {
                 if (method.getParameterCount() != 1) continue;
-                if (!method.getParameters()[0].getType().equals(object.getClass())) continue;
+                if (!method.getParameters()[0].getType().equals(event.getClass())) continue;
                 for (Annotation declaredAnnotation : method.getDeclaredAnnotations()) {
                     if (declaredAnnotation instanceof SubscribeEvent subscribeEvent) {
                         if (target != null && !subscribeEvent.target().equals(target)) break;
                         try {
-                            method.invoke(null, object);
-                            if (object instanceof EventTaxiReturnableEvent event) {
+                            if (event.isCancelled())break outerLoop;
+                            method.invoke(null, event);
+                            if (event instanceof EventTaxiReturnableEvent) {
                                 //System.out.println(event.getBoolean());
                             }
                             break;
@@ -138,8 +140,8 @@ public class EventTaxi {
                 }
             }
         }
-        if (object instanceof EventTaxiReturnableEvent event) {
-            return event.getResult();
+        if (event instanceof EventTaxiReturnableEvent eventReturnable) {
+            return eventReturnable.getResult();
         }
         return null;
     }

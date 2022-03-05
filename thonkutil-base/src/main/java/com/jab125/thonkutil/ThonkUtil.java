@@ -6,9 +6,10 @@ import com.google.gson.GsonBuilder;
 import com.jab125.thonkutil.api.annotations.SubscribeEvent;
 import com.jab125.thonkutil.api.events.*;
 import com.jab125.thonkutil.api.events.client.screen.TitleScreenRenderEvent;
+import com.jab125.thonkutil.api.events.server.entity.TotemUseEvent;
 import com.jab125.thonkutil.util.AccessUtil;
-import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.api.ModInitializer;
+import net.fabricmc.api.*;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.fabricmc.loader.api.FabricLoader;
@@ -16,10 +17,14 @@ import net.minecraft.block.Blocks;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.screen.TitleScreen;
+import net.minecraft.entity.Entity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
+import net.minecraft.util.Identifier;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -27,9 +32,11 @@ import java.util.Locale;
 
 import static com.jab125.thonkutil.api.events.EventTaxi.registerEventTaxiSubscriber;
 
+@EnvironmentInterface(value = EnvType.CLIENT, itf = ClientModInitializer.class)
 public class ThonkUtil implements ThonkUtilBaseClass, ModInitializer, ClientModInitializer {
+    public static final Identifier TOTEM_PACKET = new Identifier("thonkutil:totem_particle_packet");
     public static final Logger LOGGER = LogManager.getLogger("thonkutil");
-    private static final State state = State.PRE_ALPHA;
+    private static final State state = State.RELEASE;
     public static final Gson GSON = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).setPrettyPrinting().create();
 
     /**
@@ -39,6 +46,10 @@ public class ThonkUtil implements ThonkUtilBaseClass, ModInitializer, ClientModI
     public void onInitialize() {
         EventTaxi.registerTaxis();
         EventTaxi.registerEventTaxiSubscriber(ThonkUtil.class);
+    }
+
+    public static State getState() {
+        return state;
     }
 
     private static enum State {
@@ -68,8 +79,16 @@ public class ThonkUtil implements ThonkUtilBaseClass, ModInitializer, ClientModI
 
 
     @Override
+    @Environment(EnvType.CLIENT)
     public void onInitializeClient() {
         EventTaxi.registerClientTaxis();
+        ClientPlayNetworking.registerGlobalReceiver(TOTEM_PACKET,
+                (client, handler, buf, responseSender) -> {
+                    ItemStack itemStack = buf.readItemStack();
+                    assert client.world != null;
+                    Entity entity = client.world.getEntityById(buf.readInt());
+                    client.execute(() -> TotemUseEvent.playActivateAnimation(entity, itemStack));
+                });
     }
 
     public static class MODID {

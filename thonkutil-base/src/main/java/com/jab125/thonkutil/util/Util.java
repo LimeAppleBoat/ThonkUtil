@@ -1,15 +1,21 @@
 package com.jab125.thonkutil.util;
 
 import com.jab125.thonkutil.ThonkUtilBaseClass;
+import dev.emi.trinkets.api.SlotReference;
+import dev.emi.trinkets.api.TrinketsApi;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Pair;
 import net.minecraft.util.registry.DefaultedRegistry;
 import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 @SuppressWarnings("unused")
 public class Util implements ThonkUtilBaseClass {
@@ -112,5 +118,12 @@ public class Util implements ThonkUtilBaseClass {
 
     public static Block quickRegisterBlock(Identifier id, Block block) {
         return Registry.register(Registry.BLOCK, id, block);
+    }
+
+    public static ItemStack findTrinketsItem(net.minecraft.item.Item item, ServerPlayerEntity player) {
+        return TrinketsApi.getTrinketComponent(player).map(component -> {
+            List<Pair<SlotReference, ItemStack>> res = component.getEquipped(item);
+            return res.size() > 0 ? res.get(0).getRight() : ItemStack.EMPTY;
+        }).orElse(ItemStack.EMPTY);
     }
 }

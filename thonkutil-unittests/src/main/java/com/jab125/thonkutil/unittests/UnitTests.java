@@ -13,6 +13,7 @@ import java.util.ArrayList;
 public class UnitTests {
     private static int q = 0;
     private static int r = 0;
+    private static int d = 0;
     private static final ArrayList<Object> errs = new ArrayList<>();
     private static final PingMap<String, String> pingMap = new PingMap<>();
     public static void main(String[] args) {
@@ -22,6 +23,7 @@ public class UnitTests {
         logTestStart("Subscribe Event Test");
         EventTaxi.executeEventTaxi(new SubscribeEventTest("TEST", 15));
         checkResults(1, q);
+        checkResults(1, d);
         logTestEnd();
 
         logTestStart("Subscribe Event Returnable Test");
@@ -42,6 +44,13 @@ public class UnitTests {
         checkResults("TEST", test.str);
         checkResults(15, test.i);
         q = 1;
+    }
+
+    @SubscribeEvent
+    public static void testSubscribeEvent1(SubscribeEventTest test) {
+        checkResults("TEST", test.str);
+        checkResults(15, test.i);
+        d = 1;
     }
     @SubscribeEvent
     public static void testSubscribeEvent(PingMapEvent event) {
