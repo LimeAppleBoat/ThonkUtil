@@ -3,3 +3,4 @@ accessWidener	v1    named
 extendable class net/minecraft/enchantment/EnchantmentTarget
 accessible field net/minecraft/client/gui/screen/TitleScreen doBackgroundFade Z
 accessible field net/minecraft/client/gui/screen/TitleScreen backgroundFadeStart J
+accessible field net/minecraft/potion/Potion baseName Ljava/lang/String;
