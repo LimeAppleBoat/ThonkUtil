@@ -60,7 +60,7 @@ class BumpVersionTask extends DefaultTask {
                     def config = cp.configurations.api
                     config.allDependencies.forEach { dep ->
                         if (dep.name == p.name) {
-                            if (!toUpdate.containsKey(cp)) {
+                            if (!toUpdate.containsKey(cp) && cp.name != "thonkutil-unittests") {
                                 println "Bumping patch of ${cp.name} as it depends on ${p.name}"
 
                                 temp.put(cp, 2) // Bump patch
