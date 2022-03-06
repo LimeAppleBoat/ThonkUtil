@@ -29,11 +29,14 @@ class BumpVersionTask extends DefaultTask {
 
             def subProject = project.getChildProjects().get(input)
 
+            if (input == "thonkutil") {
+                subProject = project
+            }
+
             if (!subProject) {
                 println "Could not find project with name: $input"
                 continue
             }
-
             while (true) {
                 println "Bump version for ${subProject.name}:"
                 println "0) Bump Major"
