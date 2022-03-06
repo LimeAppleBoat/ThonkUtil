@@ -117,24 +117,28 @@ public class EventTaxi {
      */
     public static Object executeEventTaxi(EventTaxiEvent event, String target) {
         if (event == null) return null;
-        outerLoop:
-        for (Class<?> clazz : registeredEventClazzes) {
-            for (Method method : clazz.getMethods()) {
-                if (method.getParameterCount() != 1) continue;
-                if (!method.getParameters()[0].getType().equals(event.getClass())) continue;
-                for (Annotation declaredAnnotation : method.getDeclaredAnnotations()) {
-                    if (declaredAnnotation instanceof SubscribeEvent subscribeEvent) {
-                        if (target != null && !subscribeEvent.target().equals(target)) break;
-                        try {
-                            if (event.isCancelled())break outerLoop;
-                            method.invoke(null, event);
-                            if (event instanceof EventTaxiReturnableEvent) {
-                                //System.out.println(event.getBoolean());
+        for (SubscribeEvent.Priority priority : new SubscribeEvent.Priority[]{SubscribeEvent.Priority.HIGH, SubscribeEvent.Priority.DEFAULT, SubscribeEvent.Priority.LOW}) {
+            outerLoop:
+            for (Class<?> clazz : registeredEventClazzes) {
+                methodLoop:
+                for (Method method : clazz.getMethods()) {
+                    if (method.getParameterCount() != 1) continue;
+                    if (!method.getParameters()[0].getType().equals(event.getClass())) continue;
+                    for (Annotation declaredAnnotation : method.getDeclaredAnnotations()) {
+                        if (declaredAnnotation instanceof SubscribeEvent subscribeEvent) {
+                            if (target != null && !subscribeEvent.target().equals(target)) break;
+                            if (!subscribeEvent.priority().equals(priority)) break;
+                            try {
+                                if (event.isCancelled())break outerLoop;
+                                method.invoke(null, event);
+                                if (event instanceof EventTaxiReturnableEvent) {
+                                    //System.out.println(event.getBoolean());
+                                }
+                                break;
+                            } catch (Exception e){
+                                e.printStackTrace();
+                                System.out.println("failed to execute event taxi");
                             }
-                            break;
-                        } catch (Exception e){
-                            e.printStackTrace();
-                            System.out.println("failed to execute event taxi");
                         }
                     }
                 }
@@ -145,5 +149,4 @@ public class EventTaxi {
         }
         return null;
     }
-
 }
