@@ -107,7 +107,9 @@ public class ThonkUtil implements ThonkUtilBaseClass, ModInitializer, ClientModI
         secretComment("optifine");
     }
 
+    @SuppressWarnings("unused")
     private static void secretComment(Object object) {
+        var q = object;
     }
 
     @SubscribeEvent
