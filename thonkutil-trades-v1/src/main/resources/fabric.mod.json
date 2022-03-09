@@ -27,7 +27,7 @@
   "environment": "*",
   "custom": {
     "loom:injected_interfaces": {
-      "net/minecraft/class_1914": ["com.jab125.thonkutil.api.IdentifiableTrade"]
+      "net/minecraft/class_1914": ["com/jab125/thonkutil/api/IdentifiableTrade"]
     },
     "modmenu": {
       "parent": {
