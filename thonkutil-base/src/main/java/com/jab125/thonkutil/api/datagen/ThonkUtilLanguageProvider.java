@@ -48,8 +48,8 @@ public abstract class ThonkUtilLanguageProvider implements DataProvider {
         addTranslations();
         @SuppressWarnings("deprecation")
         String rawJson = JavaUnicodeEscaper.outsideOf(0, 0x7f).translate(GSON.toJson(data));
-        Path path = this.fabricDataGenerator.getOutput().resolve("resources/assets/" + this.fabricDataGenerator.getModId() + "/lang/" + locale + ".json");
-        var debug = true;
+        Path path = this.fabricDataGenerator.getOutput().resolve("assets/" + this.fabricDataGenerator.getModId() + "/lang/" + locale + ".json");
+        var debug = false;
         if (debug) {
             System.out.println("JSON: " + rawJson);
             System.out.println("Path: " + path);
