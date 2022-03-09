@@ -9,8 +9,6 @@ import com.jab125.thonkutil.api.events.server.player.OnPlayerFatalDamageEvent;
 import com.jab125.thonkutil.api.events.server.world.ServerWorldLoadEvent;
 import com.jab125.thonkutil.api.events.server.world.ServerWorldUnloadEvent;
 import com.jab125.thonkutil.api.events.world.WorldTickEvent;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
@@ -20,11 +18,14 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import static com.jab125.thonkutil.api.Tick.Phase.END;
 import static com.jab125.thonkutil.api.Tick.Phase.START;
 
 public class EventTaxi {
+    private static final HashMap<Class<?>, Method[]> caches = new HashMap<>();
     private static final ArrayList<Class<?>> registeredEventClazzes = new ArrayList<>();
 
     public static void registerTaxis() {
@@ -63,12 +64,17 @@ public class EventTaxi {
     }
 
     public static void registerEventTaxiSubscriber(Class<?> clazz) {
-        registeredEventClazzes.add(clazz);
+        if (registeredEventClazzes.add(clazz)) {
+            caches.put(clazz, getSubscribedMethods(clazz));
+        }
+        System.out.println(caches);
     }
 
     @SuppressWarnings("unused")
     public static void unregisterEventTaxiSubscriber(Class<?> clazz) {
-        registeredEventClazzes.remove(clazz);
+        if (registeredEventClazzes.remove(clazz)) {
+            caches.remove(clazz);
+        }
     }
 
 
@@ -91,9 +97,8 @@ public class EventTaxi {
         if (event == null) return null;
         for (SubscribeEvent.Priority priority : new SubscribeEvent.Priority[]{SubscribeEvent.Priority.HIGH, SubscribeEvent.Priority.DEFAULT, SubscribeEvent.Priority.LOW}) {
             outerLoop:
-            for (Class<?> clazz : registeredEventClazzes) {
-                Method[] methods = clazz.getMethods();
-                for (Method method : methods) {
+            for (Method[] methods : caches.values()) {
+                for (var method : methods) {
                     if (method.getParameterCount() != 1) continue;
                     if (!method.getParameters()[0].getType().equals(event.getClass())) continue;
                     for (Annotation declaredAnnotation : method.getDeclaredAnnotations()) {
@@ -120,5 +125,17 @@ public class EventTaxi {
             return eventReturnable.getResult();
         }
         return null;
+    }
+
+    private static Method[] getSubscribedMethods(Class<?> clazz) {
+        var methods = clazz.getMethods();
+        List<Method> methodList = new ArrayList<>();
+        for (var method : methods) {
+            var a = method.getAnnotation(SubscribeEvent.class);
+            if (a != null && method.getParameterCount() != 1 && (EventTaxiEvent.class.isAssignableFrom(method.getParameterTypes()[0]) || method.getParameterTypes()[0] == EventTaxiEvent.class)) {
+                methodList.add(method);
+            }
+        }
+        return methodList.toArray(new Method[0]);
     }
 }
