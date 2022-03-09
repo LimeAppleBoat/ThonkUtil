@@ -2,6 +2,8 @@ package com.jab125.thonkutil.util;
 
 import com.jab125.thonkutil.ThonkUtilBaseClass;
 import dev.emi.trinkets.api.SlotReference;
+import dev.emi.trinkets.api.TrinketComponent;
+import dev.emi.trinkets.api.TrinketInventory;
 import dev.emi.trinkets.api.TrinketsApi;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
@@ -16,6 +18,8 @@ import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @SuppressWarnings("unused")
 public class Util implements ThonkUtilBaseClass {
@@ -121,9 +125,17 @@ public class Util implements ThonkUtilBaseClass {
     }
 
     public static ItemStack findTrinketsItem(net.minecraft.item.Item item, ServerPlayerEntity player) {
-        return TrinketsApi.getTrinketComponent(player).map(component -> {
-            List<Pair<SlotReference, ItemStack>> res = component.getEquipped(item);
-            return res.size() > 0 ? res.get(0).getRight() : ItemStack.EMPTY;
-        }).orElse(ItemStack.EMPTY);
+        try {
+            Optional<TrinketComponent> component = dev.emi.trinkets.api.TrinketsApi.getTrinketComponent(player);
+
+            var e = component.map(component2 -> {
+                List<Pair<SlotReference, ItemStack>> res = component2.getEquipped(item);
+                return res.size() > 0 ? res.get(0).getRight() : ItemStack.EMPTY;
+            }).orElse(ItemStack.EMPTY);
+            return e;
+        } catch (Exception exception) {
+            // TRINKETS IS PROBABLY NOT INSTALLED ON SERVER
+        }
+        return ItemStack.EMPTY;
     }
 }

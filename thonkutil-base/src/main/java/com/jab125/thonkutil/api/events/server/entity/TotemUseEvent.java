@@ -24,6 +24,8 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.Hand;
 
+import static com.jab125.thonkutil.util.Util.isModInstalled;
+
 public class TotemUseEvent extends EventTaxiBooleanReturnableEvent {
     private final LivingEntity entity;
     private final DamageSource source;
@@ -60,7 +62,7 @@ public class TotemUseEvent extends EventTaxiBooleanReturnableEvent {
         ItemStack itemStack = null;
         Hand[] var4 = Hand.values();
 
-        if (this.getEntity() instanceof ServerPlayerEntity entity)
+        if (this.getEntity() instanceof ServerPlayerEntity entity && isModInstalled("trinkets"))
             itemStack = Util.findTrinketsItem(item, entity);
 
         if (itemStack == null || itemStack.equals(ItemStack.EMPTY))
