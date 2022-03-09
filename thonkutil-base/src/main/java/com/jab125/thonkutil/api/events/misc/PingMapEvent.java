@@ -8,15 +8,15 @@ import java.util.Objects;
 public final class PingMapEvent extends EventTaxiEvent {
     private final String key;
     private final Object value;
-    private final PingMap map;
+    private final PingMap<?,?> map;
 
-    public PingMapEvent(PingMap map, String key, Object value) {
+    public PingMapEvent(PingMap<?,?> map, String key, Object value) {
         this.map = map;
         this.key = key;
         this.value = value;
     }
 
-    public PingMap map() {
+    public PingMap<?,?> map() {
         return map;
     }
 

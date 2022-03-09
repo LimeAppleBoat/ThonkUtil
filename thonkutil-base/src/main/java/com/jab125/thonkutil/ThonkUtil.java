@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.jab125.thonkutil.api.annotations.SubscribeEvent;
 import com.jab125.thonkutil.api.events.*;
+import com.jab125.thonkutil.api.events.client.EventTaxiClient;
 import com.jab125.thonkutil.api.events.client.screen.TitleScreenRenderEvent;
 import com.jab125.thonkutil.api.events.server.entity.TotemUseEvent;
 import com.jab125.thonkutil.util.AccessUtil;
@@ -81,7 +82,7 @@ public class ThonkUtil implements ThonkUtilBaseClass, ModInitializer, ClientModI
     @Override
     @Environment(EnvType.CLIENT)
     public void onInitializeClient() {
-        EventTaxi.registerClientTaxis();
+        EventTaxiClient.registerClientTaxis();
         ClientPlayNetworking.registerGlobalReceiver(TOTEM_PACKET,
                 (client, handler, buf, responseSender) -> {
                     ItemStack itemStack = buf.readItemStack();
@@ -110,6 +111,7 @@ public class ThonkUtil implements ThonkUtilBaseClass, ModInitializer, ClientModI
     }
 
     @SubscribeEvent
+    @Environment(EnvType.CLIENT)
     public static void showMessage(TitleScreenRenderEvent event) {
         if (state.equals(State.RELEASE)) return;
         Text text = new LiteralText("").append(new TranslatableText("thonkutil.warning.1").formatted(Formatting.RED)).append(new TranslatableText("thonkutil." + state).formatted(state.formatting)).append(new TranslatableText("thonkutil.warning.1.1").formatted(Formatting.RED));

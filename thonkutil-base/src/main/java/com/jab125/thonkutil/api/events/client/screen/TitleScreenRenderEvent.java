@@ -1,12 +1,15 @@
 package com.jab125.thonkutil.api.events.client.screen;
 
 import com.jab125.thonkutil.api.events.EventTaxiEvent;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.TitleScreen;
 import net.minecraft.client.util.math.MatrixStack;
 
 import java.util.Objects;
 
+@Environment(EnvType.CLIENT)
 public final class TitleScreenRenderEvent extends EventTaxiEvent {
     private final Screen screen;
     private final MatrixStack matrices;

@@ -21,6 +21,9 @@ import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
+import net.fabricmc.loader.api.FabricLoader;
+import net.fabricmc.loader.impl.launch.knot.Knot;
+import net.fabricmc.loader.impl.transformer.FabricTransformer;
 import net.minecraft.client.gui.screen.TitleScreen;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.MathHelper;
@@ -28,6 +31,7 @@ import net.minecraft.util.math.MathHelper;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import static com.jab125.thonkutil.api.Tick.Phase.END;
 import static com.jab125.thonkutil.api.Tick.Phase.START;
@@ -70,29 +74,6 @@ public class EventTaxi {
         }));
     }
 
-    @Environment(EnvType.CLIENT)
-    public static void registerClientTaxis() {
-        ScreenEvents.AFTER_INIT.register(((client, screen, scaledWidth, scaledHeight) -> {
-            EventTaxi.executeEventTaxi(new ScreenEvent(screen, client, scaledWidth, scaledHeight));
-            ScreenEvents.afterRender(screen).register(((screen1, matrices, mouseX, mouseY, tickDelta) -> {
-                EventTaxi.executeEventTaxi(new ScreenRenderEvent(screen, matrices, mouseX, mouseY, tickDelta));
-            }));
-            if (screen instanceof TitleScreen titleScreen) {
-                EventTaxi.executeEventTaxi(new TitleScreenEvent(screen, client, scaledWidth, scaledHeight));
-                ScreenEvents.afterRender(screen).register(((screen1, matrices, mouseX, mouseY, tickDelta) -> {
-                    float f = titleScreen.doBackgroundFade ? (float)(Util.getMeasuringTimeMs() - titleScreen.backgroundFadeStart) / 1000.0F : 1.0F;
-                    float g = titleScreen.doBackgroundFade ? MathHelper.clamp(f - 1.0F, 0.0F, 1.0F) : 1.0F;
-                    int l = MathHelper.ceil(g * 255.0F) << 24;
-                    if ((l & -67108864) != 0) {
-                        // for (int i = 0; i < 4; i++) {
-                        EventTaxi.executeEventTaxi(new TitleScreenRenderEvent(titleScreen, matrices, mouseX, mouseY, tickDelta, l));
-                        // }
-                    }
-                }));
-            }
-        }));
-    }
-
     public static void registerEventTaxiSubscriber(Class<?> clazz) {
         registeredEventClazzes.add(clazz);
     }
@@ -121,26 +102,31 @@ public class EventTaxi {
             outerLoop:
             for (Class<?> clazz : registeredEventClazzes) {
                 methodLoop:
-                for (Method method : clazz.getMethods()) {
-                    if (method.getParameterCount() != 1) continue;
-                    if (!method.getParameters()[0].getType().equals(event.getClass())) continue;
-                    for (Annotation declaredAnnotation : method.getDeclaredAnnotations()) {
-                        if (declaredAnnotation instanceof SubscribeEvent subscribeEvent) {
-                            if (target != null && !subscribeEvent.target().equals(target)) break;
-                            if (!subscribeEvent.priority().equals(priority)) break;
-                            try {
-                                if (event.isCancelled())break outerLoop;
-                                method.invoke(null, event);
-                                if (event instanceof EventTaxiReturnableEvent) {
-                                    //System.out.println(event.getBoolean());
+                try {
+                    Method[] methods = clazz.getMethods();
+                    for (Method method : methods) {
+                        if (method.getParameterCount() != 1) continue;
+                        if (!method.getParameters()[0].getType().equals(event.getClass())) continue;
+                        for (Annotation declaredAnnotation : method.getDeclaredAnnotations()) {
+                            if (declaredAnnotation instanceof SubscribeEvent subscribeEvent) {
+                                if (target != null && !subscribeEvent.target().equals(target)) break;
+                                if (!subscribeEvent.priority().equals(priority)) break;
+                                try {
+                                    if (event.isCancelled()) break outerLoop;
+                                    method.invoke(null, event);
+                                    if (event instanceof EventTaxiReturnableEvent) {
+                                        //System.out.println(event.getBoolean());
+                                    }
+                                    break;
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                    System.out.println("failed to execute event taxi");
                                 }
-                                break;
-                            } catch (Exception e){
-                                e.printStackTrace();
-                                System.out.println("failed to execute event taxi");
                             }
                         }
                     }
+                } catch (RuntimeException ignored) {
+                    throw ignored;
                 }
             }
         }

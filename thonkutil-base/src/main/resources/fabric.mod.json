@@ -26,8 +26,8 @@
   "environment": "*",
   "custom": {
     "loom:injected_interfaces": {
-      "net/minecraft/class_1792": ["com.jab125.thonkutil.impl.RegistryUtil"],
-      "net/minecraft/class_2248": ["com.jab125.thonkutil.impl.RegistryUtil"]
+      "net/minecraft/class_1792": ["com/jab125/thonkutil/impl/RegistryUtil"],
+      "net/minecraft/class_2248": ["com/jab125/thonkutil/impl/RegistryUtil"]
     },
     "modmenu": {
       "parent": {
