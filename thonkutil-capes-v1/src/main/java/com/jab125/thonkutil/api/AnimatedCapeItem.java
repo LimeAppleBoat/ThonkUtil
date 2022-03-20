@@ -1,12 +1,24 @@
 package com.jab125.thonkutil.api;
 
+import com.jab125.thonkutil.ThonkUtilCapesClient;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener;
+import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
+import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.resource.ResourceManager;
+import net.minecraft.resource.ResourceType;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.profiler.Profiler;
 import net.minecraft.util.registry.Registry;
+
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executor;
 
 public class AnimatedCapeItem extends CapeItem {
     private final int frames;
     private final int delay;
     private long nextFrameTime;
+    private boolean loadedT = false;
     private int currentFrame = 0;
     public AnimatedCapeItem(Settings settings, int frames, int delay) {
         this(settings, frames, delay, true, false);
@@ -23,14 +35,23 @@ public class AnimatedCapeItem extends CapeItem {
         this(settings, frames, delay, hasElytraTexture, false);
     }
 
+    @Deprecated
+    public Identifier getCapeTexture0() {
+        return Identifier.tryParse(Registry.ITEM.getId(this).getNamespace() + ":textures/cape/"+ Registry.ITEM.getId(this).getPath() + ".png");
+    }
     @Override
     public Identifier getCapeTexture() {
+        if (FabricLoader.getInstance().getEnvironmentType().equals(EnvType.CLIENT) && !loadedT) {
+            ThonkUtilCapesClient.loadCapes(this);
+            loadedT = true;
+        }
         long currentTimeMillis = System.currentTimeMillis();
         if (currentTimeMillis > nextFrameTime) {
             currentFrame = currentFrame == frames-1 ? 0 : currentFrame + 1;
             setNextFrameTime(delay);
         }
-        return Identifier.tryParse(Registry.ITEM.getId(this).getNamespace() + ":textures/cape/"+ Registry.ITEM.getId(this).getPath() + "/" + currentFrame + ".png");
+        return new Identifier("thonkutil", String.format("capes/%s/%d", this.getRegistryIdAsIdentifier().toUnderscoreSeparatedString(), currentFrame));
+        //return Identifier.tryParse(Registry.ITEM.getId(this).getNamespace() + ":textures/cape/"+ Registry.ITEM.getId(this).getPath() + "/" + currentFrame + ".png");
     }
 
     @Override

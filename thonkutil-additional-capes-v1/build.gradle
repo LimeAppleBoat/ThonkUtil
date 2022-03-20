@@ -1,0 +1,42 @@
+archivesBaseName = "thonkutil-additional-capes-v1"
+group = rootProject.group
+version = getSubprojectVersion(project)
+
+moduleDependencies(project, [
+        "thonkutil-base",
+        "thonkutil-capes-v1"
+])
+repositories {
+    maven {
+        url "https://cursemaven.com"
+    }
+}
+dependencies {
+    modImplementation "curse.maven:minecraftcapes-359836:3673296"
+}
+
+sourceSets {
+    main {
+        resources {
+            srcDirs += [
+                    'src/generated/resources'
+            ]
+        }
+    }
+}
+
+loom {
+    accessWidenerPath = file("src/main/resources/thonkutil-additional-capes-v1.accesswidener")
+    runs {
+        data {
+            server()
+            name "Data Generation"
+            vmArg "-Dfabric-api.datagen"
+            vmArg "-Dfabric-api.datagen.output-dir=${file("src/generated/resources")}"
+            vmArg "-Dfabric-api.datagen.strict-validation"
+            vmArg "-Dfabric-api.datagen.modid=thonkutil-additional-capes-v1"
+            ideConfigGenerated = true
+            runDir "build/datagen"
+        }
+    }
+}

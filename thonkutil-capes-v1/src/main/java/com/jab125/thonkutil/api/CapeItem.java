@@ -1,6 +1,7 @@
 package com.jab125.thonkutil.api;
 
 import com.jab125.thonkutil.ThonkUtilCapes;
+import com.jab125.thonkutil.impl.TextureLoader;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.client.resource.language.I18n;
 import net.minecraft.item.Item;
@@ -24,9 +25,16 @@ import static com.jab125.thonkutil.util.Util.isModInstalled;
 public class CapeItem extends Item implements Wearable {
     private final boolean hasElytraTexture;
     private final boolean has2WingedElytra;
+    private boolean addToCreativeInventory = true;
 
     public CapeItem(Settings settings) {
         this(settings, true);
+    }
+
+    @SuppressWarnings("unused")
+    public CapeItem doNotAddToCreativeInventory() {
+        addToCreativeInventory = false;
+        return this;
     }
 
     public CapeItem(Settings settings, boolean hasElytraTexture, boolean has2WingedElytra) {
@@ -42,11 +50,15 @@ public class CapeItem extends Item implements Wearable {
     @Override
     public void appendStacks(ItemGroup group, DefaultedList<ItemStack> stacks) {
         super.appendStacks(group, stacks);
-        if (group.equals(ThonkUtilCapes.CAPES_GROUP) && !getRegistryId().equals("thonkutil:mojang_cape") && !getRegistryId().equals("thonkutil:mojang_classic_cape") && !getRegistryId().equals("thonkutil:mojang_studios_cape")) stacks.add(new ItemStack(this));
+        if (group.equals(ThonkUtilCapes.CAPES_GROUP) && !getRegistryId().equals("thonkutil:mojang_cape") && !getRegistryId().equals("thonkutil:mojang_classic_cape") && !getRegistryId().equals("thonkutil:mojang_studios_cape") && addToCreativeInventory) stacks.add(new ItemStack(this));
     }
 
     private String getRegistryId() {
         return Registry.ITEM.getId(this).toString();
+    }
+
+    public Identifier getRegistryIdAsIdentifier() {
+        return Registry.ITEM.getId(this);
     }
 
     public Identifier getCapeTexture() {
@@ -58,6 +70,13 @@ public class CapeItem extends Item implements Wearable {
     }
 
     public Identifier getElytraTexture() {
+        if (has2WingedElytra) {
+            TextureLoader.apply2WingedElytra(this);
+        }
+        return has2WingedElytra ? Identifier.tryParse(Registry.ITEM.getId(this).getNamespace() + ":textures/elytra/"+ Registry.ITEM.getId(this).getPath() + ".png") : getCapeTexture();
+    }
+
+    public Identifier getElytraTexture0() {
         return has2WingedElytra ? Identifier.tryParse(Registry.ITEM.getId(this).getNamespace() + ":textures/elytra/"+ Registry.ITEM.getId(this).getPath() + ".png") : getCapeTexture();
     }
 

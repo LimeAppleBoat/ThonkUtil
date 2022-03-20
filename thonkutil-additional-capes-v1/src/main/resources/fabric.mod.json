@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "id": "thonkutil-additional-capes-v1",
+  "version": "${version}",
+  "mixins": [
+    "thonkutil-additional-capes-v1.mixins.json"
+  ],
+  "name": "ThonkUtil Base",
+  "description": "Base Functionality of ThonkUtil, almost all the modules depend on this.",
+  "authors": [
+    "Jab125"
+  ],
+  "entrypoints": {
+    "main": [
+      "com.jab125.thonkutil.additionalcapes.v1.ThonkUtilAdditionalCapes"
+    ],
+    "client": [
+      "com.jab125.thonkutil.additionalcapes.v1.ThonkUtilAdditionalCapes"
+    ],
+    "_modmenu": [
+      "com.jab125.thonkutil.config.ThonkUtilModMenuCompat"
+    ],
+    "fabric-datagen": [
+      "com.jab125.thonkutil.additionalcapes.v1.datagen.AdditionalCapesDataGeneration"
+    ]
+  },
+  "license": "CC0-1.0",
+  "icon": "assets/thonkutil-additional-capes-v1/icon.png",
+  "environment": "*",
+  "custom": {
+    "loom:injected_interfaces": {
+    },
+    "modmenu": {
+      "parent": {
+        "id": "thonkutil",
+        "name": "ThonkUtil",
+        "description": "Some useful features that mod devs and regular users would like.",
+        "icon": "assets/thonkutil-additional-capes-v1/icon.png",
+        "badges": ["library"]
+      },
+      "badges": ["library"]
+    }
+  },
+  "accessWidener": "thonkutil-additional-capes-v1.accesswidener"
+}

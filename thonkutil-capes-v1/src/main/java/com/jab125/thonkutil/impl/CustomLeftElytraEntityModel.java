@@ -15,13 +15,13 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.Vec3d;
 
 @Environment(EnvType.CLIENT)
-public class CustomElytraEntityModel<T extends LivingEntity> extends AnimalModel<T> {
-    private final ModelPart rightWing;
+public class CustomLeftElytraEntityModel<T extends LivingEntity> extends AnimalModel<T> {
+    //private final ModelPart rightWing;
     private final ModelPart leftWing;
 
-    public CustomElytraEntityModel(ModelPart root) {
+    public CustomLeftElytraEntityModel(ModelPart root) {
         this.leftWing = root.getChild("left_wing");
-        this.rightWing = root.getChild("right_wing");
+        //this.rightWing = root.getChild("right_wing");
     }
 
     public static TexturedModelData getTexturedModelData() {
@@ -29,7 +29,7 @@ public class CustomElytraEntityModel<T extends LivingEntity> extends AnimalModel
         ModelPartData modelPartData = modelData.getRoot();
         Dilation dilation = new Dilation(1.0F);
         modelPartData.addChild("left_wing", ModelPartBuilder.create().uv(0, 0).cuboid(-10.0F, 0.0F, 0.0F, 10.0F, 20.0F, 2.0F, dilation), ModelTransform.of(5.0F, 0.0F, 0.0F, 0.2617994F, 0.0F, -0.2617994F));
-        modelPartData.addChild("right_wing", ModelPartBuilder.create().uv(24, 0).mirrored().cuboid(0.0F, 0.0F, 0.0F, 10.0F, 20.0F, 2.0F, dilation), ModelTransform.of(-5.0F, 0.0F, 0.0F, 0.2617994F, 0.0F, 0.2617994F));
+        //modelPartData.addChild("right_wing", ModelPartBuilder.create().uv(0, 0).mirrored().cuboid(0.0F, 0.0F, 0.0F, 10.0F, 20.0F, 2.0F, dilation), ModelTransform.of(-5.0F, 0.0F, 0.0F, 0.2617994F, 0.0F, 0.2617994F));
         return TexturedModelData.of(modelData, 64, 32);
     }
 
@@ -40,7 +40,7 @@ public class CustomElytraEntityModel<T extends LivingEntity> extends AnimalModel
 
     @Override
     protected Iterable<ModelPart> getBodyParts() {
-        return ImmutableList.of(this.leftWing, this.rightWing);
+        return ImmutableList.of(this.leftWing/*, this.rightWing*/);
     }
 
     @Override
@@ -81,9 +81,9 @@ public class CustomElytraEntityModel<T extends LivingEntity> extends AnimalModel
             this.leftWing.yaw = n;
         }
 
-        this.rightWing.yaw = -this.leftWing.yaw;
-        this.rightWing.pivotY = this.leftWing.pivotY;
-        this.rightWing.pitch = this.leftWing.pitch;
-        this.rightWing.roll = -this.leftWing.roll;
+        //this.rightWing.yaw = -this.leftWing.yaw;
+        //this.rightWing.pivotY = this.leftWing.pivotY;
+        //this.rightWing.pitch = this.leftWing.pitch;
+        //this.rightWing.roll = -this.leftWing.roll;
     }
 }
