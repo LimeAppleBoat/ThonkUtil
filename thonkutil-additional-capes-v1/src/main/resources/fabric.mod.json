@@ -5,8 +5,8 @@
   "mixins": [
     "thonkutil-additional-capes-v1.mixins.json"
   ],
-  "name": "ThonkUtil Base",
-  "description": "Base Functionality of ThonkUtil, almost all the modules depend on this.",
+  "name": "ThonkUtil Additional Capes",
+  "description": "Additional Capes for ThonkUtil.",
   "authors": [
     "Jab125"
   ],

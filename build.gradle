@@ -222,7 +222,7 @@ subprojects {
 }
 
 def dontInclude = [
-
+        "thonkutil-additional-capes-v1"
 ]
 def dontUse = [
         "thonkutil-unittests"
