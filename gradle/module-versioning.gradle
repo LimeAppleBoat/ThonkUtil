@@ -1,4 +1,3 @@
-
 /**
  * This task should be used to easily bump the major/minor/patch version of a ThonkUtil module.
  * It will automatically bump the versions of dependent modules.
@@ -93,7 +92,7 @@ class BumpVersionTask extends DefaultTask {
 
             def split = version.split("\\.")
             split[i] = (split[i] as Integer) + 1
-            for (j in (i + 1) ..< split.length) {
+            for (j in (i + 1)..<split.length) {
                 split[j] = 0
             }
             def newVersion = split.join(".")

@@ -3,22 +3,17 @@ package com.jab125.thonkutil.util;
 import com.jab125.thonkutil.ThonkUtilBaseClass;
 import dev.emi.trinkets.api.SlotReference;
 import dev.emi.trinkets.api.TrinketComponent;
-import dev.emi.trinkets.api.TrinketInventory;
-import dev.emi.trinkets.api.TrinketsApi;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
-import net.minecraft.util.registry.DefaultedRegistry;
 import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @SuppressWarnings("unused")
@@ -46,6 +41,7 @@ public class Util implements ThonkUtilBaseClass {
     public static boolean isOverflowInstalled() {
         return isModInstalled("overflow");
     }
+
     /**
      * @deprecated use {@link Util#isModInstalled(String)}
      */
@@ -53,23 +49,28 @@ public class Util implements ThonkUtilBaseClass {
     public static boolean isEnchantmentDisplaysInstalled() {
         return isModInstalled("enchantment-displays");
     }
+
     public static int secondsToTick(double seconds) {
         //System.out.println((int)seconds/60 + ", " + seconds%60);
         return (int) (seconds * 20);
     }
 
     public static int minutesToTick(double minutes, double seconds) {
-        return secondsToTick(minutes*60 + seconds);
+        return secondsToTick(minutes * 60 + seconds);
     }
+
     public static int minutesToTick(double minutes) {
-        return secondsToTick(minutes*60);
+        return secondsToTick(minutes * 60);
     }
+
     public static ItemStack toItemStack(ItemStack itemStack) {
         return itemStack;
     }
+
     public static ItemStack toItemStack(net.minecraft.item.Item item) {
         return new ItemStack(item);
     }
+
     public static ItemStack toItemStack(net.minecraft.item.Item item, int count) {
         return new ItemStack(item, count);
     }
@@ -99,10 +100,12 @@ public class Util implements ThonkUtilBaseClass {
     public static class JointBlockItem {
         private final net.minecraft.item.Item item;
         private final Block block;
+
         private JointBlockItem(net.minecraft.item.Item item, Block block) {
             this.item = item;
             this.block = block;
         }
+
         private static JointBlockItem register(Identifier identifier, Block block, net.minecraft.item.Item.Settings settings) {
             return new JointBlockItem(Registry.register(Registry.ITEM, identifier, new BlockItem(block, settings)), Registry.register(Registry.BLOCK, identifier, block));
         }

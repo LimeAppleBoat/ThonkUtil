@@ -101,7 +101,8 @@ public class ThonkUtilPotionConfigManager {
                     if (BooleanConfigOption.class.isAssignableFrom(field.getType())) {
                         BooleanConfigOption option = (BooleanConfigOption) field.get(null);
                         config.addProperty(field.getName().toLowerCase(Locale.ROOT), ConfigOptionStorage.getBoolean(option.getKey()));
-                    } if (SliderConfigOption.class.isAssignableFrom(field.getType())) {
+                    }
+                    if (SliderConfigOption.class.isAssignableFrom(field.getType())) {
                         SliderConfigOption option = (SliderConfigOption) field.get(null);
                         config.addProperty(field.getName().toLowerCase(Locale.ROOT), ConfigOptionStorage.getDouble(option.getKey()));
                     } else if (StringSetConfigOption.class.isAssignableFrom(field.getType())) {

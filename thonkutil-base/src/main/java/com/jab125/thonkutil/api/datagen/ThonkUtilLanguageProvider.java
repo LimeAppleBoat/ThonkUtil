@@ -2,7 +2,6 @@ package com.jab125.thonkutil.api.datagen;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.minecraft.block.Block;
 import net.minecraft.data.DataCache;
@@ -55,11 +54,9 @@ public abstract class ThonkUtilLanguageProvider implements DataProvider {
             System.out.println("Path: " + path);
         }
         String hash = SHA1.hashUnencodedChars(rawJson).toString();
-        if(!Objects.equals(cache.getOldSha1(path), hash) || !Files.exists(path))
-        {
+        if (!Objects.equals(cache.getOldSha1(path), hash) || !Files.exists(path)) {
             Files.createDirectories(path.getParent());
-            try(BufferedWriter writer = Files.newBufferedWriter(path))
-            {
+            try (BufferedWriter writer = Files.newBufferedWriter(path)) {
                 writer.write(rawJson);
             }
         }
@@ -140,7 +137,7 @@ public abstract class ThonkUtilLanguageProvider implements DataProvider {
             add(miscId + "." + id.split(":")[0] + "." + id.split(":")[1], translation);
             return;
         }
-        add(miscId + "." + fabricDataGenerator.getModId() + "." +  id, translation);
+        add(miscId + "." + fabricDataGenerator.getModId() + "." + id, translation);
     }
 
     private String getPotion0(Potion potion) {

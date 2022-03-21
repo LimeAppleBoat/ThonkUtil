@@ -9,8 +9,6 @@ import com.jab125.thonkutil.api.events.server.player.OnPlayerFatalDamageEvent;
 import com.jab125.thonkutil.api.events.server.world.ServerWorldLoadEvent;
 import com.jab125.thonkutil.api.events.server.world.ServerWorldUnloadEvent;
 import com.jab125.thonkutil.api.events.world.WorldTickEvent;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;

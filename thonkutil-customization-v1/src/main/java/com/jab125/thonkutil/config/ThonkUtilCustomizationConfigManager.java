@@ -21,7 +21,7 @@ public class ThonkUtilCustomizationConfigManager {
         if (file != null) {
             return;
         }
-        file = new File(FabricLoader.getInstance().getConfigDir().toFile(), ThonkUtil.MODID.CUSTOMIZATION_V1_MODID  + ".json");
+        file = new File(FabricLoader.getInstance().getConfigDir().toFile(), ThonkUtil.MODID.CUSTOMIZATION_V1_MODID + ".json");
     }
 
     public static void initializeConfig() {
@@ -101,7 +101,8 @@ public class ThonkUtilCustomizationConfigManager {
                     if (BooleanConfigOption.class.isAssignableFrom(field.getType())) {
                         BooleanConfigOption option = (BooleanConfigOption) field.get(null);
                         config.addProperty(field.getName().toLowerCase(Locale.ROOT), ConfigOptionStorage.getBoolean(option.getKey()));
-                    } if (SliderConfigOption.class.isAssignableFrom(field.getType())) {
+                    }
+                    if (SliderConfigOption.class.isAssignableFrom(field.getType())) {
                         SliderConfigOption option = (SliderConfigOption) field.get(null);
                         config.addProperty(field.getName().toLowerCase(Locale.ROOT), ConfigOptionStorage.getDouble(option.getKey()));
                     } else if (StringSetConfigOption.class.isAssignableFrom(field.getType())) {

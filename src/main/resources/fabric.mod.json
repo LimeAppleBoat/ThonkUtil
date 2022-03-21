@@ -2,7 +2,6 @@
   "schemaVersion": 1,
   "id": "thonkutil",
   "version": "${version}",
-
   "name": "ThonkUtil",
   "description": "Some useful features that mod devs and regular users would like.",
   "authors": [
@@ -14,10 +13,8 @@
     "sources": "https://github.com/Jab125/ThonkUtil",
     "issues": "https://github.com/Jab125/ThonkUtil/issues"
   },
-
   "license": "CC0-1.0",
   "icon": "assets/thonkutil/icon.png",
-
   "environment": "*",
   "depends": {
     "fabricloader": ">=0.12.8",
@@ -29,7 +26,9 @@
   },
   "custom": {
     "modmenu": {
-      "badges": ["library"]
+      "badges": [
+        "library"
+      ]
     }
   }
 }

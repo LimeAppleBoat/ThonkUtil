@@ -16,14 +16,14 @@ public class AdditionalCapeItems {
 
     public static void registerCapes() {
         for (Field cape : AdditionalCapeItems.class.getFields()) {
-             if (Modifier.isStatic(cape.getModifiers()) && cape.getType().isAssignableFrom(CapeItem.class)) {
-                 try {
-                     CapeItem capeItem = (CapeItem) cape.get(null);
-                     Registry.register(Registry.ITEM, new Identifier("thonkutil", cape.getName().toLowerCase()), capeItem);
-                 } catch (IllegalAccessException e) {
-                     e.printStackTrace();
-                 }
-             }
+            if (Modifier.isStatic(cape.getModifiers()) && cape.getType().isAssignableFrom(CapeItem.class)) {
+                try {
+                    CapeItem capeItem = (CapeItem) cape.get(null);
+                    Registry.register(Registry.ITEM, new Identifier("thonkutil", cape.getName().toLowerCase()), capeItem);
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 }

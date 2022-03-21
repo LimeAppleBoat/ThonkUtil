@@ -4,8 +4,6 @@ import com.jab125.thonkutil.api.Tick;
 import com.jab125.thonkutil.api.events.EventTaxiEvent;
 import net.minecraft.server.MinecraftServer;
 
-import java.util.Objects;
-
 public final class ServerTickEvent extends EventTaxiEvent {
     private final MinecraftServer server;
     private final Tick.Phase phase;

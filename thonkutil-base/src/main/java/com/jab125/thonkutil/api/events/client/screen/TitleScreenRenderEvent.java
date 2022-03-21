@@ -7,8 +7,6 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.TitleScreen;
 import net.minecraft.client.util.math.MatrixStack;
 
-import java.util.Objects;
-
 @Environment(EnvType.CLIENT)
 public final class TitleScreenRenderEvent extends EventTaxiEvent {
     private final Screen screen;

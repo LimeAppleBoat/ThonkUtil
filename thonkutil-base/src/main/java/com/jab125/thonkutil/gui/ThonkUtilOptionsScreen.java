@@ -9,7 +9,6 @@ import net.minecraft.client.gui.screen.option.GameOptionsScreen;
 import net.minecraft.client.gui.widget.ButtonListWidget;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.ClickableWidget;
-import net.minecraft.client.gui.widget.DoubleOptionSliderWidget;
 import net.minecraft.client.option.GameOptions;
 import net.minecraft.client.option.Option;
 import net.minecraft.client.util.math.MatrixStack;
@@ -53,7 +52,7 @@ public class ThonkUtilOptionsScreen extends GameOptionsScreen {
     }
 
     public void addSingle(Option[] options, ButtonListWidget widget) {
-        for(int i = 0; i < options.length; i += 2) {
+        for (int i = 0; i < options.length; i += 2) {
             widget.addSingleOptionEntry(options[i]);
         }
 

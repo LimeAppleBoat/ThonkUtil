@@ -49,7 +49,7 @@ public class ThonkUtilTradesOptionsScreen extends GameOptionsScreen {
     }
 
     public void addSingle(Option[] options, ButtonListWidget widget) {
-        for(int i = 0; i < options.length; i += 2) {
+        for (int i = 0; i < options.length; i += 2) {
             widget.addSingleOptionEntry(options[i]);
         }
 

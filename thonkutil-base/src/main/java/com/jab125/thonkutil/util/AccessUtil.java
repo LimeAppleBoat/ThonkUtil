@@ -1,9 +1,5 @@
 package com.jab125.thonkutil.util;
 
-import com.google.common.reflect.Reflection;
-
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Method;
 import java.util.Objects;
 
 public class AccessUtil {
@@ -14,13 +10,12 @@ public class AccessUtil {
     /**
      * if you can't use an accessor (because you want to be mixin-free} or an access widener (for some reason), use this.
      *
-     * @param classPath the path to the class, for example {@link AccessUtil this} class would be {@code com.jab125.thonkutil.util.AccessUtil}
+     * @param classPath  the path to the class, for example {@link AccessUtil this} class would be {@code com.jab125.thonkutil.util.AccessUtil}
      * @param methodName the name of the method, for this method it is {@code callMethod}
-     * @param params the parameters of the method, example: {@code new Object[]{"com.jab125.thonkutil.util.AccessUtil", "callMethod", etc..}}
-     *
+     * @param params     the parameters of the method, example: {@code new Object[]{"com.jab125.thonkutil.util.AccessUtil", "callMethod", etc..}}
      * @return the result, can be {@code null} if its return type is {@code void}
      */
-    public static Object callStaticMethod(String classPath, String methodName, Class<?>[]paramTypes, Object[] params) {
+    public static Object callStaticMethod(String classPath, String methodName, Class<?>[] paramTypes, Object[] params) {
         try {
             Class.forName(classPath).getDeclaredMethod(methodName, paramTypes).setAccessible(true);
             return Class.forName(classPath).getDeclaredMethod(methodName, paramTypes).invoke(null, params);

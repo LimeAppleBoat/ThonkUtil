@@ -5,6 +5,7 @@ import net.minecraft.server.MinecraftServer;
 
 public class ServerStartEvent extends EventTaxiEvent {
     private final MinecraftServer server;
+
     public ServerStartEvent(MinecraftServer server) {
         this.server = server;
     }

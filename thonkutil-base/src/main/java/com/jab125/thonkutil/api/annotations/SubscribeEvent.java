@@ -19,6 +19,7 @@ import java.lang.annotation.Target;
 /* this is the best name for it */
 public @interface SubscribeEvent {
     String target() default "";
+
     Priority priority() default Priority.DEFAULT;
 
     enum Priority {

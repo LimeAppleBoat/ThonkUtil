@@ -5,6 +5,7 @@ import net.minecraft.server.MinecraftServer;
 
 public class ServerStopEvent extends EventTaxiEvent {
     private final MinecraftServer server;
+
     public ServerStopEvent(MinecraftServer server) {
         this.server = server;
     }

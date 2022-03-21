@@ -15,6 +15,7 @@ public class TemperatureUtil {
         if (entity.getWorld().getDimension().isUltrawarm()) return 100;
         return getEntityBiome(entity).getTemperature() * 30;
     }
+
     private static Biome getEntityBiome(Entity entity) {
         //i know it works on client, but eh
         if (entity.world.isClient) throw new RuntimeException("RUN ON SERVER");

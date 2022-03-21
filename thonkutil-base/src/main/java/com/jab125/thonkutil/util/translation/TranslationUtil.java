@@ -12,6 +12,7 @@ public class TranslationUtil implements ThonkUtilBaseClass {
     private TranslationUtil() {
         throw new RuntimeException("This Util class is not allowed to be instantiated!");
     }
+
     public static Text translateNumeric(String key, int[]... args) {
         Object[] realArgs = new Object[args.length];
         for (int i = 0; i < args.length; i++) {

@@ -9,6 +9,7 @@ public class OnPlayerFatalDamageEvent extends EventTaxiBooleanReturnableEvent {
     private final DamageSource damageSource;
     private boolean allowDeath = true;
     private final float damageAmount;
+
     public OnPlayerFatalDamageEvent(ServerPlayerEntity player, DamageSource damageSource, float damageAmount) {
         this.damageAmount = damageAmount;
         this.player = player;

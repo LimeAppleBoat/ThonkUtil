@@ -12,6 +12,7 @@ public class ScreenEvent extends EventTaxiEvent {
     private final MinecraftClient client;
     private final int scaledWidth;
     private final int scaledHeight;
+
     public ScreenEvent(Screen screen, MinecraftClient client, int scaledWidth, int scaledHeight) {
         this.client = client;
         this.screen = screen;

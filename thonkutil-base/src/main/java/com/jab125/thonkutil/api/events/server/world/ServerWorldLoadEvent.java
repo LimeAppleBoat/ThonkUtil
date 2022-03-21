@@ -7,6 +7,7 @@ import net.minecraft.server.world.ServerWorld;
 public class ServerWorldLoadEvent extends EventTaxiEvent {
     private final MinecraftServer server;
     private final ServerWorld world;
+
     public ServerWorldLoadEvent(MinecraftServer server, ServerWorld world) {
         this.server = server;
         this.world = world;

@@ -2,7 +2,6 @@
   "schemaVersion": 1,
   "id": "thonkutil-capes-v1",
   "version": "${version}",
-
   "name": "ThonkUtil Capes (v1)",
   "description": "Allows adding cape items",
   "authors": [
@@ -29,9 +28,13 @@
         "name": "ThonkUtil",
         "description": "Some useful features that mod devs and regular users would like.",
         "icon": "assets/thonkutil-capes-v1/icon.png",
-        "badges": ["library"]
+        "badges": [
+          "library"
+        ]
       },
-      "badges": ["library"]
+      "badges": [
+        "library"
+      ]
     }
   },
   "accessWidener": "thonkutil-capes-v1.accesswidener"

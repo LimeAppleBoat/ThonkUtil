@@ -18,8 +18,8 @@ public abstract class PlayerEntityMixin<T extends LivingEntity, M extends Entity
     @Inject(method = "<init>", at = @At("TAIL"))
     @SuppressWarnings("unchecked")
     public void initInject(EntityRendererFactory.Context ctx, boolean slim, CallbackInfo ci) {
-        ((LivingEntityRendererAccessor) (Object)this).callAddFeature(new ItemCapeRenderer((PlayerEntityRenderer)(Object)this, ctx.getModelLoader()));
-        ((LivingEntityRendererAccessor) (Object)this).callAddFeature(new ItemElytraRenderer((PlayerEntityRenderer)(Object)this, ctx.getModelLoader()));
-        ((LivingEntityRendererAccessor) (Object)this).callAddFeature(new TwoWingedItemElytraRenderer((PlayerEntityRenderer)(Object)this, ctx.getModelLoader()));
+        ((LivingEntityRendererAccessor) (Object) this).callAddFeature(new ItemCapeRenderer((PlayerEntityRenderer) (Object) this, ctx.getModelLoader()));
+        ((LivingEntityRendererAccessor) (Object) this).callAddFeature(new ItemElytraRenderer((PlayerEntityRenderer) (Object) this, ctx.getModelLoader()));
+        ((LivingEntityRendererAccessor) (Object) this).callAddFeature(new TwoWingedItemElytraRenderer((PlayerEntityRenderer) (Object) this, ctx.getModelLoader()));
     }
 }

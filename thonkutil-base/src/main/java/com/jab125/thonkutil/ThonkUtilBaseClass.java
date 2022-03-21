@@ -4,5 +4,7 @@ public interface ThonkUtilBaseClass extends ThonkUtilClass {
     @Override
     default String modId() {
         return "thonkutil-base";
-    };
+    }
+
+    ;
 }

@@ -26,10 +26,18 @@
   "environment": "*",
   "custom": {
     "loom:injected_interfaces": {
-      "net/minecraft/class_1792": ["com/jab125/thonkutil/impl/RegistryUtil"],
-      "net/minecraft/class_2248": ["com/jab125/thonkutil/impl/RegistryUtil"],
-      "net/minecraft/class_1297": ["com/jab125/thonkutil/impl/RegistryUtil"],
-      "net/minecraft/class_1291": ["com/jab125/thonkutil/impl/RegistryUtil"]
+      "net/minecraft/class_1792": [
+        "com/jab125/thonkutil/impl/RegistryUtil"
+      ],
+      "net/minecraft/class_2248": [
+        "com/jab125/thonkutil/impl/RegistryUtil"
+      ],
+      "net/minecraft/class_1297": [
+        "com/jab125/thonkutil/impl/RegistryUtil"
+      ],
+      "net/minecraft/class_1291": [
+        "com/jab125/thonkutil/impl/RegistryUtil"
+      ]
     },
     "modmenu": {
       "parent": {
@@ -37,9 +45,13 @@
         "name": "ThonkUtil",
         "description": "Some useful features that mod devs and regular users would like.",
         "icon": "assets/thonkutil-base/icon.png",
-        "badges": ["library"]
+        "badges": [
+          "library"
+        ]
       },
-      "badges": ["library"]
+      "badges": [
+        "library"
+      ]
     }
   },
   "accessWidener": "thonkutil-base.accesswidener"

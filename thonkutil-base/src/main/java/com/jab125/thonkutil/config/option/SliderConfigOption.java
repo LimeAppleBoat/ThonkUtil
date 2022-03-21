@@ -31,7 +31,8 @@ public class SliderConfigOption implements OptionConvertable, ThonkUtilBaseClass
     }
 
     protected static Text getValueText(SliderConfigOption option, double value) {
-        if (((float)(int) option.step) - option.step == 0) return new TranslatableText(option.translationKey, (int)value);
+        if (((float) (int) option.step) - option.step == 0)
+            return new TranslatableText(option.translationKey, (int) value);
         return new TranslatableText(option.translationKey, value);
     }
 

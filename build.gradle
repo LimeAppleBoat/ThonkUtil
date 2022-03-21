@@ -1,311 +1,310 @@
 import net.fabricmc.loom.task.RemapJarTask
 import org.apache.commons.codec.digest.DigestUtils
+import org.kohsuke.github.GHReleaseBuilder
 
 buildscript {
-	dependencies {
-		classpath 'org.kohsuke:github-api:1.135'
-		classpath 'commons-codec:commons-codec:1.6'
-	}
+    dependencies {
+        classpath 'org.kohsuke:github-api:1.135'
+        classpath 'commons-codec:commons-codec:1.6'
+    }
 }
 plugins {
-	id 'fabric-loom' version '0.11-SNAPSHOT'
-	id 'maven-publish'
-	id "com.matthewprenger.cursegradle" version "1.4.0"
-	id "org.ajoberstar.grgit" version "3.1.0"
+    id 'fabric-loom' version '0.11-SNAPSHOT'
+    id 'maven-publish'
+    id "com.matthewprenger.cursegradle" version "1.4.0"
+    id "org.ajoberstar.grgit" version "3.1.0"
 }
 def ENV = System.getenv()
 version = project.properties["thonkutil-version"] + "+" + (ENV.GITHUB_RUN_NUMBER ? "" : "local-") + getBranch();
+
 def moduleDependencies(project, List<String> depNames) {
-	def deps = depNames.iterator().collect { project.dependencies.project(path: ":$it", configuration: 'namedElements') }
-	project.dependencies {
-		deps.each {
-			api it
-		}
-	}
+    def deps = depNames.iterator().collect { project.dependencies.project(path: ":$it", configuration: 'namedElements') }
+    project.dependencies {
+        deps.each {
+            api it
+        }
+    }
 }
 
 def getBranch() {
-	def ENV = System.getenv()
-	if (ENV.GITHUB_REF) {
-		def branch = ENV.GITHUB_REF
-		return branch.substring(branch.lastIndexOf("/") + 1)
-	}
+    def ENV = System.getenv()
+    if (ENV.GITHUB_REF) {
+        def branch = ENV.GITHUB_REF
+        return branch.substring(branch.lastIndexOf("/") + 1)
+    }
 
-	if (grgit == null) {
-		return "unknown"
-	}
+    if (grgit == null) {
+        return "unknown"
+    }
 
-	def branch = grgit.branch.current().name
-	return branch.substring(branch.lastIndexOf("/") + 1)
+    def branch = grgit.branch.current().name
+    return branch.substring(branch.lastIndexOf("/") + 1)
 }
 
 
-import org.kohsuke.github.GHReleaseBuilder;
+import org.kohsuke.github.GitHub;
 
 def getSubprojectVersion(project) {
-	// Get the version from the gradle.properties file
-	def version = project.properties["${project.name}-version"]
+    // Get the version from the gradle.properties file
+    def version = project.properties["${project.name}-version"]
 
-	if (!version) {
-		throw new NullPointerException("Could not find version for " + project.name)
-	}
+    if (!version) {
+        throw new NullPointerException("Could not find version for " + project.name)
+    }
 
-	if (grgit == null) {
-		return version + "+nogit"
-	}
+    if (grgit == null) {
+        return version + "+nogit"
+    }
 
-	def latestCommits = grgit.log(paths: [project.name], maxCommits: 1)
+    def latestCommits = grgit.log(paths: [project.name], maxCommits: 1)
 
-	if (latestCommits.isEmpty()) {
-		return version + "+uncommited"
-	}
+    if (latestCommits.isEmpty()) {
+        return version + "+uncommited"
+    }
 
-	return version + "+" + latestCommits.get(0).id.substring(0, 8) + DigestUtils.sha256Hex(project.rootProject.minecraft_version).substring(0, 2)
+    return version + "+" + latestCommits.get(0).id.substring(0, 8) + DigestUtils.sha256Hex(project.rootProject.minecraft_version).substring(0, 2)
 }
 
 def getAddon(project) {
-	// Get the version from the gradle.properties file
+    // Get the version from the gradle.properties file
 
 
-	if (grgit == null) {
-		return "+nogit"
-	}
+    if (grgit == null) {
+        return "+nogit"
+    }
 
-	def latestCommits = grgit.log(paths: [project.name], maxCommits: 1)
+    def latestCommits = grgit.log(paths: [project.name], maxCommits: 1)
 
-	if (latestCommits.isEmpty()) {
-		return "+uncommited"
-	}
+    if (latestCommits.isEmpty()) {
+        return "+uncommited"
+    }
 
-	return "+" + latestCommits.get(0).id.substring(0, 8) + DigestUtils.sha256Hex(project.rootProject.minecraft_version).substring(0, 2)
+    return "+" + latestCommits.get(0).id.substring(0, 8) + DigestUtils.sha256Hex(project.rootProject.minecraft_version).substring(0, 2)
 }
 
 
 allprojects {
-	apply plugin: 'fabric-loom'
+    apply plugin: 'fabric-loom'
 
-	sourceCompatibility = JavaVersion.VERSION_17
-	targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 
-	archivesBaseName = project.archives_base_name
-	//version = project.mod_version
-	group = project.maven_group
+    archivesBaseName = project.archives_base_name
+    //version = project.mod_version
+    group = project.maven_group
 
-	repositories {
-		maven { url "https://maven.terraformersmc.com/releases" }
-		maven {
-			name = "Ladysnake Libs"
-			url = "https://ladysnake.jfrog.io/artifactory/mods"
-		}
-		maven { url 'https://jitpack.io' }
-		maven {
-			url "https://cursemaven.com"
-		}
-		// Add repositories to retrieve artifacts from in here.
-		// You should only use this when depending on other mods because
-		// Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
-		// See https://docs.gradle.org/current/userguide/declaring_repositories.html
-		// for more information about repositories.
-	}
+    repositories {
+        maven { url "https://maven.terraformersmc.com/releases" }
+        maven {
+            name = "Ladysnake Libs"
+            url = "https://ladysnake.jfrog.io/artifactory/mods"
+        }
+        maven { url 'https://jitpack.io' }
+        maven {
+            url "https://cursemaven.com"
+        }
+        // Add repositories to retrieve artifacts from in here.
+        // You should only use this when depending on other mods because
+        // Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
+        // See https://docs.gradle.org/current/userguide/declaring_repositories.html
+        // for more information about repositories.
+    }
 
-	loom {
-		shareRemapCaches = true
-	}
+    loom {
+        shareRemapCaches = true
+    }
 
 
-	dependencies {
-		// To change the versions see the gradle.properties file
-		minecraft "com.mojang:minecraft:${project.minecraft_version}"
-		mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
-		modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    dependencies {
+        // To change the versions see the gradle.properties file
+        minecraft "com.mojang:minecraft:${project.minecraft_version}"
+        mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+        modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
-		// Fabric API. This is technically optional, but you probably want it anyway.
-		modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+        // Fabric API. This is technically optional, but you probably want it anyway.
+        modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-		modImplementation "com.terraformersmc:modmenu:3.0.0", {
-			exclude module: "fabric-api"
-		}
+        modImplementation "com.terraformersmc:modmenu:3.0.0", {
+            exclude module: "fabric-api"
+        }
 
-		modImplementation "dev.emi:trinkets:3.3.0"
-		// PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
-		// You may need to force-disable transitiveness on them.
-	}
+        modImplementation "dev.emi:trinkets:3.3.0"
+        // PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
+        // You may need to force-disable transitiveness on them.
+    }
 
-	afterEvaluate {
-		artifacts {
-			dev file: file("${project.buildDir}/libs/$archivesBaseName-${version}-dev.jar"), type: "jar", builtBy: jar
-		}
-	}
+    afterEvaluate {
+        artifacts {
+            dev file: file("${project.buildDir}/libs/$archivesBaseName-${version}-dev.jar"), type: "jar", builtBy: jar
+        }
+    }
 
-	repositories {
-		mavenLocal()
-	}
+    repositories {
+        mavenLocal()
+    }
 
-	configurations {
-		dev
-	}
+    configurations {
+        dev
+    }
 
-	processResources {
-		inputs.property "version", project.version
+    processResources {
+        inputs.property "version", project.version
 
-		filesMatching("fabric.mod.json") {
-			expand "version": project.version
-		}
-	}
+        filesMatching("fabric.mod.json") {
+            expand "version": project.version
+        }
+    }
 
-	tasks.withType(JavaCompile).configureEach {
-		// ensure that the encoding is set to UTF-8, no matter what the system default is
-		// this fixes some edge cases with special characters not displaying correctly
-		// see http://yodaconditions.net/blog/fix-for-java-file-encoding-problems-with-gradle.html
-		// If Javadoc is generated, this must be specified in that task too.
-		it.options.encoding = "UTF-8"
+    tasks.withType(JavaCompile).configureEach {
+        // ensure that the encoding is set to UTF-8, no matter what the system default is
+        // this fixes some edge cases with special characters not displaying correctly
+        // see http://yodaconditions.net/blog/fix-for-java-file-encoding-problems-with-gradle.html
+        // If Javadoc is generated, this must be specified in that task too.
+        it.options.encoding = "UTF-8"
 
-		// Minecraft 1.17 (21w19a) upwards uses Java 17.
-		it.options.release = 17
-	}
+        // Minecraft 1.17 (21w19a) upwards uses Java 17.
+        it.options.release = 17
+    }
 
-	java {
-		// Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
-		// if it is present.
-		// If you remove this line, sources will not be generated.
-		withSourcesJar()
-	}
-	jar {
-		from("LICENSE") {
-			rename { "${it}_${project.archivesBaseName}" }
-		}
-	}
+    java {
+        // Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
+        // if it is present.
+        // If you remove this line, sources will not be generated.
+        withSourcesJar()
+    }
+    jar {
+        from("LICENSE") {
+            rename { "${it}_${project.archivesBaseName}" }
+        }
+    }
 
-	task remapMavenJar(type: RemapJarTask, dependsOn: remapJar) {
-		input = jar.archiveFile
-		archiveFileName = "${archivesBaseName}-${project.version}-maven.jar"
-		addNestedDependencies = false
-	}
-	build.dependsOn remapMavenJar
+    task remapMavenJar(type: RemapJarTask, dependsOn: remapJar) {
+        input = jar.archiveFile
+        archiveFileName = "${archivesBaseName}-${project.version}-maven.jar"
+        addNestedDependencies = false
+    }
+    build.dependsOn remapMavenJar
 
 // configure the maven publication
-	publishing {
-		publications {
-			mavenJava(MavenPublication) {
-				// add all the jars that should be included when publishing to maven
-				artifact(remapJar) {
-					builtBy remapJar
-				}
-				artifact(sourcesJar) {
-					builtBy remapSourcesJar
-				}
-			}
-		}
+    publishing {
+        publications {
+            mavenJava(MavenPublication) {
+                // add all the jars that should be included when publishing to maven
+                artifact(remapJar) {
+                    builtBy remapJar
+                }
+                artifact(sourcesJar) {
+                    builtBy remapSourcesJar
+                }
+            }
+        }
 
-		// See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
-		repositories {
-			// Add repositories to publish to here.
-			// Notice: This block does NOT have the same function as the block in the top level.
-			// The repositories here will be used for publishing your artifact, not for
-			// retrieving dependencies.
-		}
-	}
+        // See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
+        repositories {
+            // Add repositories to publish to here.
+            // Notice: This block does NOT have the same function as the block in the top level.
+            // The repositories here will be used for publishing your artifact, not for
+            // retrieving dependencies.
+        }
+    }
 }
 
 subprojects.each { remapJar.dependsOn("${it.path}:remapJar") }
 
 
 subprojects {
-	runClient {
-		enabled = false
-	}
-	runServer {
-		enabled = false
-	}
+    runClient {
+        enabled = false
+    }
+    runServer {
+        enabled = false
+    }
 }
 
 def dontInclude = [
 
 ]
 def dontUse = [
-		"thonkutil-unittests"
+        "thonkutil-unittests"
 ]
 
 dependencies {
-	afterEvaluate {
-		subprojects.each {
-			if (!(it.name in dontUse)) {
-				api project(path: ":${it.name}", configuration: "namedElements")
+    afterEvaluate {
+        subprojects.each {
+            if (!(it.name in dontUse)) {
+                api project(path: ":${it.name}", configuration: "namedElements")
 
-				if (!(it.name in dontInclude)) {
-					include project("${it.name}:")
-				}
-			}
+                if (!(it.name in dontInclude)) {
+                    include project("${it.name}:")
+                }
+            }
 
-			//testmodImplementation project("${it.name}:").sourceSets.testmod.output
-		}
-	}
+            //testmodImplementation project("${it.name}:").sourceSets.testmod.output
+        }
+    }
 }
 
 tasks.withType(Jar).configureEach {
-	manifest {
-		attributes 'Implementation-Title': 'ThonkUtil',
-				'Implementation-Version': project.version,
-				'Main-Class': 'com.jab125.thonkutil.Main'
-	}
+    manifest {
+        attributes 'Implementation-Title': 'ThonkUtil',
+                'Implementation-Version': project.version,
+                'Main-Class': 'com.jab125.thonkutil.Main'
+    }
 }
 
 curseforge {
-	if (ENV.CURSEFORGE_API_KEY) {
-		apiKey = ENV.CURSEFORGE_API_KEY
-		if (project.prerelease == "pre-alpha") return
-	}
+    if (ENV.CURSEFORGE_API_KEY) {
+        apiKey = ENV.CURSEFORGE_API_KEY
+        if (project.prerelease == "pre-alpha") return
+    }
 
-	project {
-		id = "536648"
-		changelog = ENV.CHANGELOG ?: "No changelog provided"
-		releaseType = project.prerelease == "true" ? "beta" : project.prerelease == "alpha" ? "alpha" : "release"
-		addGameVersion "1.18.2"
-		addGameVersion "1.18-Snapshot"
-		addGameVersion "Fabric"
-		addGameVersion "Java 17"
+    project {
+        id = "536648"
+        changelog = ENV.CHANGELOG ?: "No changelog provided"
+        releaseType = project.prerelease == "true" ? "beta" : project.prerelease == "alpha" ? "alpha" : "release"
+        addGameVersion "1.18.2"
+        addGameVersion "1.18-Snapshot"
+        addGameVersion "Fabric"
+        addGameVersion "Java 17"
 
-		mainArtifact(remapJar) {
-			displayName = "[$project.minecraft_version] ThonkUtil $project.version"
-			relations {
-				requiredDependency 'fabric-api'
-				optionalDependency 'trinkets-fabric'
-			}
-		}
+        mainArtifact(remapJar) {
+            displayName = "[$project.minecraft_version] ThonkUtil $project.version"
+            relations {
+                requiredDependency 'fabric-api'
+                optionalDependency 'trinkets-fabric'
+            }
+        }
 
-		afterEvaluate {
-			uploadTask.dependsOn("remapJar")
-		}
-	}
+        afterEvaluate {
+            uploadTask.dependsOn("remapJar")
+        }
+    }
 
-	options {
-		forgeGradleIntegration = false
-		debug = ENV.GITHUB_RUN_NUMBER ? false : true
-	}
+    options {
+        forgeGradleIntegration = false
+        debug = ENV.GITHUB_RUN_NUMBER ? false : true
+    }
 }
 
-
-import org.kohsuke.github.GitHub
-
 task github(dependsOn: remapMavenJar) {
-	onlyIf {
-		ENV.GITHUB_TOKEN
-		project.prerelease != "pre-alpha"
-	}
+    onlyIf {
+        ENV.GITHUB_TOKEN
+        project.prerelease != "pre-alpha"
+    }
 
-	doLast {
-		def github = GitHub.connectUsingOAuth(ENV.GITHUB_TOKEN as String)
-		def repository = github.getRepository(ENV.GITHUB_REPOSITORY)
+    doLast {
+        def github = GitHub.connectUsingOAuth(ENV.GITHUB_TOKEN as String)
+        def repository = github.getRepository(ENV.GITHUB_REPOSITORY)
 
-		def releaseBuilder = new GHReleaseBuilder(repository, version as String)
-		releaseBuilder.name("[$project.minecraft_version] ThonkUtil $project.version")
-		releaseBuilder.body(ENV.CHANGELOG ?: "No changelog provided")
-		releaseBuilder.commitish(getBranch())
-		releaseBuilder.prerelease(project.prerelease == "true" || project.prerelease == "alpha")
+        def releaseBuilder = new GHReleaseBuilder(repository, version as String)
+        releaseBuilder.name("[$project.minecraft_version] ThonkUtil $project.version")
+        releaseBuilder.body(ENV.CHANGELOG ?: "No changelog provided")
+        releaseBuilder.commitish(getBranch())
+        releaseBuilder.prerelease(project.prerelease == "true" || project.prerelease == "alpha")
 
-		def ghRelease = releaseBuilder.create()
-		ghRelease.uploadAsset(file("${project.buildDir}/libs/${archivesBaseName}-${version}.jar"), "application/java-archive");
-	}
+        def ghRelease = releaseBuilder.create()
+        ghRelease.uploadAsset(file("${project.buildDir}/libs/${archivesBaseName}-${version}.jar"), "application/java-archive");
+    }
 }
 
 apply from: "gradle/module-versioning.gradle"

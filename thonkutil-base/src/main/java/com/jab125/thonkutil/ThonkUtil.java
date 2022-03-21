@@ -4,39 +4,23 @@ import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.jab125.thonkutil.api.annotations.SubscribeEvent;
-import com.jab125.thonkutil.api.events.*;
+import com.jab125.thonkutil.api.events.EventTaxi;
 import com.jab125.thonkutil.api.events.client.EventTaxiClient;
 import com.jab125.thonkutil.api.events.client.screen.TitleScreenRenderEvent;
 import com.jab125.thonkutil.api.events.server.entity.TotemUseEvent;
-import com.jab125.thonkutil.api.item.PotionableItem;
-import com.jab125.thonkutil.util.AccessUtil;
 import net.fabricmc.api.*;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;
-import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
-import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.block.Blocks;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;
-import net.minecraft.client.gui.screen.TitleScreen;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.util.Locale;
-
-import static com.jab125.thonkutil.api.events.EventTaxi.registerEventTaxiSubscriber;
 
 @EnvironmentInterface(value = EnvType.CLIENT, itf = ClientModInitializer.class)
 public class ThonkUtil implements ThonkUtilBaseClass, ModInitializer, ClientModInitializer {
@@ -67,16 +51,19 @@ public class ThonkUtil implements ThonkUtilBaseClass, ModInitializer, ClientModI
         private final String id;
         private final Formatting formatting;
         private final String translationKeyDesc;
+
         State(String id, Formatting formatting) {
             this.id = id;
             this.formatting = formatting;
             this.translationKeyDesc = "thonkutil.warning.2";
         }
+
         State(String id, Formatting formatting, String translationKeyDesc) {
             this.id = id;
             this.formatting = formatting;
             this.translationKeyDesc = translationKeyDesc;
         }
+
         @Override
         public String toString() {
             return id;

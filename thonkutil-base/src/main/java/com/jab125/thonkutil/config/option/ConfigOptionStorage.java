@@ -35,6 +35,7 @@ public class ConfigOptionStorage implements ThonkUtilBaseClass {
     public static double getDouble(String key) {
         return DOUBLE_OPTIONS.get(key);
     }
+
     public static boolean containsDouble(String key) {
         return DOUBLE_OPTIONS.containsKey(key);
     }

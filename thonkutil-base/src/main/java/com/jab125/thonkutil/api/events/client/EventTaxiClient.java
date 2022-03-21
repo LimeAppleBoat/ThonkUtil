@@ -25,7 +25,7 @@ public class EventTaxiClient {
             if (screen instanceof TitleScreen titleScreen) {
                 EventTaxi.executeEventTaxi(new TitleScreenEvent(screen, client, scaledWidth, scaledHeight));
                 ScreenEvents.afterRender(screen).register(((screen1, matrices, mouseX, mouseY, tickDelta) -> {
-                    float f = titleScreen.doBackgroundFade ? (float)(Util.getMeasuringTimeMs() - titleScreen.backgroundFadeStart) / 1000.0F : 1.0F;
+                    float f = titleScreen.doBackgroundFade ? (float) (Util.getMeasuringTimeMs() - titleScreen.backgroundFadeStart) / 1000.0F : 1.0F;
                     float g = titleScreen.doBackgroundFade ? MathHelper.clamp(f - 1.0F, 0.0F, 1.0F) : 1.0F;
                     int l = MathHelper.ceil(g * 255.0F) << 24;
                     if ((l & -67108864) != 0) {
