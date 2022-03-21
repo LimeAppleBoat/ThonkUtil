@@ -31,6 +31,12 @@ public class AnimatedCapeItem extends CapeItem {
         this.setNextFrameTime(delay);
     }
 
+    @Override
+    public AnimatedCapeItem doNotAddToCreativeInventory() {
+        super.doNotAddToCreativeInventory();
+        return this;
+    }
+
     public AnimatedCapeItem(Settings settings, int frames, int delay, boolean hasElytraTexture) {
         this(settings, frames, delay, hasElytraTexture, false);
     }

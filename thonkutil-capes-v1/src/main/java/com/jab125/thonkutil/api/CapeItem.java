@@ -25,7 +25,16 @@ import static com.jab125.thonkutil.util.Util.isModInstalled;
 public class CapeItem extends Item implements Wearable {
     private final boolean hasElytraTexture;
     private final boolean has2WingedElytra;
+    private final Item.Settings settings;
     private boolean addToCreativeInventory = true;
+
+    private CapeItem(CapeItem cape) {
+        super(cape.settings);
+        this.settings = cape.settings;
+        this.has2WingedElytra = cape.has2WingedElytra;
+        this.hasElytraTexture = cape.hasElytraTexture;
+        this.addToCreativeInventory = cape.addToCreativeInventory;
+    }
 
     public CapeItem(Settings settings) {
         this(settings, true);
@@ -39,6 +48,7 @@ public class CapeItem extends Item implements Wearable {
 
     public CapeItem(Settings settings, boolean hasElytraTexture, boolean has2WingedElytra) {
         super(settings.maxCount(1));
+        this.settings = settings;
         this.hasElytraTexture = hasElytraTexture;
         this.has2WingedElytra = has2WingedElytra;
     }
@@ -69,13 +79,16 @@ public class CapeItem extends Item implements Wearable {
         return hasElytraTexture;
     }
 
+    private boolean hasAppliedElytraTexture = false;
     public Identifier getElytraTexture() {
-        if (has2WingedElytra) {
+        if (has2WingedElytra && hasAppliedElytraTexture) {
             TextureLoader.apply2WingedElytra(this);
+            hasAppliedElytraTexture = true;
         }
         return has2WingedElytra ? Identifier.tryParse(Registry.ITEM.getId(this).getNamespace() + ":textures/elytra/"+ Registry.ITEM.getId(this).getPath() + ".png") : getCapeTexture();
     }
 
+    @Deprecated
     public Identifier getElytraTexture0() {
         return has2WingedElytra ? Identifier.tryParse(Registry.ITEM.getId(this).getNamespace() + ":textures/elytra/"+ Registry.ITEM.getId(this).getPath() + ".png") : getCapeTexture();
     }

@@ -77,7 +77,7 @@ public class TextureLoader {
     private static void loadFramesToResource(Int2ObjectMap<NativeImage> cape, String itemId) {
         cape.forEach((integer, nativeImage) -> {
             Identifier identifier = new Identifier("thonkutil", String.format("capes/%s/%d", itemId, integer));
-            System.out.println(identifier);
+            //System.out.println(identifier);
             TextureLoader.applyTexture(identifier, nativeImage);
         });
     }
@@ -85,7 +85,7 @@ public class TextureLoader {
     private static void loadElytraFramesToResource(Int2ObjectMap<NativeImage> cape, String itemId) {
         cape.forEach((integer, nativeImage) -> {
             Identifier identifier = new Identifier("thonkutil", String.format("elytra/%s/%d", itemId, integer));
-            System.out.println(identifier);
+            //System.out.println(identifier);
             TextureLoader.applyTexture(identifier, nativeImage);
         });
     }
