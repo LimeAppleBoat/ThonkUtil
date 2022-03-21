@@ -6,7 +6,9 @@
   "mixins": [
     "BlockMixin",
     "EntityMixin",
-    "ItemMixin"
+    "ItemMixin",
+    "PotionMixin",
+    "StatusEffectMixin"
   ],
   "client": [
   ],
