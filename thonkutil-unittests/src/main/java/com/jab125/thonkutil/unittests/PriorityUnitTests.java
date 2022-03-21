@@ -25,5 +25,6 @@ public class PriorityUnitTests {
         System.out.println(3);
     }
 
-    public static class PriorityEvent extends EventTaxiEvent {}
+    public static class PriorityEvent extends EventTaxiEvent {
+    }
 }

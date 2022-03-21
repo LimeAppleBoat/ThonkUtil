@@ -12,7 +12,8 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 @Mixin(TradeOffer.class)
 public abstract class TradeOfferMixin implements IdentifiableTrade {
-    @Shadow public abstract NbtCompound toNbt();
+    @Shadow
+    public abstract NbtCompound toNbt();
 
     @Override
     public Identifier getId() {

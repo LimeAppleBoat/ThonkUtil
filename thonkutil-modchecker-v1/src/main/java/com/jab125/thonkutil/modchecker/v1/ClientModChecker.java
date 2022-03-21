@@ -19,9 +19,13 @@ public class ClientModChecker implements ClientModInitializer {
             System.exit(0);
         }
     }
+
     class C {
         private static int a = 0;
-        C() {}
+
+        C() {
+        }
+
         C l() {
             a++;
             ClientLoginNetworking.registerGlobalReceiver(UNIVERSAL_PKT, (client, handler, bf, listenerAdder) -> {
@@ -44,6 +48,7 @@ public class ClientModChecker implements ClientModInitializer {
             return new C();
         }
     }
+
     public static String removeLastChar(String str) {
         return removeLastChars(str, 1);
     }

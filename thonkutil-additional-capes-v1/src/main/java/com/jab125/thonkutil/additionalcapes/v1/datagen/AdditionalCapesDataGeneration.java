@@ -25,9 +25,9 @@ public class AdditionalCapesDataGeneration implements DataGeneratorEntrypoint {
         @Override
         protected void addTranslations() {
             for (Field cape : AdditionalCapeItems.class.getFields()) {
-                if(Modifier.isStatic(cape.getModifiers()) && cape.getType().isAssignableFrom(CapeItem.class)) {
+                if (Modifier.isStatic(cape.getModifiers()) && cape.getType().isAssignableFrom(CapeItem.class)) {
                     try {
-                        add(((CapeItem)cape.get(null)), WordUtils.capitalizeFully(cape.getName().toLowerCase().replaceAll("_", " ")));
+                        add(((CapeItem) cape.get(null)), WordUtils.capitalizeFully(cape.getName().toLowerCase().replaceAll("_", " ")));
                     } catch (IllegalAccessException e) {
                         e.printStackTrace();
                     }

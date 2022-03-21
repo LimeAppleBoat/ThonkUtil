@@ -12,6 +12,7 @@ public class BrewingRecipeRegistry {
     public static void registerPotionRecipe(Potion input, Item ingredient, Potion output) {
         BrewingHelper.registerPotionRecipe(input, ingredient, output);
     }
+
     public static void registerItemRecipe(Item input, Item ingredient, Item output) {
         BrewingHelper.registerItemRecipe(input, ingredient, output);
     }

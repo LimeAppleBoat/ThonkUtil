@@ -19,6 +19,7 @@ public class PotionItemMixin {
     private void appendToStacks(ItemGroup group, DefaultedList<ItemStack> stacks, CallbackInfo ci) {
         this.potionItem = (PotionItem) (Object) this;
     }
+
     @ModifyVariable(method = "appendStacks", at = @At(value = "STORE", target = "Lnet/minecraft/item/TippedArrowItem;appendStacks(Lnet/minecraft/item/ItemGroup;Lnet/minecraft/util/collection/DefaultedList;)V"), ordinal = 0)
     private Potion modifyPotion(Potion potion) {
         if (SkipPotionImpl.contains(potion, getType(this.potionItem))) {

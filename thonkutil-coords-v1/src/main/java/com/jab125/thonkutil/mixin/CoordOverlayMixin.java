@@ -25,9 +25,12 @@ import static net.minecraft.client.gui.DrawableHelper.fill;
 public abstract class CoordOverlayMixin {
 
 
-    @Shadow @Final private MinecraftClient client;
+    @Shadow
+    @Final
+    private MinecraftClient client;
 
-    @Shadow public abstract TextRenderer getTextRenderer();
+    @Shadow
+    public abstract TextRenderer getTextRenderer();
 
     @Inject(method = "render", at = @At("TAIL"))
     private void injectCoords(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
@@ -55,8 +58,8 @@ public abstract class CoordOverlayMixin {
         }
         //list.add(String.format("Render Distance: %s", this.client.options.viewDistance));
 
-        for(int i = 0; i < list.size(); ++i) {
-            String string = (String)list.get(i);
+        for (int i = 0; i < list.size(); ++i) {
+            String string = (String) list.get(i);
             if (!Strings.isNullOrEmpty(string)) {
                 Objects.requireNonNull(this.getTextRenderer());
                 int j = 9;
@@ -65,9 +68,9 @@ public abstract class CoordOverlayMixin {
                 fill(matrices, 1, m - 1, 2 + k + 1, m + j - 1, -1873784752);
 
                 if (FabricLoader.getInstance().isModLoaded("betterf3"))
-                this.getTextRenderer().drawWithShadow(matrices, string, 2.0F, (float)m, 14737632);
+                    this.getTextRenderer().drawWithShadow(matrices, string, 2.0F, (float) m, 14737632);
                 else
-                this.getTextRenderer().draw(matrices, string, 2.0F, (float)m, 14737632);
+                    this.getTextRenderer().draw(matrices, string, 2.0F, (float) m, 14737632);
             }
         }
         this.client.getProfiler().pop();

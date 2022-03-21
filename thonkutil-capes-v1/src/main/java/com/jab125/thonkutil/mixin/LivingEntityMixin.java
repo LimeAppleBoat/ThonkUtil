@@ -1,8 +1,6 @@
 package com.jab125.thonkutil.mixin;
 
 import com.jab125.thonkutil.api.CapeItem;
-import com.jab125.thonkutil.util.TemperatureUtil;
-import net.minecraft.client.resource.language.I18n;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
@@ -10,10 +8,8 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.text.LiteralText;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
-import net.minecraft.util.Util;
 import net.minecraft.util.registry.Registry;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -40,21 +36,21 @@ public class LivingEntityMixin {
 
     @Inject(method = "onDeath", at = @At("TAIL"))
     private void onDeathInject(DamageSource source, CallbackInfo ci) {
-        if (((LivingEntity)(Object) this).world.isClient()) return;
+        if (((LivingEntity) (Object) this).world.isClient()) return;
         var a = pickOutCape();
         if (Math.random() * 100 == 0)
-        ((LivingEntity) (Object) this).dropStack(new ItemStack(a));
+            ((LivingEntity) (Object) this).dropStack(new ItemStack(a));
         //((LivingEntity)(Object) this).world.getServer().sendSystemMessage(new LiteralText("You got " + I18n.translate(a.getTranslationKey()) + "!"), Util.NIL_UUID);
     }
 
     private Item pickOutCape() {
         boolean a = false;
-        if (((LivingEntity)(Object) this).getType().equals(EntityType.ZOMBIE)) a = true;
-        if (((LivingEntity)(Object) this).getType().equals(EntityType.HUSK)) a = true;
-        if (((LivingEntity)(Object) this).getType().equals(EntityType.DROWNED)) a = true;
-        if (((LivingEntity)(Object) this).getType().equals(EntityType.ZOMBIFIED_PIGLIN)) a = true;
-        if (((LivingEntity)(Object) this).getType().equals(EntityType.SKELETON)) a = true;
-        if (((LivingEntity)(Object) this).getType().equals(EntityType.STRAY)) a = true;
+        if (((LivingEntity) (Object) this).getType().equals(EntityType.ZOMBIE)) a = true;
+        if (((LivingEntity) (Object) this).getType().equals(EntityType.HUSK)) a = true;
+        if (((LivingEntity) (Object) this).getType().equals(EntityType.DROWNED)) a = true;
+        if (((LivingEntity) (Object) this).getType().equals(EntityType.ZOMBIFIED_PIGLIN)) a = true;
+        if (((LivingEntity) (Object) this).getType().equals(EntityType.SKELETON)) a = true;
+        if (((LivingEntity) (Object) this).getType().equals(EntityType.STRAY)) a = true;
         if (!a) return Items.AIR;
         ArrayList<Pair<Item, Integer>> capCapes = new ArrayList<>();
         capCapes.add(new Pair<>(Registry.ITEM.get(new Identifier("thonkutil:migration_cape")), 50));

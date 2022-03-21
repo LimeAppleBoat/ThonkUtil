@@ -2,7 +2,6 @@
   "schemaVersion": 1,
   "id": "thonkutil-customization-v1",
   "version": "${version}",
-
   "name": "ThonkUtil Customization (v1)",
   "description": "Customize vanilla features\nCurrently disabled.",
   "authors": [
@@ -29,9 +28,14 @@
         "name": "ThonkUtil",
         "description": "Some useful features that mod devs and regular users would like.",
         "icon": "assets/thonkutil-customization-v1/icon.png",
-        "badges": ["library"]
+        "badges": [
+          "library"
+        ]
       },
-      "badges": ["library", "deprecated"]
+      "badges": [
+        "library",
+        "deprecated"
+      ]
     }
   }
 }

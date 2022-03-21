@@ -1,7 +1,7 @@
 package com.jab125.thonkutil.titlescreen.v1;
 
-import com.jab125.thonkutil.api.events.EventTaxi;
 import com.jab125.thonkutil.api.annotations.SubscribeEvent;
+import com.jab125.thonkutil.api.events.EventTaxi;
 import com.jab125.thonkutil.api.events.client.screen.TitleScreenRenderEvent;
 import com.jab125.thonkutil.titlescreen.v1.config.ThonkUtilTitleScreenConfig;
 import com.jab125.thonkutil.titlescreen.v1.config.ThonkUtilTitleScreenConfigManager;
@@ -68,7 +68,7 @@ public class ThonkUtilTitleScreen implements ClientModInitializer {
 
     private static String getModCount() {
         try {
-            return (String)(Class.forName("com.terraformersmc.modmenu.ModMenu").getMethod("getDisplayedModCount").invoke(null, new Object[]{}));
+            return (String) (Class.forName("com.terraformersmc.modmenu.ModMenu").getMethod("getDisplayedModCount").invoke(null, new Object[]{}));
 //            for (Method method : Class.forName("com.terraformersmc.modmenu.ModMenu").getMethods()) {
 //                System.out.println(method.getName() + ", Annotations" + Arrays.toString(method.getDeclaredAnnotations()) + ", Static: " + Modifier.isStatic(method.getModifiers()));
 //            }
@@ -76,6 +76,7 @@ public class ThonkUtilTitleScreen implements ClientModInitializer {
             return String.valueOf(FabricLoader.getInstance().getAllMods().size());
         }
     }
+
     private String getTextNoFAPI(int i) {
         return switch (i) {
             case 2 -> "Fabric " + FabricLoader.getInstance().getModContainer("fabricloader").get().getMetadata().getVersion().getFriendlyString();

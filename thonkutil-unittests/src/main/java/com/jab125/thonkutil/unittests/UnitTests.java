@@ -7,7 +7,6 @@ import com.jab125.thonkutil.api.events.EventTaxiReturnableEvent;
 import com.jab125.thonkutil.api.events.misc.PingMapEvent;
 import com.jab125.thonkutil.util.PingMap;
 
-import java.rmi.UnexpectedException;
 import java.util.ArrayList;
 
 public class UnitTests {
@@ -16,6 +15,7 @@ public class UnitTests {
     private static int d = 0;
     private static final ArrayList<Object> errs = new ArrayList<>();
     private static final PingMap<String, String> pingMap = new PingMap<>();
+
     public static void main(String[] args) {
         System.out.println("Started Unit Tests");
         //System.out.println(new SubscribeEventTest("TEST", 15).getClass());
@@ -52,6 +52,7 @@ public class UnitTests {
         checkResults(15, test.i);
         d = 1;
     }
+
     @SubscribeEvent
     public static void testSubscribeEvent(PingMapEvent event) {
         checkResults(pingMap, event.map());
@@ -86,6 +87,7 @@ public class UnitTests {
     }
 
     private static String e;
+
     private static void logTestStart(String str) {
         System.out.println("Starting test {" + str + "}");
         e = str;
@@ -94,7 +96,7 @@ public class UnitTests {
     private static void logTestEnd() {
         if (errs.size() > 0) {
             System.err.println("Test {" + e + "} finished with " + errs.size() + " unexpected results:");
-            for (var err: errs) {
+            for (var err : errs) {
                 System.err.println(err);
             }
         } else {
@@ -102,9 +104,11 @@ public class UnitTests {
         }
         errs.clear();
     }
+
     public static class SubscribeEventTest extends EventTaxiEvent {
         private final String str;
         private final int i;
+
         public SubscribeEventTest(String str, int i) {
             this.str = str;
             this.i = i;
@@ -115,6 +119,7 @@ public class UnitTests {
         private final String str;
         private final int i;
         private boolean b = false;
+
         public SubscribeEventReturnableTest(String str, int i) {
             this.str = str;
             this.i = i;
@@ -124,6 +129,7 @@ public class UnitTests {
         public Boolean getResult() {
             return b;
         }
+
         public void setBoolean(boolean b) {
             this.b = b;
         }

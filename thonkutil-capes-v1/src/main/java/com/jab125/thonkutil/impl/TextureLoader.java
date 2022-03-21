@@ -17,7 +17,6 @@ import java.io.InputStream;
 @Environment(EnvType.CLIENT)
 public class TextureLoader {
     /**
-     *
      * @param cape
      * @deprecated not used right now.
      */
@@ -44,8 +43,10 @@ public class TextureLoader {
 
             TextureLoader.loadElytraFramesToResource(elytraTextures, cape.getRegistryIdAsIdentifier().toUnderscoreSeparatedString());
 
-        } catch (Exception ignored){}
+        } catch (Exception ignored) {
+        }
     }
+
     public static void applyAnimatedCape(AnimatedCapeItem cape) {
         try {
             InputStream texture = MinecraftClient.getInstance().getResourceManager().getResource(cape.getCapeTexture0()).getInputStream();

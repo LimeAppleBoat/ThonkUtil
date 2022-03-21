@@ -4,5 +4,6 @@ import com.google.common.annotations.Beta;
 
 @Beta
 public class Cape {
-    private Cape(){}
+    private Cape() {
+    }
 }

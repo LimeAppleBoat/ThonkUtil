@@ -60,7 +60,8 @@ public class CapeItem extends Item implements Wearable {
     @Override
     public void appendStacks(ItemGroup group, DefaultedList<ItemStack> stacks) {
         super.appendStacks(group, stacks);
-        if (group.equals(ThonkUtilCapes.CAPES_GROUP) && !getRegistryId().equals("thonkutil:mojang_cape") && !getRegistryId().equals("thonkutil:mojang_classic_cape") && !getRegistryId().equals("thonkutil:mojang_studios_cape") && addToCreativeInventory) stacks.add(new ItemStack(this));
+        if (group.equals(ThonkUtilCapes.CAPES_GROUP) && !getRegistryId().equals("thonkutil:mojang_cape") && !getRegistryId().equals("thonkutil:mojang_classic_cape") && !getRegistryId().equals("thonkutil:mojang_studios_cape") && addToCreativeInventory)
+            stacks.add(new ItemStack(this));
     }
 
     private String getRegistryId() {
@@ -72,7 +73,7 @@ public class CapeItem extends Item implements Wearable {
     }
 
     public Identifier getCapeTexture() {
-        return Identifier.tryParse(Registry.ITEM.getId(this).getNamespace() + ":textures/cape/"+ Registry.ITEM.getId(this).getPath() + ".png");
+        return Identifier.tryParse(Registry.ITEM.getId(this).getNamespace() + ":textures/cape/" + Registry.ITEM.getId(this).getPath() + ".png");
     }
 
     public boolean hasElytraTexture() {
@@ -80,17 +81,18 @@ public class CapeItem extends Item implements Wearable {
     }
 
     private boolean hasAppliedElytraTexture = false;
+
     public Identifier getElytraTexture() {
         if (has2WingedElytra && hasAppliedElytraTexture) {
             TextureLoader.apply2WingedElytra(this);
             hasAppliedElytraTexture = true;
         }
-        return has2WingedElytra ? Identifier.tryParse(Registry.ITEM.getId(this).getNamespace() + ":textures/elytra/"+ Registry.ITEM.getId(this).getPath() + ".png") : getCapeTexture();
+        return has2WingedElytra ? Identifier.tryParse(Registry.ITEM.getId(this).getNamespace() + ":textures/elytra/" + Registry.ITEM.getId(this).getPath() + ".png") : getCapeTexture();
     }
 
     @Deprecated
     public Identifier getElytraTexture0() {
-        return has2WingedElytra ? Identifier.tryParse(Registry.ITEM.getId(this).getNamespace() + ":textures/elytra/"+ Registry.ITEM.getId(this).getPath() + ".png") : getCapeTexture();
+        return has2WingedElytra ? Identifier.tryParse(Registry.ITEM.getId(this).getNamespace() + ":textures/elytra/" + Registry.ITEM.getId(this).getPath() + ".png") : getCapeTexture();
     }
 
     @Override
@@ -103,9 +105,9 @@ public class CapeItem extends Item implements Wearable {
         if (I18n.hasTranslation(this.getOrCreateTranslationKey() + ".tooltip.3"))
             tooltip.add(new TranslatableText(this.getOrCreateTranslationKey() + ".tooltip.3").formatted(Formatting.GOLD));
         if (this instanceof AnimatedCapeItem)
-        tooltip.add(new TranslatableText("thonkutil.animated_cape").formatted(Formatting.GRAY));
+            tooltip.add(new TranslatableText("thonkutil.animated_cape").formatted(Formatting.GRAY));
         if (!hasElytraTexture && isModInstalled("trinkets"))
-        tooltip.add(new TranslatableText("thonkutil.no_elytra").formatted(Formatting.GRAY));
+            tooltip.add(new TranslatableText("thonkutil.no_elytra").formatted(Formatting.GRAY));
     }
 
     @Override

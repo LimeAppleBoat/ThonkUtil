@@ -4,7 +4,9 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.loader.api.FabricLoader;
 
 public class CheckerUtil {
-    private CheckerUtil(){}
+    private CheckerUtil() {
+    }
+
     protected static boolean isClient() {
         return FabricLoader.getInstance().getEnvironmentType().equals(EnvType.CLIENT);
     }

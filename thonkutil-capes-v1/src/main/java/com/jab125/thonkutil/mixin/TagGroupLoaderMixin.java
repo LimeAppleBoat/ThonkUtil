@@ -18,7 +18,9 @@ import java.util.Map;
 @Mixin(TagGroupLoader.class)
 public class TagGroupLoaderMixin {
 
-    @Shadow @Final private String dataType;
+    @Shadow
+    @Final
+    private String dataType;
 
     @Inject(method = "loadTags", at = @At("RETURN"), cancellable = true)
     private void loadTagInject(ResourceManager manager, CallbackInfoReturnable<Map<Identifier, Tag.Builder>> cir) {

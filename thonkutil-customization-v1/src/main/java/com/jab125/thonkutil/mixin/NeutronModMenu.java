@@ -16,12 +16,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(FabricMod.class)
 public abstract class NeutronModMenu {
 
-    @Shadow @Final private ModMetadata metadata;
+    @Shadow
+    @Final
+    private ModMetadata metadata;
 
     @Inject(method = "<init>", at = @At("TAIL"))
     private void injectInit(ModContainer t, CallbackInfo ci) {
         if (metadata.getId().equals("thonkutil-customization-v1")) {
-            ((FabricMod)(Object)this).getBadges().add(Mod.Badge.DEPRECATED);
+            ((FabricMod) (Object) this).getBadges().add(Mod.Badge.DEPRECATED);
         }
     }
 }

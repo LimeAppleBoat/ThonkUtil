@@ -2,14 +2,12 @@
   "schemaVersion": 1,
   "id": "thonkutil-modchecker-v1",
   "version": "${version}",
-
   "name": "ThonkUtil ModChecker (v1)",
   "description": "Allows servers to disconnect players when they have blacklisted mods installed.",
   "authors": [
     "Jab125"
   ],
   "mixins": [
-
   ],
   "entrypoints": {
     "main": [
@@ -29,9 +27,13 @@
         "name": "ThonkUtil",
         "description": "Some useful features that mod devs and regular users would like.",
         "icon": "assets/thonkutil-modchecker-v1/icon.png",
-        "badges": ["library"]
+        "badges": [
+          "library"
+        ]
       },
-      "badges": ["library"]
+      "badges": [
+        "library"
+      ]
     }
   }
 }

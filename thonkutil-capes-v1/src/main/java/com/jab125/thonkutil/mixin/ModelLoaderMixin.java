@@ -16,8 +16,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class ModelLoaderMixin {
     @Inject(method = "loadModelFromJson", at = @At(value = "INVOKE", target = "Lnet/minecraft/resource/ResourceManager;getResource(Lnet/minecraft/util/Identifier;)Lnet/minecraft/resource/Resource;"), cancellable = true)
     public void loadModelFromJson(Identifier id, CallbackInfoReturnable<JsonUnbakedModel> cir) {
-       // System.out.println(id.getNamespace() + ":" + id.getPath().split("/")[1]);
-        if (!(Registry.ITEM.get(Identifier.tryParse(id.getNamespace() + ":" + id.getPath().split("/")[1])) instanceof CapeItem)) return;
+        // System.out.println(id.getNamespace() + ":" + id.getPath().split("/")[1]);
+        if (!(Registry.ITEM.get(Identifier.tryParse(id.getNamespace() + ":" + id.getPath().split("/")[1])) instanceof CapeItem))
+            return;
         String b = id.getNamespace() + ":" + "cape/" + id.getPath().split("/")[1];
         //Here, we can do different checks to see if the current item is a block-item, a tool, or other.
         //This can be done in a lot of different ways, like putting all our items in a Set or a List and checking if the current item is contained inside.

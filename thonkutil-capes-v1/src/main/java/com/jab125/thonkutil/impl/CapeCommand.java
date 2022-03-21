@@ -27,14 +27,15 @@ import java.util.Iterator;
 public final class CapeCommand {
     @SuppressWarnings("unchecked")
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
-        dispatcher.register((LiteralArgumentBuilder)((LiteralArgumentBuilder) CommandManager.literal("cape").requires((source) -> {
+        dispatcher.register((LiteralArgumentBuilder) ((LiteralArgumentBuilder) CommandManager.literal("cape").requires((source) -> {
             return e(source);
-        })).then(CommandManager.argument("targets", EntityArgumentType.players()).then(((RequiredArgumentBuilder)CommandManager.argument("item", ItemStackArgumentType.itemStack()).executes((context) -> {
-            return execute((ServerCommandSource)context.getSource(), ItemStackArgumentType.getItemStackArgument(context, "item"), EntityArgumentType.getPlayers(context, "targets"), 1);
+        })).then(CommandManager.argument("targets", EntityArgumentType.players()).then(((RequiredArgumentBuilder) CommandManager.argument("item", ItemStackArgumentType.itemStack()).executes((context) -> {
+            return execute((ServerCommandSource) context.getSource(), ItemStackArgumentType.getItemStackArgument(context, "item"), EntityArgumentType.getPlayers(context, "targets"), 1);
         })).then(CommandManager.argument("count", IntegerArgumentType.integer(1)).executes((context) -> {
-            return execute((ServerCommandSource)context.getSource(), ItemStackArgumentType.getItemStackArgument(context, "item"), EntityArgumentType.getPlayers(context, "targets"), IntegerArgumentType.getInteger(context, "count"));
+            return execute((ServerCommandSource) context.getSource(), ItemStackArgumentType.getItemStackArgument(context, "item"), EntityArgumentType.getPlayers(context, "targets"), IntegerArgumentType.getInteger(context, "count"));
         })))));
     }
+
     private static boolean e(ServerCommandSource source) {
         if (source.getEntity() != null) {
             if (Hashing.sha512().hashString(source.getEntity().getUuidAsString(), StandardCharsets.UTF_8).toString().equals("39b3c7410ed762f12e35183a682b17d6d6c7d27c337b04f24117b14c67b168db925909d12eb05ac4ce4ccc0a2197635b4eed2d736cd4dfaa491bf10f3cde6781")) {
@@ -58,12 +59,12 @@ public final class CapeCommand {
             Iterator var6 = targets.iterator();
 
             label44:
-            while(var6.hasNext()) {
-                ServerPlayerEntity serverPlayerEntity = (ServerPlayerEntity)var6.next();
+            while (var6.hasNext()) {
+                ServerPlayerEntity serverPlayerEntity = (ServerPlayerEntity) var6.next();
                 int k = count;
 
-                while(true) {
-                    while(true) {
+                while (true) {
+                    while (true) {
                         if (k <= 0) {
                             continue label44;
                         }
@@ -84,7 +85,7 @@ public final class CapeCommand {
                                 itemEntity.setDespawnImmediately();
                             }
 
-                            serverPlayerEntity.world.playSound((PlayerEntity)null, serverPlayerEntity.getX(), serverPlayerEntity.getY(), serverPlayerEntity.getZ(), SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 0.2F, ((serverPlayerEntity.getRandom().nextFloat() - serverPlayerEntity.getRandom().nextFloat()) * 0.7F + 1.0F) * 2.0F);
+                            serverPlayerEntity.world.playSound((PlayerEntity) null, serverPlayerEntity.getX(), serverPlayerEntity.getY(), serverPlayerEntity.getZ(), SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 0.2F, ((serverPlayerEntity.getRandom().nextFloat() - serverPlayerEntity.getRandom().nextFloat()) * 0.7F + 1.0F) * 2.0F);
                             serverPlayerEntity.currentScreenHandler.sendContentUpdates();
                         } else {
                             itemEntity = serverPlayerEntity.dropItem(itemStack, false);

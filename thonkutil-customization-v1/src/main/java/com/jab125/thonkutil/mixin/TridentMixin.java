@@ -2,12 +2,10 @@ package com.jab125.thonkutil.mixin;
 
 import com.jab125.thonkutil.ThonkUtilCustomization;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
-import net.minecraft.entity.data.TrackedDataHandler;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.entity.projectile.TridentEntity;
@@ -17,24 +15,34 @@ import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
-import org.spongepowered.asm.mixin.injection.*;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(TridentEntity.class)
 public abstract class TridentMixin extends PersistentProjectileEntity {
-    @Shadow @Final private static TrackedData<Byte> LOYALTY;
-    @Unique @Final private static final TrackedData<Byte> VOID_SAVER = DataTracker.registerData(TridentEntity.class, TrackedDataHandlerRegistry.BYTE);;
+    @Shadow
+    @Final
+    private static TrackedData<Byte> LOYALTY;
+    @Unique
+    @Final
+    private static final TrackedData<Byte> VOID_SAVER = DataTracker.registerData(TridentEntity.class, TrackedDataHandlerRegistry.BYTE);
+    ;
 
-    @Shadow private boolean dealtDamage;
+    @Shadow
+    private boolean dealtDamage;
 
-    @Unique private int thonkutil_voidRelease = 0;
+    @Unique
+    private int thonkutil_voidRelease = 0;
+
     protected TridentMixin(EntityType<? extends PersistentProjectileEntity> entityType, World world) {
         super(entityType, world);
     }
 
     @Inject(method = "initDataTracker", at = @At("TAIL"))
     private void thonkutil$injectDataTracker(CallbackInfo ci) {
-        this.dataTracker.startTracking(VOID_SAVER, (byte)0);
+        this.dataTracker.startTracking(VOID_SAVER, (byte) 0);
     }
 
 
@@ -53,9 +61,10 @@ public abstract class TridentMixin extends PersistentProjectileEntity {
     private void thonkutil$injectTick(CallbackInfo ci) {
 
     }
+
     @Inject(method = "<init>(Lnet/minecraft/world/World;Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/item/ItemStack;)V", at = @At("TAIL"))
     private void thonkutil$injectInit(World world, LivingEntity owner, ItemStack stack, CallbackInfo ci) {
-        this.dataTracker.set(VOID_SAVER, (byte)EnchantmentHelper.getLevel(ThonkUtilCustomization.VOID_SAVER, stack));
+        this.dataTracker.set(VOID_SAVER, (byte) EnchantmentHelper.getLevel(ThonkUtilCustomization.VOID_SAVER, stack));
     }
 
     //private int thonkutil$modifyI(DataTracker instance, TrackedData<T> data) {

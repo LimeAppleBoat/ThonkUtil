@@ -54,7 +54,7 @@ public class CustomLeftElytraEntityModel<T extends LivingEntity> extends AnimalM
             Vec3d vec3d = livingEntity.getVelocity();
             if (vec3d.y < 0.0D) {
                 Vec3d vec3d2 = vec3d.normalize();
-                o = 1.0F - (float)Math.pow(-vec3d2.y, 1.5D);
+                o = 1.0F - (float) Math.pow(-vec3d2.y, 1.5D);
             }
 
             k = o * 0.34906584F + (1.0F - o) * k;
@@ -68,10 +68,10 @@ public class CustomLeftElytraEntityModel<T extends LivingEntity> extends AnimalM
 
         this.leftWing.pivotY = m;
         if (livingEntity instanceof AbstractClientPlayerEntity) {
-            AbstractClientPlayerEntity o = (AbstractClientPlayerEntity)livingEntity;
-            o.elytraPitch = (float)((double)o.elytraPitch + (double)(k - o.elytraPitch) * 0.1D);
-            o.elytraYaw = (float)((double)o.elytraYaw + (double)(n - o.elytraYaw) * 0.1D);
-            o.elytraRoll = (float)((double)o.elytraRoll + (double)(l - o.elytraRoll) * 0.1D);
+            AbstractClientPlayerEntity o = (AbstractClientPlayerEntity) livingEntity;
+            o.elytraPitch = (float) ((double) o.elytraPitch + (double) (k - o.elytraPitch) * 0.1D);
+            o.elytraYaw = (float) ((double) o.elytraYaw + (double) (n - o.elytraYaw) * 0.1D);
+            o.elytraRoll = (float) ((double) o.elytraRoll + (double) (l - o.elytraRoll) * 0.1D);
             this.leftWing.pitch = o.elytraPitch;
             this.leftWing.yaw = o.elytraYaw;
             this.leftWing.roll = o.elytraRoll;

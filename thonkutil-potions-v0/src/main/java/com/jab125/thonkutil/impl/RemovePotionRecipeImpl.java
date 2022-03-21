@@ -99,9 +99,12 @@ public class RemovePotionRecipeImpl {
             return false;
         }
     }
+
     public static boolean shouldCraft(ItemStack potionStack, ItemStack itemStack) {
-        if (itemStack.getItem().equals(Items.GUNPOWDER) && potionStack.getItem().equals(Items.POTION) && RemoveSplashPotionRecipeImpl.contains(PotionUtil.getPotion(potionStack))) return false;
-        if (itemStack.getItem().equals(Items.DRAGON_BREATH) && potionStack.getItem().equals(Items.SPLASH_POTION) && RemoveLingeringPotionRecipeImpl.contains(PotionUtil.getPotion(potionStack))) return false;
+        if (itemStack.getItem().equals(Items.GUNPOWDER) && potionStack.getItem().equals(Items.POTION) && RemoveSplashPotionRecipeImpl.contains(PotionUtil.getPotion(potionStack)))
+            return false;
+        if (itemStack.getItem().equals(Items.DRAGON_BREATH) && potionStack.getItem().equals(Items.SPLASH_POTION) && RemoveLingeringPotionRecipeImpl.contains(PotionUtil.getPotion(potionStack)))
+            return false;
         return true;
     }
 }

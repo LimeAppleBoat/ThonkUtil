@@ -43,11 +43,11 @@ public class TwoWingedItemElytraRenderer<T extends LivingEntity, M extends Entit
         ItemStack itemStack = livingEntity.getEquippedStack(EquipmentSlot.CHEST);
         if (itemStack.isOf(Items.ELYTRA) && livingEntity instanceof PlayerEntity && ThonkUtilCapes.getCape((PlayerEntity) livingEntity).getItem() instanceof CapeItem && ((CapeItem) ThonkUtilCapes.getCape((PlayerEntity) livingEntity).getItem()).hasElytraTexture() && ((CapeItem) ThonkUtilCapes.getCape((PlayerEntity) livingEntity).getItem()).has2WingedElytra()) {
             Identifier identifier;
-            AbstractClientPlayerEntity abstractClientPlayerEntity = (AbstractClientPlayerEntity)livingEntity;
-            ((CapeItem)ThonkUtilCapes.getCape(abstractClientPlayerEntity).getItem()).getElytraTexture();
+            AbstractClientPlayerEntity abstractClientPlayerEntity = (AbstractClientPlayerEntity) livingEntity;
+            ((CapeItem) ThonkUtilCapes.getCape(abstractClientPlayerEntity).getItem()).getElytraTexture();
             //identifier = ((CapeItem) ThonkUtilCapes.getCape(abstractClientPlayerEntity).getItem()).getElytraTexture();
-            identifier = new Identifier("thonkutil", String.format("elytra/%s/%d", ((CapeItem)ThonkUtilCapes.getCape(abstractClientPlayerEntity).getItem()).getRegistryIdAsIdentifier().toUnderscoreSeparatedString(), 0));
-            var identifier2 = new Identifier("thonkutil", String.format("elytra/%s/%d", ((CapeItem)ThonkUtilCapes.getCape(abstractClientPlayerEntity).getItem()).getRegistryIdAsIdentifier().toUnderscoreSeparatedString(), 1));
+            identifier = new Identifier("thonkutil", String.format("elytra/%s/%d", ((CapeItem) ThonkUtilCapes.getCape(abstractClientPlayerEntity).getItem()).getRegistryIdAsIdentifier().toUnderscoreSeparatedString(), 0));
+            var identifier2 = new Identifier("thonkutil", String.format("elytra/%s/%d", ((CapeItem) ThonkUtilCapes.getCape(abstractClientPlayerEntity).getItem()).getRegistryIdAsIdentifier().toUnderscoreSeparatedString(), 1));
             matrixStack.push();
             matrixStack.translate(0.0D, 0.0D, 0.125D);
             this.getContextModel().copyStateTo(this.elytra);

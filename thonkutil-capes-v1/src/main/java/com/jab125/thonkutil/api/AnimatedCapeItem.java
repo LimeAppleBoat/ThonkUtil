@@ -2,17 +2,9 @@ package com.jab125.thonkutil.api;
 
 import com.jab125.thonkutil.ThonkUtilCapesClient;
 import net.fabricmc.api.EnvType;
-import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener;
-import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.resource.ResourceManager;
-import net.minecraft.resource.ResourceType;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.profiler.Profiler;
 import net.minecraft.util.registry.Registry;
-
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.Executor;
 
 public class AnimatedCapeItem extends CapeItem {
     private final int frames;
@@ -20,6 +12,7 @@ public class AnimatedCapeItem extends CapeItem {
     private long nextFrameTime;
     private boolean loadedT = false;
     private int currentFrame = 0;
+
     public AnimatedCapeItem(Settings settings, int frames, int delay) {
         this(settings, frames, delay, true, false);
     }
@@ -43,8 +36,9 @@ public class AnimatedCapeItem extends CapeItem {
 
     @Deprecated
     public Identifier getCapeTexture0() {
-        return Identifier.tryParse(Registry.ITEM.getId(this).getNamespace() + ":textures/cape/"+ Registry.ITEM.getId(this).getPath() + ".png");
+        return Identifier.tryParse(Registry.ITEM.getId(this).getNamespace() + ":textures/cape/" + Registry.ITEM.getId(this).getPath() + ".png");
     }
+
     @Override
     public Identifier getCapeTexture() {
         if (FabricLoader.getInstance().getEnvironmentType().equals(EnvType.CLIENT) && !loadedT) {
@@ -53,7 +47,7 @@ public class AnimatedCapeItem extends CapeItem {
         }
         long currentTimeMillis = System.currentTimeMillis();
         if (currentTimeMillis > nextFrameTime) {
-            currentFrame = currentFrame == frames-1 ? 0 : currentFrame + 1;
+            currentFrame = currentFrame == frames - 1 ? 0 : currentFrame + 1;
             setNextFrameTime(delay);
         }
         return new Identifier("thonkutil", String.format("capes/%s/%d", this.getRegistryIdAsIdentifier().toUnderscoreSeparatedString(), currentFrame));
@@ -62,7 +56,7 @@ public class AnimatedCapeItem extends CapeItem {
 
     @Override
     public Identifier getElytraTexture() {
-        return has2WingedElytra() ? Identifier.tryParse(Registry.ITEM.getId(this).getNamespace() + ":textures/elytra/"+ Registry.ITEM.getId(this).getPath() + "/" + currentFrame + ".png") : getCapeTexture();
+        return has2WingedElytra() ? Identifier.tryParse(Registry.ITEM.getId(this).getNamespace() + ":textures/elytra/" + Registry.ITEM.getId(this).getPath() + "/" + currentFrame + ".png") : getCapeTexture();
     }
 
     private void setNextFrameTime(long nextFrameTime) {

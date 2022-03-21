@@ -32,17 +32,17 @@ public class ItemCapeRenderer extends FeatureRenderer<AbstractClientPlayerEntity
             if (!itemStack.isOf(Items.ELYTRA)) {
                 matrixStack.push();
                 matrixStack.translate(0.0D, 0.0D, 0.125D);
-                double d = MathHelper.lerp((double)h, abstractClientPlayerEntity.prevCapeX, abstractClientPlayerEntity.capeX) - MathHelper.lerp((double)h, abstractClientPlayerEntity.prevX, abstractClientPlayerEntity.getX());
-                double e = MathHelper.lerp((double)h, abstractClientPlayerEntity.prevCapeY, abstractClientPlayerEntity.capeY) - MathHelper.lerp((double)h, abstractClientPlayerEntity.prevY, abstractClientPlayerEntity.getY());
-                double m = MathHelper.lerp((double)h, abstractClientPlayerEntity.prevCapeZ, abstractClientPlayerEntity.capeZ) - MathHelper.lerp((double)h, abstractClientPlayerEntity.prevZ, abstractClientPlayerEntity.getZ());
+                double d = MathHelper.lerp((double) h, abstractClientPlayerEntity.prevCapeX, abstractClientPlayerEntity.capeX) - MathHelper.lerp((double) h, abstractClientPlayerEntity.prevX, abstractClientPlayerEntity.getX());
+                double e = MathHelper.lerp((double) h, abstractClientPlayerEntity.prevCapeY, abstractClientPlayerEntity.capeY) - MathHelper.lerp((double) h, abstractClientPlayerEntity.prevY, abstractClientPlayerEntity.getY());
+                double m = MathHelper.lerp((double) h, abstractClientPlayerEntity.prevCapeZ, abstractClientPlayerEntity.capeZ) - MathHelper.lerp((double) h, abstractClientPlayerEntity.prevZ, abstractClientPlayerEntity.getZ());
                 float n = abstractClientPlayerEntity.prevBodyYaw + (abstractClientPlayerEntity.bodyYaw - abstractClientPlayerEntity.prevBodyYaw);
-                double o = (double)MathHelper.sin(n * 0.017453292F);
-                double p = (double)(-MathHelper.cos(n * 0.017453292F));
-                float q = (float)e * 10.0F;
+                double o = (double) MathHelper.sin(n * 0.017453292F);
+                double p = (double) (-MathHelper.cos(n * 0.017453292F));
+                float q = (float) e * 10.0F;
                 q = MathHelper.clamp(q, -6.0F, 32.0F);
-                float r = (float)(d * o + m * p) * 100.0F;
+                float r = (float) (d * o + m * p) * 100.0F;
                 r = MathHelper.clamp(r, 0.0F, 150.0F);
-                float s = (float)(d * p - m * o) * 100.0F;
+                float s = (float) (d * p - m * o) * 100.0F;
                 s = MathHelper.clamp(s, -20.0F, 20.0F);
                 if (r < 0.0F) {
                     r = 0.0F;

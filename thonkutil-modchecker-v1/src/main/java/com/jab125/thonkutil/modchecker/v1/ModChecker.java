@@ -15,12 +15,12 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
 public class ModChecker implements ModInitializer {
     protected static final Identifier UNIVERSAL_PKT = new Identifier("thonkutil", "universal_packet");
+
     @Override
     public void onInitialize() {
         ThonkUtilModCheckerConfigManager.initializeConfig();
@@ -50,9 +50,9 @@ public class ModChecker implements ModInitializer {
                 if (!collection.isEmpty() || !client_collection.isEmpty()) {
                     String pth = "";
                     for (int i = 0; i < collection.toArray().length; i++) {
-                        if (i == collection.toArray().length-1) {
+                        if (i == collection.toArray().length - 1) {
                             pth = pth + collection.toArray()[i];
-                        } else if (i == collection.toArray().length-2) {
+                        } else if (i == collection.toArray().length - 2) {
                             pth = pth + collection.toArray()[i] + "\n";
                         } else {
                             pth = pth + collection.toArray()[i] + "\n";
@@ -61,9 +61,9 @@ public class ModChecker implements ModInitializer {
 
                     String pt = "";
                     for (int i = 0; i < client_collection.toArray().length; i++) {
-                        if (i == client_collection.toArray().length-1) {
+                        if (i == client_collection.toArray().length - 1) {
                             pt = pt + client_collection.toArray()[i];
-                        } else if (i == collection.toArray().length-2) {
+                        } else if (i == collection.toArray().length - 2) {
                             pt = pt + client_collection.toArray()[i] + "\n";
                         } else {
                             pt = pt + client_collection.toArray()[i] + "\n";

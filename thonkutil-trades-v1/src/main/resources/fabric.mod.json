@@ -2,7 +2,6 @@
   "schemaVersion": 1,
   "id": "thonkutil-trades-v1",
   "version": "${version}",
-
   "name": "ThonkUtil Trades (v1)",
   "description": "Allows for multiple trade types",
   "authors": [
@@ -27,7 +26,9 @@
   "environment": "*",
   "custom": {
     "loom:injected_interfaces": {
-      "net/minecraft/class_1914": ["com/jab125/thonkutil/api/IdentifiableTrade"]
+      "net/minecraft/class_1914": [
+        "com/jab125/thonkutil/api/IdentifiableTrade"
+      ]
     },
     "modmenu": {
       "parent": {
@@ -35,9 +36,13 @@
         "name": "ThonkUtil",
         "description": "Some useful features that mod devs and regular users would like.",
         "icon": "assets/thonkutil-trades-v1/icon.png",
-        "badges": ["library"]
+        "badges": [
+          "library"
+        ]
       },
-      "badges": ["library"]
+      "badges": [
+        "library"
+      ]
     }
   }
 }
