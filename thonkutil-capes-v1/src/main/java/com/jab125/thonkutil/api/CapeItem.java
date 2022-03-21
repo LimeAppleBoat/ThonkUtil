@@ -2,6 +2,8 @@ package com.jab125.thonkutil.api;
 
 import com.jab125.thonkutil.ThonkUtilCapes;
 import com.jab125.thonkutil.impl.TextureLoader;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.client.resource.language.I18n;
 import net.minecraft.item.Item;
@@ -72,6 +74,7 @@ public class CapeItem extends Item implements Wearable {
         return Registry.ITEM.getId(this);
     }
 
+    @Environment(EnvType.CLIENT)
     public Identifier getCapeTexture() {
         return Identifier.tryParse(Registry.ITEM.getId(this).getNamespace() + ":textures/cape/" + Registry.ITEM.getId(this).getPath() + ".png");
     }
@@ -82,6 +85,7 @@ public class CapeItem extends Item implements Wearable {
 
     private boolean hasAppliedElytraTexture = false;
 
+    @Environment(EnvType.CLIENT)
     public Identifier getElytraTexture() {
         if (has2WingedElytra && hasAppliedElytraTexture) {
             TextureLoader.apply2WingedElytra(this);
@@ -91,6 +95,7 @@ public class CapeItem extends Item implements Wearable {
     }
 
     @Deprecated
+    @Environment(EnvType.CLIENT)
     public Identifier getElytraTexture0() {
         return has2WingedElytra ? Identifier.tryParse(Registry.ITEM.getId(this).getNamespace() + ":textures/elytra/" + Registry.ITEM.getId(this).getPath() + ".png") : getCapeTexture();
     }

@@ -2,6 +2,7 @@ package com.jab125.thonkutil.api;
 
 import com.jab125.thonkutil.ThonkUtilCapesClient;
 import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -35,10 +36,12 @@ public class AnimatedCapeItem extends CapeItem {
     }
 
     @Deprecated
+    @Environment(EnvType.CLIENT)
     public Identifier getCapeTexture0() {
         return Identifier.tryParse(Registry.ITEM.getId(this).getNamespace() + ":textures/cape/" + Registry.ITEM.getId(this).getPath() + ".png");
     }
 
+    @Environment(EnvType.CLIENT)
     @Override
     public Identifier getCapeTexture() {
         if (FabricLoader.getInstance().getEnvironmentType().equals(EnvType.CLIENT) && !loadedT) {
@@ -55,6 +58,7 @@ public class AnimatedCapeItem extends CapeItem {
     }
 
     @Override
+    @Environment(EnvType.CLIENT)
     public Identifier getElytraTexture() {
         return has2WingedElytra() ? Identifier.tryParse(Registry.ITEM.getId(this).getNamespace() + ":textures/elytra/" + Registry.ITEM.getId(this).getPath() + "/" + currentFrame + ".png") : getCapeTexture();
     }

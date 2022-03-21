@@ -16,11 +16,6 @@ import java.io.InputStream;
 
 @Environment(EnvType.CLIENT)
 public class TextureLoader {
-    /**
-     * @param cape
-     * @deprecated not used right now.
-     */
-    @Deprecated
     public static void apply2WingedElytra(CapeItem cape) {
         try {
             InputStream texture = MinecraftClient.getInstance().getResourceManager().getResource(cape.getElytraTexture0()).getInputStream();
