@@ -4,3 +4,4 @@ accessible    method    net/minecraft/recipe/BrewingRecipeRegistry    registerPo
 accessible    method    net/minecraft/recipe/BrewingRecipeRegistry    registerItemRecipe    (Lnet/minecraft/item/Item;Lnet/minecraft/item/Item;Lnet/minecraft/item/Item;)V
 accessible field net/minecraft/potion/Potion baseName Ljava/lang/String;
 accessible method net/minecraft/item/Item isIn (Lnet/minecraft/item/ItemGroup;)Z
+accessible field net/minecraft/entity/effect/StatusEffectInstance duration I

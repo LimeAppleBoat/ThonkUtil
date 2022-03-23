@@ -21,7 +21,10 @@ public abstract class PotionLivingEntityMixin {
         if (!(source.getAttacker() instanceof LivingEntity livingEntity)) return;
         if (!(livingEntity.getMainHandStack().getItem() instanceof Potionable potionableItem)) return;
         for (StatusEffectInstance potionEffect : PotionUtil.getPotionEffects(livingEntity.getMainHandStack())) {
-            this.addStatusEffect(new StatusEffectInstance(potionEffect));
+            var duration = Math.max(potionEffect.getDuration() * potionableItem.potionLengthMultiplier(), 1);
+            var potionEffecc = new StatusEffectInstance(potionEffect);
+            potionEffecc.duration = (int) duration;
+            this.addStatusEffect(potionEffecc);
         }
     }
 }

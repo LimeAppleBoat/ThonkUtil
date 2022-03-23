@@ -4,10 +4,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionUtil;
+import org.jetbrains.annotations.ApiStatus;
 
 import java.util.ArrayList;
 
 @SuppressWarnings("unused")
+@ApiStatus.Internal
+@Deprecated
 public class RemovePotionRecipeImpl {
 
     public static class RemoveTippedArrowRecipeImpl {
@@ -33,6 +36,7 @@ public class RemovePotionRecipeImpl {
     }
 
     @Deprecated
+    @ApiStatus.Experimental
     public static class RemovePotionableRecipeImpl {
 
         static ArrayList<Potion> potionable_potions = new ArrayList<>();
