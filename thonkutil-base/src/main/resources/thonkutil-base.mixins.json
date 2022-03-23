@@ -7,7 +7,6 @@
     "BlockMixin",
     "EntityMixin",
     "ItemMixin",
-    "LivingEntityMixin",
     "PotionMixin",
     "StatusEffectMixin"
   ],

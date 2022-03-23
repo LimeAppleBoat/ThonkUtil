@@ -3,3 +3,4 @@ accessWidener	v1    named
 accessible    method    net/minecraft/recipe/BrewingRecipeRegistry    registerPotionRecipe    (Lnet/minecraft/potion/Potion;Lnet/minecraft/item/Item;Lnet/minecraft/potion/Potion;)V
 accessible    method    net/minecraft/recipe/BrewingRecipeRegistry    registerItemRecipe    (Lnet/minecraft/item/Item;Lnet/minecraft/item/Item;Lnet/minecraft/item/Item;)V
 accessible field net/minecraft/potion/Potion baseName Ljava/lang/String;
+accessible method net/minecraft/item/Item isIn (Lnet/minecraft/item/ItemGroup;)Z

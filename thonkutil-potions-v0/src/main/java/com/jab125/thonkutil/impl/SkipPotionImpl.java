@@ -21,7 +21,7 @@ public class SkipPotionImpl {
     public static boolean contains(Potion potion, int skip) {
         for (var pair : skipList) {
             if (pair.getLeft().equals(potion)) {
-                if (pair.getRight().intValue() == skip) {
+                if (pair.getRight() == skip) {
                     return true;
                 }
             }

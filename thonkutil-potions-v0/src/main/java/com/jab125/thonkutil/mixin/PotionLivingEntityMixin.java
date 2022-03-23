@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(LivingEntity.class)
-public abstract class LivingEntityMixin {
+public abstract class PotionLivingEntityMixin {
     @Shadow
     public abstract boolean addStatusEffect(StatusEffectInstance effect);
 

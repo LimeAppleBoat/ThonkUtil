@@ -23,19 +23,11 @@ public class PotionableHoe extends HoeItem implements Potionable {
 
     public void appendStacks(ItemGroup group, DefaultedList<ItemStack> stacks) {
         if (!this.addPotionsToCreativeInventory()) super.appendStacks(group, stacks);
-        if (this.isIn(group)) {
-
-            for (Potion potion : Registry.POTION) {
-                if (!potion.getEffects().isEmpty()) {
-                    stacks.add(PotionUtil.setPotion(new ItemStack(this), potion));
-                }
-            }
-        }
-
+        addToCreativeInventory(group, stacks);
     }
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        PotionUtil.buildTooltip(stack, tooltip, 1.0F);
+        PotionUtil.buildTooltip(stack, tooltip, potionLengthMultiplier());
     }
 }

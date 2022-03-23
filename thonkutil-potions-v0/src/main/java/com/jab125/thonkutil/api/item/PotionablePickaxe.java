@@ -4,7 +4,7 @@ import com.jab125.thonkutil.impl.Potionable;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.SwordItem;
+import net.minecraft.item.PickaxeItem;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionUtil;
@@ -16,26 +16,18 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class PotionableSword extends SwordItem implements Potionable {
-    public PotionableSword(ToolMaterial toolMaterial, int attackDamage, float attackSpeed, Settings settings) {
+public class PotionablePickaxe extends PickaxeItem implements Potionable {
+    public PotionablePickaxe(ToolMaterial toolMaterial, int attackDamage, float attackSpeed, Settings settings) {
         super(toolMaterial, attackDamage, attackSpeed, settings);
     }
 
     public void appendStacks(ItemGroup group, DefaultedList<ItemStack> stacks) {
         if (!this.addPotionsToCreativeInventory()) super.appendStacks(group, stacks);
-        if (this.isIn(group)) {
-
-            for (Potion potion : Registry.POTION) {
-                if (!potion.getEffects().isEmpty()) {
-                    stacks.add(PotionUtil.setPotion(new ItemStack(this), potion));
-                }
-            }
-        }
-
+        addToCreativeInventory(group, stacks);
     }
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        PotionUtil.buildTooltip(stack, tooltip, 1.0F);
+        PotionUtil.buildTooltip(stack, tooltip, potionLengthMultiplier());
     }
 }

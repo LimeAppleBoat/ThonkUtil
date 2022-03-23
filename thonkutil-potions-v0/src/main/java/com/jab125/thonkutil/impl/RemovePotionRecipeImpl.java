@@ -32,6 +32,29 @@ public class RemovePotionRecipeImpl {
         }
     }
 
+    @Deprecated
+    public static class RemovePotionableRecipeImpl {
+
+        static ArrayList<Potion> potionable_potions = new ArrayList<>();
+
+        public static void removePotionableRecipe(Potion potion) {
+            potionable_potions.add(potion);
+        }
+
+        public static Potion[] getPotionablePotions() {
+            return potionable_potions.toArray(Potion[]::new);
+        }
+
+        public static boolean contains(Potion potion) {
+            //System.out.println(Registry.POTION.getId(potion).toString());
+            for (var potion2 : potionable_potions) {
+                //System.out.println(Registry.POTION.getId(potion2).toString());
+                if (potion2.equals(potion)) return true;
+            }
+            return false;
+        }
+    }
+
     public static class RemoveSplashPotionRecipeImpl {
 
         static ArrayList<Potion> splash_potions = new ArrayList<>();
