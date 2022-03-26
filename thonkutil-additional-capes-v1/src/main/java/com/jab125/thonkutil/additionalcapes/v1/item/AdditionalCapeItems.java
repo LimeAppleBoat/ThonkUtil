@@ -12,7 +12,9 @@ import static com.jab125.thonkutil.additionalcapes.v1.ThonkUtilAdditionalCapes.A
 
 @SuppressWarnings("unused")
 public class AdditionalCapeItems {
-    public static CapeItem MISSING_TEXTURE_CAPE = new CapeItem(new Item.Settings().group(ADDITIONAL_CAPES_GROUP), false);
+    public static CapeItem MISSING_TEXTURE_CAPE = createCape(false);
+    //public static CapeItem NO_CAPE = createCape();
+    public static CapeItem UKRAINE_CAPE = createCape();
 
     public static void registerCapes() {
         for (Field cape : AdditionalCapeItems.class.getFields()) {
@@ -25,5 +27,11 @@ public class AdditionalCapeItems {
                 }
             }
         }
+    }
+    private static CapeItem createCape(boolean hasElytra) {
+        return new CapeItem(new Item.Settings().group(ADDITIONAL_CAPES_GROUP), hasElytra).doNotAddToCreativeInventory();
+    }
+    private static CapeItem createCape() {
+        return createCape(true);
     }
 }
