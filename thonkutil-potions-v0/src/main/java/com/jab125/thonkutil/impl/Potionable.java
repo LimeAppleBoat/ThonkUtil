@@ -19,7 +19,7 @@ public interface Potionable {
     }
 
     default void addToCreativeInventory(ItemGroup group, DefaultedList<ItemStack> stacks) {
-        if (this instanceof Item item) {
+        if (this instanceof Item item && addPotionsToCreativeInventory()) {
             if (item.isIn(group)) {
                 for (Potion potion : Registry.POTION) {
                     if (!potion.getEffects().isEmpty() && !SkipPotionImpl.contains(potion, SkipPotion.getType(item))) {
