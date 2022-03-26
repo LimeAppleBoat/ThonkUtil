@@ -20,7 +20,7 @@ public class ClientModChecker implements ClientModInitializer {
         }
     }
 
-    class C {
+    private class C {
         private static int a = 0;
 
         C() {
