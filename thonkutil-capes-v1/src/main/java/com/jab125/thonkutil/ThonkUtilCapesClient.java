@@ -2,6 +2,7 @@ package com.jab125.thonkutil;
 
 import com.jab125.thonkutil.api.AnimatedCapeItem;
 import com.jab125.thonkutil.api.CapeItem;
+import com.jab125.thonkutil.compat.MinecraftCapesCompat;
 import com.jab125.thonkutil.impl.CustomLeftElytraEntityModel;
 import com.jab125.thonkutil.impl.CustomRightElytraEntityModel;
 import com.jab125.thonkutil.impl.TextureLoader;
@@ -14,6 +15,8 @@ import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 
+import static com.jab125.thonkutil.util.Util.isModInstalled;
+
 @Environment(EnvType.CLIENT)
 public class ThonkUtilCapesClient implements ClientModInitializer {
     public static final EntityModelLayer TWO_LEFT_WINGED_ELYTRA = new EntityModelLayer(new Identifier("thonkutil", "two_left_winged_elytra"), "two_left_winged_elytra_render_layer");
@@ -25,6 +28,9 @@ public class ThonkUtilCapesClient implements ClientModInitializer {
      */
     @Override
     public void onInitializeClient() {
+        if (isModInstalled("minecraftcapes")) {
+            new MinecraftCapesCompat();
+        }
         LivingEntityFeatureRenderEvents.ALLOW_CAPE_RENDER.register((abstractClientPlayerEntity) -> {
             return !(abstractClientPlayerEntity.canRenderCapeTexture() && !abstractClientPlayerEntity.isInvisible() && !ThonkUtilCapes.getCape(abstractClientPlayerEntity).equals(ItemStack.EMPTY) && ThonkUtilCapes.getCape(abstractClientPlayerEntity).getItem() instanceof CapeItem);
         });

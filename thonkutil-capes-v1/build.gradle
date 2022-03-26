@@ -2,9 +2,16 @@ archivesBaseName = "thonkutil-capes-v1"
 group = rootProject.group
 version = getSubprojectVersion(project)
 
+repositories {
+    maven {
+        url "https://cursemaven.com"
+    }
+}
 dependencies {
+    modCompileOnly "curse.maven:minecraftcapes-359836:3673296"
     api project(path: ':thonkutil-base', configuration: 'namedElements')
 }
+
 loom {
     accessWidenerPath = file("src/main/resources/thonkutil-capes-v1.accesswidener")
 }
