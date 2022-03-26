@@ -25,6 +25,11 @@ public class SkipPotion {
     public static final int POTIONABLE = 10;
 
 
+    public static void skipAll(Potion potion) {
+        for (var i = 0; i < 10; i++) {
+            skipPotion(potion, i);
+        }
+    }
     public static void skipPotion(Potion potion, int skip) {
         SkipPotionImpl.skipPotion(potion, skip);
     }
