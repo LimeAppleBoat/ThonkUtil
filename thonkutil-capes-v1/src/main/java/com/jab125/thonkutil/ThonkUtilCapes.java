@@ -92,13 +92,13 @@ public class ThonkUtilCapes implements ModInitializer, ThonkUtilCapesClass {
                     dev.emi.trinkets.api.TrinketComponent trinketComponent = component.get();
                     Map<String, Map<String, dev.emi.trinkets.api.TrinketInventory>> inventory = trinketComponent.getInventory();
                     dev.emi.trinkets.api.TrinketInventory trinketInventory = inventory.get("chest").get("cape");
-                    return trinketInventory.getStack(0);
+                    return trinketInventory.getStack(0).getItem() instanceof CapeItem ? trinketInventory.getStack(0) : ItemStack.EMPTY;
                 }
             } catch (Exception exception) {
                 // TRINKETS IS PROBABLY NOT INSTALLED ON SERVER
             }
 
         }
-        return player.getInventory().getArmorStack(2);
+        return player.getInventory().getArmorStack(2).getItem() instanceof CapeItem ? player.getInventory().getArmorStack(2) : ItemStack.EMPTY;
     }
 }

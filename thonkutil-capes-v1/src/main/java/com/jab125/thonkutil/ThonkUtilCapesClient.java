@@ -3,6 +3,7 @@ package com.jab125.thonkutil;
 import com.jab125.thonkutil.api.AnimatedCapeItem;
 import com.jab125.thonkutil.api.CapeItem;
 import com.jab125.thonkutil.compat.MinecraftCapesCompat;
+import com.jab125.thonkutil.compat.WaveyCapesCompat;
 import com.jab125.thonkutil.impl.CustomLeftElytraEntityModel;
 import com.jab125.thonkutil.impl.CustomRightElytraEntityModel;
 import com.jab125.thonkutil.impl.TextureLoader;
@@ -30,6 +31,9 @@ public class ThonkUtilCapesClient implements ClientModInitializer {
     public void onInitializeClient() {
         if (isModInstalled("minecraftcapes")) {
             new MinecraftCapesCompat();
+        }
+        if (isModInstalled("waveycapes")) {
+            new WaveyCapesCompat();
         }
         LivingEntityFeatureRenderEvents.ALLOW_CAPE_RENDER.register((abstractClientPlayerEntity) -> {
             return !(abstractClientPlayerEntity.canRenderCapeTexture() && !abstractClientPlayerEntity.isInvisible() && !ThonkUtilCapes.getCape(abstractClientPlayerEntity).equals(ItemStack.EMPTY) && ThonkUtilCapes.getCape(abstractClientPlayerEntity).getItem() instanceof CapeItem);
