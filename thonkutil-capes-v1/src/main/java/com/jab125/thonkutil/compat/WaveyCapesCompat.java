@@ -38,7 +38,7 @@ public class WaveyCapesCompat implements ModSupport {
         return false;
     }
 
-    private class ThonkUtilCapesRenderer implements CapeRenderer {
+    private final class ThonkUtilCapesRenderer implements CapeRenderer {
         private ThonkUtilCapesRenderer() {
         }
 
