@@ -7,10 +7,12 @@
     "BlockMixin",
     "EntityMixin",
     "ItemMixin",
+    "PlayerEntityDataTrackerMixin",
     "PotionMixin",
     "StatusEffectMixin"
   ],
   "client": [
+    "PlayerEntityModelMixin"
   ],
   "injectors": {
     "defaultRequire": 1
