@@ -31,6 +31,7 @@ public class ExclamationMarkModel<T extends Entity> extends EntityModel<T> {
 
 	@Override
 	public void setAngles(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+		this.bb_main.setAngles(0,0,0);
 	}
 
 	@Override

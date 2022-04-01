@@ -37,6 +37,9 @@
       ],
       "net/minecraft/class_1291": [
         "com/jab125/thonkutil/impl/RegistryUtil"
+      ],
+      "net/minecraft/class_1657": [
+        "com/jab125/thonkutil/impl/PlayerExpansion"
       ]
     },
     "modmenu": {
