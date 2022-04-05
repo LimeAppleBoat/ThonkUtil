@@ -10,6 +10,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Wearable;
+import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
@@ -20,6 +21,7 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.jab125.thonkutil.util.Util.isModInstalled;
@@ -29,6 +31,7 @@ public class CapeItem extends Item implements Wearable {
     private final boolean has2WingedElytra;
     private final Item.Settings settings;
     private boolean addToCreativeInventory = true;
+    private ArrayList<String> credits = new ArrayList<>();
 
     private CapeItem(CapeItem cape) {
         super(cape.settings);
@@ -42,10 +45,44 @@ public class CapeItem extends Item implements Wearable {
         this(settings, true);
     }
 
+    public CapeItem mojangCredits() {
+        this.credits.add("Mojang Studios");
+        return this;
+    }
+
     @SuppressWarnings("unused")
     public CapeItem doNotAddToCreativeInventory() {
         addToCreativeInventory = false;
         return this;
+    }
+
+    public CapeItem addCredits(String... credits) {
+        this.credits.addAll(List.of(credits));
+        return this;
+    }
+
+    // Generated with GitHub Copilot
+    private String generateCredits(boolean and) {
+        // combine the credits into one string, inserting a comma between each one, but not the last one, and insert an "and" after the second last one if and is true
+        StringBuilder sb = new StringBuilder();
+        int i = 0;
+        for (String credit : credits) {
+            if (i > 0) {
+                if (i == credits.size() - 1) {
+                    sb.append(" and ");
+                } else {
+                    if (!(i == credits.size()))
+                        sb.append(", ");
+                }
+            }
+            sb.append(credit);
+            i++;
+        }
+        return sb.toString();
+    }
+
+    private String generateCredits() {
+        return generateCredits(true);
     }
 
     public CapeItem(Settings settings, boolean hasElytraTexture, boolean has2WingedElytra) {
@@ -113,6 +150,8 @@ public class CapeItem extends Item implements Wearable {
             tooltip.add(new TranslatableText("thonkutil.animated_cape").formatted(Formatting.GRAY));
         if (!hasElytraTexture && isModInstalled("trinkets"))
             tooltip.add(new TranslatableText("thonkutil.no_elytra").formatted(Formatting.GRAY));
+        if (credits.size() > 0)
+            tooltip.add(new LiteralText(generateCredits()).formatted(Formatting.GRAY));
     }
 
     @Override
