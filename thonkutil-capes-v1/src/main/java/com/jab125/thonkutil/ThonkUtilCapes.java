@@ -8,6 +8,8 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -16,6 +18,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
 import net.minecraft.util.registry.Registry;
 
+import javax.annotation.Nonnull;
 import java.util.Map;
 import java.util.Optional;
 
@@ -83,22 +86,33 @@ public class ThonkUtilCapes implements ModInitializer, ThonkUtilCapesClass {
         return "";
     }
 
-    public static ItemStack getCape(PlayerEntity player) {
-        if (FabricLoader.getInstance().isModLoaded("trinkets")) {
-            try {
-                Optional<dev.emi.trinkets.api.TrinketComponent> component = dev.emi.trinkets.api.TrinketsApi.getTrinketComponent(player);
+    public static ItemStack getCape(LivingEntity player) {
+        if (player instanceof PlayerEntity playerEntity) {
+            if (FabricLoader.getInstance().isModLoaded("trinkets")) {
+                try {
+                    Optional<dev.emi.trinkets.api.TrinketComponent> component = dev.emi.trinkets.api.TrinketsApi.getTrinketComponent(player);
 
-                if (component.isPresent()) {
-                    dev.emi.trinkets.api.TrinketComponent trinketComponent = component.get();
-                    Map<String, Map<String, dev.emi.trinkets.api.TrinketInventory>> inventory = trinketComponent.getInventory();
-                    dev.emi.trinkets.api.TrinketInventory trinketInventory = inventory.get("chest").get("cape");
-                    return trinketInventory.getStack(0).getItem() instanceof CapeItem ? trinketInventory.getStack(0) : ItemStack.EMPTY;
+                    if (component.isPresent()) {
+                        dev.emi.trinkets.api.TrinketComponent trinketComponent = component.get();
+                        Map<String, Map<String, dev.emi.trinkets.api.TrinketInventory>> inventory = trinketComponent.getInventory();
+                        dev.emi.trinkets.api.TrinketInventory trinketInventory = inventory.get("chest").get("cape");
+                        return trinketInventory.getStack(0).getItem() instanceof CapeItem ? trinketInventory.getStack(0) : ItemStack.EMPTY;
+                    }
+                } catch (Exception exception) {
+                    // TRINKETS IS PROBABLY NOT INSTALLED ON SERVER
                 }
-            } catch (Exception exception) {
-                // TRINKETS IS PROBABLY NOT INSTALLED ON SERVER
-            }
 
+            }
+            return playerEntity.getInventory().getArmorStack(2).getItem() instanceof CapeItem ? playerEntity.getInventory().getArmorStack(2) : ItemStack.EMPTY;
         }
-        return player.getInventory().getArmorStack(2).getItem() instanceof CapeItem ? player.getInventory().getArmorStack(2) : ItemStack.EMPTY;
+        else {
+
+            @Nonnull
+            ItemStack itemStack = ItemStack.fromNbt(player.getEquippedStack(EquipmentSlot.CHEST).getOrCreateNbt().getCompound("thonkutil:cape_id"));
+            if (!itemStack.isEmpty()) {
+                return itemStack;
+            }
+            return player.getEquippedStack(EquipmentSlot.CHEST).getItem() instanceof CapeItem ? player.getEquippedStack(EquipmentSlot.CHEST) : ItemStack.EMPTY;
+        }
     }
 }

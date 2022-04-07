@@ -1,10 +1,12 @@
 package com.jab125.thonkutil.mixin;
 
 import com.jab125.thonkutil.api.CapeItem;
+import com.jab125.thonkutil.impl.LivingEntityExtension;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -12,6 +14,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
 import net.minecraft.util.registry.Registry;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -22,10 +25,66 @@ import java.util.ArrayList;
 import static com.jab125.thonkutil.util.Util.isModInstalled;
 
 @Mixin(LivingEntity.class)
-public class LivingEntityMixin {
+public class LivingEntityMixin implements LivingEntityExtension {
+    @Unique
+    double prevCapeZ;
+    @Unique
+    double capeX;
+    @Unique
+    double capeY;
+    @Unique
+    double capeZ;
+    @Unique
+    double prevCapeX;
+    @Unique
+    double prevCapeY;
+    @Unique
+    private void updateCapeAngles() {
+        var livingEntity = (LivingEntity)(Object)this;
+        this.prevCapeX = this.capeX;
+        this.prevCapeY = this.capeY;
+        this.prevCapeZ = this.capeZ;
+        double d = livingEntity.getX() - this.capeX;
+        double e = livingEntity.getY() - this.capeY;
+        double f = livingEntity.getZ() - this.capeZ;
+        double g = 10.0D;
+        if (d > 10.0D) {
+            this.capeX = livingEntity.getX();
+            this.prevCapeX = this.capeX;
+        }
+
+        if (f > 10.0D) {
+            this.capeZ = livingEntity.getZ();
+            this.prevCapeZ = this.capeZ;
+        }
+
+        if (e > 10.0D) {
+            this.capeY = livingEntity.getY();
+            this.prevCapeY = this.capeY;
+        }
+
+        if (d < -10.0D) {
+            this.capeX = livingEntity.getX();
+            this.prevCapeX = this.capeX;
+        }
+
+        if (f < -10.0D) {
+            this.capeZ = livingEntity.getZ();
+            this.prevCapeZ = this.capeZ;
+        }
+
+        if (e < -10.0D) {
+            this.capeY = livingEntity.getY();
+            this.prevCapeY = this.capeY;
+        }
+
+        this.capeX += d * 0.25D;
+        this.capeZ += f * 0.25D;
+        this.capeY += e * 0.25D;
+    }
     @Inject(method = "getPreferredEquipmentSlot", at = @At(value = "HEAD"), cancellable = true)
     private static void getPreferredEquipmentSlot(ItemStack stack, CallbackInfoReturnable<EquipmentSlot> cir) {
-        if (isModInstalled("trinkets")) return; // TODO: Trinkets compat
+        if (isModInstalled("trinkets")) return;
         Item item = stack.getItem();
 
         if (item instanceof CapeItem) {
@@ -41,6 +100,11 @@ public class LivingEntityMixin {
         if (Math.random() * 100 == 0)
             ((LivingEntity) (Object) this).dropStack(new ItemStack(a));
         //((LivingEntity)(Object) this).world.getServer().sendSystemMessage(new LiteralText("You got " + I18n.translate(a.getTranslationKey()) + "!"), Util.NIL_UUID);
+    }
+
+    @Inject(method = "tick", at = @At("HEAD"))
+    private void thonkutil$tick(CallbackInfo ci) {
+        this.updateCapeAngles();
     }
 
     private Item pickOutCape() {
@@ -67,5 +131,35 @@ public class LivingEntityMixin {
         final Object[] c = capCapes.toArray();
         final int b = (int) (Math.random() * c.length);
         return ((Pair<Item, Integer>) c[b]).getRight() >= (Math.random() * 100) + 1 ? ((Pair<Item, Integer>) c[b]).getLeft() : Items.AIR;
+    }
+
+    @Override
+    public double thonkutil$getCapeX() {
+        return capeX;
+    }
+
+    @Override
+    public double thonkutil$getCapeY() {
+        return capeY;
+    }
+
+    @Override
+    public double thonkutil$getCapeZ() {
+        return capeZ;
+    }
+
+    @Override
+    public double thonkutil$getPrevCapeX() {
+        return prevCapeX;
+    }
+
+    @Override
+    public double thonkutil$getPrevCapeY() {
+        return prevCapeY;
+    }
+
+    @Override
+    public double thonkutil$getPrevCapeZ() {
+        return prevCapeZ;
     }
 }
