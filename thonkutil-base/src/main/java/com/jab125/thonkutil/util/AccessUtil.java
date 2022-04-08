@@ -2,6 +2,7 @@ package com.jab125.thonkutil.util;
 
 import java.util.Objects;
 
+@Deprecated
 public class AccessUtil {
     private AccessUtil() {
         throw new UnsupportedOperationException();
