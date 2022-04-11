@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "thonkutil-misc-api-v1",
+  "version": "${version}",
+  "name": "ThonkUtil Misc Api (v1)",
+  "description": "Ditto",
+  "authors": [
+    "Jab125"
+  ],
+  "entrypoints": {
+    "main": [
+      "com.jab125.thonkutil.misc.impl.v1.ThonkUtilMisc"
+    ],
+    "thonkutil:early_load": [
+      "com.jab125.thonkutil.misc.impl.v1.ThonkUtilMisc"
+    ]
+  },
+
+  "license": "CC0-1.0",
+  "icon": "assets/thonkutil-misc-api-v1/icon.png",
+  "environment": "*",
+  "mixins": [
+    "thonkutil-misc-api-v1.mixins.json"
+  ],
+  "custom": {
+    "modmenu": {
+      "parent": {
+        "id": "thonkutil",
+        "name": "ThonkUtil",
+        "description": "Some useful features that mod devs and regular users would like.",
+        "icon": "assets/thonkutil-misc-api-v1/icon.png",
+        "badges": [
+          "library"
+        ]
+      },
+      "badges": [
+        "library"
+      ]
+    }
+  }
+}
