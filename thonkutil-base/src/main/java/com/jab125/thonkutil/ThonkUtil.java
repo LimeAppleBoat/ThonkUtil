@@ -4,7 +4,6 @@ import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.jab125.thonkutil.api.annotations.SubscribeEvent;
-import com.jab125.thonkutil.api.config.toml.TomlConfig;
 import com.jab125.thonkutil.api.events.EventTaxi;
 import com.jab125.thonkutil.api.events.client.EventTaxiClient;
 import com.jab125.thonkutil.api.events.client.screen.TitleScreenRenderEvent;
