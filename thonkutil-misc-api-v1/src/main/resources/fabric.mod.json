@@ -13,6 +13,9 @@
     ],
     "thonkutil:early_load": [
       "com.jab125.thonkutil.misc.impl.v1.ThonkUtilMisc"
+    ],
+    "preLaunch": [
+      "com.jab125.thonkutil.misc.impl.v1.EnumExtend"
     ]
   },
 
