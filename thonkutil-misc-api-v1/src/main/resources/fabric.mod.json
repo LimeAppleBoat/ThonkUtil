@@ -10,9 +10,6 @@
   "entrypoints": {
     "main": [
       "com.jab125.thonkutil.misc.impl.v1.ThonkUtilMisc"
-    ],
-    "thonkutil:early_load": [
-      "com.jab125.thonkutil.misc.impl.v1.ThonkUtilMisc"
     ]
   },
 
