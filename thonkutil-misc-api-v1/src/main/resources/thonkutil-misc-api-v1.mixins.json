@@ -5,6 +5,11 @@
   "package": "com.jab125.thonkutil.misc.impl.v1.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "FabricModMixin"
+  ],
+  "client": [
+    "ModMenuMixin",
+    "ModSearchMixin"
   ],
   "injectors": {
     "defaultRequire": 1

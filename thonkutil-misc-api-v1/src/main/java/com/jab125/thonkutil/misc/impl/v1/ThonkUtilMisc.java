@@ -2,26 +2,28 @@ package com.jab125.thonkutil.misc.impl.v1;
 
 import com.jab125.thonkutil.misc.api.v1.CustomBoatType;
 import com.jab125.thonkutil.misc.api.v1.CustomEnchantmentTarget;
-import net.fabricmc.api.ModInitializer;
+import com.jab125.thonkutil.misc.api.v1.CustomModBadge;
+import com.jab125.thonkutil.misc.api.v1.ModMenuInitialization;
+import com.terraformersmc.modmenu.util.mod.Mod;
+import net.fabricmc.api.*;
 import net.minecraft.block.Blocks;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
-import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.vehicle.BoatEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Map;
 
 
+@EnvironmentInterfaces(value = {@EnvironmentInterface(value = EnvType.CLIENT, itf = ClientModInitializer.class), @EnvironmentInterface(value = EnvType.CLIENT, itf = ModMenuInitialization.class)})
+public class ThonkUtilMisc implements ModInitializer, ClientModInitializer, ModMenuInitialization {
+    @Environment(EnvType.CLIENT)
+    public static final Mod.Badge ASM_BADGE = CustomModBadge.create("THONKUTIL:ASM", "thonkutil.badge.asm", 0xff6f6c6a, 0xff31302f, "thonkutil:asm", "thonkutil.searchTerms.asm");
+    @Environment(EnvType.CLIENT)
+    public static final Mod.Badge UNSTABLE_BADGE = CustomModBadge.create("THONKUTIL:UNSTABLE", "thonkutil.badge.unstable", 0xff841426, 0xff530C17, "thonkutil:unstable", "thonkutil.searchTerms.unstable");
 
-public class ThonkUtilMisc implements ModInitializer {
     @Override
     public void onInitialize() {
         CustomBoatType.create("CRAZY_HAT", Blocks.GRASS_BLOCK, "crazy_hat");
@@ -31,5 +33,20 @@ public class ThonkUtilMisc implements ModInitializer {
         Registry.register(Registry.ENCHANTMENT, "swing", new Enchantment(Enchantment.Rarity.VERY_RARE, type, new EquipmentSlot[]{EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET}) {
 
         });
+    }
+
+    @Environment(EnvType.CLIENT)
+    @Override
+    public void onInitializeClient() {
+    }
+
+    @Environment(EnvType.CLIENT)
+    @Override
+    public void afterModMenuInitialized() {
+    }
+
+    @Environment(EnvType.CLIENT)
+    @Override
+    public void beforeModMenuInitialized() {
     }
 }

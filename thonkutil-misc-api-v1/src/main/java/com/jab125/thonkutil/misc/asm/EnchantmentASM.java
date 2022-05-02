@@ -26,7 +26,7 @@ public class EnchantmentASM extends ASM implements Opcodes{
 
     @Override
     public MethodVisitor visitMethod(int access, String name, String descriptor, String signature, String[] exceptions) {
-        if (name.equals("isAcceptableItem") && (access & ACC_ABSTRACT) != 0) {
+        if (name.equals(FabricLoader.getInstance().getMappingResolver().mapMethodName("intermediary", "net.minecraft.class_1886", "method_8177", "(Lnet/minecraft/class_1792;)Z")) && (access & ACC_ABSTRACT) != 0) {
             return null;
         }
         return super.visitMethod(access, name, descriptor, signature, exceptions);
@@ -39,17 +39,19 @@ public class EnchantmentASM extends ASM implements Opcodes{
         MethodVisitor methodVisitor;
         cr.accept(new EnchantmentASM(FabricLoaderImpl.ASM_VERSION, cw), 0);
         AnnotationVisitor annotationVisitor0;
+        var enchantmentTargetName = FabricLoader.getInstance().getMappingResolver().mapClassName("intermediary", "net.minecraft.class_1886").replaceAll("\\.", "/");
+        var itemName = FabricLoader.getInstance().getMappingResolver().mapClassName("intermediary", "net.minecraft.class_1792").replaceAll("\\.", "/");
 
-        //cw.visit(V17, ACC_PUBLIC | ACC_SUPER, "net/minecraft/enchantment/EnchantmentTarget", null, "java/lang/Object", null);
+        //cw.visit(V17, ACC_PUBLIC | ACC_SUPER, "L" + enchantmentTargetName + ";", null, "java/lang/Object", null);
 
         cw.visitSource("EnchantmentTarget.java", null);
 
         {
-            fieldVisitor = cw.visitField(ACC_PRIVATE, "func", "Ljava/util/function/Predicate;", "Ljava/util/function/Predicate<Lnet/minecraft/item/Item;>;", null);
+            fieldVisitor = cw.visitField(ACC_PRIVATE, "func", "Ljava/util/function/Predicate;", "Ljava/util/function/Predicate<L" + itemName + ";>;", null);
             fieldVisitor.visitEnd();
         }
         {
-            methodVisitor = cw.visitMethod(ACC_PUBLIC, "<init>", "(Ljava/lang/String;ILjava/util/function/Predicate;)V", "(Ljava/util/function/Predicate<Lnet/minecraft/item/Item;>;)V", null);
+            methodVisitor = cw.visitMethod(ACC_PUBLIC, "<init>", "(Ljava/lang/String;ILjava/util/function/Predicate;)V", "(Ljava/util/function/Predicate<L" + itemName + ";>;)V", null);
             methodVisitor.visitCode();
             Label label0 = new Label();
             methodVisitor.visitLabel(label0);
@@ -63,30 +65,30 @@ public class EnchantmentASM extends ASM implements Opcodes{
             methodVisitor.visitLineNumber(17, label1);
             methodVisitor.visitVarInsn(ALOAD, 0);
             methodVisitor.visitVarInsn(ALOAD, 3);
-            methodVisitor.visitFieldInsn(PUTFIELD, "net/minecraft/enchantment/EnchantmentTarget", "func", "Ljava/util/function/Predicate;");
+            methodVisitor.visitFieldInsn(PUTFIELD, enchantmentTargetName, "func", "Ljava/util/function/Predicate;");
             Label label2 = new Label();
             methodVisitor.visitLabel(label2);
             methodVisitor.visitLineNumber(18, label2);
             methodVisitor.visitInsn(RETURN);
             Label label3 = new Label();
             methodVisitor.visitLabel(label3);
-            methodVisitor.visitLocalVariable("this", "Lnet/minecraft/enchantment/EnchantmentTarget;", null, label0, label3, 0);
-            methodVisitor.visitLocalVariable("function", "Ljava/util/function/Predicate;", "Ljava/util/function/Predicate<Lnet/minecraft/item/Item;>;", label0, label3, 3);
+            methodVisitor.visitLocalVariable("this", "L" + enchantmentTargetName + ";", null, label0, label3, 0);
+            methodVisitor.visitLocalVariable("function", "Ljava/util/function/Predicate;", "Ljava/util/function/Predicate<L" + itemName + ";>;", label0, label3, 3);
             methodVisitor.visitMaxs(3, 4);
             methodVisitor.visitEnd();
         }
         {
-            methodVisitor = cw.visitMethod(ACC_PUBLIC, "isAcceptableItem", "(Lnet/minecraft/item/Item;)Z", null, null);
+            methodVisitor = cw.visitMethod(ACC_PUBLIC, "isAcceptableItem", "(L" + itemName + ";)Z", null, null);
             methodVisitor.visitCode();
             Label label0 = new Label();
             methodVisitor.visitLabel(label0);
             methodVisitor.visitLineNumber(20, label0);
             methodVisitor.visitVarInsn(ALOAD, 0);
-            methodVisitor.visitFieldInsn(GETFIELD, "net/minecraft/enchantment/EnchantmentTarget", "func", "Ljava/util/function/Predicate;");
+            methodVisitor.visitFieldInsn(GETFIELD, enchantmentTargetName, "func", "Ljava/util/function/Predicate;");
             Label label1 = new Label();
             methodVisitor.visitJumpInsn(IFNULL, label1);
             methodVisitor.visitVarInsn(ALOAD, 0);
-            methodVisitor.visitFieldInsn(GETFIELD, "net/minecraft/enchantment/EnchantmentTarget", "func", "Ljava/util/function/Predicate;");
+            methodVisitor.visitFieldInsn(GETFIELD, enchantmentTargetName, "func", "Ljava/util/function/Predicate;");
             methodVisitor.visitVarInsn(ALOAD, 1);
             methodVisitor.visitMethodInsn(INVOKEINTERFACE, "java/util/function/Predicate", "test", "(Ljava/lang/Object;)Z", true);
             methodVisitor.visitJumpInsn(IFEQ, label1);
@@ -101,13 +103,13 @@ public class EnchantmentASM extends ASM implements Opcodes{
             methodVisitor.visitInsn(IRETURN);
             Label label3 = new Label();
             methodVisitor.visitLabel(label3);
-            methodVisitor.visitLocalVariable("this", "Lnet/minecraft/enchantment/EnchantmentTarget;", null, label0, label3, 0);
-            methodVisitor.visitLocalVariable("item", "Lnet/minecraft/item/Item;", null, label0, label3, 1);
+            methodVisitor.visitLocalVariable("this", "L" + enchantmentTargetName + ";", null, label0, label3, 0);
+            methodVisitor.visitLocalVariable("item", "L" + itemName + ";", null, label0, label3, 1);
             methodVisitor.visitMaxs(2, 2);
             methodVisitor.visitEnd();
         }
         cw.visitEnd();
-        //cw.visitMethod(ACC_PUBLIC, "isAcceptableItem", "(Lnet/minecraft/item/Item;)Z", null, new String[0]);
+        //cw.visitMethod(ACC_PUBLIC, "isAcceptableItem", "(L" + itemName + ";)Z", null, new String[0]);
 
         //cw.
         byte[] bytes = cw.toByteArray();
