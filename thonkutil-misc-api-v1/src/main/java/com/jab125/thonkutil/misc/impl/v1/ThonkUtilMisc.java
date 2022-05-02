@@ -31,17 +31,6 @@ public class ThonkUtilMisc implements ModInitializer, ClientModInitializer, ModM
 
     @Override
     public void onInitialize() {
-        try {
-            var target = FabricLoader.getInstance().getMappingResolver().mapClassName("intermediary", "net.minecraft.class_1690$class_1692");
-            var d = Class.forName(target).getClassLoader().getResourceAsStream(target.replace(".", "/") + ".class");
-            var e = Class.forName(target).getClassLoader().getResource(target.replace(".", "/") + ".class");
-            System.out.println(target);
-            System.out.println(d);
-            System.out.println(e);
-            //throw new RuntimeException(Objects.toString(d) + ", " + Objects.toString(e) + ", " + Class.forName(FabricLoader.getInstance().getMappingResolver().mapClassName("intermediary", "net.minecraft.class_1690$class_1692")).getClassLoader().getClass().toString());
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
         CustomBoatType.create("CRAZY_HAT", Blocks.GRASS_BLOCK, "crazy_hat");
         var type = CustomEnchantmentTarget.create("SWING", item -> item.equals(Items.TOTEM_OF_UNDYING));
         System.out.println(Arrays.toString(BoatEntity.Type.values()));
