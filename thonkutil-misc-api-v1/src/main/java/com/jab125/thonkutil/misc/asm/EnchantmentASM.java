@@ -2,8 +2,10 @@ package com.jab125.thonkutil.misc.asm;
 
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.impl.FabricLoaderImpl;
+import net.minecraft.obfuscate.DontObfuscate;
 import org.objectweb.asm.*;
 
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.security.CodeSource;
 
@@ -33,7 +35,19 @@ public class EnchantmentASM extends ASM implements Opcodes{
     }
 
     public static void patchClass(String className, String fieldName, String extenderName, byte[] extender) throws Exception {
-        ClassReader cr = new ClassReader(className);
+        System.out.println("Patched Class Name: " + className);
+        var qs = ClassReader.class.getDeclaredMethod("readStream", InputStream.class, boolean.class);
+        qs.setAccessible(true);
+
+        var slkj = DontObfuscate.class.getClassLoader().getResource(className.replace('.', '/') + ".class");
+        System.out.println(slkj);
+        //System.exit(-1);
+        var rtf = DontObfuscate.class.getClassLoader().getResourceAsStream(className.replace('.', '/') + ".class");
+        if (rtf == null) throw new RuntimeException("QUANTUM PHYSICS!!!!");
+        //if (true) throw new IllegalStateException(slkj + ", " + rtf);
+        byte[] fvg = (byte[]) qs.invoke(null, rtf, true);
+
+        ClassReader cr = new ClassReader(fvg);
         ClassWriter cw = new ClassWriter(cr, 0);
         FieldVisitor fieldVisitor;
         MethodVisitor methodVisitor;

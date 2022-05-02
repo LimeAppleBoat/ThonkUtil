@@ -41,21 +41,21 @@ public abstract class PlayerEntityDataTrackerMixin extends LivingEntity implemen
         super(entityType, world);
     }
 
-    @Inject(method = "initDataTracker", at = @At("TAIL"))
-    private void thonkutil$dataTracker(CallbackInfo ci) {
-        this.dataTracker.startTracking(CURRENT_COSMETIC, "");
-        this.dataTracker.startTracking(COSMETIC_ENCHANTED, false);
-    }
-    @Inject(method = "writeCustomDataToNbt", at = @At("TAIL"))
-    private void thonkutil$writeNbt(NbtCompound nbt, CallbackInfo ci) {
-        nbt.putString("thonkutil:currentcosmetic", this.dataTracker.get(CURRENT_COSMETIC));
-        nbt.putBoolean("thonkutil:cosmeticenchanted", this.dataTracker.get(COSMETIC_ENCHANTED));
-    }
-    @Inject(method = "readCustomDataFromNbt", at = @At("TAIL"))
-    private void thonkutil$readNbt(NbtCompound nbt, CallbackInfo ci) {
-        this.dataTracker.set(CURRENT_COSMETIC, nbt.getString("thonkutil:currentcosmetic"));
-        this.dataTracker.set(COSMETIC_ENCHANTED, nbt.getBoolean("thonkutil:cosmeticenchanted"));
-    }
+//    @Inject(method = "initDataTracker", at = @At("TAIL"))
+//    private void thonkutil$dataTracker(CallbackInfo ci) {
+//        this.dataTracker.startTracking(CURRENT_COSMETIC, "");
+//        this.dataTracker.startTracking(COSMETIC_ENCHANTED, false);
+//    }
+//    @Inject(method = "writeCustomDataToNbt", at = @At("TAIL"))
+//    private void thonkutil$writeNbt(NbtCompound nbt, CallbackInfo ci) {
+//        nbt.putString("thonkutil:currentcosmetic", this.dataTracker.get(CURRENT_COSMETIC));
+//        nbt.putBoolean("thonkutil:cosmeticenchanted", this.dataTracker.get(COSMETIC_ENCHANTED));
+//    }
+//    @Inject(method = "readCustomDataFromNbt", at = @At("TAIL"))
+//    private void thonkutil$readNbt(NbtCompound nbt, CallbackInfo ci) {
+//        this.dataTracker.set(CURRENT_COSMETIC, nbt.getString("thonkutil:currentcosmetic"));
+//        this.dataTracker.set(COSMETIC_ENCHANTED, nbt.getBoolean("thonkutil:cosmeticenchanted"));
+//    }
 
     @Override
     public String thonkutil$getCosmetic() {

@@ -1,7 +1,10 @@
 package com.jab125.thonkutil.misc.asm;
 
 import net.fabricmc.loader.api.FabricLoader;
+import net.fabricmc.loader.impl.FabricLoaderImpl;
+import org.apache.commons.logging.LogFactory;
 import org.objectweb.asm.*;
+import org.slf4j.LoggerFactory;
 
 import static org.objectweb.asm.Opcodes.*;
 import static org.objectweb.asm.Opcodes.ARETURN;
@@ -10,6 +13,8 @@ public class BoatPatch {
 
     static void patch() throws Exception {
         var target = FabricLoader.getInstance().getMappingResolver().mapClassName("intermediary", "net.minecraft.class_1690$class_1692");
+        //try {Class.forName(target);} catch (ClassNotFoundException e) { LoggerFactory.getLogger("thonkutil").info("Target Not Found!"); throw e; }
+        LoggerFactory.getLogger("thonkutil").info(target);
         Patch.patchClass(target, "field_7724", "com.jab125.thonkutil.misc.api.v1.CustomBoatType", extension());
     }
 
