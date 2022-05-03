@@ -132,7 +132,7 @@ public class EnchantmentASM extends ASM implements Opcodes{
         var e = ASM.class.getClassLoader();
         //System.out.println(e.getClass().toString());
 
-        var q = Class.forName("net.fabricmc.loader.impl.launch.knot.KnotClassLoader").getDeclaredMethod("defineClassFwd", String.class, byte[].class, int.class, int.class, CodeSource.class);
+        var q = Class.forName(Patch.loader).getDeclaredMethod("defineClassFwd", String.class, byte[].class, int.class, int.class, CodeSource.class);
         q.setAccessible(true);
         q.invoke(ASM.class.getClassLoader(), className, bytes, 0, bytes.length, null);
 

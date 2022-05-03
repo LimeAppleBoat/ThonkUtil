@@ -13,10 +13,12 @@ import org.objectweb.asm.util.ASMifier;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.security.CodeSource;
 
 public class Patch implements Opcodes {
+    static String loader = "net.fabricmc.loader.impl.launch.knot.KnotClassLoader";
     public static void main(String[] args) throws IOException {
         //ASMifier.main(new String[]{"/Users/josephyap/Documents/GitHub/ThonkUtil/thonkutil-misc-api-v1/build/classes/java/main/com/jab125/thonkutil/misc/api/v1/CustomEnchantmentTarget.class"});
         //ASMifier.main(new String[]{"/Users/josephyap/Documents/GitHub/ThonkUtil/thonkutil-misc-api-v1/build/classes/java/main/com/jab125/thonkutil/misc/asm/CustomEnchantmentTarget2.class"});
@@ -25,7 +27,7 @@ public class Patch implements Opcodes {
     public static void patchClass(String className, byte[] bytes) throws Exception{
 
         Files.write(FabricLoader.getInstance().getGameDir().resolve(className + ".class"), bytes);
-        var q = Class.forName("net.fabricmc.loader.impl.launch.knot.KnotClassLoader").getDeclaredMethod("defineClassFwd", String.class, byte[].class, int.class, int.class, CodeSource.class);
+        var q = Class.forName(loader).getDeclaredMethod("defineClassFwd", String.class, byte[].class, int.class, int.class, CodeSource.class);
         q.setAccessible(true);
         q.invoke(ASM.class.getClassLoader(), className, bytes, 0, bytes.length, null);
 
@@ -58,8 +60,7 @@ public class Patch implements Opcodes {
         Files.write(FabricLoader.getInstance().getGameDir().resolve(className + ".class"), bytes);
         var e = ASM.class.getClassLoader();
         //System.out.println(e.getClass().toString());
-
-        var q = Class.forName("net.fabricmc.loader.impl.launch.knot.KnotClassLoader").getDeclaredMethod("defineClassFwd", String.class, byte[].class, int.class, int.class, CodeSource.class);
+        Method q = Class.forName(loader).getDeclaredMethod("defineClassFwd", String.class, byte[].class, int.class, int.class, CodeSource.class);
         q.setAccessible(true);
         q.invoke(ASM.class.getClassLoader(), className, bytes, 0, bytes.length, null);
 

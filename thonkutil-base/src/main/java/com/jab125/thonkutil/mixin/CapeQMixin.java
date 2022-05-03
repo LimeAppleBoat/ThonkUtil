@@ -14,10 +14,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class CapeQMixin implements PlayerExpansion {
     @Inject(method = "getCapeTexture", at = @At("HEAD"), cancellable = true)
     private void thonkutil$getCapeTexture(CallbackInfoReturnable<Identifier> cir) {
-        if (this.thonkutil$getCosmetic().equals("blanketcon_cape")) {
-            cir.setReturnValue(Identifier.tryParse("thonkutil" + ":textures/cape/" + "blanketcon_cape" + ".png"));
-        } else if (this.thonkutil$getCosmetic().equals("grifferthrydwy_cape")) {
-            cir.setReturnValue(Identifier.tryParse("thonkutil" + ":textures/cape/" + "grifferthrydwy_cape" + ".png"));
-        }
+//        if (this.thonkutil$getCosmetic().equals("blanketcon_cape")) {
+//            cir.setReturnValue(Identifier.tryParse("thonkutil" + ":textures/cape/" + "blanketcon_cape" + ".png"));
+//        } else if (this.thonkutil$getCosmetic().equals("grifferthrydwy_cape")) {
+//            cir.setReturnValue(Identifier.tryParse("thonkutil" + ":textures/cape/" + "grifferthrydwy_cape" + ".png"));
+//        }
     }
 }
