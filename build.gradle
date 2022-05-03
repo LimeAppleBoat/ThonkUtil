@@ -445,6 +445,7 @@ allprojects {
         it.tasks.publishToMavenLocal.enabled = false
         it.tasks.publish.enabled = false
         it.tasks.publishMavenJavaPublicationToMavenLocal.enabled = false
+        it.tasks.publishMavenJavaPublicationToMavenRepository.enabled = false
     }
 }
 
