@@ -1,5 +1,5 @@
 archivesBaseName = "thonkutil-base"
-group = rootProject.group
+
 version = getSubprojectVersion(project)
 
 moduleDependencies(project, [

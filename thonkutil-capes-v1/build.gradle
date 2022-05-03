@@ -1,10 +1,12 @@
 archivesBaseName = "thonkutil-capes-v1"
-group = rootProject.group
+
 version = getSubprojectVersion(project)
 
+moduleDependencies(project, [
+        "thonkutil-base"
+])
 dependencies {
     modCompileOnly "curse.maven:minecraftcapes-359836:3673296"
-    api project(path: ':thonkutil-base', configuration: 'namedElements')
 }
 
 loom {

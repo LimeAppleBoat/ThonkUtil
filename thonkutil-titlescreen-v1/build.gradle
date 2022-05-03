@@ -1,9 +1,11 @@
 archivesBaseName = "thonkutil-titlescreen-v1"
-group = rootProject.group
+
 version = getSubprojectVersion(project)
 
+moduleDependencies(project, [
+        "thonkutil-base"
+])
 dependencies {
-    api project(path: ':thonkutil-base', configuration: 'namedElements')
 }
 
 loom {
