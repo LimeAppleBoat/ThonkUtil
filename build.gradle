@@ -431,6 +431,7 @@ subprojects {
 }
 
 try {
+    tasks.publishMavenJavaPublicationToMavenLocal.mushRunAfter signModuleJavadocJar
     tasks.publishMavenJavaPublicationToMavenLocal.mustRunAfter signSourcesJar
     tasks.publishMavenJavaPublicationToMavenLocal.mustRunAfter signJavadocJar
     tasks.publishMavenJavaPublicationToMavenLocal.mustRunAfter signRemapMavenJar
