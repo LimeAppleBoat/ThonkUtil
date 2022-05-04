@@ -10,7 +10,7 @@ jobs:
     strategy:
       matrix:
         java: [17-jdk]
-    runs-on: ubuntu-20.04
+    runs-on: macos-latest
     container:
       image: eclipse-temurin:${{ matrix.java }}
       options: --user root
@@ -19,6 +19,9 @@ jobs:
         with:
           fetch-depth: 0
       - uses: gradle/wrapper-validation-action@v1
+      - name: make gradle wrapper executable
+        if: ${{ runner.os != 'Windows' }}
+        run: chmod +x ./gradlew
       - run: ./gradlew check build publishToMavenLocal --stacktrace --parallel --warning-mode=fail
       - uses: actions/upload-artifact@v2
         with:
