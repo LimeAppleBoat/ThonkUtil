@@ -43,6 +43,23 @@ def moduleDependencies(project, List<String> depNames) {
             mavenJava(MavenPublication) {
                 pom.withXml {
                     System.out.println(project.name);
+                    asNode().appendNode("name", project.group + ":" + project.name)
+                    asNode().appendNode("description", "Module for ThonkUtil")
+                    asNode().appendNode("url", "https://github.com/LimeAppleBoat/ThonkUtil/")
+                    def licenses = asNode().appendNode("licenses")
+                    def license = licenses.appendNode("license")
+                    license.appendNode("name", "CC0 1.0 Universal")
+                    license.appendNode("url", "https://github.com/LimeAppleBoat/ThonkUtil/blob/1.18/LICENSE")
+                    def developers = asNode().appendNode("developers")
+                    def developer = developers.appendNode("developer")
+                    developer.appendNode("name", "Joseph Yap")
+                    developer.appendNode("email", "joseph_calvin_yap@hotmail.com")
+                    developer.appendNode("organization", "LimeAppleBoat")
+                    developer.appendNode("organizationUrl", "https://github.com/LimeAppleBoat")
+                    def scm = asNode().appendNode("scm")
+                    scm.appendNode("connection", "scm:git:git://github.com/LimeAppleBoat/ThonkUtil.git")
+                    scm.appendNode("developerConnection", "scm:git:ssh://github.com:LimeAppleBoat/ThonkUtil.git")
+                    scm.appendNode("url", "https://github.com/LimeAppleBoat/ThonkUtil/tree/1.18/")
                     def depsNode = asNode().appendNode("dependencies")
                     deps.each {
                         def depNode = depsNode.appendNode("dependency")
@@ -117,6 +134,7 @@ def getAddon(project) {
 allprojects {
     apply plugin: 'fabric-loom'
     apply plugin: 'maven-publish'
+    apply plugin: 'signing'
 
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
@@ -218,6 +236,19 @@ allprojects {
         }
     }
 
+    task moduleJavadocJar(type: Jar) {
+        classifier = 'javadoc'
+        from javadoc
+    }
+    build.dependsOn moduleJavadocJar
+
+    signing {
+        //useGpgCmd()
+        sign moduleJavadocJar
+        sign sourcesJar
+        sign remapSourcesJar
+    }
+
 // configure the maven publication
 }
 
@@ -276,7 +307,28 @@ publishing {
             }
             artifact javadocJar
 
+            artifact(moduleJavadocJar) {
+                builtBy moduleJavadocJar
+            }
+
             pom.withXml {
+                asNode().appendNode("name", project.group + ":" + project.name)
+                asNode().appendNode("description", "Modular api for Minecraft mods.")
+                asNode().appendNode("url", "https://github.com/LimeAppleBoat/ThonkUtil/")
+                def licenses = asNode().appendNode("licenses")
+                def license = licenses.appendNode("license")
+                license.appendNode("name", "CC0 1.0 Universal")
+                license.appendNode("url", "https://github.com/LimeAppleBoat/ThonkUtil/blob/1.18/LICENSE")
+                def developers = asNode().appendNode("developers")
+                def developer = developers.appendNode("developer")
+                developer.appendNode("name", "Joseph Yap")
+                developer.appendNode("email", "joseph_calvin_yap@hotmail.com")
+                developer.appendNode("organization", "LimeAppleBoat")
+                developer.appendNode("organizationUrl", "https://github.com/LimeAppleBoat")
+                def scm = asNode().appendNode("scm")
+                scm.appendNode("connection", "scm:git:git://github.com/LimeAppleBoat/ThonkUtil.git")
+                scm.appendNode("developerConnection", "scm:git:ssh://github.com:LimeAppleBoat/ThonkUtil.git")
+                scm.appendNode("url", "https://github.com/LimeAppleBoat/ThonkUtil/tree/1.18/")
                 def depsNode = asNode().appendNode("dependencies")
                 subprojects.each {
                     if (it.name in dontUse) return
@@ -306,6 +358,10 @@ subprojects {
                 }
                 artifact(sourcesJar) {
                     builtBy remapSourcesJar
+                }
+
+                artifact(moduleJavadocJar) {
+                    builtBy moduleJavadocJar
                 }
             }
         }
@@ -353,6 +409,17 @@ tasks.withType(Jar).configureEach {
         attributes 'Implementation-Title': 'ThonkUtil',
                 'Implementation-Version': project.version,
                 'Main-Class': 'com.jab125.thonkutil.Main'
+    }
+}
+allprojects {
+    signing {
+        sign remapMavenJar
+        sign publishing.publications.mavenJava
+
+//    sign sourcesJar
+//    sign remapSourcesJar
+//    sign moduleJavadocJar
+        sign javadocJar
     }
 }
 
@@ -445,8 +512,9 @@ allprojects {
         it.tasks.publishToMavenLocal.enabled = false
         it.tasks.publish.enabled = false
         it.tasks.publishMavenJavaPublicationToMavenLocal.enabled = false
-        it.tasks.publishMavenJavaPublicationToMavenRepository.enabled = false
+        try {
+            it.tasks.publishMavenJavaPublicationToMavenRepository.enabled = false
+        } catch (Exception ignored){}
     }
 }
-
 apply from: "gradle/module-versioning.gradle"
