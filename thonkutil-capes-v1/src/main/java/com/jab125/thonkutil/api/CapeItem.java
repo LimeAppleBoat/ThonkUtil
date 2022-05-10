@@ -10,7 +10,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Wearable;
-import net.minecraft.text.BaseText;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
@@ -32,7 +31,7 @@ public class CapeItem extends Item implements Wearable {
     private final boolean has2WingedElytra;
     private final Item.Settings settings;
     private boolean addToCreativeInventory = true;
-    private ArrayList<Text> credits = new ArrayList<>();
+    private ArrayList<String> credits = new ArrayList<>();
 
     private CapeItem(CapeItem cape) {
         super(cape.settings);
@@ -47,7 +46,7 @@ public class CapeItem extends Item implements Wearable {
     }
 
     public CapeItem mojangCredits() {
-        this.credits.add(Text.of("Mojang Studios"));
+        this.credits.add("Mojang Studios");
         return this;
     }
 
@@ -58,23 +57,16 @@ public class CapeItem extends Item implements Wearable {
     }
 
     public CapeItem addCredits(String... credits) {
-        for (String credit : credits) {
-            this.credits.add(new LiteralText(credit));
-        }
-        return this;
-    }
-
-    public CapeItem addCredits(Text... credits) {
         this.credits.addAll(List.of(credits));
         return this;
     }
 
     // Generated with GitHub Copilot
-    private BaseText generateCredits(boolean and) {
+    private String generateCredits(boolean and) {
         // combine the credits into one string, inserting a comma between each one, but not the last one, and insert an "and" after the second last one if and is true
-        BaseText sb = new LiteralText("");
+        StringBuilder sb = new StringBuilder();
         int i = 0;
-        for (Text credit : credits) {
+        for (String credit : credits) {
             if (i > 0) {
                 if (i == credits.size() - 1) {
                     sb.append(" and ");
@@ -86,10 +78,10 @@ public class CapeItem extends Item implements Wearable {
             sb.append(credit);
             i++;
         }
-        return sb;
+        return sb.toString();
     }
 
-    private BaseText generateCredits() {
+    private String generateCredits() {
         return generateCredits(true);
     }
 
@@ -159,7 +151,7 @@ public class CapeItem extends Item implements Wearable {
         if (!hasElytraTexture && isModInstalled("trinkets"))
             tooltip.add(new TranslatableText("thonkutil.no_elytra").formatted(Formatting.GRAY));
         if (credits.size() > 0)
-            tooltip.add(generateCredits().formatted(Formatting.GRAY));
+            tooltip.add(new LiteralText(generateCredits()).formatted(Formatting.GRAY));
     }
 
     @Override
