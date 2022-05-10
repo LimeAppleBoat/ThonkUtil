@@ -8,7 +8,6 @@ import com.jab125.thonkutil.api.events.EventTaxi;
 import com.jab125.thonkutil.api.events.client.EventTaxiClient;
 import com.jab125.thonkutil.api.events.client.screen.TitleScreenRenderEvent;
 import com.jab125.thonkutil.api.events.server.entity.TotemUseEvent;
-import com.jab125.thonkutil.cosmetics.Cosmetics;
 import net.fabricmc.api.*;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.MinecraftClient;
@@ -75,7 +74,6 @@ public class ThonkUtil implements ThonkUtilBaseClass, ModInitializer, ClientModI
     @Override
     @Environment(EnvType.CLIENT)
     public void onInitializeClient() {
-        Cosmetics.init();
         EventTaxiClient.registerClientTaxis();
         ClientPlayNetworking.registerGlobalReceiver(TOTEM_PACKET,
                 (client, handler, buf, responseSender) -> {
