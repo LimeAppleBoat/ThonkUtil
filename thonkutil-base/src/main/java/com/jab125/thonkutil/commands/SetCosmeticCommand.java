@@ -22,11 +22,11 @@ public final class SetCosmeticCommand {
         dispatcher.register(CommandManager.literal("thonkutil:cosmetic").requires((source) -> {
             return e(source);
         }).executes(context->execute(context.getSource(), "", false))
-                .then(CommandManager.argument("cosmetic", StringArgumentType.string()).executes((context) -> {
-            return execute(context.getSource(), StringArgumentType.getString(context, "cosmetic"), false);
+                .then(CommandManager.argument("cosmetic", StringArgumentType.string()).executes((dispacher) -> {
+            return execute(dispacher.getSource(), StringArgumentType.getString(dispacher, "cosmetic"), false);
                 }
-        ).then(CommandManager.argument("enchanted", BoolArgumentType.bool()).executes((context)-> {
-            return execute(context.getSource(), StringArgumentType.getString(context, "cosmetic"), BoolArgumentType.getBool(context, "enchanted"));
+        ).then(CommandManager.argument("enchanted", BoolArgumentType.bool()).executes((dispatchr)-> {
+            return execute(dispatchr.getSource(), StringArgumentType.getString(dispatchr, "cosmetic"), BoolArgumentType.getBool(dispatchr, "enchanted"));
                 }))));
     }
 
