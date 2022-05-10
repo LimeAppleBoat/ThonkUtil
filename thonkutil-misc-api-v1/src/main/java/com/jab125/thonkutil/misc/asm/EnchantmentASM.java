@@ -92,7 +92,7 @@ public class EnchantmentASM extends ASM implements Opcodes{
             methodVisitor.visitEnd();
         }
         {
-            methodVisitor = cw.visitMethod(ACC_PUBLIC, FabricLoader.getInstance().getMappingResolver().mapMethodName("intermediary", "net.minecraft.class_1886", "method_8177", "(Lnet/minecraft/class_1792;)Z"), "(L" + itemName + ";)Z", null, null);
+            methodVisitor = cw.visitMethod(ACC_PUBLIC, "isAcceptableItem", "(L" + itemName + ";)Z", null, null);
             methodVisitor.visitCode();
             Label label0 = new Label();
             methodVisitor.visitLabel(label0);
