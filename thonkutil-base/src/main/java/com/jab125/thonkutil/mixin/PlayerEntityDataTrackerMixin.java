@@ -59,57 +59,56 @@ public abstract class PlayerEntityDataTrackerMixin extends LivingEntity implemen
 
     @Override
     public String thonkutil$getCosmetic() {
-//        if (thonkutil$ownsCosmetic(this.dataTracker.get(CURRENT_COSMETIC)))
-//            return this.dataTracker.get(CURRENT_COSMETIC);
+        if (thonkutil$ownsCosmetic(this.dataTracker.get(CURRENT_COSMETIC)))
+            return this.dataTracker.get(CURRENT_COSMETIC);
         return "";
     }
 
     @Override
     public void thonkutil$setCosmetic(String string) {
-//        if (thonkutil$ownsCosmetic(string))
-//            this.dataTracker.set(CURRENT_COSMETIC, string);
+        if (thonkutil$ownsCosmetic(string))
+            this.dataTracker.set(CURRENT_COSMETIC, string);
     }
 
     @Override
     public boolean thonkutil$cosmeticEnchanted() {
-        return false;
-//        return this.dataTracker.get(COSMETIC_ENCHANTED) && thonkutil$cosmeticEnchantable(this.thonkutil$getCosmetic());
+        return this.dataTracker.get(COSMETIC_ENCHANTED) && thonkutil$cosmeticEnchantable(this.thonkutil$getCosmetic());
     }
 
     @Override
     public boolean thonkutil$cosmeticEnchantable(String cosmetic) {
-//        for (Cosmetics.CosmeticType cosmetic2 : cosmetics) {
-//            if (cosmetic2.uuid().equals(this.uuidString) || (cosmetic2.uuid().equals("dev") && FabricLoader.getInstance().isDevelopmentEnvironment())) {
-//                for (Pair<String, Boolean> cosmetic1 : cosmetic2.cosmetics()) {
-//                    if (cosmetic1.getLeft().equals(cosmetic)) {
-//                        return cosmetic1.getRight();
-//                    }
-//                }
-//                return false;
-//            }
-//        }
+        for (Cosmetics.CosmeticType cosmetic2 : cosmetics) {
+            if (cosmetic2.uuid().equals(this.uuidString) || (cosmetic2.uuid().equals("dev") && FabricLoader.getInstance().isDevelopmentEnvironment())) {
+                for (Pair<String, Boolean> cosmetic1 : cosmetic2.cosmetics()) {
+                    if (cosmetic1.getLeft().equals(cosmetic)) {
+                        return cosmetic1.getRight();
+                    }
+                }
+                return false;
+            }
+        }
         return false;
     }
 
     @Override
     public boolean thonkutil$ownsCosmetic(String string) {
-//        if (string.equals("")) return true;
-//        for (Cosmetics.CosmeticType cosmetic : cosmetics) {
-//            if (cosmetic.uuid().equals(this.uuidString) || (cosmetic.uuid().equals("dev") && FabricLoader.getInstance().isDevelopmentEnvironment())) {
-//                for (Pair<String, Boolean> cosmetic1 : cosmetic.cosmetics()) {
-//                    if (cosmetic1.getLeft().equals(string)) {
-//                        return true;
-//                    }
-//                }
-//                return false;
-//            }
-//        }
+        if (string.equals("")) return true;
+        for (Cosmetics.CosmeticType cosmetic : cosmetics) {
+            if (cosmetic.uuid().equals(this.uuidString) || (cosmetic.uuid().equals("dev") && FabricLoader.getInstance().isDevelopmentEnvironment())) {
+                for (Pair<String, Boolean> cosmetic1 : cosmetic.cosmetics()) {
+                    if (cosmetic1.getLeft().equals(string)) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+        }
         return false;
     }
 
     @Override
     public void thonkutil$setEnchanted(boolean enchant) {
-//        if (thonkutil$cosmeticEnchantable(thonkutil$getCosmetic()))
-//            this.dataTracker.set(COSMETIC_ENCHANTED, enchant);
+        if (thonkutil$cosmeticEnchantable(thonkutil$getCosmetic()))
+            this.dataTracker.set(COSMETIC_ENCHANTED, enchant);
     }
 }
