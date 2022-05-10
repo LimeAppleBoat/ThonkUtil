@@ -2,7 +2,6 @@ package com.jab125.thonkutil.mixin;
 
 import com.jab125.thonkutil.cosmetics.Cosmetics;
 import com.jab125.thonkutil.impl.PlayerExpansion;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
@@ -78,7 +77,7 @@ public abstract class PlayerEntityDataTrackerMixin extends LivingEntity implemen
     @Override
     public boolean thonkutil$cosmeticEnchantable(String cosmetic) {
         for (Cosmetics.CosmeticType cosmetic2 : cosmetics) {
-            if (cosmetic2.uuid().equals(this.uuidString) || (cosmetic2.uuid().equals("dev") && FabricLoader.getInstance().isDevelopmentEnvironment())) {
+            if (cosmetic2.uuid().equals(this.uuidString)) {
                 for (Pair<String, Boolean> cosmetic1 : cosmetic2.cosmetics()) {
                     if (cosmetic1.getLeft().equals(cosmetic)) {
                         return cosmetic1.getRight();
@@ -94,7 +93,7 @@ public abstract class PlayerEntityDataTrackerMixin extends LivingEntity implemen
     public boolean thonkutil$ownsCosmetic(String string) {
         if (string.equals("")) return true;
         for (Cosmetics.CosmeticType cosmetic : cosmetics) {
-            if (cosmetic.uuid().equals(this.uuidString) || (cosmetic.uuid().equals("dev") && FabricLoader.getInstance().isDevelopmentEnvironment())) {
+            if (cosmetic.uuid().equals(this.uuidString)) {
                 for (Pair<String, Boolean> cosmetic1 : cosmetic.cosmetics()) {
                     if (cosmetic1.getLeft().equals(string)) {
                         return true;
