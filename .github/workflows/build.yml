@@ -19,7 +19,8 @@ jobs:
         with:
           fetch-depth: 0
       - uses: gradle/wrapper-validation-action@v1
-      if: ${{ runner.os != 'Windows' }}
+      - name: make gradle wrapper executable
+        if: ${{ runner.os != 'Windows' }}
         run: chmod +x ./gradlew
       - run: ./gradlew check build publishToMavenLocal --stacktrace --parallel --warning-mode=fail
       - uses: actions/upload-artifact@v2
