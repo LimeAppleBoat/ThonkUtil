@@ -87,7 +87,7 @@ public class CapeItem extends Item implements Wearable {
 
     @Environment(EnvType.CLIENT)
     public Identifier getElytraTexture() {
-        if (has2WingedElytra && !hasAppliedElytraTexture) {
+        if (has2WingedElytra && hasAppliedElytraTexture) {
             TextureLoader.apply2WingedElytra(this);
             hasAppliedElytraTexture = true;
         }
