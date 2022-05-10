@@ -6,7 +6,6 @@ moduleDependencies(project, [
 
 ])
 dependencies {
-
 }
 loom {
     accessWidenerPath = file("src/main/resources/thonkutil-base.accesswidener")
