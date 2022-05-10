@@ -142,23 +142,19 @@ public abstract class ASM extends ClassVisitor {
 
     @Override
     public MethodVisitor visitMethod(int access, String name, String descriptor, String signature, String[] exceptions) {
-        //System.out.println(descriptor);
-        //System.out.println(name);
-        //System.out.println(access);
-        if(name.equals("lambda$static$0")) { // ModMenu lambda
-            access = access - ACC_PRIVATE;
-            access += ACC_PUBLIC;
-        }
+        System.out.println(descriptor);
+        System.out.println(name);
+        System.out.println(access);
         if (name.equals("<init>") && !(this instanceof EnchantmentASM)) {
             if ((access & ACC_PRIVATE) != 0)
             access = access - Opcodes.ACC_PRIVATE;
             if ((access & ACC_PUBLIC) == 0)
             access = access + Opcodes.ACC_PUBLIC;
         }
-        if ((access & Opcodes.ACC_SYNTHETIC) != 0 && FabricLoader.getInstance().isDevelopmentEnvironment()) {
+        if ((access & Opcodes.ACC_SYNTHETIC) != 0) {
             access = access - Opcodes.ACC_SYNTHETIC;
         }
-        //System.out.println(access);
+        System.out.println(access);
         return super.visitMethod(access, name, descriptor, signature, exceptions);
     }
 

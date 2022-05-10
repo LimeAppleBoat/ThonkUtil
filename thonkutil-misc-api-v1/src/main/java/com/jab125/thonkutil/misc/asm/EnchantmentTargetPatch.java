@@ -1,19 +1,16 @@
 package com.jab125.thonkutil.misc.asm;
 
-import net.fabricmc.loader.api.FabricLoader;
 import org.objectweb.asm.*;
 
 public class EnchantmentTargetPatch extends Patch{
 
     static void patch() throws Exception {
-        var target = FabricLoader.getInstance().getMappingResolver().mapClassName("intermediary", "net.minecraft.class_1886");
-        EnchantmentASM.patchClass(target, "field_9077", "com.jab125.thonkutil.misc.api.v1.CustomEnchantmentTarget", extension());
+        EnchantmentASM.patchClass("net.minecraft.enchantment.EnchantmentTarget", "field_9077", "com.jab125.thonkutil.misc.api.v1.CustomEnchantmentTarget", extension());
         //patchClass("com.jab125.thonkutil.misc.api.v1.CustomEnchantmentTarget$1", extension$1());
     }
 
     public static byte[] extension() throws Exception {
-        var enchantmentTargetName = FabricLoader.getInstance().getMappingResolver().mapClassName("intermediary", "net.minecraft.class_1886").replaceAll("\\.", "/");
-        var itemName = FabricLoader.getInstance().getMappingResolver().mapClassName("intermediary", "net.minecraft.class_1792").replaceAll("\\.", "/");
+
         ClassWriter classWriter = new ClassWriter(0);
         FieldVisitor fieldVisitor;
         RecordComponentVisitor recordComponentVisitor;
@@ -40,14 +37,14 @@ public class EnchantmentTargetPatch extends Patch{
             methodVisitor.visitEnd();
         }
         {
-            methodVisitor = classWriter.visitMethod(ACC_PUBLIC | ACC_STATIC, "create", "(Ljava/lang/String;Ljava/util/function/Predicate;)L" + enchantmentTargetName + ";", "(Ljava/lang/String;Ljava/util/function/Predicate<L" + itemName + ";>;)L" + enchantmentTargetName + ";", null);
+            methodVisitor = classWriter.visitMethod(ACC_PUBLIC | ACC_STATIC, "create", "(Ljava/lang/String;Ljava/util/function/Predicate;)Lnet/minecraft/enchantment/EnchantmentTarget;", "(Ljava/lang/String;Ljava/util/function/Predicate<Lnet/minecraft/item/Item;>;)Lnet/minecraft/enchantment/EnchantmentTarget;", null);
             methodVisitor.visitCode();
             Label label0 = new Label();
             methodVisitor.visitLabel(label0);
             methodVisitor.visitLineNumber(13, label0);
             methodVisitor.visitTypeInsn(NEW, "java/util/ArrayList");
             methodVisitor.visitInsn(DUP);
-            methodVisitor.visitFieldInsn(GETSTATIC, "" + enchantmentTargetName + "", "field_9077", "[L" + enchantmentTargetName + ";");
+            methodVisitor.visitFieldInsn(GETSTATIC, "net/minecraft/enchantment/EnchantmentTarget", "field_9077", "[Lnet/minecraft/enchantment/EnchantmentTarget;");
             methodVisitor.visitMethodInsn(INVOKESTATIC, "java/util/Arrays", "asList", "([Ljava/lang/Object;)Ljava/util/List;", false);
             methodVisitor.visitMethodInsn(INVOKESPECIAL, "java/util/ArrayList", "<init>", "(Ljava/util/Collection;)V", false);
             methodVisitor.visitVarInsn(ASTORE, 2);
@@ -60,20 +57,20 @@ public class EnchantmentTargetPatch extends Patch{
             methodVisitor.visitInsn(ICONST_1);
             methodVisitor.visitInsn(ISUB);
             methodVisitor.visitMethodInsn(INVOKEVIRTUAL, "java/util/ArrayList", "get", "(I)Ljava/lang/Object;", false);
-            methodVisitor.visitTypeInsn(CHECKCAST, "" + enchantmentTargetName + "");
+            methodVisitor.visitTypeInsn(CHECKCAST, "net/minecraft/enchantment/EnchantmentTarget");
             methodVisitor.visitVarInsn(ASTORE, 3);
             Label label2 = new Label();
             methodVisitor.visitLabel(label2);
             methodVisitor.visitLineNumber(15, label2);
-            methodVisitor.visitTypeInsn(NEW, "" + enchantmentTargetName + "");
+            methodVisitor.visitTypeInsn(NEW, "net/minecraft/enchantment/EnchantmentTarget");
             methodVisitor.visitInsn(DUP);
             methodVisitor.visitVarInsn(ALOAD, 0);
             methodVisitor.visitVarInsn(ALOAD, 3);
-            methodVisitor.visitMethodInsn(INVOKEVIRTUAL, "" + enchantmentTargetName + "", "ordinal", "()I", false);
+            methodVisitor.visitMethodInsn(INVOKEVIRTUAL, "net/minecraft/enchantment/EnchantmentTarget", "ordinal", "()I", false);
             methodVisitor.visitInsn(ICONST_1);
             methodVisitor.visitInsn(IADD);
             methodVisitor.visitVarInsn(ALOAD, 1);
-            methodVisitor.visitMethodInsn(INVOKESPECIAL, "" + enchantmentTargetName + "", "<init>", "(Ljava/lang/String;ILjava/util/function/Predicate;)V", false);
+            methodVisitor.visitMethodInsn(INVOKESPECIAL, "net/minecraft/enchantment/EnchantmentTarget", "<init>", "(Ljava/lang/String;ILjava/util/function/Predicate;)V", false);
             methodVisitor.visitVarInsn(ASTORE, 4);
             Label label3 = new Label();
             methodVisitor.visitLabel(label3);
@@ -87,10 +84,10 @@ public class EnchantmentTargetPatch extends Patch{
             methodVisitor.visitLineNumber(17, label4);
             methodVisitor.visitVarInsn(ALOAD, 2);
             methodVisitor.visitInsn(ICONST_0);
-            methodVisitor.visitTypeInsn(ANEWARRAY, "" + enchantmentTargetName + "");
+            methodVisitor.visitTypeInsn(ANEWARRAY, "net/minecraft/enchantment/EnchantmentTarget");
             methodVisitor.visitMethodInsn(INVOKEVIRTUAL, "java/util/ArrayList", "toArray", "([Ljava/lang/Object;)[Ljava/lang/Object;", false);
-            methodVisitor.visitTypeInsn(CHECKCAST, "[L" + enchantmentTargetName + ";");
-            methodVisitor.visitFieldInsn(PUTSTATIC, "" + enchantmentTargetName + "", "field_9077", "[L" + enchantmentTargetName + ";");
+            methodVisitor.visitTypeInsn(CHECKCAST, "[Lnet/minecraft/enchantment/EnchantmentTarget;");
+            methodVisitor.visitFieldInsn(PUTSTATIC, "net/minecraft/enchantment/EnchantmentTarget", "field_9077", "[Lnet/minecraft/enchantment/EnchantmentTarget;");
             Label label5 = new Label();
             methodVisitor.visitLabel(label5);
             methodVisitor.visitLineNumber(18, label5);
@@ -99,10 +96,10 @@ public class EnchantmentTargetPatch extends Patch{
             Label label6 = new Label();
             methodVisitor.visitLabel(label6);
             methodVisitor.visitLocalVariable("internalName", "Ljava/lang/String;", null, label0, label6, 0);
-            methodVisitor.visitLocalVariable("pred", "Ljava/util/function/Predicate;", "Ljava/util/function/Predicate<L" + itemName + ";>;", label0, label6, 1);
-            methodVisitor.visitLocalVariable("targets", "Ljava/util/ArrayList;", "Ljava/util/ArrayList<L" + enchantmentTargetName + ";>;", label1, label6, 2);
-            methodVisitor.visitLocalVariable("last", "L" + enchantmentTargetName + ";", null, label2, label6, 3);
-            methodVisitor.visitLocalVariable("target", "L" + enchantmentTargetName + ";", null, label3, label6, 4);
+            methodVisitor.visitLocalVariable("pred", "Ljava/util/function/Predicate;", "Ljava/util/function/Predicate<Lnet/minecraft/item/Item;>;", label0, label6, 1);
+            methodVisitor.visitLocalVariable("targets", "Ljava/util/ArrayList;", "Ljava/util/ArrayList<Lnet/minecraft/enchantment/EnchantmentTarget;>;", label1, label6, 2);
+            methodVisitor.visitLocalVariable("last", "Lnet/minecraft/enchantment/EnchantmentTarget;", null, label2, label6, 3);
+            methodVisitor.visitLocalVariable("target", "Lnet/minecraft/enchantment/EnchantmentTarget;", null, label3, label6, 4);
             methodVisitor.visitMaxs(5, 5);
             methodVisitor.visitEnd();
         }

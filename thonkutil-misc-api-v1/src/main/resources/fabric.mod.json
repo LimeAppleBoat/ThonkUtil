@@ -3,18 +3,12 @@
   "id": "thonkutil-misc-api-v1",
   "version": "${version}",
   "name": "ThonkUtil Misc Api (v1)",
-  "description": "Enum Extension API, will burn down your house if used incorrectly.",
+  "description": "Ditto",
   "authors": [
     "Jab125"
   ],
   "entrypoints": {
     "main": [
-      "com.jab125.thonkutil.misc.impl.v1.ThonkUtilMisc"
-    ],
-    "client": [
-      "com.jab125.thonkutil.misc.impl.v1.ThonkUtilMisc"
-    ],
-    "thonkutil:modmenu_initialization": [
       "com.jab125.thonkutil.misc.impl.v1.ThonkUtilMisc"
     ]
   },
@@ -37,9 +31,7 @@
         ]
       },
       "badges": [
-        "library",
-        "thonkutil:asm",
-        "thonkutil:unstable"
+        "library"
       ]
     }
   }

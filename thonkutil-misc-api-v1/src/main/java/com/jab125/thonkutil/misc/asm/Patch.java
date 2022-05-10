@@ -14,8 +14,7 @@ import java.security.CodeSource;
 public class Patch implements Opcodes {
     public static void main(String[] args) throws IOException {
         //ASMifier.main(new String[]{"/Users/josephyap/Documents/GitHub/ThonkUtil/thonkutil-misc-api-v1/build/classes/java/main/com/jab125/thonkutil/misc/api/v1/CustomEnchantmentTarget.class"});
-        //ASMifier.main(new String[]{"/Users/josephyap/Documents/GitHub/ThonkUtil/thonkutil-misc-api-v1/build/classes/java/main/com/jab125/thonkutil/misc/asm/CustomEnchantmentTarget2.class"});
-        ASMifier.main(new String[]{"/Users/josephyap/Documents/GitHub/ThonkUtil/thonkutil-misc-api-v1/build/classes/java/main/com/jab125/thonkutil/misc/api/v1/CustomModBadge.class"});
+        ASMifier.main(new String[]{"/Users/josephyap/Documents/GitHub/ThonkUtil/thonkutil-misc-api-v1/build/classes/java/main/com/jab125/thonkutil/misc/asm/CustomEnchantmentTarget2.class"});
     }
     public static void patchClass(String className, byte[] bytes) throws Exception{
 
