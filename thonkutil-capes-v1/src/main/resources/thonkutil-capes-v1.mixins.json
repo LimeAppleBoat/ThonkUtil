@@ -13,12 +13,7 @@
     "defaultRequire": 1
   },
   "mixins": [
-    "ArmorStandMixin",
-    "ArmorStandModelMixin",
-    "ArmorStandRendererMixin",
     "LivingEntityMixin",
-    "ModelPartAccessor",
-    "ModelPartDataAccessor",
     "TagGroupLoaderMixin",
     "TrackedEntryAccessor"
   ]

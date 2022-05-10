@@ -4,10 +4,12 @@ import com.jab125.thonkutil.ThonkUtilCapes;
 import com.jab125.thonkutil.impl.TextureLoader;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.block.DispenserBlock;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.client.resource.language.I18n;
-import net.minecraft.item.*;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Wearable;
 import net.minecraft.text.BaseText;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
@@ -96,7 +98,6 @@ public class CapeItem extends Item implements Wearable {
         this.settings = settings;
         this.hasElytraTexture = hasElytraTexture;
         this.has2WingedElytra = has2WingedElytra;
-        DispenserBlock.registerBehavior(this, ArmorItem.DISPENSER_BEHAVIOR);
     }
 
     public CapeItem(Settings settings, boolean hasElytraTexture) {

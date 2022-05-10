@@ -22,7 +22,7 @@ public class ElytraRendererMixin<T extends LivingEntity, M extends EntityModel<T
     @Inject(at = @At(value = "HEAD"), method = "render(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;ILnet/minecraft/entity/LivingEntity;FFFFFF)V", require = 1, allow = 1, cancellable = true)
     public void injectCapeRenderCheck(MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, T livingEntity, float f, float g, float h, float j, float k, float l, CallbackInfo ci) {
         ItemStack itemStack = livingEntity.getEquippedStack(EquipmentSlot.CHEST);
-        if (itemStack.isOf(Items.ELYTRA) && ThonkUtilCapes.getCape(livingEntity).getItem() instanceof CapeItem && ((CapeItem) ThonkUtilCapes.getCape(livingEntity).getItem()).hasElytraTexture()) {
+        if (itemStack.isOf(Items.ELYTRA) && livingEntity instanceof PlayerEntity && ThonkUtilCapes.getCape((PlayerEntity) livingEntity).getItem() instanceof CapeItem && ((CapeItem) ThonkUtilCapes.getCape((PlayerEntity) livingEntity).getItem()).hasElytraTexture()) {
             ci.cancel();
         }
     }

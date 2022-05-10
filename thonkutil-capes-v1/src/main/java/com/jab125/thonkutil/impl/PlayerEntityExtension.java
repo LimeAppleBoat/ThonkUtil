@@ -6,12 +6,9 @@ import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.util.math.MatrixStack;
 
-public interface LivingEntityExtension {
-    double thonkutil$getCapeX();
-    double thonkutil$getCapeY();
-    double thonkutil$getCapeZ();
-    
-    double thonkutil$getPrevCapeX();
-    double thonkutil$getPrevCapeY();
-    double thonkutil$getPrevCapeZ();
+public interface PlayerEntityExtension {
+    ModelPart thonkutil_getItemCape();
+
+    @Environment(EnvType.CLIENT)
+    void renderItemCape(MatrixStack matrices, VertexConsumer vertices, int light, int overlay);
 }
