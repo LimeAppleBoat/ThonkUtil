@@ -47,7 +47,7 @@ public final class SetCosmeticCommand {
                 source.sendFeedback(new LiteralText("Cosmetic enchantment glint " + (enchanted ? "enabled." : "disabled.")), false);
             }
         }
-        else source.sendError(new LiteralText("Cosmetic change failed as you do not own the cosmetic."));
+        else source.sendError(new LiteralText("Cosmetic change failed: You do not own the cosmetic"));
         return 1;
     }
 }
