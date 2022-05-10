@@ -46,10 +46,10 @@ public class ArmorStandModelMixin implements ArmorStandModelExtension {
     // ignore those BLARING warnings
     @ModifyVariable(method = "getTexturedModelData", at = @At(value = "STORE", target = "Lnet/minecraft/client/render/entity/model/ArmorStandArmorEntityModel;getTexturedModelData(Lnet/minecraft/client/model/Dilation;)Lnet/minecraft/client/model/TexturedModelData;"))
     private static ModelPartData thonkutil$getModelPartData(ModelPartData data) {
-      //  System.out.println(data.toString());
+        System.out.println(data.toString());
         data.addChild(CLOAK, ModelPartBuilder.create().uv(0, 0).cuboid(-5.0F, 0.0F, -1.0F, 10.0F, 16.0F, 1.0F, dilation, 1.0F, 0.5F), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
-        //System.out.println("ADDED, CHILDREN:");
-      //  ((ModelPartDataAccessor)data).getChildren().forEach(((s, modelPartData) -> System.out.println(s)));
+        System.out.println("ADDED, CHILDREN:");
+        ((ModelPartDataAccessor)data).getChildren().forEach(((s, modelPartData) -> System.out.println(s)));
         return data;
     }
 
