@@ -41,9 +41,9 @@ public class TwoWingedItemElytraRenderer<T extends LivingEntity, M extends Entit
 
     public void render(MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, T livingEntity, float f, float g, float h, float j, float k, float l) {
         ItemStack itemStack = livingEntity.getEquippedStack(EquipmentSlot.CHEST);
-        if (itemStack.isOf(Items.ELYTRA) && ThonkUtilCapes.getCape(livingEntity).getItem() instanceof CapeItem && ((CapeItem) ThonkUtilCapes.getCape(livingEntity).getItem()).hasElytraTexture() && ((CapeItem) ThonkUtilCapes.getCape(livingEntity).getItem()).has2WingedElytra()) {
+        if (itemStack.isOf(Items.ELYTRA) && livingEntity instanceof PlayerEntity && ThonkUtilCapes.getCape((PlayerEntity) livingEntity).getItem() instanceof CapeItem && ((CapeItem) ThonkUtilCapes.getCape((PlayerEntity) livingEntity).getItem()).hasElytraTexture() && ((CapeItem) ThonkUtilCapes.getCape((PlayerEntity) livingEntity).getItem()).has2WingedElytra()) {
             Identifier identifier;
-            LivingEntity abstractClientPlayerEntity = livingEntity;
+            AbstractClientPlayerEntity abstractClientPlayerEntity = (AbstractClientPlayerEntity) livingEntity;
             ((CapeItem) ThonkUtilCapes.getCape(abstractClientPlayerEntity).getItem()).getElytraTexture();
             //identifier = ((CapeItem) ThonkUtilCapes.getCape(abstractClientPlayerEntity).getItem()).getElytraTexture();
             identifier = new Identifier("thonkutil", String.format("elytra/%s/%d", ((CapeItem) ThonkUtilCapes.getCape(abstractClientPlayerEntity).getItem()).getRegistryIdAsIdentifier().toUnderscoreSeparatedString(), 0));

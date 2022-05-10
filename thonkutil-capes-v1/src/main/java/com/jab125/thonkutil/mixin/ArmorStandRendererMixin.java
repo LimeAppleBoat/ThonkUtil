@@ -18,7 +18,6 @@ public class ArmorStandRendererMixin {
     public void initInject(EntityRendererFactory.Context ctx, CallbackInfo ci) {
         ((LivingEntityRendererAccessor) (Object) this).callAddFeature(new ItemCapeRenderer((ArmorStandEntityRenderer) (Object) this, ctx.getModelLoader()));
         ((LivingEntityRendererAccessor) (Object) this).callAddFeature(new ItemElytraRenderer((ArmorStandEntityRenderer) (Object) this, ctx.getModelLoader()));
-        ((LivingEntityRendererAccessor) (Object) this).callAddFeature(new TwoWingedItemElytraRenderer((ArmorStandEntityRenderer) (Object) this, ctx.getModelLoader()));
     //    ((LivingEntityRendererAccessor) (Object) this).callAddFeature(new ItemElytraRenderer((PlayerEntityRenderer) (Object) this, ctx.getModelLoader()));
     //    ((LivingEntityRendererAccessor) (Object) this).callAddFeature(new TwoWingedItemElytraRenderer((PlayerEntityRenderer) (Object) this, ctx.getModelLoader()));
     }
