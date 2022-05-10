@@ -226,7 +226,7 @@ def dontInclude = [
         "thonkutil-additional-capes-v1"
 ]
 def dontUse = [
-        "thonkutil-unittests"
+        "thonkutil-unittests", "thonkutil-misc-v1"
 ]
 
 dependencies {

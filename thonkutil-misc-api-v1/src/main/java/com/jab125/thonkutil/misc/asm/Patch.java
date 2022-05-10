@@ -2,17 +2,12 @@ package com.jab125.thonkutil.misc.asm;
 
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.impl.FabricLoaderImpl;
-import net.fabricmc.loader.impl.launch.FabricLauncherBase;
-import net.fabricmc.loader.impl.launch.knot.Knot;
-import net.fabricmc.loader.impl.launch.knot.KnotClient;
-import net.minecraft.obfuscate.DontObfuscate;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.util.ASMifier;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.Files;
 import java.security.CodeSource;
 
@@ -32,19 +27,7 @@ public class Patch implements Opcodes {
         //q.invoke(ASM.class.getClassLoader(), className, bytes, 0, bytes.length, null);
     }
     public static void patchClass(String className, String fieldName, String extenderName, byte[] extender) throws Exception {
-        System.out.println("Patched Class Name: " + className);
-        var qs = ClassReader.class.getDeclaredMethod("readStream", InputStream.class, boolean.class);
-        qs.setAccessible(true);
-
-        var slkj = DontObfuscate.class.getClassLoader().getResource(className.replace('.', '/') + ".class");
-        System.out.println(slkj);
-        //System.exit(-1);
-        var rtf = DontObfuscate.class.getClassLoader().getResourceAsStream(className.replace('.', '/') + ".class");
-        if (rtf == null) throw new RuntimeException("QUANTUM PHYSICS!!!!");
-        //if (true) throw new IllegalStateException(slkj + ", " + rtf);
-        byte[] fvg = (byte[]) qs.invoke(null, rtf, true);
-
-        ClassReader cr = new ClassReader(fvg);
+        ClassReader cr = new ClassReader(className);
         ClassWriter cw = new ClassWriter(cr, 0);
         cr.accept(new ASM(FabricLoaderImpl.ASM_VERSION, cw) {
             @Override
