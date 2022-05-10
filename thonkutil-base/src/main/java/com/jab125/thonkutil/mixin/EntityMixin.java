@@ -16,7 +16,7 @@ public class EntityMixin implements RegistryUtil {
     private void thonkutil$tryUseTotem(DamageSource source, CallbackInfoReturnable<Boolean> cir) {
         if (((LivingEntity) (Object) this).world.isClient) return;
         boolean shouldSavePlayer = (boolean) EventTaxi.executeEventTaxi(new TotemUseEvent((LivingEntity) (Object) this, source));
-        //System.out.println("Saving player: " + shouldSavePlayer);
+        System.out.println("Saving player: " + shouldSavePlayer);
         if (shouldSavePlayer) {
             cir.setReturnValue(true);
         }
