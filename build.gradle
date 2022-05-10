@@ -16,7 +16,7 @@ plugins {
 }
 
 def dontInclude = [
-        "thonkutil-additional-capes-v1", "thonkutil-misc-api-v1"
+        "thonkutil-additional-capes-v1"
 ]
 //def dontUse = [
 //        "thonkutil-unittests"
