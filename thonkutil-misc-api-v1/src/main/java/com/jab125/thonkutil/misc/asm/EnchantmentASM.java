@@ -35,12 +35,12 @@ public class EnchantmentASM extends ASM implements Opcodes{
     }
 
     public static void patchClass(String className, String fieldName, String extenderName, byte[] extender) throws Exception {
-        //System.out.println("Patched Class Name: " + className);
+        System.out.println("Patched Class Name: " + className);
         var qs = ClassReader.class.getDeclaredMethod("readStream", InputStream.class, boolean.class);
         qs.setAccessible(true);
 
         var slkj = DontObfuscate.class.getClassLoader().getResource(className.replace('.', '/') + ".class");
-        //System.out.println(slkj);
+        System.out.println(slkj);
         //System.exit(-1);
         var rtf = DontObfuscate.class.getClassLoader().getResourceAsStream(className.replace('.', '/') + ".class");
         if (rtf == null) throw new RuntimeException("QUANTUM PHYSICS!!!!");
@@ -130,7 +130,7 @@ public class EnchantmentASM extends ASM implements Opcodes{
 
         Files.write(FabricLoader.getInstance().getGameDir().resolve(className + ".class"), bytes);
         var e = ASM.class.getClassLoader();
-        //System.out.println(e.getClass().toString());
+        System.out.println(e.getClass().toString());
 
         var q = Class.forName("net.fabricmc.loader.impl.launch.knot.KnotClassLoader").getDeclaredMethod("defineClassFwd", String.class, byte[].class, int.class, int.class, CodeSource.class);
         q.setAccessible(true);
