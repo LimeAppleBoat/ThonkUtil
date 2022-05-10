@@ -431,14 +431,13 @@ subprojects {
 }
 
 try {
-    tasks.publishMavenJavaPublicationToMavenLocal.dependsOn(signModuleJavadocJar)
-    tasks.publishMavenJavaPublicationToMavenLocal.dependsOn(signSourcesJar)
-    tasks.publishMavenJavaPublicationToMavenLocal.dependsOn(signJavadocJar)
-    tasks.publishMavenJavaPublicationToMavenLocal.dependsOn(signRemapMavenJar)
+    tasks.publishMavenJavaPublicationToMavenLocal.mushRunAfter signModuleJavadocJar
+    tasks.publishMavenJavaPublicationToMavenLocal.mustRunAfter signSourcesJar
+    tasks.publishMavenJavaPublicationToMavenLocal.mustRunAfter signJavadocJar
+    tasks.publishMavenJavaPublicationToMavenLocal.mustRunAfter signRemapMavenJar
     subprojects.each {
-        tasks.publishMavenJavaPublicationToMavenLocal.dependsOn("${it.path}:signJavadocJar")
-        tasks.publishMavenJavaPublicationToMavenLocal.dependsOn("${it.path}:signmoduleJavadocJar")
-        tasks.publishMavenJavaPublicationToMavenLocal.dependsOn("${it.path}:signRemapMavenJar")
+        tasks.publishMavenJavaPublicationToMavenLocal.mustRunAfter("${it.path}:signJavadocJar")
+        tasks.publishMavenJavaPublicationToMavenLocal.mustRunAfter("${it.path}:signRemapMavenJar")
     }
 } catch (Exception e) {}
 
