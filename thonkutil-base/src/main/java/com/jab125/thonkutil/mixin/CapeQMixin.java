@@ -16,8 +16,6 @@ public abstract class CapeQMixin implements PlayerExpansion {
     private void thonkutil$getCapeTexture(CallbackInfoReturnable<Identifier> cir) {
         if (this.thonkutil$getCosmetic().equals("blanketcon_cape")) {
             cir.setReturnValue(Identifier.tryParse("thonkutil" + ":textures/cape/" + "blanketcon_cape" + ".png"));
-        } else if (this.thonkutil$getCosmetic().equals("grifferthrydwy_cape")) {
-            cir.setReturnValue(Identifier.tryParse("thonkutil" + ":textures/cape/" + "grifferthrydwy_cape" + ".png"));
         }
     }
 }
