@@ -9,10 +9,8 @@ import com.jab125.thonkutil.api.events.client.EventTaxiClient;
 import com.jab125.thonkutil.api.events.client.screen.TitleScreenRenderEvent;
 import com.jab125.thonkutil.api.events.server.entity.TotemUseEvent;
 import com.jab125.thonkutil.cosmetics.Cosmetics;
-import com.jab125.thonkutil.commands.SetCosmeticCommand;
 import net.fabricmc.api.*;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.entity.Entity;
@@ -37,10 +35,8 @@ public class ThonkUtil implements ThonkUtilBaseClass, ModInitializer, ClientModI
      */
     @Override
     public void onInitialize() {
-        Cosmetics.load();
         EventTaxi.registerTaxis();
         EventTaxi.registerEventTaxiSubscriber(ThonkUtil.class);
-        CommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> SetCosmeticCommand.register(dispatcher));
     }
 
     public static State getState() {

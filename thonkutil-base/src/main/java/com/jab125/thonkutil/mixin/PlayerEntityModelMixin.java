@@ -1,12 +1,13 @@
 package com.jab125.thonkutil.mixin;
 
 import com.jab125.thonkutil.cosmetics.exclamationmark.ExclamationMarkRenderer;
-import com.jab125.thonkutil.cosmetics.spinningpenguins.SpinningPenguinsRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.LivingEntityRenderer;
 import net.minecraft.client.render.entity.PlayerEntityRenderer;
 import net.minecraft.client.render.entity.model.EntityModel;
+import net.minecraft.client.render.entity.model.PlayerEntityModel;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -23,6 +24,5 @@ public abstract class PlayerEntityModelMixin<T extends LivingEntity, M extends E
     @SuppressWarnings("unchecked")
     public void initInject(EntityRendererFactory.Context ctx, boolean slim, CallbackInfo ci) {
         this.addFeature(new ExclamationMarkRenderer<>(this, ctx.getModelLoader()));
-        this.addFeature(new SpinningPenguinsRenderer<>(this, ctx.getModelLoader()));
     }
 }
