@@ -10,7 +10,7 @@ public class FabricASM implements Runnable {
         try {
             BoatPatch.patch();
             EnchantmentTargetPatch.patch();
-            if (FabricLoader.getInstance().getEnvironmentType().equals(EnvType.CLIENT) && FabricLoader.getInstance().isModLoaded("modmenu"))
+            if (FabricLoader.getInstance().getEnvironmentType().equals(EnvType.CLIENT))
             ModBadgePatch.patch();
         } catch (Exception e) {
             throw new RuntimeException(e);
