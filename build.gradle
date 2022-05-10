@@ -14,45 +14,14 @@ plugins {
     id "com.matthewprenger.cursegradle" version "1.4.0"
     id "org.ajoberstar.grgit" version "3.1.0"
 }
-
-def dontInclude = [
-        "thonkutil-additional-capes-v1"
-]
-//def dontUse = [
-//        "thonkutil-unittests"
-//]
 def ENV = System.getenv()
 version = project.properties["thonkutil-version"] + "+" + (ENV.GITHUB_RUN_NUMBER ? "" : "local-") + getBranch();
 
-def getDontUse() {
-    return  ["thonkutil-unittests"]
-}
 def moduleDependencies(project, List<String> depNames) {
     def deps = depNames.iterator().collect { project.dependencies.project(path: ":$it", configuration: 'namedElements') }
     project.dependencies {
         deps.each {
             api it
-        }
-    }
-
-    if (project.name in dontUse) return
-
-    // As we manually handle the maven artifacts, we need to also manually specify the deps.
-    project.publishing {
-        publications {
-            mavenJava(MavenPublication) {
-                pom.withXml {
-                    System.out.println(project.name);
-                    def depsNode = asNode().appendNode("dependencies")
-                    deps.each {
-                        def depNode = depsNode.appendNode("dependency")
-                        depNode.appendNode("groupId", it.group)
-                        depNode.appendNode("artifactId", it.name)
-                        depNode.appendNode("version", it.version)
-                        depNode.appendNode("scope", "compile")
-                    }
-                }
-            }
         }
     }
 }
@@ -116,14 +85,12 @@ def getAddon(project) {
 
 allprojects {
     apply plugin: 'fabric-loom'
-    apply plugin: 'maven-publish'
 
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
 
     archivesBaseName = project.archives_base_name
     //version = project.mod_version
-    //group = "io.github.limeappleboat.thonkutil"
     group = project.maven_group
 
     repositories {
@@ -136,17 +103,11 @@ allprojects {
         maven {
             url "https://cursemaven.com"
         }
-
-        mavenCentral()
         // Add repositories to retrieve artifacts from in here.
         // You should only use this when depending on other mods because
         // Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
         // See https://docs.gradle.org/current/userguide/declaring_repositories.html
         // for more information about repositories.
-    }
-
-    tasks.withType(GenerateModuleMetadata) {
-        enabled = false
     }
 
     loom {
@@ -218,88 +179,17 @@ allprojects {
         }
     }
 
+    task remapMavenJar(type: RemapJarTask, dependsOn: remapJar) {
+        input = jar.archiveFile
+        archiveFileName = "${archivesBaseName}-${project.version}-maven.jar"
+        addNestedDependencies = false
+    }
+    build.dependsOn remapMavenJar
+
 // configure the maven publication
-}
-
-task remapMavenJar(type: RemapJarTask, dependsOn: remapJar) {
-    input = jar.archiveFile
-    archiveFileName = "${archivesBaseName}-${project.version}-maven.jar"
-    addNestedDependencies = false
-}
-build.dependsOn remapMavenJar
-
-javadoc {
-    options {
-        source = "17"
-        encoding = "UTF-8"
-        charSet = "UTF-8"
-        memberLevel = JavadocMemberLevel.PACKAGE
-        links(
-                "https://guava.dev/releases/21.0/api/docs/",
-                "https://asm.ow2.io/javadoc/",
-                "https://docs.oracle.com/javase/8/docs/api/",
-                "http://jenkins.liteloader.com/job/Mixin/javadoc/",
-                "https://logging.apache.org/log4j/2.x/log4j-api/apidocs/"
-                // Need to add minecraft jd publication etc once there is one available
-        )
-        // Disable the crazy super-strict doclint tool in Java 8
-        addStringOption("Xdoclint:none", "-quiet")
-    }
-
-    allprojects.each {
-        source(it.sourceSets.main.allJava.srcDirs)
-    }
-
-    classpath = sourceSets.main.compileClasspath
-    include("**/api/**")
-    failOnError false
-}
-build.dependsOn remapMavenJar
-
-task javadocJar(type: Jar) {
-    dependsOn javadoc
-    from javadoc.destinationDir
-    //Set as `fatjavadoc` to prevent an ide form trying to use this javadoc, over using the modules javadoc
-    archiveClassifier = "fatjavadoc"
-}
-
-build.dependsOn javadocJar
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            artifact(remapMavenJar) {
-                builtBy remapMavenJar
-            }
-
-            artifact(sourcesJar) {
-                builtBy remapSourcesJar
-            }
-            artifact javadocJar
-
-            pom.withXml {
-                def depsNode = asNode().appendNode("dependencies")
-                subprojects.each {
-                    if (it.name in dontUse) return
-                    def depNode = depsNode.appendNode("dependency")
-                    depNode.appendNode("groupId", it.group)
-                    depNode.appendNode("artifactId", it.name)
-                    depNode.appendNode("version", it.version)
-                    depNode.appendNode("scope", "compile")
-                }
-            }
-        }
-    }
-    setupRepositories(repositories)
-}
-
-subprojects.each { remapJar.dependsOn("${it.path}:remapJar") }
-
-
-subprojects {
     publishing {
         publications {
             mavenJava(MavenPublication) {
-
                 // add all the jars that should be included when publishing to maven
                 artifact(remapJar) {
                     builtBy remapJar
@@ -309,28 +199,35 @@ subprojects {
                 }
             }
         }
-        setupRepositories(repositories)
-    }
-    loom.disableDeprecatedPomGeneration(publishing.publications.mavenJava)
-    javadoc.enabled = false
 
+        // See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
+        repositories {
+            // Add repositories to publish to here.
+            // Notice: This block does NOT have the same function as the block in the top level.
+            // The repositories here will be used for publishing your artifact, not for
+            // retrieving dependencies.
+        }
+    }
+}
+
+subprojects.each { remapJar.dependsOn("${it.path}:remapJar") }
+
+
+subprojects {
     runClient {
         enabled = false
     }
     runServer {
         enabled = false
     }
-
-    afterEvaluate {
-        // Disable the gen sources task on sub projects
-        genSourcesWithFernFlower.enabled = false
-        genSourcesWithCfr.enabled = false
-        unpickJar.enabled = false
-    }
 }
-loom.disableDeprecatedPomGeneration(publishing.publications.mavenJava)
 
-dontInclude.addAll(dontUse)
+def dontInclude = [
+        "thonkutil-additional-capes-v1"
+]
+def dontUse = [
+        "thonkutil-unittests"
+]
 
 dependencies {
     afterEvaluate {
@@ -353,33 +250,6 @@ tasks.withType(Jar).configureEach {
         attributes 'Implementation-Title': 'ThonkUtil',
                 'Implementation-Version': project.version,
                 'Main-Class': 'com.jab125.thonkutil.Main'
-    }
-}
-
-void setupRepositories(RepositoryHandler repositories) {
-    //repositories.mavenLocal() // uncomment for testing
-    def ENV = System.getenv()
-    if (ENV.MAVEN_URL) {
-        repositories.maven {
-            url ENV.MAVEN_URL
-            if (ENV.MAVEN_USERNAME) {
-                credentials {
-                    username ENV.MAVEN_USERNAME
-                    password ENV.MAVEN_PASSWORD
-                }
-            }
-        }
-    }
-}
-
-remapJar {
-    afterEvaluate {
-        subprojects.each {
-            if (it.name in dontInclude) return
-            nestedJars.from project("${it.name}:").tasks.getByName("remapJar")
-            // Include the signed or none signed jar from the sub project.
-            //nestedJars.from project("${it.name}:").tasks.getByName(signingEnabled ? "signRemapJar" : "remapJar")
-        }
     }
 }
 
@@ -435,16 +305,6 @@ task github(dependsOn: remapMavenJar) {
 
         def ghRelease = releaseBuilder.create()
         ghRelease.uploadAsset(file("${project.buildDir}/libs/${archivesBaseName}-${version}.jar"), "application/java-archive");
-    }
-}
-
-allprojects {
-    if (it.name in dontUse) {
-        System.out.println("Not using " + it.name)
-        it.tasks.generatePomFileForMavenJavaPublication.enabled = false
-        it.tasks.publishToMavenLocal.enabled = false
-        it.tasks.publish.enabled = false
-        it.tasks.publishMavenJavaPublicationToMavenLocal.enabled = false
     }
 }
 

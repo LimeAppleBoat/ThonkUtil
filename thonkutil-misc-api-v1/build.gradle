@@ -1,9 +1,7 @@
 archivesBaseName = "thonkutil-misc-api-v1"
-
+group = rootProject.group
 version = getSubprojectVersion(project)
-moduleDependencies(project, [
-        "thonkutil-base"
-])
-dependencies {
 
+dependencies {
+    api project(path: ':thonkutil-base', configuration: 'namedElements')
 }

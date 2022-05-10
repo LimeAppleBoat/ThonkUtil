@@ -1,5 +1,5 @@
 archivesBaseName = "thonkutil-potions-v0"
-
+group = rootProject.group
 version = getSubprojectVersion(project)
 
 moduleDependencies(project, [
