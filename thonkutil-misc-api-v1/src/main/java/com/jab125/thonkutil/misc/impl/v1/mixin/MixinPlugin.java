@@ -1,6 +1,11 @@
 package com.jab125.thonkutil.misc.impl.v1.mixin;
 
-import com.jab125.thonkutil.misc.asm.FabricASM;
+import com.jab125.thonkutil.misc.api.v1.ThonkUtilBoatTypes;
+import com.jab125.thonkutil.misc.impl.v1.BoatTypeExtension;
+import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.entity.vehicle.BoatEntity;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
@@ -33,7 +38,9 @@ public class MixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public List<String> getMixins() {
-        new FabricASM().run();
+        // hopefully no one mixes into Runnable
+        //System.out.println(Arrays.toString(BoatEntity.Type.values()));
+        //System.exit(-1);
         return null;
     }
 

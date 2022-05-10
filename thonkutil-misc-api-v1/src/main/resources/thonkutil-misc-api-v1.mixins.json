@@ -5,6 +5,8 @@
   "package": "com.jab125.thonkutil.misc.impl.v1.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "BoatEntityAccessor",
+    "BoatTypeMixin"
   ],
   "injectors": {
     "defaultRequire": 1
