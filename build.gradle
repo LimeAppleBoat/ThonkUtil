@@ -423,17 +423,12 @@ allprojects {
     }
 }
 
-//subprojects {
-//    try {
-//        tasks.publishMavenJavaPublicationToMavenLocal.mustRunAfter signSourcesJar
-//        tasks.publishMavenJavaPublicationToMavenLocal.mustRunAfter signModuleJavadocJar
-//    } catch (Exception e) {}
-//}
-//
-//try {
-//    tasks.publishMavenJavaPublicationToMavenLocal.mustRunAfter signSourcesJar
-//    tasks.publishMavenJavaPublicationToMavenLocal.mustRunAfter javadocJar
-//} catch (Exception e) {}
+subprojects {
+    try {
+        tasks.publishMavenJavaPublicationToMavenLocal.mustRunAfter signSourcesJar
+        tasks.publishMavenJavaPublicationToMavenLocal.mustRunAfter signModuleJavadocJar
+    } catch (Exception e) {}
+}
 
 void setupRepositories(RepositoryHandler repositories) {
     //repositories.mavenLocal() // uncomment for testing
