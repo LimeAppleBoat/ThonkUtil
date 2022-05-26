@@ -16,7 +16,6 @@
 package com.jab125.thonkutil.mixin;
 
 import com.google.common.base.Strings;
-import com.jab125.thonkutil.config.ThonkUtilCoordConfig;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
@@ -50,7 +49,7 @@ public abstract class CoordOverlayMixin {
     @Inject(method = "render", at = @At("TAIL"))
     private void injectCoords(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
         if (this.client.options.debugEnabled) return;
-        if (!ThonkUtilCoordConfig.ALWAYS_SHOW_COORDS.getValue()) return;
+        if (!false) return;
         thonkutil$renderCoords(matrices);
     }
 

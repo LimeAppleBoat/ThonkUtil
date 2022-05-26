@@ -15,7 +15,6 @@
  */
 package com.jab125.thonkutil;
 
-import com.jab125.thonkutil.config.ThonkUtilCustomizationConfigManager;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
@@ -41,6 +40,6 @@ public class ThonkUtilCustomization implements ModInitializer {
      */
     @Override
     public void onInitialize() {
-        ThonkUtilCustomizationConfigManager.initializeConfig();
+
     }
 }

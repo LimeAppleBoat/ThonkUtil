@@ -15,7 +15,6 @@
  */
 package com.jab125.thonkutil.mixin;
 
-import com.jab125.thonkutil.config.ThonkUtilCustomizationConfig;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.VillagerEntity;
@@ -29,7 +28,4 @@ public class VillagerMixin extends MobEntity {
         super(entityType, world);
     }
 
-    public boolean canBeLeashedBy(PlayerEntity player) {
-        return ThonkUtilCustomizationConfig.LEAD_VILLAGERS.getValue();
-    }
 }

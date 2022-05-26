@@ -18,8 +18,7 @@ package com.jab125.thonkutil.util.translation;
 import com.jab125.thonkutil.ThonkUtilBaseClass;
 import net.minecraft.client.resource.language.I18n;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
-
+import net.minecraft.text.TranslatableTextContent;
 import java.text.NumberFormat;
 import java.util.Arrays;
 
@@ -65,10 +64,10 @@ public class TranslationUtil implements ThonkUtilBaseClass {
             }
             lastKey = fullKey.toString();
             if (I18n.hasTranslation(lastKey)) {
-                return new TranslatableText(lastKey, realArgs);
+                return Text.translatable(lastKey, realArgs);
             }
         }
-        return new TranslatableText(lastKey, realArgs);
+        return Text.translatable(lastKey, realArgs);
     }
 
     public static String translationKeyOf(String type, String id, String modid) {

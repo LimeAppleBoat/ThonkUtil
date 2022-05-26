@@ -21,7 +21,7 @@ import com.jab125.thonkutil.impl.CapeCommand;
 import com.jab125.thonkutil.util.Util;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
-import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
+import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -41,8 +41,8 @@ public class ThonkUtilCapes implements ModInitializer, ThonkUtilCapesClass {
     public void onInitialize() {
         System.out.println(this.modId() + " Init");
         registerCapes();
-        CommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> {
-            CapeCommand.register(dispatcher);
+        CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
+            CapeCommand.register(dispatcher, registryAccess);
         });
     }
 

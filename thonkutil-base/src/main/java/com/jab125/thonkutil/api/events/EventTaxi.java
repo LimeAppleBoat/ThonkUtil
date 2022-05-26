@@ -24,7 +24,7 @@ import com.jab125.thonkutil.api.events.server.player.OnPlayerFatalDamageEvent;
 import com.jab125.thonkutil.api.events.server.world.ServerWorldLoadEvent;
 import com.jab125.thonkutil.api.events.server.world.ServerWorldUnloadEvent;
 import com.jab125.thonkutil.api.events.world.WorldTickEvent;
-import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
+import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
@@ -41,8 +41,8 @@ public class EventTaxi {
     private static final ArrayList<Class<?>> registeredEventClazzes = new ArrayList<>();
 
     public static void registerTaxis() {
-        CommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> {
-            EventTaxi.executeEventTaxi(new RegisterCommandEvent(dispatcher, dedicated));
+        CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
+            EventTaxi.executeEventTaxi(new RegisterCommandEvent(dispatcher, registryAccess, environment));
         });
         ServerPlayerEvents.ALLOW_DEATH.register((player, damageSource, damageAmount) -> {
             return (boolean) EventTaxi.executeEventTaxi(new OnPlayerFatalDamageEvent(player, damageSource, damageAmount));

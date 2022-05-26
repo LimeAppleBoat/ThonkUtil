@@ -15,14 +15,15 @@
  */
 package com.jab125.thonkutil.mixin;
 
-import net.minecraft.tag.Tag;
+import net.minecraft.tag.TagEntry;
+import net.minecraft.tag.TagGroupLoader;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
-@Mixin(Tag.TrackedEntry.class)
+@Mixin(TagGroupLoader.TrackedEntry.class)
 public interface TrackedEntryAccessor {
     @Invoker("<init>")
-    static Tag.TrackedEntry createTrackedEntry(Tag.Entry entry, String source) {
+    static TagGroupLoader.TrackedEntry createTrackedEntry(TagEntry entry, String source) {
         throw new UnsupportedOperationException();
     }
 }
