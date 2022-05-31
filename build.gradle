@@ -105,6 +105,13 @@ allprojects {
         maven {
             url "https://cursemaven.com"
         }
+        maven {
+            name = "Modrinth"
+            url = "https://api.modrinth.com/maven"
+            content {
+                includeGroup "maven.modrinth"
+            }
+        }
         // Add repositories to retrieve artifacts from in here.
         // You should only use this when depending on other mods because
         // Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
@@ -131,6 +138,9 @@ allprojects {
         }
 
         modRuntimeOnly "dev.onyxstudios.cardinal-components-api:cardinal-components-api:5.0.0-beta.1"
+
+        modRuntimeOnly "maven.modrinth:wavey-capes:1.2.0-fabric-1.18"
+
         modCompileOnly "dev.emi:trinkets:3.3.0"
         //modCompileOnly "curse.maven:waveycapes-521594:3695381"
         // PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
@@ -185,7 +195,6 @@ allprojects {
     spotless {
         java {
             licenseHeaderFile(rootProject.file("HEADER"))
-            targetExclude("src/fakeCraft/**/*.java", "src/shim/**/*.java")
         }
     }
 
