@@ -10,3 +10,14 @@ dependencies {
 loom {
     accessWidenerPath = file("src/main/resources/thonkutil-capes-v1.accesswidener")
 }
+
+
+sourceSets {
+    fakeCraft
+    shim {
+        compileClasspath += fakeCraft.output
+    }
+    main {
+        compileClasspath += shim.output
+    }
+}

@@ -184,6 +184,7 @@ allprojects {
     spotless {
         java {
             licenseHeaderFile(rootProject.file("HEADER"))
+            targetExclude("src/fakeCraft/**/*.java", "src/shim/**/*.java")
         }
     }
 
