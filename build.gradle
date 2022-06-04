@@ -291,7 +291,7 @@ curseforge {
             displayName = "[$project.minecraft_version] ThonkUtil $project.version"
             relations {
                 requiredDependency 'fabric-api'
-                optionalDependency 'trinkets-fabric'
+                optionalDependency 'trinkets'
             }
         }
 
