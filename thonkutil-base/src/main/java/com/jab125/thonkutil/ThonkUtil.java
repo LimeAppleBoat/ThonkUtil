@@ -41,7 +41,7 @@ import org.apache.logging.log4j.Logger;
 public class ThonkUtil implements ThonkUtilBaseClass, ModInitializer, ClientModInitializer {
     public static final Identifier TOTEM_PACKET = new Identifier("thonkutil:totem_particle_packet");
     public static final Logger LOGGER = LogManager.getLogger("thonkutil");
-    private static final State state = State.ALPHA;
+    private static final State state = State.BETA;
     public static final Gson GSON = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).setPrettyPrinting().create();
 
     /**
@@ -123,6 +123,7 @@ public class ThonkUtil implements ThonkUtilBaseClass, ModInitializer, ClientModI
     @Environment(EnvType.CLIENT)
     public static void showMessage(TitleScreenRenderEvent event) {
         if (state.equals(State.RELEASE)) return;
+        if (state.equals(State.BETA)) return;
         Text text = Text.literal("").append(Text.translatable("thonkutil.warning.1").formatted(Formatting.RED)).append(Text.translatable("thonkutil." + state).formatted(state.formatting)).append(Text.translatable("thonkutil.warning.1.1").formatted(Formatting.RED));
         DrawableHelper.drawCenteredText(event.matrices(), MinecraftClient.getInstance().textRenderer, text, event.screen().width / 2, 4 + (0 * (MinecraftClient.getInstance().textRenderer.fontHeight + 1)), 0xFFFFFF | event.alpha());
 
