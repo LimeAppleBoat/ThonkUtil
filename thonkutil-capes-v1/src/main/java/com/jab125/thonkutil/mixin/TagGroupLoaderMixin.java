@@ -52,7 +52,14 @@ public class TagGroupLoaderMixin {
         if (n != null) {
             Registry.ITEM.forEach((item -> {
                 if (item instanceof CapeItem)
-                   b.get(Registry.ITEM.getId(item)).add(TrackedEntryAccessor.createTrackedEntry(TagEntryAccessor.createTagEntry(Registry.ITEM.getId(item), false, true), Registry.ITEM.getId(item).getNamespace()));
+                   try {
+                       b.get(Registry.ITEM.getId(item)).add(TrackedEntryAccessor.createTrackedEntry(TagEntryAccessor.createTagEntry(Registry.ITEM.getId(item), false, true), Registry.ITEM.getId(item).getNamespace()));
+                   } catch (NullPointerException e) {
+                       TagGroupLoader.TrackedEntry q = TrackedEntryAccessor.createTrackedEntry(TagEntryAccessor.createTagEntry(Registry.ITEM.getId(item), false, true), Registry.ITEM.getId(item).getNamespace());
+                       var l = new ArrayList<TagGroupLoader.TrackedEntry>();
+                       l.add(q); // Hope for the best
+                       b.put(Registry.ITEM.getId(item), l);
+                   }
             }));
             b.put(Identifier.tryParse("trinkets:chest/cape"), n);
         } else {
