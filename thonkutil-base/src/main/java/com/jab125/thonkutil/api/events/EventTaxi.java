@@ -32,6 +32,7 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 
 import static com.jab125.thonkutil.api.Tick.Phase.END;
@@ -39,6 +40,7 @@ import static com.jab125.thonkutil.api.Tick.Phase.START;
 
 public class EventTaxi {
     private static final ArrayList<Class<?>> registeredEventClazzes = new ArrayList<>();
+    private static final ArrayList<Object> registeredEventObjects = new ArrayList<>();
 
     public static void registerTaxis() {
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
@@ -79,9 +81,18 @@ public class EventTaxi {
         registeredEventClazzes.add(clazz);
     }
 
+    public static void registerEventTaxiSubscriber(Object clazz) {
+        registeredEventObjects.add(clazz);
+    }
+
     @SuppressWarnings("unused")
     public static void unregisterEventTaxiSubscriber(Class<?> clazz) {
         registeredEventClazzes.remove(clazz);
+    }
+
+    @SuppressWarnings("unused")
+    public static void unregisterEventTaxiSubscriber(Object clazz) {
+        registeredEventObjects.remove(clazz);
     }
 
 
@@ -108,6 +119,7 @@ public class EventTaxi {
                 Method[] methods = clazz.getMethods();
                 for (Method method : methods) {
                     if (method.getParameterCount() != 1) continue;
+                    if (!Modifier.isStatic(method.getModifiers())) continue;
                     if (!method.getParameters()[0].getType().equals(event.getClass())) continue;
                     for (Annotation declaredAnnotation : method.getDeclaredAnnotations()) {
                         if (declaredAnnotation instanceof SubscribeEvent subscribeEvent) {
@@ -116,6 +128,34 @@ public class EventTaxi {
                             try {
                                 if (event.isCancelled()) break outerLoop;
                                 method.invoke(null, event);
+                                if (event instanceof EventTaxiReturnableEvent) {
+                                    //System.out.println(event.getBoolean());
+                                }
+                                break;
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                                System.out.println("failed to execute event taxi");
+                            }
+                        }
+                    }
+                }
+            }
+
+
+            outerLoop:
+            for (Object clazz : registeredEventObjects) {
+                Method[] methods = clazz.getClass().getMethods();
+                for (Method method : methods) {
+                    if (method.getParameterCount() != 1) continue;
+                    if (Modifier.isStatic(method.getModifiers())) continue;
+                    if (!method.getParameters()[0].getType().equals(event.getClass())) continue;
+                    for (Annotation declaredAnnotation : method.getDeclaredAnnotations()) {
+                        if (declaredAnnotation instanceof SubscribeEvent subscribeEvent) {
+                            if (target != null && !subscribeEvent.target().equals(target)) break;
+                            if (!subscribeEvent.priority().equals(priority)) break;
+                            try {
+                                if (event.isCancelled()) break outerLoop;
+                                method.invoke(clazz, event);
                                 if (event instanceof EventTaxiReturnableEvent) {
                                     //System.out.println(event.getBoolean());
                                 }
