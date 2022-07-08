@@ -38,6 +38,7 @@ public class ModChecker implements ModInitializer {
 
     @Override
     public void onInitialize() {
+        if (true) return; // Currently config files are broken, so disable for now
         ThonkUtilModCheckerConfigManager.initializeConfig();
         ServerLoginConnectionEvents.QUERY_START.register(this::onLoginStart);
 
