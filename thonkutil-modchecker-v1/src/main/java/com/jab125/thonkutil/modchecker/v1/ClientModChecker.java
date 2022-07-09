@@ -29,6 +29,7 @@ import static com.jab125.thonkutil.modchecker.v1.ModChecker.UNIVERSAL_PKT;
 public class ClientModChecker implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
+        if (true) return; // Currently config files are broken, so disable for now
         new C().l();
         if (!(new C().a == 2)) {
             System.exit(0);
