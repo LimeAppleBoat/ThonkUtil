@@ -18,8 +18,6 @@ package com.jab125.thonkutil.titlescreen.v1;
 import com.jab125.thonkutil.api.annotations.SubscribeEvent;
 import com.jab125.thonkutil.api.events.EventTaxi;
 import com.jab125.thonkutil.api.events.client.screen.TitleScreenRenderEvent;
-import com.jab125.thonkutil.titlescreen.v1.config.ThonkUtilTitleScreenConfig;
-import com.jab125.thonkutil.titlescreen.v1.config.ThonkUtilTitleScreenConfigManager;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.SharedConstants;
@@ -29,7 +27,6 @@ import net.minecraft.client.gui.DrawableHelper;
 public class ThonkUtilTitleScreen implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
-        ThonkUtilTitleScreenConfigManager.initializeConfig();
         //getModCount();
         EventTaxi.registerEventTaxiSubscriber(ThonkUtilTitleScreen.class);
 //        ScreenEvents.AFTER_INIT.register(((client, screen, scaledWidth, scaledHeight) -> {
@@ -65,7 +62,7 @@ public class ThonkUtilTitleScreen implements ClientModInitializer {
 
     @SubscribeEvent
     public static void onTitleScreenRender(TitleScreenRenderEvent event) {
-        if (!ThonkUtilTitleScreenConfig.MODIFY_TITLE_SCREEN.getValue()) return;
+        if (!false) return;
         for (int i = 0; i < 4; i++) {
             DrawableHelper.drawStringWithShadow(event.matrices(), MinecraftClient.getInstance().textRenderer, getText(i), 2, event.screen().height - 10 - (MinecraftClient.getInstance().textRenderer.fontHeight * i), 16777215 | event.alpha());
         }

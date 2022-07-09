@@ -26,7 +26,7 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Wearable;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.TranslatableTextContent;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
@@ -119,15 +119,15 @@ public class CapeItem extends Item implements Wearable {
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         super.appendTooltip(stack, world, tooltip, context);
         if (I18n.hasTranslation(this.getOrCreateTranslationKey() + ".tooltip"))
-            tooltip.add(new TranslatableText(this.getOrCreateTranslationKey() + ".tooltip").formatted(Formatting.GOLD));
+            tooltip.add(Text.translatable(this.getOrCreateTranslationKey() + ".tooltip").formatted(Formatting.GOLD));
         if (I18n.hasTranslation(this.getOrCreateTranslationKey() + ".tooltip.2"))
-            tooltip.add(new TranslatableText(this.getOrCreateTranslationKey() + ".tooltip.2").formatted(Formatting.GOLD));
+            tooltip.add(Text.translatable(this.getOrCreateTranslationKey() + ".tooltip.2").formatted(Formatting.GOLD));
         if (I18n.hasTranslation(this.getOrCreateTranslationKey() + ".tooltip.3"))
-            tooltip.add(new TranslatableText(this.getOrCreateTranslationKey() + ".tooltip.3").formatted(Formatting.GOLD));
+            tooltip.add(Text.translatable(this.getOrCreateTranslationKey() + ".tooltip.3").formatted(Formatting.GOLD));
         if (this instanceof AnimatedCapeItem)
-            tooltip.add(new TranslatableText("thonkutil.animated_cape").formatted(Formatting.GRAY));
+            tooltip.add(Text.translatable("thonkutil.animated_cape").formatted(Formatting.GRAY));
         if (!hasElytraTexture && isModInstalled("trinkets"))
-            tooltip.add(new TranslatableText("thonkutil.no_elytra").formatted(Formatting.GRAY));
+            tooltip.add(Text.translatable("thonkutil.no_elytra").formatted(Formatting.GRAY));
     }
 
     @Override

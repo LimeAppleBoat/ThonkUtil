@@ -4,6 +4,7 @@ version = getSubprojectVersion(project)
 
 dependencies {
     modCompileOnly "curse.maven:minecraftcapes-359836:3673296"
+    modCompileOnly "maven.modrinth:wavey-capes:1.2.0-fabric-1.18"
     api project(path: ':thonkutil-base', configuration: 'namedElements')
 }
 

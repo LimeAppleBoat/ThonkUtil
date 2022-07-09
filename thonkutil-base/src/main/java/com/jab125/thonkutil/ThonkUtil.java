@@ -29,9 +29,9 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.text.LiteralText;
+import net.minecraft.text.LiteralTextContent;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.TranslatableTextContent;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import org.apache.logging.log4j.LogManager;
@@ -41,7 +41,7 @@ import org.apache.logging.log4j.Logger;
 public class ThonkUtil implements ThonkUtilBaseClass, ModInitializer, ClientModInitializer {
     public static final Identifier TOTEM_PACKET = new Identifier("thonkutil:totem_particle_packet");
     public static final Logger LOGGER = LogManager.getLogger("thonkutil");
-    private static final State state = State.RELEASE;
+    private static final State state = State.BETA;
     public static final Gson GSON = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).setPrettyPrinting().create();
 
     /**
@@ -123,13 +123,14 @@ public class ThonkUtil implements ThonkUtilBaseClass, ModInitializer, ClientModI
     @Environment(EnvType.CLIENT)
     public static void showMessage(TitleScreenRenderEvent event) {
         if (state.equals(State.RELEASE)) return;
-        Text text = new LiteralText("").append(new TranslatableText("thonkutil.warning.1").formatted(Formatting.RED)).append(new TranslatableText("thonkutil." + state).formatted(state.formatting)).append(new TranslatableText("thonkutil.warning.1.1").formatted(Formatting.RED));
+        if (state.equals(State.BETA)) return;
+        Text text = Text.literal("").append(Text.translatable("thonkutil.warning.1").formatted(Formatting.RED)).append(Text.translatable("thonkutil." + state).formatted(state.formatting)).append(Text.translatable("thonkutil.warning.1.1").formatted(Formatting.RED));
         DrawableHelper.drawCenteredText(event.matrices(), MinecraftClient.getInstance().textRenderer, text, event.screen().width / 2, 4 + (0 * (MinecraftClient.getInstance().textRenderer.fontHeight + 1)), 0xFFFFFF | event.alpha());
 
-        text = new TranslatableText(state.translationKeyDesc);
+        text = Text.translatable(state.translationKeyDesc);
         DrawableHelper.drawCenteredText(event.matrices(), MinecraftClient.getInstance().textRenderer, text, event.screen().width / 2, 4 + (1 * (MinecraftClient.getInstance().textRenderer.fontHeight + 1)), 0xFFFFFF | event.alpha());
 
-        text = new TranslatableText("thonkutil.warning.3");
+        text = Text.translatable("thonkutil.warning.3");
         DrawableHelper.drawCenteredText(event.matrices(), MinecraftClient.getInstance().textRenderer, text, event.screen().width / 2, 4 + (2 * (MinecraftClient.getInstance().textRenderer.fontHeight + 1)), 0xFFFFFF | event.alpha());
 
     }

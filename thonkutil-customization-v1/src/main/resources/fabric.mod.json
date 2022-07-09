@@ -14,8 +14,7 @@
     "_main": [
       "com.jab125.thonkutil.ThonkUtilCustomization"
     ],
-    "_modmenu": [
-      "com.jab125.thonkutil.config.ThonkUtilCustomizationModMenuCompat"
+    "modmenu": [
     ]
   },
   "license": "CC0-1.0",

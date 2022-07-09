@@ -15,8 +15,6 @@
  */
 package com.jab125.thonkutil.modchecker.v1;
 
-import com.jab125.thonkutil.modchecker.v1.config.ThonkUtilModCheckerConfig;
-import com.jab125.thonkutil.modchecker.v1.config.ThonkUtilModCheckerConfigManager;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
@@ -24,12 +22,13 @@ import net.fabricmc.fabric.api.networking.v1.ServerLoginConnectionEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerLoginNetworking;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerLoginNetworkHandler;
-import net.minecraft.text.LiteralText;
+import net.minecraft.text.LiteralTextContent;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -39,7 +38,6 @@ public class ModChecker implements ModInitializer {
     @Override
     public void onInitialize() {
         if (true) return; // Currently config files are broken, so disable for now
-        ThonkUtilModCheckerConfigManager.initializeConfig();
         ServerLoginConnectionEvents.QUERY_START.register(this::onLoginStart);
 
         ServerLoginNetworking.registerGlobalReceiver(UNIVERSAL_PKT, (server, handler, understood, buf, synchronizer, sender) -> {
@@ -86,15 +84,15 @@ public class ModChecker implements ModInitializer {
                         }
                     }
 
-                    Text kickMsg = new LiteralText("The following mods are blacklisted:\n\n")
-                            .append(new LiteralText("Universal Mods:\n").formatted(Formatting.BOLD)).append(pth + "\n\n")
-                            .append(new LiteralText("Client Side Mods:\n").formatted(Formatting.BOLD)).append(pt + "\n\n")
+                    Text kickMsg = Text.literal("The following mods are blacklisted:\n\n")
+                            .append(Text.literal("Universal Mods:\n").formatted(Formatting.BOLD)).append(pth + "\n\n")
+                            .append(Text.literal("Client Side Mods:\n").formatted(Formatting.BOLD)).append(pt + "\n\n")
                             .append("Please uninstall all of these mods to join.");
                     handler.disconnect(kickMsg);
                 }
             } else {
                 System.err.println("Client did not understand response query message with channel name " + UNIVERSAL_PKT);
-                handler.disconnect(new LiteralText(""));
+                handler.disconnect(Text.literal(""));
             }
         });
 
@@ -112,6 +110,6 @@ public class ModChecker implements ModInitializer {
     }
 
     public static Set<String> getBlackListedMods() {
-        return ThonkUtilModCheckerConfig.BLACKLISTED_MODS.getValue();
+        return Collections.emptySet();
     }
 }

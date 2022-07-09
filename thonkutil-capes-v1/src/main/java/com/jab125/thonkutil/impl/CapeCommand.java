@@ -22,6 +22,7 @@ import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.builder.RequiredArgumentBuilder;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import net.minecraft.command.CommandRegistryAccess;
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.command.argument.ItemStackArgument;
 import net.minecraft.command.argument.ItemStackArgumentType;
@@ -33,7 +34,8 @@ import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.text.LiteralText;
+import net.minecraft.text.LiteralTextContent;
+import net.minecraft.text.Text;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Collection;
@@ -41,10 +43,10 @@ import java.util.Iterator;
 
 public final class CapeCommand {
     @SuppressWarnings("unchecked")
-    public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
+    public static void register(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess access) {
         dispatcher.register((LiteralArgumentBuilder) ((LiteralArgumentBuilder) CommandManager.literal("cape").requires((source) -> {
             return e(source);
-        })).then(CommandManager.argument("targets", EntityArgumentType.players()).then(((RequiredArgumentBuilder) CommandManager.argument("item", ItemStackArgumentType.itemStack()).executes((context) -> {
+        })).then(CommandManager.argument("targets", EntityArgumentType.players()).then(((RequiredArgumentBuilder) CommandManager.argument("item", ItemStackArgumentType.itemStack(access)).executes((context) -> {
             return execute((ServerCommandSource) context.getSource(), ItemStackArgumentType.getItemStackArgument(context, "item"), EntityArgumentType.getPlayers(context, "targets"), 1);
         })).then(CommandManager.argument("count", IntegerArgumentType.integer(1)).executes((context) -> {
             return execute((ServerCommandSource) context.getSource(), ItemStackArgumentType.getItemStackArgument(context, "item"), EntityArgumentType.getPlayers(context, "targets"), IntegerArgumentType.getInteger(context, "count"));
@@ -88,7 +90,7 @@ public final class CapeCommand {
                         k -= l;
                         ItemStack itemStack = item.createStack(l, false);
                         if (!(itemStack.getItem() instanceof CapeItem)) {
-                            source.sendError(new LiteralText("[[CAPE NO]]"));
+                            source.sendError(Text.literal("[[CAPE NO]]"));
                             return 0;
                         }
                         boolean bl = serverPlayerEntity.getInventory().insertStack(itemStack);

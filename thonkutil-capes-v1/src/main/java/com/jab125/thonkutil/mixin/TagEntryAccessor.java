@@ -13,13 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.jab125.thonkutil.config;
+package com.jab125.thonkutil.mixin;
 
-import com.terraformersmc.modmenu.api.ModMenuApi;
+import net.minecraft.tag.TagEntry;
+import net.minecraft.util.Identifier;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.gen.Invoker;
 
-public class ThonkUtilCustomizationModMenuCompat implements ModMenuApi {
-//    @Override
-//    public ConfigScreenFactory<?> getModConfigScreenFactory() {
-//        return ;
-//    }
+@Mixin(TagEntry.class)
+public interface TagEntryAccessor {
+    @Invoker("<init>")
+    static TagEntry createTagEntry(Identifier id, boolean tag, boolean required) {
+        throw new UnsupportedOperationException();
+    }
 }

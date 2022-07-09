@@ -9,7 +9,7 @@ buildscript {
     }
 }
 plugins {
-    id 'fabric-loom' version '0.11-SNAPSHOT'
+    id 'fabric-loom' version '0.12-SNAPSHOT'
     id 'maven-publish'
     id "com.matthewprenger.cursegradle" version "1.4.0"
     id "org.ajoberstar.grgit" version "3.1.0"
@@ -105,6 +105,13 @@ allprojects {
         maven {
             url "https://cursemaven.com"
         }
+        maven {
+            name = "Modrinth"
+            url = "https://api.modrinth.com/maven"
+            content {
+                includeGroup "maven.modrinth"
+            }
+        }
         // Add repositories to retrieve artifacts from in here.
         // You should only use this when depending on other mods because
         // Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
@@ -126,12 +133,16 @@ allprojects {
         // Fabric API. This is technically optional, but you probably want it anyway.
         modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-        modImplementation "com.terraformersmc:modmenu:3.0.0", {
+        modImplementation "com.terraformersmc:modmenu:4.0.0-beta.4", {
             exclude module: "fabric-api"
         }
 
-        modImplementation "dev.emi:trinkets:3.3.0"
-        modImplementation "curse.maven:waveycapes-521594:3695381"
+        modRuntimeOnly "dev.onyxstudios.cardinal-components-api:cardinal-components-api:5.0.0-beta.1"
+
+        modRuntimeOnly "maven.modrinth:wavey-capes:1.2.0-fabric-1.18"
+
+        modCompileOnly "dev.emi:trinkets:3.3.0"
+        //modCompileOnly "curse.maven:waveycapes-521594:3695381"
         // PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
         // You may need to force-disable transitiveness on them.
     }
@@ -271,8 +282,8 @@ curseforge {
         id = "536648"
         changelog = ENV.CHANGELOG ?: "No changelog provided"
         releaseType = project.prerelease == "true" ? "beta" : project.prerelease == "alpha" ? "alpha" : "release"
-        addGameVersion "1.18.2"
-        addGameVersion "1.18-Snapshot"
+        addGameVersion "1.19"
+        addGameVersion "1.19-Snapshot"
         addGameVersion "Fabric"
         addGameVersion "Java 17"
 
@@ -280,7 +291,7 @@ curseforge {
             displayName = "[$project.minecraft_version] ThonkUtil $project.version"
             relations {
                 requiredDependency 'fabric-api'
-                optionalDependency 'trinkets-fabric'
+                optionalDependency 'trinkets'
             }
         }
 

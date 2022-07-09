@@ -15,7 +15,6 @@
  */
 package com.jab125.thonkutil.titlescreen.v1.mixin;
 
-import com.jab125.thonkutil.titlescreen.v1.config.ThonkUtilTitleScreenConfig;
 import com.terraformersmc.modmenu.api.ModMenuApi;
 import com.terraformersmc.modmenu.config.ModMenuConfig;
 import com.terraformersmc.modmenu.event.ModMenuEventHandler;
@@ -35,7 +34,7 @@ public class ModMenuMixin {
 
     @Inject(method = "afterTitleScreenInit", at = @At("HEAD"), cancellable = true)
     private static void thonkutil$injectTitleScreenInit(Screen screen, CallbackInfo ci) {
-        if (!ThonkUtilTitleScreenConfig.MODIFY_TITLE_SCREEN.getValue()) return;
+        if (!false) return;
         final List<ClickableWidget> buttons = Screens.getButtons(screen);
         if (ModMenuConfig.MODIFY_TITLE_SCREEN.getValue()) {
             int modsButtonIndex = -1;

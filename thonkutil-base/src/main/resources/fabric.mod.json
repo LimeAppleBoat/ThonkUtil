@@ -18,7 +18,6 @@
       "com.jab125.thonkutil.ThonkUtil"
     ],
     "modmenu": [
-      "com.jab125.thonkutil.config.ThonkUtilModMenuCompat"
     ]
   },
   "license": "CC0-1.0",

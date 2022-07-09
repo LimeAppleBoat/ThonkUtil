@@ -20,7 +20,7 @@ import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
 @Pseudo
-@Mixin(targets = "com.terraformersmc.modmenu.util.mod.fabric.FabricMod$ModMenuData")
+@Mixin(targets = "com.terraformersmc.modmenu.util.mod.fabric.FabricMod$ModMenuData", remap = false)
 public interface ModMenuDataAccessor {
     @Invoker("fillParentIfEmpty")
     void callFillParentIfEmpty(String string);

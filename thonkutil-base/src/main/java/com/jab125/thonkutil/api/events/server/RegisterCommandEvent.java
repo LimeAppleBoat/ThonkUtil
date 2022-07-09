@@ -17,22 +17,30 @@ package com.jab125.thonkutil.api.events.server;
 
 import com.jab125.thonkutil.api.events.EventTaxiEvent;
 import com.mojang.brigadier.CommandDispatcher;
+import net.minecraft.command.CommandRegistryAccess;
+import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 
 public class RegisterCommandEvent extends EventTaxiEvent {
     private final CommandDispatcher<ServerCommandSource> source;
-    private final boolean dedicated;
+    private final CommandRegistryAccess registryAccess;
+    private final CommandManager.RegistrationEnvironment environment;
 
-    public RegisterCommandEvent(CommandDispatcher<ServerCommandSource> source, boolean dedicated) {
-        this.source = source;
-        this.dedicated = dedicated;
+    public RegisterCommandEvent(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess registryAccess, CommandManager.RegistrationEnvironment environment) {
+        this.source = dispatcher;
+        this.registryAccess = registryAccess;
+        this.environment = environment;
     }
 
     public CommandDispatcher<ServerCommandSource> source() {
         return source;
     }
 
-    public boolean dedicated() {
-        return dedicated;
+    public CommandRegistryAccess registryAccess() {
+        return registryAccess;
+    }
+
+    public CommandManager.RegistrationEnvironment environment() {
+        return environment;
     }
 }

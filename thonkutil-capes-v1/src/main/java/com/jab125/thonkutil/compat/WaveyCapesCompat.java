@@ -29,9 +29,6 @@ import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.item.ItemStack;
-import net.minecraftcapes.config.MinecraftCapesConfig;
-import net.minecraftcapes.player.PlayerHandler;
 
 public class WaveyCapesCompat implements ModSupport {
     private final ThonkUtilCapesRenderer render = new ThonkUtilCapesRenderer();
@@ -57,6 +54,7 @@ public class WaveyCapesCompat implements ModSupport {
         private ThonkUtilCapesRenderer() {
         }
 
+        @Override
         public void render(AbstractClientPlayerEntity player, int part, ModelPart model, MatrixStack poseStack, VertexConsumerProvider multiBufferSource, int light, int overlay) {
             boolean isCapeVisible = !ThonkUtilCapes.getCape(player).isEmpty();
             CapeItem cape = (CapeItem) ThonkUtilCapes.getCape(player).getItem();
@@ -70,12 +68,14 @@ public class WaveyCapesCompat implements ModSupport {
             model.render(poseStack, vertexConsumer, light, OverlayTexture.DEFAULT_UV);
         }
 
+        @Override
         public VertexConsumer getVertexConsumer(VertexConsumerProvider multiBufferSource, AbstractClientPlayerEntity player) {
             boolean isCapeVisible = !ThonkUtilCapes.getCape(player).isEmpty();
             CapeItem cape = (CapeItem) ThonkUtilCapes.getCape(player).getItem();
             return isCapeVisible && cape.getCapeTexture() != null ? ItemRenderer.getArmorGlintConsumer(multiBufferSource, RenderLayer.getArmorCutoutNoCull(cape.getCapeTexture()), false, cape.hasGlint(ThonkUtilCapes.getCape(player))) : ItemRenderer.getArmorGlintConsumer(multiBufferSource, RenderLayer.getArmorCutoutNoCull(cape.getCapeTexture()), false, false);
         }
 
+        @Override
         public boolean vanillaUvValues() {
             return true;
         }

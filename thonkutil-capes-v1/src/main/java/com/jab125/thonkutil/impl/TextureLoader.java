@@ -33,7 +33,7 @@ import java.io.InputStream;
 public class TextureLoader {
     public static void apply2WingedElytra(CapeItem cape) {
         try {
-            InputStream texture = MinecraftClient.getInstance().getResourceManager().getResource(cape.getElytraTexture0()).getInputStream();
+            InputStream texture = MinecraftClient.getInstance().getResourceManager().getResource(cape.getElytraTexture0()).orElseThrow().getInputStream();
             NativeImage elytra = NativeImage.read(texture);
             Int2ObjectMap<NativeImage> elytraTextures = new Int2ObjectOpenHashMap<>();
             int imageHeight = elytra.getHeight() / (elytra.getWidth() / 2);
@@ -59,7 +59,7 @@ public class TextureLoader {
 
     public static void applyAnimatedCape(AnimatedCapeItem cape) {
         try {
-            InputStream texture = MinecraftClient.getInstance().getResourceManager().getResource(cape.getCapeTexture0()).getInputStream();
+            InputStream texture = MinecraftClient.getInstance().getResourceManager().getResource(cape.getCapeTexture0()).orElseThrow().getInputStream();
             NativeImage capeImage = NativeImage.read(texture);
             int imageHeight;
             int currentFrame;

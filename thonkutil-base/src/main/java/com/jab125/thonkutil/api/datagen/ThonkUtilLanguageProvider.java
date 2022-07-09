@@ -18,9 +18,11 @@ package com.jab125.thonkutil.api.datagen;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricLootTableProvider;
 import net.minecraft.block.Block;
 import net.minecraft.data.DataCache;
 import net.minecraft.data.DataProvider;
+import net.minecraft.data.DataWriter;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.effect.StatusEffect;
@@ -58,7 +60,7 @@ public abstract class ThonkUtilLanguageProvider implements DataProvider {
     }
 
     @Override
-    public void run(DataCache cache) throws IOException {
+    public void run(DataWriter writer) throws IOException {
         addTranslations();
         @SuppressWarnings("deprecation")
         String rawJson = JavaUnicodeEscaper.outsideOf(0, 0x7f).translate(GSON.toJson(data));
@@ -68,14 +70,7 @@ public abstract class ThonkUtilLanguageProvider implements DataProvider {
             System.out.println("JSON: " + rawJson);
             System.out.println("Path: " + path);
         }
-        String hash = SHA1.hashUnencodedChars(rawJson).toString();
-        if (!Objects.equals(cache.getOldSha1(path), hash) || !Files.exists(path)) {
-            Files.createDirectories(path.getParent());
-            try (BufferedWriter writer = Files.newBufferedWriter(path)) {
-                writer.write(rawJson);
-            }
-        }
-        cache.updateSha1(path, hash);
+        DataProvider.writeToPath(writer, GSON.toJsonTree(data), path);
     }
 
     @Override

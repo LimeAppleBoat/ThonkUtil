@@ -15,7 +15,6 @@
       "com.jab125.thonkutil.ThonkUtilCoord"
     ],
     "modmenu": [
-      "com.jab125.thonkutil.config.ThonkUtilCoordModMenuCompat"
     ]
   },
   "license": "CC0-1.0",

@@ -27,7 +27,7 @@ public class TemperatureUtil {
 
     public static float getTemperatureAlt(Entity entity) {
         if (entity.getWorld().isClient()) return 0;
-        if (entity.getWorld().getDimension().isUltrawarm()) return 100;
+        if (entity.getWorld().getDimension().ultrawarm()) return 100;
         return getEntityBiome(entity).getTemperature() * 30;
     }
 

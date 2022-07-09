@@ -23,8 +23,8 @@ import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.entity.Entity;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.text.TranslatableText;
-
+import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableTextContent;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -72,7 +72,7 @@ public class TemperatureCommand {
 
         for (Entity target : targets) {
             if (x > 10) return 10;
-            source.sendFeedback(new TranslatableText("commands.temperature.success.single", target.getDisplayName(), b.next()), true);
+            source.sendFeedback(Text.translatable("commands.temperature.success.single", target.getDisplayName(), b.next()), true);
             x++;
         }
 

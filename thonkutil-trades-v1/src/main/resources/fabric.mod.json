@@ -18,7 +18,6 @@
       "com.jab125.thonkutil.ThonkUtilTradesClient"
     ],
     "modmenu": [
-      "com.jab125.thonkutil.config.ThonkUtilTradesModMenuCompat"
     ]
   },
   "license": "CC0-1.0",
