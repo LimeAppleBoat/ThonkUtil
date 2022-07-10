@@ -37,6 +37,7 @@ public class ModChecker implements ModInitializer {
 
     @Override
     public void onInitialize() {
+        if (true) return; // Currently config files are broken, so disable for now
         ServerLoginConnectionEvents.QUERY_START.register(this::onLoginStart);
 
         ServerLoginNetworking.registerGlobalReceiver(UNIVERSAL_PKT, (server, handler, understood, buf, synchronizer, sender) -> {
