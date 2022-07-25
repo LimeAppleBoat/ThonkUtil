@@ -40,7 +40,7 @@ public class TagGroupLoaderMixin {
     @Final
     private String dataType;
 
-    @Inject(method = "loadTags", at = @At("RETURN"), cancellable = true)
+    @Inject(method = "loadTags", at = @At("RETURN"))
     private void loadTagInject(ResourceManager manager, CallbackInfoReturnable<Map<Identifier, List<TagGroupLoader.TrackedEntry>>> cir) {
         if (!this.dataType.equals("tags/items")) return;
         List<TagGroupLoader.TrackedEntry> a = new ArrayList<>();
@@ -65,9 +65,5 @@ public class TagGroupLoaderMixin {
         } else {
             b.put(Identifier.tryParse("trinkets:chest/cape"), a);
         }
-        cir.setReturnValue(b);
-        cir.getReturnValue().forEach(((identifier, builder) -> {
-            //System.out.println(identifier.toString() + ", " +  builder.toJson().toString() + ", " + this.dataType);
-        }));
     }
 }
