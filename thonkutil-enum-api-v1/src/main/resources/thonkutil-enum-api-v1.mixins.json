@@ -1,0 +1,25 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "plugin": "com.jab125.limeappleboat.thonkutil.enumapi.v1.impl.mixin.MixinPlugin",
+  "package": "com.jab125.limeappleboat.thonkutil.enumapi.v1.impl.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "mixins": [
+    "YggdrasilUserApiServiceMixin",
+    "boattype.BoatMixin",
+    "boattype.BoatTypeAdderMixin",
+    "boattype.BoatTypeMixin",
+    "difficulty.DifficultyCreatorMixin",
+    "difficulty.DifficultyMixin",
+    "enchantmenttarget.EnchantmentTargetAdderMixin",
+    "enchantmenttarget.EnchantmentTargetMixin",
+    "modbadge.ModBadgeCreatorMixin",
+    "modbadge.ModBadgeMixin",
+    "modbadge.ModMenuMixin",
+    "tooltipsection.TooltipSectionAdderMixin",
+    "tooltipsection.TooltipSectionMixin"
+  ]
+}
