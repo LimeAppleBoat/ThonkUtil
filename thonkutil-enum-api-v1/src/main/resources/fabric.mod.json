@@ -3,7 +3,7 @@
   "id": "thonkutil-enum-api-v1",
   "version": "${version}",
   "name": "ThonkUtil Enum Api (v1)",
-  "description": "",
+  "description": "oh no",
   "authors": [
     "Jab125"
   ],
@@ -16,6 +16,9 @@
       "com.jab125.limeappleboat.thonkutil.enumapi.v1.impl.ThonkUtilEnumApi"
     ],
     "modmenu": [
+    ],
+    "thonkutil:enum_api": [
+      "com.jab125.limeappleboat.thonkutil.enumapi.v1.impl.Builtins"
     ]
   },
   "license": "CC0-1.0",

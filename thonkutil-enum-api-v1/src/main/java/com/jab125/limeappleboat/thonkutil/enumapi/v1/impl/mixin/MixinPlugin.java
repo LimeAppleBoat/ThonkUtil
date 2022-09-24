@@ -1,46 +1,30 @@
-//        System.out.println(methodQueues);
-//        methodQueues.forEach(methodQueued -> methodQueued.add(targetClass));
-//        //System.out.println(targetClassName);
-//        if (targetClassName.equals("com.jab125.limeappleboat.thonkutil.enumapi.v1.api.BoatTypeAdder")) {
-//        for (MethodNode method : targetClass.methods) {
-//        if (method.name.equals("create") || method.name.equals("addToField")) {
-//        System.out.println(method.name);
-//        for (AbstractInsnNode instruction : method.instructions) {
-//        System.out.println(instruction.getClass());
-//        if (instruction instanceof LabelNode labelNode) {
-//        System.out.println(labelNode.getLabel());
-//        } else if (instruction instanceof LineNumberNode lineNumberNode) {
-//        System.out.println(lineNumberNode.start.getLabel() + ", " + lineNumberNode.line);
-//        } else if (instruction instanceof TypeInsnNode typeInsnNode) {
-//        System.out.println(typeInsnNode.desc + ", " + typeInsnNode.invisibleTypeAnnotations + ", " + typeInsnNode.visibleTypeAnnotations + ", " + typeInsnNode.getType() + ", " + typeInsnNode.getOpcode());
-//        } else if (instruction instanceof MethodInsnNode methodInsnNode) {
-//        System.out.println(methodInsnNode.getOpcode() + ", " + methodInsnNode.desc + ", " + methodInsnNode.name + ", " + methodInsnNode.owner + ", " + methodInsnNode.invisibleTypeAnnotations + ", " + methodInsnNode.visibleTypeAnnotations + ", " + methodInsnNode.itf);
-//        } else if (instruction instanceof InsnNode insnNode) {
-//        System.out.println(insnNode.getOpcode() + ", " + insnNode.invisibleTypeAnnotations + ", " + insnNode.visibleTypeAnnotations + ", " + insnNode.getType());
-//        } else if (instruction instanceof VarInsnNode varInsnNode) {
-//        System.out.println(varInsnNode.var + ", " + varInsnNode.getType() + ", " + varInsnNode.getOpcode() + ", " + varInsnNode.invisibleTypeAnnotations + ", " + varInsnNode.visibleTypeAnnotations);
-//        } else if (instruction instanceof FieldInsnNode fieldInsnNode) {
-//        System.out.println(fieldInsnNode.desc + ", " + fieldInsnNode.name + ", " + fieldInsnNode.owner + ", " + fieldInsnNode.invisibleTypeAnnotations + ", " + fieldInsnNode.visibleTypeAnnotations + ", " + fieldInsnNode.getType() + ", " + fieldInsnNode.getOpcode());
-//        }
-//        }
-//        }
-//        }
-//        }
-//        //if(true)return;
+/*
+ * Copyright (c) 2021, 2022 Jab125 & LimeAppleBoat
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.jab125.limeappleboat.thonkutil.enumapi.v1.impl.mixin;
 
 import com.google.common.collect.ImmutableList;
-import com.jab125.limeappleboat.thonkutil.enumapi.v1.impl.MethodName;
+import com.jab125.limeappleboat.thonkutil.enumapi.v1.api.EnumAdder;
+import com.jab125.limeappleboat.thonkutil.enumapi.v1.api.MethodName;
 import com.jab125.limeappleboat.thonkutil.enumapi.v1.impl.MethodQueued;
+import com.jab125.limeappleboat.thonkutil.enumapi.v1.impl.MixinDefiner;
+import com.jab125.limeappleboat.thonkutil.enumapi.v1.impl.URLHandler;
 import net.fabricmc.loader.api.FabricLoader;
-import net.fabricmc.loader.impl.gui.FabricStatusTree;
 import net.fabricmc.loader.impl.launch.FabricLauncherBase;
 import net.fabricmc.loader.impl.util.mappings.TinyRemapperMappingsHelper;
 import net.fabricmc.tinyremapper.IMappingProvider;
-import net.fabricmc.tinyremapper.TinyRemapper;
-import net.fabricmc.tinyremapper.TinyUtils;
-import net.minecraft.enchantment.EnchantmentTarget;
-import org.apache.commons.lang3.text.WordUtils;
 import org.objectweb.asm.Label;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
@@ -48,17 +32,23 @@ import org.objectweb.asm.tree.*;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.lang.invoke.MethodHandle;
+import java.lang.invoke.MethodHandles;
+import java.lang.reflect.Method;
+import java.net.URL;
+import java.net.URLClassLoader;
+import java.util.*;
 
 public class MixinPlugin implements IMixinConfigPlugin {
     private final ArrayList<MethodQueued> methodQueues = new ArrayList<>();
     private static final String PREFIX = "^_^ + 08 - e rT 7 ( 馬鹿_イーヌン_";
     private final IMappingProvider what = TinyRemapperMappingsHelper.create(FabricLauncherBase.getLauncher().getMappingConfiguration().getMappings(), FabricLoader.getInstance().getMappingResolver().getCurrentRuntimeNamespace(), "intermediary");
+    private MethodHandle addUrlClass;
+    private ClassLoader cl;
+    private Map<String, byte[]> extraMixins = new HashMap<>();
+    private List<String> extraMixinList = new ArrayList<>();
+    private List<EnumAdder> adders;
+
     private String remapDescriptor(String desc) {
         var a = Arrays.stream(Type.getArgumentTypes(desc)).toList();
         var b = new ArrayList<Type>();
@@ -75,7 +65,79 @@ public class MixinPlugin implements IMixinConfigPlugin {
     }
     @Override
     public void onLoad(String mixinPackage) {
+        entrypoint();
+        setupAddURL();
+        for (EnumAdder adder : adders) {
+            defineMixin(adder.enumClass());
+            defineMixin(adder.surrogateClass());
+         //   System.out.println(adder.enumClass());
+         //   System.out.println(adder.surrogateClass());
+        }
+        addUrl(URLHandler.create(extraMixins));
+        //defineMixin("net.minecraft.util.DyeColor");
+        outputUrls();
+      //  URL wh = URLHandler.create(extraMixins);
+       // addUrl(wh);
 
+    }
+
+    private void outputUrls() {
+        try {
+            var dd = this.getClass().getClassLoader().getClass().getDeclaredField("urlLoader");
+            dd.setAccessible(true);
+            URLClassLoader ls = (URLClassLoader) dd.get(this.getClass().getClassLoader());
+          //    System.out.println(Arrays.toString(ls.getURLs()));
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void entrypoint() {
+        try {
+            FabricLoader.getInstance().getEntrypoints("thonkutil:enum_api", Runnable.class).forEach(Runnable::run);
+            var f = EnumAdder.class.getDeclaredField("additions");
+            f.setAccessible(true);
+            @SuppressWarnings("unchecked")
+            List<EnumAdder> adders = (List<EnumAdder>) MethodHandles.lookup().unreflectGetter(f).invoke();
+            this.adders = adders;
+        } catch (Throwable e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void defineMixin(String clazz) {
+        var defined = MixinDefiner.defineMixin(clazz);
+        String cn = (String) defined.get(0);
+        byte[] data = (byte[]) defined.get(1);
+        extraMixins.put('/' + cn.replace('.', '/') + ".class", data);
+//        var n = MixinDefiner.defineMixin(clazz);
+//        defineClass(((String) n.get(0)).replaceAll("/", "."), (byte[]) n.get(1), 0, ((byte[]) n.get(1)).length, null);
+        this.extraMixinList.add(cn.replaceFirst("com/jab125/limeappleboat/thonkutil/enumapi/v1/impl/mixin/", "").replaceAll("/", "."));
+//        System.out.println(n.get(0));
+    }
+    private void setupAddURL() {
+        var classLoader = MixinPlugin.class.getClassLoader();
+        for (Method declaredMethod : classLoader.getClass().getDeclaredMethods()) {
+            if (Arrays.equals(declaredMethod.getParameterTypes(), new Class<?>[]{URL.class})) {
+                declaredMethod.setAccessible(true);
+                try {
+                    this.addUrlClass = MethodHandles.publicLookup().unreflect(declaredMethod);
+                    this.cl = classLoader;
+                } catch (IllegalAccessException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+    }
+
+    private void addUrl(URL url) {
+        try {
+            this.addUrlClass.invoke(this.cl, url);
+        } catch (Throwable e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -90,12 +152,12 @@ public class MixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public void acceptTargets(Set<String> myTargets, Set<String> otherTargets) {
-        System.out.println(myTargets);
     }
 
     @Override
     public List<String> getMixins() {
-        return null;
+        return extraMixinList;
+    //    return List.of("generatedMixins.aaa");
     }
 
     @Override
@@ -190,15 +252,12 @@ public class MixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public void postApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo) {
-        FabricLoader.getInstance().getEntrypoints("thonkutil:enum_api", Runnable.class).forEach(Runnable::run);
-        transformClass(targetClass, targetClassName, "net.minecraft.class_1690$class_1692", "field_7724", "com.jab125.limeappleboat.thonkutil.enumapi.v1.api.BoatTypeAdder", "(Ljava/lang/String;IL" + map("net/minecraft/class_2248", true) + ";Ljava/lang/String;)V");
-        transformClass(targetClass, targetClassName,  "net.minecraft.class_1799$class_5422", "field_25776", "com.jab125.limeappleboat.thonkutil.enumapi.v1.api.TooltipSectionAdder", "(Ljava/lang/String;I)V");
-        List<MethodName> names = ImmutableList.of(new MethodName("method_8177", "(Lnet/minecraft/class_1792;)Z", "thonkutil$isAcceptableItem"));
-        transformClass(targetClass, targetClassName, "net.minecraft.class_1886", "field_9077", "com.jab125.limeappleboat.thonkutil.enumapi.v1.api.EnchantmentTargetAdder", "(Ljava/lang/String;I)V", names);
-        transformClass(targetClass, targetClassName, "net.minecraft.class_1267", "field_5804", "com.jab125.limeappleboat.thonkutil.enumapi.v1.api.DifficultyCreator", "(Ljava/lang/String;IILjava/lang/String;)V");
-        transformClass(targetClass, targetClassName, "com.terraformersmc.modmenu.util.mod.Mod$Badge", "$VALUES", "com.jab125.limeappleboat.thonkutil.enumapi.v1.api.ModBadgeCreator", "(Ljava/lang/String;ILjava/lang/String;IILjava/lang/String;)V");
+      //  System.out.println(targetClassName);
+        if (mixinClassName.replaceAll("\\.", "/").startsWith("com/jab125/limeappleboat/thonkutil/enumapi/v1/impl/mixin/generatedMixins/"))
+        for (EnumAdder adder : adders) {
+            transformClass(targetClass, targetClassName, adder.enumClass(), adder.valuesField(), adder.surrogateClass(), adder.desc(), adder.names());
+        }
     }
-
 // // access flags 0x1
 //  public isAcceptableItem(Lnet/minecraft/item/Item;)Z
 //   L0
@@ -249,9 +308,9 @@ public class MixinPlugin implements IMixinConfigPlugin {
 
     private void transformClass(ClassNode targetClass, String targetClassName, String enumClass, String valuesField, String surrogateClass, String desc, List<MethodName> names) {
         targetClassName = targetClassName.replaceAll("/", ".");
-        enumClass = map(enumClass).replaceAll("/", ".");
+     //   enumClass = map(enumClass).replaceAll("/", ".");
         surrogateClass = surrogateClass.replaceAll("/", ".");
-        System.out.println(targetClassName + ", " + enumClass + ", " + targetClassName.equals(map(enumClass)));
+      //  System.out.println(targetClassName + ", " + enumClass + ", " + targetClassName.equals(map(enumClass)));
         if (targetClassName.equals(enumClass)) {
             targetClass.access &= ~Opcodes.ACC_ABSTRACT; // impl classes via mixin
             targetClass.fields.forEach(field -> {field.access &= ~Opcodes.ACC_SYNTHETIC;if(field.name.equals(valuesField)){field.access&=~Opcodes.ACC_PRIVATE;field.access&=~Opcodes.ACC_FINAL;field.access+=Opcodes.ACC_PUBLIC;}});
@@ -261,15 +320,15 @@ public class MixinPlugin implements IMixinConfigPlugin {
                     abstractHook(targetClass, method, names);
                     method.access &= ~Opcodes.ACC_ABSTRACT;
                 }
-                System.out.println(method.name + ", " + method.desc);
-                System.out.println(method.access);
+      //          System.out.println(method.name + ", " + method.desc);
+      //          System.out.println(method.access);
                 if (method.name.equals("<init>")) {
-                    System.out.println("transforming init");
+         //           System.out.println("transforming init");
                     method.access &= ~Opcodes.ACC_PRIVATE;
                     method.access &= ~Opcodes.ACC_PUBLIC;
                     method.access += Opcodes.ACC_PUBLIC;
-                    System.out.println("DESC: " + method.desc);
-                    System.out.println(method.access);
+          //          System.out.println("DESC: " + method.desc);
+          //          System.out.println(method.access);
                 }
             }
         } else if (targetClassName.equals(surrogateClass)) {
@@ -286,7 +345,7 @@ public class MixinPlugin implements IMixinConfigPlugin {
             node2.access += Opcodes.ACC_STATIC;
             node2.name = PREFIX + "addToField";
             node2.desc = "(L" + enumClass.replaceAll("\\.", "/") + ";)L" + enumClass.replaceAll("\\.", "/") + ";";
-            System.out.println("NODE: " + node.desc);
+       //     System.out.println("NODE: " + node.desc);
 
             var target = surrogateClass;
             createCreateConstructor(node.instructions, enumClass, target, desc);
@@ -297,25 +356,6 @@ public class MixinPlugin implements IMixinConfigPlugin {
         methodQueues.forEach(a -> a.add(targetClass));
     }
 
-    private static String map(String clazz) {
-        return map(clazz, false);
-    }
-
-    private static String map(String clazz, boolean slash) {
-        var a = FabricLoader.getInstance().getMappingResolver().mapClassName("intermediary", clazz.replaceAll("/", "."));
-        System.out.println(WordUtils.capitalize(FabricLoader.getInstance().getMappingResolver().getCurrentRuntimeNamespace()) + " name: " + a);
-        return slash ? a.replaceAll("\\.", "/") : a;
-    }
-
-    private static String remap(String clazz) {
-        return remap(clazz, false);
-    }
-
-    private static String remap(String clazz, boolean slash) {
-        var a = FabricLoader.getInstance().getMappingResolver().unmapClassName("intermediary", clazz.replaceAll("/", "."));
-        System.out.println("Intermediary name: " + a);
-        return slash ? a.replaceAll("\\.", "/") : a;
-    }
 
     private static InsnList listOf(AbstractInsnNode... nodes) {
         InsnList list = new InsnList();
