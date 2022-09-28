@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "id": "thonkutil-enum-api-v1",
+  "version": "${version}",
+  "name": "ThonkUtil Enum Api (v1)",
+  "description": "oh no",
+  "authors": [
+    "Jab125"
+  ],
+  "mixins": [
+    "thonkutil-enum-api-v1.mixins.json"
+  ],
+  "accessWidener": "thonkutil-enum-api-v1.accesswidener",
+  "entrypoints": {
+    "main": [
+      "com.jab125.limeappleboat.thonkutil.enumapi.v1.impl.ThonkUtilEnumApi"
+    ],
+    "modmenu": [
+    ],
+    "thonkutil:enum_api": [
+      "com.jab125.limeappleboat.thonkutil.enumapi.v1.impl.Builtins"
+    ]
+  },
+  "license": "CC0-1.0",
+  "icon": "assets/thonkutil-enum-api-v1/icon.png",
+  "environment": "*",
+  "custom": {
+    "modmenu": {
+      "parent": {
+        "id": "thonkutil",
+        "name": "ThonkUtil",
+        "description": "Some useful features that mod devs and regular users would like.",
+        "icon": "assets/thonkutil-enum-api-v1/icon.png",
+        "badges": [
+          "library"
+        ]
+      },
+      "badges": [
+        "library"
+      ]
+    }
+  }
+}

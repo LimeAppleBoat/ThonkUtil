@@ -1,0 +1,11 @@
+archivesBaseName = "thonkutil-enum-api-v1"
+group = rootProject.group
+version = getSubprojectVersion(project)
+
+dependencies {
+    api project(path: ':thonkutil-base', configuration: 'namedElements')
+}
+
+loom {
+    accessWidenerPath = file("src/main/resources/thonkutil-enum-api-v1.accesswidener")
+}
