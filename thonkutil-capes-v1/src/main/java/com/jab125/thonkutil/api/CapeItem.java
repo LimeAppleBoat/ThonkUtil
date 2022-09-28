@@ -35,6 +35,7 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.jab125.thonkutil.util.Util.isModInstalled;
@@ -44,6 +45,7 @@ public class CapeItem extends Item implements Wearable {
     private final boolean has2WingedElytra;
     private final Item.Settings settings;
     private boolean addToCreativeInventory = true;
+    private ArrayList<String> credits = new ArrayList<>();
 
     private CapeItem(CapeItem cape) {
         super(cape.settings);
@@ -128,6 +130,8 @@ public class CapeItem extends Item implements Wearable {
             tooltip.add(Text.translatable("thonkutil.animated_cape").formatted(Formatting.GRAY));
         if (!hasElytraTexture && isModInstalled("trinkets"))
             tooltip.add(Text.translatable("thonkutil.no_elytra").formatted(Formatting.GRAY));
+        if (credits.size() > 0)
+            tooltip.add(Text.literal(generateCredits()).formatted(Formatting.GRAY));
     }
 
     @Override
@@ -137,5 +141,38 @@ public class CapeItem extends Item implements Wearable {
 
     public boolean has2WingedElytra() {
         return has2WingedElytra;
+    }
+
+    public CapeItem mojangCredits() {
+        this.credits.add("Mojang Studios");
+        return this;
+    }
+
+    private String generateCredits(boolean and) {
+        // combine the credits into one string, inserting a comma between each one, but not the last one, and insert an "and" after the second last one if and is true
+        StringBuilder sb = new StringBuilder();
+        int i = 0;
+        for (String credit : credits) {
+            if (i > 0) {
+                if (i == credits.size() - 1) {
+                    sb.append(" and ");
+                } else {
+                    if (!(i == credits.size()))
+                        sb.append(", ");
+                }
+            }
+            sb.append(credit);
+            i++;
+        }
+        return sb.toString();
+    }
+
+    private String generateCredits() {
+        return generateCredits(true);
+    }
+
+    public CapeItem addCredits(String... credits) {
+        this.credits.addAll(List.of(credits));
+        return this;
     }
 }

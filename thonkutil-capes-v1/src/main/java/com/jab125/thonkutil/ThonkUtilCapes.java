@@ -47,48 +47,48 @@ public class ThonkUtilCapes implements ModInitializer, ThonkUtilCapesClass {
     }
 
     private static void registerCapes() {
-        Util.quickRegisterItem(new Identifier("thonkutil:mojang_classic_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)));
-        Util.quickRegisterItem(new Identifier("thonkutil:mojang_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)));
-        Util.quickRegisterItem(new Identifier("thonkutil:mojang_studios_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)));
+        Util.quickRegisterItem(new Identifier("thonkutil:mojang_classic_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)).mojangCredits());
+        Util.quickRegisterItem(new Identifier("thonkutil:mojang_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)).mojangCredits());
+        Util.quickRegisterItem(new Identifier("thonkutil:mojang_studios_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)).mojangCredits());
 
-        Util.quickRegisterItem(new Identifier("thonkutil:minecon_2011_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)));
-        Util.quickRegisterItem(new Identifier("thonkutil:minecon_2012_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)));
-        Util.quickRegisterItem(new Identifier("thonkutil:minecon_2013_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)));
-        Util.quickRegisterItem(new Identifier("thonkutil:minecon_2015_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)));
-        Util.quickRegisterItem(new Identifier("thonkutil:minecon_2016_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)));
+        Util.quickRegisterItem(new Identifier("thonkutil:minecon_2011_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)).mojangCredits());
+        Util.quickRegisterItem(new Identifier("thonkutil:minecon_2012_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)).mojangCredits());
+        Util.quickRegisterItem(new Identifier("thonkutil:minecon_2013_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)).mojangCredits());
+        Util.quickRegisterItem(new Identifier("thonkutil:minecon_2015_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)).mojangCredits());
+        Util.quickRegisterItem(new Identifier("thonkutil:minecon_2016_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)).mojangCredits());
 
-        Util.quickRegisterItem(new Identifier("thonkutil:bacon_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE), false));
-        Util.quickRegisterItem(new Identifier("thonkutil:one_millionth_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)));
-        Util.quickRegisterItem(new Identifier("thonkutil:dannybstyle_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)));
-        Util.quickRegisterItem(new Identifier("thonkutil:julian_clark_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)));
-        Util.quickRegisterItem(new Identifier("thonkutil:mrmessiah_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)));
-        Util.quickRegisterItem(new Identifier("thonkutil:prismarine_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)));
-        Util.quickRegisterItem(new Identifier("thonkutil:birthday_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)));
+        Util.quickRegisterItem(new Identifier("thonkutil:bacon_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE), false).addCredits("Miclee"));
+        Util.quickRegisterItem(new Identifier("thonkutil:one_millionth_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)).mojangCredits().addCredits("Kinten"));
+        Util.quickRegisterItem(new Identifier("thonkutil:dannybstyle_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)).mojangCredits());
+        Util.quickRegisterItem(new Identifier("thonkutil:julian_clark_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)).mojangCredits());
+        Util.quickRegisterItem(new Identifier("thonkutil:mrmessiah_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)).mojangCredits());
+        Util.quickRegisterItem(new Identifier("thonkutil:prismarine_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)).mojangCredits());
+        Util.quickRegisterItem(new Identifier("thonkutil:birthday_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)).mojangCredits());
 
-        Util.quickRegisterItem(new Identifier("thonkutil:translator_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)));
-        Util.quickRegisterItem(new Identifier("thonkutil:chinese_translator_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)));
-        Util.quickRegisterItem(new Identifier("thonkutil:japanese_translator_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)));
-        Util.quickRegisterItem(new Identifier("thonkutil:scrolls_champion_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)));
-        Util.quickRegisterItem(new Identifier("thonkutil:cobalt_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)));
-        Util.quickRegisterItem(new Identifier("thonkutil:mojira_moderator_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)));
-        Util.quickRegisterItem(new Identifier("thonkutil:mapmaker_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)));
-        Util.quickRegisterItem(new Identifier("thonkutil:turtle_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)));
-        Util.quickRegisterItem(new Identifier("thonkutil:migration_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)));
+        Util.quickRegisterItem(new Identifier("thonkutil:translator_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)).mojangCredits());
+        Util.quickRegisterItem(new Identifier("thonkutil:chinese_translator_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)).mojangCredits());
+        Util.quickRegisterItem(new Identifier("thonkutil:japanese_translator_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)).mojangCredits());
+        Util.quickRegisterItem(new Identifier("thonkutil:scrolls_champion_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)).mojangCredits());
+        Util.quickRegisterItem(new Identifier("thonkutil:cobalt_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)).mojangCredits());
+        Util.quickRegisterItem(new Identifier("thonkutil:mojira_moderator_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)).mojangCredits());
+        Util.quickRegisterItem(new Identifier("thonkutil:mapmaker_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)).mojangCredits());
+        Util.quickRegisterItem(new Identifier("thonkutil:turtle_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)).mojangCredits());
+        Util.quickRegisterItem(new Identifier("thonkutil:migration_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)).mojangCredits());
 
-        Util.quickRegisterItem(new Identifier("thonkutil:founders_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)));
-        Util.quickRegisterItem(new Identifier("thonkutil:pan_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)));
+        Util.quickRegisterItem(new Identifier("thonkutil:founders_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)).mojangCredits());
+        Util.quickRegisterItem(new Identifier("thonkutil:pan_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)).mojangCredits());
 
-        Util.quickRegisterItem(new Identifier("thonkutil:hero_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE), false));
+        Util.quickRegisterItem(new Identifier("thonkutil:hero_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE), false).mojangCredits());
 
-        Util.quickRegisterItem(new Identifier("thonkutil:christmas_2010_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE), false));
-        Util.quickRegisterItem(new Identifier("thonkutil:new_year_2011_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE), false));
-        Util.quickRegisterItem(new Identifier("thonkutil:first_birthday_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE), false));
+        Util.quickRegisterItem(new Identifier("thonkutil:christmas_2010_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE), false).mojangCredits());
+        Util.quickRegisterItem(new Identifier("thonkutil:new_year_2011_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE), false).mojangCredits());
+        Util.quickRegisterItem(new Identifier("thonkutil:first_birthday_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE), false).mojangCredits());
 
-        Util.quickRegisterItem(new Identifier("thonkutil:optifine_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)));
+        Util.quickRegisterItem(new Identifier("thonkutil:optifine_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE)).addCredits("Optifine"));
 
-        Util.quickRegisterItem(new Identifier("thonkutil:better_optifine_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE), true, true));
+        Util.quickRegisterItem(new Identifier("thonkutil:better_optifine_cape"), new CapeItem(new Item.Settings().rarity(Rarity.RARE), true, true).addCredits("Optifine", "Jab125"));
 
-        Util.quickRegisterItem(new Identifier("thonkutil:animated_christmas_2010_cape"), new AnimatedCapeItem(new Item.Settings().rarity(Rarity.RARE), 2, 1000, false));
+        Util.quickRegisterItem(new Identifier("thonkutil:animated_christmas_2010_cape"), new AnimatedCapeItem(new Item.Settings().rarity(Rarity.RARE), 2, 1000, false).mojangCredits().addCredits("Jab125"));
     }
 
     public static String createItemModelJson(Identifier id, String type) {
