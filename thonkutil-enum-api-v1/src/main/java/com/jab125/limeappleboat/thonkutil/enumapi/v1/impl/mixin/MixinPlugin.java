@@ -25,6 +25,7 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.impl.launch.FabricLauncherBase;
 import net.fabricmc.loader.impl.util.mappings.TinyRemapperMappingsHelper;
 import net.fabricmc.tinyremapper.IMappingProvider;
+import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.Label;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
@@ -32,11 +33,14 @@ import org.objectweb.asm.tree.*;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 
+import java.io.IOException;
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 
 public class MixinPlugin implements IMixinConfigPlugin {
@@ -287,10 +291,13 @@ public class MixinPlugin implements IMixinConfigPlugin {
         var label1 = new Label();
         var node1 = new LabelNode(label0);
         var node2 = new LineNumberNode(92, node1);
-        var node3 = new VarInsnNode(Opcodes.ALOAD, 0);
-        var node4 = new VarInsnNode(Opcodes.ALOAD, 1);
+        var node3 = new VarInsnNode(Opcodes.ALOAD, 0); // this
+        var node4 = new InsnList();
+        for (int i = 1; i <= Type.getArgumentTypes(method.desc).length; i++) {
+            node4.add(new VarInsnNode(Opcodes.ALOAD, 1)); // other params
+        }
         var node5 = new MethodInsnNode(Opcodes.INVOKEVIRTUAL, classNode.name, getName(classNode, method, names), method.desc);
-        var node6 = new InsnNode(Type.getReturnType(method.desc).getOpcode(Opcodes.IRETURN));
+        var node6 = new InsnNode(Type.getReturnType(method.desc).equals(Type.VOID_TYPE) ? Opcodes.RETURN : Type.getReturnType(method.desc).getOpcode(Opcodes.IRETURN));
         var node7 = new LabelNode(label1);
         method.instructions.add(node1);
         method.instructions.add(node2);

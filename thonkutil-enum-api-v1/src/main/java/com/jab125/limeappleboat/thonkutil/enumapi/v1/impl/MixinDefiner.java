@@ -31,9 +31,9 @@ public enum MixinDefiner {;
         classWriter.visit(52, Opcodes.ACC_PUBLIC | Opcodes.ACC_ABSTRACT, name, null, "java/lang/Object", null);
         createMixinAnnotation(classWriter, clazz);
         classWriter.visitEnd();
-        try {
-            Files.write(Paths.get(name.replaceAll("com/jab125/limeappleboat/thonkutil/enumapi/v1/impl/mixin/generatedMixins/", "") + ".class"), classWriter.toByteArray());
-        } catch (Exception e){};
+//        try {
+//            Files.write(Paths.get(name.replaceAll("com/jab125/limeappleboat/thonkutil/enumapi/v1/impl/mixin/generatedMixins/", "") + ".class"), classWriter.toByteArray());
+//        } catch (Exception e){};
         return List.of(name, classWriter.toByteArray());
 //        classWriter.visitAnnotation("L/org/spongepowered/asm/mixin/Mixin;", false);
 //        var node = new ClassNode();

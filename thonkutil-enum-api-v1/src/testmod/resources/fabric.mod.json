@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "id": "thonkutil-enum-api-v1-testmod",
+  "version": "1.0.0",
+  "name": "ThonkUtil Enum Api Testmod",
+  "description": "beep boop",
+  "authors": [
+    "Jab125"
+  ],
+  "mixins": [
+    "thonkutil-enum-api-v1-testmod.mixins.json"
+  ],
+  "entrypoints": {
+    "main": [
+      "com.jab125.limeappleboat.thonkutil.enumapi.testmod.Testmod"
+    ],
+    "modmenu": [
+    ],
+    "thonkutil:enum_api": [
+      "com.jab125.limeappleboat.thonkutil.enumapi.testmod.EnumTest"
+    ]
+  },
+  "license": "CC0-1.0",
+  "icon": "assets/thonkutil-enum-api-v1-testmod/icon.png",
+  "environment": "*"
+}

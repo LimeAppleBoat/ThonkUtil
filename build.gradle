@@ -205,7 +205,7 @@ allprojects {
 
         modRuntimeOnly "dev.onyxstudios.cardinal-components-api:cardinal-components-api:5.0.0-beta.1"
 
-        modRuntimeOnly "maven.modrinth:wavey-capes:1.2.0-fabric-1.18"
+      //  modRuntimeOnly "maven.modrinth:wavey-capes:1.2.0-fabric-1.18"
 
         modCompileOnly "dev.emi:trinkets:3.4.0"
         //modCompileOnly "curse.maven:waveycapes-521594:3695381"

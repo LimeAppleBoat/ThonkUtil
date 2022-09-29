@@ -34,29 +34,29 @@ public class ThonkUtilEnumApi implements ModInitializer {
 //    }
     @Override
     public void onInitialize() {
-        var d = ItemRarityCreator.create(new Identifier("ff:fff"), Formatting.AQUA);
-        System.out.println(d);
-//        BoatTypeAdder.create(new Identifier("thonkutil", "dog"), Blocks.BEDROCK);
-//        System.out.println(Arrays.toString(BoatEntity.Type.values()));
-//        TooltipSectionAdder.create(new Identifier("thonkutil", "elephant"));
-//        System.out.println(Arrays.toString(ItemStack.TooltipSection.values()));
-        var a =  EnchantmentTarget.ARMOR_FEET.isAcceptableItem(Items.ACACIA_LOG);
-        System.out.println(EnchantmentTarget.ARMOR_FEET + ", " + a);
+//        var d = ItemRarityCreator.create(new Identifier("ff:fff"), Formatting.AQUA);
+//        System.out.println(d);
+////        BoatTypeAdder.create(new Identifier("thonkutil", "dog"), Blocks.BEDROCK);
+////        System.out.println(Arrays.toString(BoatEntity.Type.values()));
+////        TooltipSectionAdder.create(new Identifier("thonkutil", "elephant"));
+////        System.out.println(Arrays.toString(ItemStack.TooltipSection.values()));
+//        var a =  EnchantmentTarget.ARMOR_FEET.isAcceptableItem(Items.ACACIA_LOG);
+//        System.out.println(EnchantmentTarget.ARMOR_FEET + ", " + a);
+////
+////
+//        var b = EnchantmentTargetAdder.create(new Identifier("ohno", "logchant"));
+//        ((EnchantmentTargetExtension)(Object)b).thonkutil$setChecker((item -> item.equals(Items.ACACIA_LOG)));
 //
 //
-        var b = EnchantmentTargetAdder.create(new Identifier("ohno", "logchant"));
-        ((EnchantmentTargetExtension)(Object)b).thonkutil$setChecker((item -> item.equals(Items.ACACIA_LOG)));
-
-
-        System.out.println("MATCHES: " + b.isAcceptableItem(Items.ACACIA_LOG) + ", " + b.isAcceptableItem(Items.DIAMOND));
-//
-//        System.out.println(Arrays.toString(EnchantmentTargetAdder.class.getDeclaredMethods()));
-//        DifficultyCreator.create(new Identifier("thonkutil", "asian"), 4);
-//                //System.exit(0);
-////        new EnchantmentTargetAdder();
-////        new TooltipSectionAdder();
-//        //System.exit(0);
+//        System.out.println("MATCHES: " + b.isAcceptableItem(Items.ACACIA_LOG) + ", " + b.isAcceptableItem(Items.DIAMOND));
+////
+////        System.out.println(Arrays.toString(EnchantmentTargetAdder.class.getDeclaredMethods()));
+////        DifficultyCreator.create(new Identifier("thonkutil", "asian"), 4);
+////                //System.exit(0);
+//////        new EnchantmentTargetAdder();
+//////        new TooltipSectionAdder();
+////        //System.exit(0);
     }
-
-    // rickroll
+//
+//    // rickroll
 }
