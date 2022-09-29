@@ -18,8 +18,11 @@ package com.jab125.limeappleboat.thonkutil.enumapi.v1.api;
 import com.terraformersmc.modmenu.util.mod.Mod;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.Difficulty;
+import org.jetbrains.annotations.ApiStatus;
 
 public class DifficultyCreator {
+    // WARNING!!! This is VERY UNSTABLE (the "id" field")
+    @ApiStatus.Experimental
     public static Difficulty create(Identifier identifier, int id) {
         var ordinal = Difficulty.values()[Difficulty.values().length-1].ordinal()+1;
         return createInternal(identifier.toString(), ordinal, id, identifier.toString());
