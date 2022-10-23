@@ -32,7 +32,7 @@ public class ModelLoaderMixin {
     @Inject(method = "loadModelFromJson", at = @At(value = "HEAD"), cancellable = true)
     public void loadModelFromJson(Identifier id, CallbackInfoReturnable<JsonUnbakedModel> cir) {
         // System.out.println(id.getNamespace() + ":" + id.getPath().split("/")[1]);
-        if (!(Registry.ITEM.get(Identifier.tryParse(id.getNamespace() + ":" + id.getPath().split("/")[1])) instanceof CapeItem))
+        if (!id.getPath().startsWith("item/") || !(Registry.ITEM.get(Identifier.tryParse(id.getNamespace() + ":" + id.getPath().split("/")[1])) instanceof CapeItem))
             return;
         String b = id.getNamespace() + ":" + "cape/" + id.getPath().split("/")[1];
         //Here, we can do different checks to see if the current item is a block-item, a tool, or other.
