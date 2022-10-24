@@ -13,19 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.jab125.limeappleboat.thonkutil.enumapi.v1.api;
+package com.jab125.limeappleboat.thonkutil.enumapi.v1.api.creator;
 
-import net.minecraft.block.Block;
-import net.minecraft.entity.vehicle.BoatEntity;
+import com.terraformersmc.modmenu.util.mod.Mod;
 import net.minecraft.util.Identifier;
 
-public class BoatTypeAdder {
-    public static BoatEntity.Type create(Identifier identifier, Block block) {
-        var ordinal = BoatEntity.Type.values()[BoatEntity.Type.values().length-1].ordinal()+1;
-        return createInternal(identifier.toString(), ordinal, block, identifier.getNamespace() + "/" + identifier.getPath());
+public class ModBadgeCreator {
+    public static Mod.Badge create(Identifier identifier, int outlineColor, int fillColor, String key) {
+        var ordinal = Mod.Badge.values()[Mod.Badge.values().length-1].ordinal()+1;
+        return createInternal(identifier.toString(), ordinal, identifier.getNamespace() + ".badge." + identifier.getPath(), outlineColor, fillColor, key);
     }
 
-    private static BoatEntity.Type createInternal(String var0, int var1, Block var2, String var3) {
+    private static Mod.Badge createInternal(String var0, int var1, String translationKey, int outlineColor, int fillColor, String key) {
         throw new AssertionError();
     }
 }

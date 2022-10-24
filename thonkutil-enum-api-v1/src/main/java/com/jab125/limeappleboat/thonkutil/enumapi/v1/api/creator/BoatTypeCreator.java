@@ -13,24 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.jab125.limeappleboat.thonkutil.enumapi.v1.api;
+package com.jab125.limeappleboat.thonkutil.enumapi.v1.api.creator;
 
 import net.minecraft.block.Block;
-import net.minecraft.enchantment.EnchantmentTarget;
-import net.minecraft.item.Item;
+import net.minecraft.entity.vehicle.BoatEntity;
 import net.minecraft.util.Identifier;
 
-public class EnchantmentTargetAdder {
-    public static EnchantmentTarget create(Identifier identifier) {
-        var ordinal = EnchantmentTarget.values()[EnchantmentTarget.values().length-1].ordinal()+1;
-        return createInternal(identifier.toString(), ordinal);
+public class BoatTypeCreator {
+    public static BoatEntity.Type create(Identifier identifier, Block block) {
+        var ordinal = BoatEntity.Type.values()[BoatEntity.Type.values().length-1].ordinal()+1;
+        return createInternal(identifier.toString(), ordinal, block, identifier.getNamespace() + "/" + identifier.getPath());
     }
 
-    private static EnchantmentTarget createInternal(String var0, int var1) {
+    private static BoatEntity.Type createInternal(String var0, int var1, Block var2, String var3) {
         throw new AssertionError();
-    }
-
-    public static interface Checker {
-        boolean check(Item item);
     }
 }

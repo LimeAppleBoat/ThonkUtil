@@ -13,19 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.jab125.limeappleboat.thonkutil.enumapi.v1.api;
+package com.jab125.limeappleboat.thonkutil.enumapi.v1.api.creator;
 
-import net.minecraft.util.Formatting;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.Rarity;
+import org.jetbrains.annotations.ApiStatus;
 
-public class ItemRarityCreator {
-    public static Rarity create(Identifier identifier, Formatting formatting) {
-        var ordinal = Rarity.values()[Rarity.values().length-1].ordinal()+1;
-        return createInternal(identifier.toString(), ordinal, formatting);
+public class TooltipSectionCreator {
+    @ApiStatus.Experimental // oh no
+    public static ItemStack.TooltipSection create(Identifier identifier) {
+        var ordinal = ItemStack.TooltipSection.values()[ItemStack.TooltipSection.values().length-1].ordinal()+1;
+        return createInternal(identifier.toString(), ordinal);
     }
 
-    private static Rarity createInternal(String var0, int var1, Formatting formatting) {
+    private static ItemStack.TooltipSection createInternal(String var0, int var1) {
         throw new AssertionError();
     }
 }

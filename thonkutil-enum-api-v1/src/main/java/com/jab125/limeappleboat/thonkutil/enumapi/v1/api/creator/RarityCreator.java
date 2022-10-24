@@ -13,18 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.jab125.limeappleboat.thonkutil.enumapi.v1.api;
+package com.jab125.limeappleboat.thonkutil.enumapi.v1.api.creator;
 
-import com.terraformersmc.modmenu.util.mod.Mod;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Rarity;
 
-public class ModBadgeCreator {
-    public static Mod.Badge create(Identifier identifier, int outlineColor, int fillColor, String key) {
-        var ordinal = Mod.Badge.values()[Mod.Badge.values().length-1].ordinal()+1;
-        return createInternal(identifier.toString(), ordinal, identifier.getNamespace() + ".badge." + identifier.getPath(), outlineColor, fillColor, key);
+public class RarityCreator {
+    public static Rarity create(Identifier identifier, Formatting formatting) {
+        var ordinal = Rarity.values()[Rarity.values().length-1].ordinal()+1;
+        return createInternal(identifier.toString(), ordinal, formatting);
     }
 
-    private static Mod.Badge createInternal(String var0, int var1, String translationKey, int outlineColor, int fillColor, String key) {
+    private static Rarity createInternal(String var0, int var1, Formatting formatting) {
         throw new AssertionError();
     }
 }

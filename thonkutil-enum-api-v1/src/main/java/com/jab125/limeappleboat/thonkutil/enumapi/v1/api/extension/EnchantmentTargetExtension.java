@@ -13,18 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.jab125.limeappleboat.thonkutil.enumapi.v1.api;
+package com.jab125.limeappleboat.thonkutil.enumapi.v1.api.extension;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.jab125.limeappleboat.thonkutil.enumapi.v1.api.creator.EnchantmentTargetCreator;
+import net.minecraft.item.Item;
 
-public record EnumAdder(String enumClass, String valuesField, String surrogateClass, String desc, List<MethodName> names) {
-    public EnumAdder(String enumClass, String valuesField, String surrogateClass, String desc) {
-        this(enumClass, valuesField, surrogateClass, desc, null);
-    }
-    @SuppressWarnings("unused")
-    private static final List<EnumAdder> additions = new ArrayList<>();
-    public void register() {
-        additions.add(this);
-    }
+public interface EnchantmentTargetExtension {
+    boolean thonkutil$accept(Item item);
+
+    void thonkutil$setChecker(EnchantmentTargetCreator.Checker checker);
 }

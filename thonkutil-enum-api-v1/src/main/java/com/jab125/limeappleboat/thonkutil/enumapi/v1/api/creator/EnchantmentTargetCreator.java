@@ -13,12 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.jab125.limeappleboat.thonkutil.enumapi.v1.api;
+package com.jab125.limeappleboat.thonkutil.enumapi.v1.api.creator;
 
+import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.item.Item;
+import net.minecraft.util.Identifier;
 
-public interface EnchantmentTargetExtension {
-    boolean thonkutil$accept(Item item);
+public class EnchantmentTargetCreator {
+    public static EnchantmentTarget create(Identifier identifier) {
+        var ordinal = EnchantmentTarget.values()[EnchantmentTarget.values().length-1].ordinal()+1;
+        return createInternal(identifier.toString(), ordinal);
+    }
 
-    void thonkutil$setChecker(EnchantmentTargetAdder.Checker checker);
+    private static EnchantmentTarget createInternal(String var0, int var1) {
+        throw new AssertionError();
+    }
+
+    public static interface Checker {
+        boolean check(Item item);
+    }
 }

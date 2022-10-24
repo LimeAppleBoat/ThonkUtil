@@ -15,21 +15,21 @@
  */
 package com.jab125.limeappleboat.thonkutil.enumapi.v1.impl.mixin;
 
-import com.jab125.limeappleboat.thonkutil.enumapi.v1.api.EnchantmentTargetAdder;
-import com.jab125.limeappleboat.thonkutil.enumapi.v1.api.EnchantmentTargetExtension;
+import com.jab125.limeappleboat.thonkutil.enumapi.v1.api.creator.EnchantmentTargetCreator;
+import com.jab125.limeappleboat.thonkutil.enumapi.v1.api.extension.EnchantmentTargetExtension;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.item.Item;
 import org.spongepowered.asm.mixin.Mixin;
 
-@Mixin(EnchantmentTarget.class)
+@Mixin(EnchantmentTarget.class) // i'd prefer an extended "EnchantmentTarget", but it'l'd be to complex to pull off
 public class EnchantmentTargetMixin implements EnchantmentTargetExtension {
-    private EnchantmentTargetAdder.Checker checker;
+    private EnchantmentTargetCreator.Checker checker;
     private boolean thonkutil$isAcceptableItem(Item item) /*isAcceptableItem*/ {
         return thonkutil$accept(item);
     }
 
     @Override
-    public void thonkutil$setChecker(EnchantmentTargetAdder.Checker checker) {
+    public void thonkutil$setChecker(EnchantmentTargetCreator.Checker checker) {
         this.checker = checker;
     }
 

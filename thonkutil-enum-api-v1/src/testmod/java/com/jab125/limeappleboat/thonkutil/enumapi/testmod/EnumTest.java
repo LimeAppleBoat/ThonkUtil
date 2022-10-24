@@ -15,7 +15,7 @@
  */
 package com.jab125.limeappleboat.thonkutil.enumapi.testmod;
 
-import com.jab125.limeappleboat.thonkutil.enumapi.v1.api.EnumAdder;
+import com.jab125.limeappleboat.thonkutil.enumapi.v1.api.EnumExtender;
 import com.jab125.limeappleboat.thonkutil.enumapi.v1.api.MethodName;
 
 import java.util.List;
@@ -23,13 +23,13 @@ import java.util.List;
 public class EnumTest implements Runnable {
     @Override
     public void run() {
-        new EnumAdder(
+        new EnumExtender(
             "com.jab125.limeappleboat.thonkutil.enumapi.testmod.TestEnum",
             "$VALUES",
             "com.jab125.limeappleboat.thonkutil.enumapi.testmod.TestEnumCreator",
             "(Ljava/lang/String;I)V"
         ).register();
-        new EnumAdder(
+        new EnumExtender(
             "com.jab125.limeappleboat.thonkutil.enumapi.testmod.TestAbstractEnum",
             "$VALUES",
             "com.jab125.limeappleboat.thonkutil.enumapi.testmod.TestAbstractEnumCreator",

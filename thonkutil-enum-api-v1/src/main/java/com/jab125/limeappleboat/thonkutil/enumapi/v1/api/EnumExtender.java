@@ -15,18 +15,16 @@
  */
 package com.jab125.limeappleboat.thonkutil.enumapi.v1.api;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.Identifier;
-import org.jetbrains.annotations.ApiStatus;
+import java.util.ArrayList;
+import java.util.List;
 
-public class TooltipSectionAdder {
-    @ApiStatus.Experimental // oh no
-    public static ItemStack.TooltipSection create(Identifier identifier) {
-        var ordinal = ItemStack.TooltipSection.values()[ItemStack.TooltipSection.values().length-1].ordinal()+1;
-        return createInternal(identifier.toString(), ordinal);
+public record EnumExtender(String enumClass, String valuesField, String surrogateClass, String desc, List<MethodName> names) {
+    public EnumExtender(String enumClass, String valuesField, String surrogateClass, String desc) {
+        this(enumClass, valuesField, surrogateClass, desc, null);
     }
-
-    private static ItemStack.TooltipSection createInternal(String var0, int var1) {
-        throw new AssertionError();
+    @SuppressWarnings("unused")
+    private static final List<EnumExtender> additions = new ArrayList<>();
+    public void register() {
+        additions.add(this);
     }
 }

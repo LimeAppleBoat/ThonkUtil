@@ -15,8 +15,7 @@
  */
 package com.jab125.limeappleboat.thonkutil.enumapi.v1.impl.mixin;
 
-import com.google.common.collect.ImmutableList;
-import com.jab125.limeappleboat.thonkutil.enumapi.v1.api.EnumAdder;
+import com.jab125.limeappleboat.thonkutil.enumapi.v1.api.EnumExtender;
 import com.jab125.limeappleboat.thonkutil.enumapi.v1.api.MethodName;
 import com.jab125.limeappleboat.thonkutil.enumapi.v1.impl.MethodQueued;
 import com.jab125.limeappleboat.thonkutil.enumapi.v1.impl.MixinDefiner;
@@ -25,7 +24,6 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.impl.launch.FabricLauncherBase;
 import net.fabricmc.loader.impl.util.mappings.TinyRemapperMappingsHelper;
 import net.fabricmc.tinyremapper.IMappingProvider;
-import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.Label;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
@@ -33,14 +31,11 @@ import org.objectweb.asm.tree.*;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 
-import java.io.IOException;
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.*;
 
 public class MixinPlugin implements IMixinConfigPlugin {
@@ -51,7 +46,7 @@ public class MixinPlugin implements IMixinConfigPlugin {
     private ClassLoader cl;
     private Map<String, byte[]> extraMixins = new HashMap<>();
     private List<String> extraMixinList = new ArrayList<>();
-    private List<EnumAdder> adders;
+    private List<EnumExtender> adders;
 
     private String remapDescriptor(String desc) {
         var a = Arrays.stream(Type.getArgumentTypes(desc)).toList();
@@ -71,7 +66,7 @@ public class MixinPlugin implements IMixinConfigPlugin {
     public void onLoad(String mixinPackage) {
         entrypoint();
         setupAddURL();
-        for (EnumAdder adder : adders) {
+        for (EnumExtender adder : adders) {
             defineMixin(adder.enumClass());
             defineMixin(adder.surrogateClass());
          //   System.out.println(adder.enumClass());
@@ -101,10 +96,10 @@ public class MixinPlugin implements IMixinConfigPlugin {
     private void entrypoint() {
         try {
             FabricLoader.getInstance().getEntrypoints("thonkutil:enum_api", Runnable.class).forEach(Runnable::run);
-            var f = EnumAdder.class.getDeclaredField("additions");
+            var f = EnumExtender.class.getDeclaredField("additions");
             f.setAccessible(true);
             @SuppressWarnings("unchecked")
-            List<EnumAdder> adders = (List<EnumAdder>) MethodHandles.lookup().unreflectGetter(f).invoke();
+            List<EnumExtender> adders = (List<EnumExtender>) MethodHandles.lookup().unreflectGetter(f).invoke();
             this.adders = adders;
         } catch (Throwable e) {
             throw new RuntimeException(e);
@@ -258,7 +253,7 @@ public class MixinPlugin implements IMixinConfigPlugin {
     public void postApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo) {
       //  System.out.println(targetClassName);
         if (mixinClassName.replaceAll("\\.", "/").startsWith("com/jab125/limeappleboat/thonkutil/enumapi/v1/impl/mixin/generatedMixins/"))
-        for (EnumAdder adder : adders) {
+        for (EnumExtender adder : adders) {
             transformClass(targetClass, targetClassName, adder.enumClass(), adder.valuesField(), adder.surrogateClass(), adder.desc(), adder.names());
         }
     }

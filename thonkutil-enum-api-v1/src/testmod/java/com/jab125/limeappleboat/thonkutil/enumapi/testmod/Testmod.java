@@ -15,7 +15,7 @@
  */
 package com.jab125.limeappleboat.thonkutil.enumapi.testmod;
 
-import com.jab125.limeappleboat.thonkutil.enumapi.v1.api.DifficultyCreator;
+import com.jab125.limeappleboat.thonkutil.enumapi.v1.api.creator.DifficultyCreator;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.util.Identifier;
 

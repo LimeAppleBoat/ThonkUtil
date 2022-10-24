@@ -16,7 +16,7 @@
 package com.jab125.limeappleboat.thonkutil.enumapi.v1.impl;
 
 import com.google.common.collect.ImmutableList;
-import com.jab125.limeappleboat.thonkutil.enumapi.v1.api.EnumAdder;
+import com.jab125.limeappleboat.thonkutil.enumapi.v1.api.EnumExtender;
 import com.jab125.limeappleboat.thonkutil.enumapi.v1.api.MethodName;
 import net.fabricmc.loader.api.FabricLoader;
 
@@ -31,7 +31,7 @@ public class Builtins implements Runnable {
         transformClass("net.minecraft.class_1886", "field_9077", "com.jab125.limeappleboat.thonkutil.enumapi.v1.api.EnchantmentTargetAdder", "(Ljava/lang/String;I)V", names);
         transformClass("net.minecraft.class_1267", "field_5804", "com.jab125.limeappleboat.thonkutil.enumapi.v1.api.DifficultyCreator", "(Ljava/lang/String;IILjava/lang/String;)V");
         transformClass("com.terraformersmc.modmenu.util.mod.Mod$Badge", "$VALUES", "com.jab125.limeappleboat.thonkutil.enumapi.v1.api.ModBadgeCreator", "(Ljava/lang/String;ILjava/lang/String;IILjava/lang/String;)V");
-        transformClass("net.minecraft.class_1814", "field_8905", "com.jab125.limeappleboat.thonkutil.enumapi.v1.api.ItemRarityCreator", "(Ljava/lang/String;IL" + map("net/minecraft/class_124", true) + ";)V");
+        transformClass("net.minecraft.class_1814", "field_8905", "com.jab125.limeappleboat.thonkutil.enumapi.v1.api.RarityCreator", "(Ljava/lang/String;IL" + map("net/minecraft/class_124", true) + ";)V");
     }
 
     private static String map(String clazz) {
@@ -45,10 +45,10 @@ public class Builtins implements Runnable {
     }
 
     private void transformClass(String enumClass, String valuesField, String surrogateClass, String desc, List<MethodName> names) {
-        new EnumAdder(map(enumClass).replaceAll("/", "."), valuesField, surrogateClass, desc, names).register();
+        new EnumExtender(map(enumClass).replaceAll("/", "."), valuesField, surrogateClass, desc, names).register();
     }
 
     private void transformClass(String enumClass, String valuesField, String surrogateClass, String desc) {
-        new EnumAdder(map(enumClass).replaceAll("/", "."), valuesField, surrogateClass, desc).register();
+        new EnumExtender(map(enumClass).replaceAll("/", "."), valuesField, surrogateClass, desc).register();
     }
 }
