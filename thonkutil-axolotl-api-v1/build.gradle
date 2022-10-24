@@ -1,0 +1,12 @@
+archivesBaseName = "thonkutil-axolotl-api-v1"
+group = rootProject.group
+version = getSubprojectVersion(project)
+
+moduleDependencies(project, [
+        'thonkutil-base',
+        'thonkutil-enum-api-v1'
+])
+
+loom {
+    accessWidenerPath = file("src/main/resources/thonkutil-axolotl-api-v1.accesswidener")
+}

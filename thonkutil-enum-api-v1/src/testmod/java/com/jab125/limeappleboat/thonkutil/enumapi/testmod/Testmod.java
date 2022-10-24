@@ -15,6 +15,7 @@
  */
 package com.jab125.limeappleboat.thonkutil.enumapi.testmod;
 
+import com.jab125.limeappleboat.thonkutil.enumapi.v1.Helpers;
 import com.jab125.limeappleboat.thonkutil.enumapi.v1.api.creator.DifficultyCreator;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.util.Identifier;
@@ -24,6 +25,7 @@ import java.util.Arrays;
 public class Testmod implements ModInitializer {
     @Override
     public void onInitialize() {
+        System.out.println(Helpers.mapField("net.minecraft.class_5762$class_5767", "field_28346", null));
         System.out.println(Arrays.toString(TestEnum.values()));
         TestEnum SUSHI = TestEnumCreator.create("SUSHI");
         System.out.println(Arrays.toString(TestEnum.values()));

@@ -16,39 +16,21 @@
 package com.jab125.limeappleboat.thonkutil.enumapi.v1.impl;
 
 import com.google.common.collect.ImmutableList;
-import com.jab125.limeappleboat.thonkutil.enumapi.v1.api.EnumExtender;
+import com.jab125.limeappleboat.thonkutil.enumapi.v1.Helpers;
 import com.jab125.limeappleboat.thonkutil.enumapi.v1.api.MethodName;
-import net.fabricmc.loader.api.FabricLoader;
 
 import java.util.List;
 
 public class Builtins implements Runnable {
     @Override
     public void run() {
-        transformClass("net.minecraft.class_1690$class_1692", "field_7724", "com.jab125.limeappleboat.thonkutil.enumapi.v1.api.BoatTypeAdder", "(Ljava/lang/String;IL" + map("net/minecraft/class_2248", true) + ";Ljava/lang/String;)V");
-        transformClass("net.minecraft.class_1799$class_5422", "field_25776", "com.jab125.limeappleboat.thonkutil.enumapi.v1.api.TooltipSectionAdder", "(Ljava/lang/String;I)V");
+        Helpers.transformClass("net.minecraft.class_1690$class_1692", "field_7724", "com.jab125.limeappleboat.thonkutil.enumapi.v1.api.creator.BoatTypeCreator", "(Ljava/lang/String;IL" + Helpers.map("net/minecraft/class_2248", true) + ";Ljava/lang/String;)V");
+        Helpers.transformClass("net.minecraft.class_1799$class_5422", "field_25776", "com.jab125.limeappleboat.thonkutil.enumapi.v1.api.creator.TooltipSectionCreator", "(Ljava/lang/String;I)V");
         List<MethodName> names = ImmutableList.of(new MethodName("method_8177", "(Lnet/minecraft/class_1792;)Z", "thonkutil$isAcceptableItem"));
-        transformClass("net.minecraft.class_1886", "field_9077", "com.jab125.limeappleboat.thonkutil.enumapi.v1.api.EnchantmentTargetAdder", "(Ljava/lang/String;I)V", names);
-        transformClass("net.minecraft.class_1267", "field_5804", "com.jab125.limeappleboat.thonkutil.enumapi.v1.api.DifficultyCreator", "(Ljava/lang/String;IILjava/lang/String;)V");
-        transformClass("com.terraformersmc.modmenu.util.mod.Mod$Badge", "$VALUES", "com.jab125.limeappleboat.thonkutil.enumapi.v1.api.ModBadgeCreator", "(Ljava/lang/String;ILjava/lang/String;IILjava/lang/String;)V");
-        transformClass("net.minecraft.class_1814", "field_8905", "com.jab125.limeappleboat.thonkutil.enumapi.v1.api.RarityCreator", "(Ljava/lang/String;IL" + map("net/minecraft/class_124", true) + ";)V");
+        Helpers.transformClass("net.minecraft.class_1886", "field_9077", "com.jab125.limeappleboat.thonkutil.enumapi.v1.api.creator.EnchantmentTargetCreator", "(Ljava/lang/String;I)V", names);
+        Helpers.transformClass("net.minecraft.class_1267", "field_5804", "com.jab125.limeappleboat.thonkutil.enumapi.v1.api.creator.DifficultyCreator", "(Ljava/lang/String;IILjava/lang/String;)V");
+        Helpers.transformClass("com.terraformersmc.modmenu.util.mod.Mod$Badge", "$VALUES", "com.jab125.limeappleboat.thonkutil.enumapi.v1.api.creator.ModBadgeCreator", "(Ljava/lang/String;ILjava/lang/String;IILjava/lang/String;)V");
+        Helpers.transformClass("net.minecraft.class_1814", "field_8905", "com.jab125.limeappleboat.thonkutil.enumapi.v1.api.RarityCreator", "(Ljava/lang/String;IL" + Helpers.map("net/minecraft/class_124", true) + ";)V");
     }
 
-    private static String map(String clazz) {
-        return map(clazz, false);
-    }
-
-    private static String map(String clazz, boolean slash) {
-        var a = FabricLoader.getInstance().getMappingResolver().mapClassName("intermediary", clazz.replaceAll("/", "."));
-        //  System.out.println(WordUtils.capitalize(FabricLoader.getInstance().getMappingResolver().getCurrentRuntimeNamespace()) + " name: " + a);
-        return slash ? a.replaceAll("\\.", "/") : a;
-    }
-
-    private void transformClass(String enumClass, String valuesField, String surrogateClass, String desc, List<MethodName> names) {
-        new EnumExtender(map(enumClass).replaceAll("/", "."), valuesField, surrogateClass, desc, names).register();
-    }
-
-    private void transformClass(String enumClass, String valuesField, String surrogateClass, String desc) {
-        new EnumExtender(map(enumClass).replaceAll("/", "."), valuesField, surrogateClass, desc).register();
-    }
 }

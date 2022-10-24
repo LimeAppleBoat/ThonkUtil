@@ -38,7 +38,7 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.*;
 
-public class MixinPlugin implements IMixinConfigPlugin {
+public class    MixinPlugin implements IMixinConfigPlugin {
     private final ArrayList<MethodQueued> methodQueues = new ArrayList<>();
     private static final String PREFIX = "^_^ + 08 - e rT 7 ( 馬鹿_イーヌン_";
     private final IMappingProvider what = TinyRemapperMappingsHelper.create(FabricLauncherBase.getLauncher().getMappingConfiguration().getMappings(), FabricLoader.getInstance().getMappingResolver().getCurrentRuntimeNamespace(), "intermediary");
