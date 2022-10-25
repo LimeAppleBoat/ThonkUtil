@@ -22,6 +22,7 @@ import com.jab125.limeappleboat.thonkutil.enumapi.v1.api.creator.DifficultyCreat
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.render.entity.AxolotlEntityRenderer;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.passive.AxolotlEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -43,7 +44,7 @@ public class Testmod implements ModInitializer {
         System.out.println("Variant: " + BLUE + ", Custom: " +  blueMetadata.isCustom() + " Id: " + blueMetadata.getId() + " Texture: " + getTexture(BLUE));
         System.out.println("Variant: " + variant + ", Custom: " + metadata.isCustom() + " Id: " + metadata.getId() + " Texture: " + getTexture(variant));
         System.out.println("========FINISH TEST========");
-        System.exit(0);
+        //System.exit(0);
     }
 
     private static Identifier getTexture(AxolotlEntity.Variant variant) {

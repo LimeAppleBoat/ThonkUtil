@@ -21,7 +21,7 @@ import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.item.Item;
 import org.spongepowered.asm.mixin.Mixin;
 
-@Mixin(EnchantmentTarget.class) // i'd prefer an extended "EnchantmentTarget", but it'l'd be to complex to pull off
+@Mixin(EnchantmentTarget.class) // i'd prefer an extended "EnchantmentTarget", but it'd be to complex to pull off
 public class EnchantmentTargetMixin implements EnchantmentTargetExtension {
     private EnchantmentTargetCreator.Checker checker;
     private boolean thonkutil$isAcceptableItem(Item item) /*isAcceptableItem*/ {

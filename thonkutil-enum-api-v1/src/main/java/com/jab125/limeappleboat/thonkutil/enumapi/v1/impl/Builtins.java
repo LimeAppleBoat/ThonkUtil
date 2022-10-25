@@ -30,7 +30,7 @@ public class Builtins implements Runnable {
         Helpers.transformClass("net.minecraft.class_1886", "field_9077", "com.jab125.limeappleboat.thonkutil.enumapi.v1.api.creator.EnchantmentTargetCreator", "(Ljava/lang/String;I)V", names);
         Helpers.transformClass("net.minecraft.class_1267", "field_5804", "com.jab125.limeappleboat.thonkutil.enumapi.v1.api.creator.DifficultyCreator", "(Ljava/lang/String;IILjava/lang/String;)V");
         Helpers.transformClass("com.terraformersmc.modmenu.util.mod.Mod$Badge", "$VALUES", "com.jab125.limeappleboat.thonkutil.enumapi.v1.api.creator.ModBadgeCreator", "(Ljava/lang/String;ILjava/lang/String;IILjava/lang/String;)V");
-        Helpers.transformClass("net.minecraft.class_1814", "field_8905", "com.jab125.limeappleboat.thonkutil.enumapi.v1.api.RarityCreator", "(Ljava/lang/String;IL" + Helpers.map("net/minecraft/class_124", true) + ";)V");
+        Helpers.transformClass("net.minecraft.class_1814", "field_8905", "com.jab125.limeappleboat.thonkutil.enumapi.v1.api.creator.RarityCreator", "(Ljava/lang/String;IL" + Helpers.map("net/minecraft/class_124", true) + ";)V");
     }
 
 }

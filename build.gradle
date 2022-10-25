@@ -345,7 +345,7 @@ dependencies {
                 }
             }
 
-            //testmodImplementation project("${it.name}:").sourceSets.testmod.output
+            testmodImplementation project("${it.name}:").sourceSets.testmod.output
         }
     }
 }
